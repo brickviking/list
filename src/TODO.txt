@@ -1,0 +1,2 @@
+1: Fix the 8-bit problem!! There's no reason it should look butt-ugly under ncurses.
+2: get list to actually take note of -c (columns) and -r (rows)
