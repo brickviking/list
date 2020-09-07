@@ -13,7 +13,8 @@ VERSION = 0.7.29
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 endif
-SRCDIR = list-$(VERSION)
+#SRCDIR = list-$(VERSION)
+SRCDIR = src
 LDFLAGS = -s
 OLDFLAGS = -s -nostdlibs -L/home/chroot/usr/lib -lc
 LIBS = -lcurses
