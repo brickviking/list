@@ -1187,7 +1187,7 @@ void PrintLine(struct FileData *fi)  {
 } /* End of PrintLine */
 
 #ifndef _MINIX
-__inline__ void BackPage(struct FileData *fi, long int LinesToBackUp)  { /* 1st in */
+extern __inline__ void BackPage(struct FileData *fi, long int LinesToBackUp)  { /* 1st in */
 #else
 void BackPage(struct FileData *fi, long int LinesToBackUp)  { /* 1st in */
 #endif
