@@ -545,7 +545,7 @@ static size_t fsetup(FILE *fp, size_t minbuf) {
 
 long ffsearch(struct FileData *fi, int N) {  /* 1st br */
   /* Hmmm, seems we don't need size, we can surely get that from strlen(SearchString) */
-  long pos = -2L, tempos = 0L;
+  long pos = -2L, tempOffset = 0L;
   char *sbuf, *p;
   size_t skip, size;
   int ch = 0;
@@ -554,7 +554,7 @@ long ffsearch(struct FileData *fi, int N) {  /* 1st br */
 /* Allocate a search buffer */
 
   if (NULL == (sbuf = (char *)malloc(size - 1)))
-    goto FDONE;
+    goto FDONE; /* Whoops, couldn't malloc, fall off end */
 
   /* Buffer the file and position us within it */
 
@@ -575,12 +575,12 @@ long ffsearch(struct FileData *fi, int N) {  /* 1st br */
     if (EOF == (ch = fgetc(fi->FPtr)))
       break;
     if ((int)*fi->SearchString == ch) {  /* 3rd in */
-       tempos = ftell(fi->FPtr);
+       tempOffset = ftell(fi->FPtr);
        if (size - 1 > fread(sbuf, sizeof(char), size - 1, fi->FPtr))
          goto FDONE;
        if (0L == memcmp(sbuf, &fi->SearchString[1], size - 1)) {  /* 4th in */
          if (0L == --N) {  /* 5th in */
-           pos = tempos - 1L;
+           pos = tempOffset - 1L;
      goto  FDONE;
          }  /* 5th out */
        }  /* 4th out */
@@ -620,7 +620,7 @@ long rfsearch(struct FileData *fi, int N) {
   /* Allocate a search buffer */
 
   if (NULL == (sbuf = (char *)malloc(size - 1)))
-    goto RDONE;
+    goto RDONE; /* Whoops, couldn't malloc, fall off end */
 
   /* Buffer the file and position us within it */
 

@@ -71,6 +71,7 @@ void ScanForCr(struct FileData *fi) {
       {
         switch (c=fgetc(fi->FPtr))
           {
+	    /* Takes no account of <CR> or \r, I should really have known better even in 1997 */
           case '\n':
             j++;
             llflag++;
@@ -120,7 +121,7 @@ long *AllocateLines(struct FileData *fi) {
   move(fi->Scrn_y - 1, 0);
   clear();
   refresh();
-  addstr("list: Counting lines ... please wait");
+  addstr("list: Counting lines ... please wait"); /* This takes far longer than it needs to */
   for(i = 0, j = 1; i < fi->FEnd;)  {
 /*    for (linelength = 0, c=0; linelength < 80 ; linelength++ ) */
     for (linelength = 0, c = 0; linelength < fi->Scrn_x - 10; linelength++)  /* Took 10 bytes off to add in line numbers */
@@ -257,7 +258,7 @@ int Search(struct FileData *fi)  { /* 1s */
        break;
   } /* 2e */
   if((-2L) == fi->SPosn)
-      Bye(1, __LINE__);  /* This dumps if no memory to assign strings in ffsearch() ... */
+      Bye(1, __LINE__);  /* This dumps if no memory to assign strings in ffsearch()/rfsearch() ... */
   if((-1L) == fi->SPosn) { /* ... Hasn't died yet, so check if string was _not_ found ... 2s */
       debug_function("String not found - hit any key to return", 0, fi->Scrn_y, __LINE__);
   } /* 2e...*/
