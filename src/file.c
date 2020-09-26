@@ -258,7 +258,7 @@ int Search(struct FileData *fi)  { /* 1s */
        break;
   } /* 2e */
   if((-2L) == fi->SPosn)
-      Bye(1, __LINE__);  /* This dumps if no memory to assign strings in ffsearch()/rfsearch() ... */
+      Bye(1, __LINE__);  /* This dumps if no memory to assign strings in ffsearch()/rfsearch() or size was 0 ... */
   if((-1L) == fi->SPosn) { /* ... Hasn't died yet, so check if string was _not_ found ... 2s */
       debug_function("String not found - hit any key to return", 0, fi->Scrn_y, __LINE__);
   } /* 2e...*/

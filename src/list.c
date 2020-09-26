@@ -559,7 +559,7 @@ long ffsearch(struct FileData *fi, int N) {  /* 1st br */
   /* Buffer the file and position us within it */
 
   if (0 == fsetup(fi->FPtr, size))
-    goto FDONE;
+    goto FDONE; /* Fall off end, might have had a malloc failure, or size = 0 */
   pos = -1L;
   fseek(fi->FPtr, fi->FPosn, SEEK_SET);
 
