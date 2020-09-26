@@ -70,89 +70,10 @@ int main(int argc, char **argv)
 /*   struct stat FileInfo; / * stat from <sys/stat.h> - 2 lines - bits to delete... */
 /*   struct stat *ListFileInfo; / * ... and create an associated pointer... */
 
-  struct FileData ListFile =
-  { 0, /* FPosn */
-    0, /* FEnd */
-    0, /* FLines */
-    0, /* *CrArray */
-    0, /* LnAtTopOfScrn */
-    0, /* FLineCtr */
-    0, /* LineNumbers - added for debugging */
-    0, /* Start */
-    0, /* Count */
-    0, /* Scrn_y */
-    0, /* Scrn_x */
-    0, /* ScrnWide */
-    0, /* *Fptr */
-    0, /* *FName */
-    't', /* DumpMode - set to text by default */
-    '0', /* DumpFlag */ /* It's official - this wants to be a char */
-    0, /* LineNumbers - on or off */
-    0, /* Monochrome - pretty obvious, isn't it? */
-    8, /* TabSize - set it to the PC default for starters */
-    0, /* AddrFlag */
-    0, /* EofSet */
-    0, /* FgColour */
-    0, /* BgColour */
-    '\0', /* SearchDirection */
-    0, /* SearchString */
-    0, /* Search Position (SPosn) */
-   { /* Start of struct stat */
-     0, /* st_dev */
-#ifdef __linux__
-     0, /* __pad1 */
-#endif
-     0, /* st_ino */
-     0, /* st_mode */
-     0, /* st_nlink */
-     0, /* st_uid */
-     0, /* st_gid */
-     0, /* st_rdev */
-#ifdef __linux__
-     0, /* __pad2  */
-     0, /* st_size */
-     0, /* st_blksize */
-     0, /* st_blocks */
-     0,  /* st_atime */
-     0,  /* unused1 */
-     0,  /* st_mtime */
-     0,  /* unused2 */
-     0,  /* st_ctime */
-     0, /* unused3 */
-     0, /* unused4 */
-     0  /* unused5 */
-#else
-#if defined __OpenBSD__ || defined(__FreeBSD__)  /*__OpenBSD__ entries... */
-     { 0, /* st_atimespec */
-       0 },
-     { 0,
-       0 }, /* st_mtimespec */
-     { 0,
-       0 }, /* st_ctimespec */
-     0, /* st_size */
-     0, /* st_blocks */
-     0, /* st_blksize */
-     0, /* st_flags */
-     0, /* st_gen */
-     0, /* st_lspare - not used */
-     { 0, 0 }  /* st_qspare - not used */
-#else
-#ifdef _MINIX
-     0, /* st_size */
-     0, /* st_atime */
-     0,  /* st_mtime */
-     0  /* st_ctime */
-#endif /* _MINIX */
-#endif /* __FreeBSD__ */
-#endif /* __linux__ */
-    }, /* struct FileInfo */
-    0, /* FileInfoPtr */
-    0, /* QuickDisplay */
-    {0, 0, 0, 0, 0, 0}, /* add the queue DirQueue */
-    0,  /* BugWriteFName */
-    0,  /* MyArgc */
-    0,   /* MyArgv - perhaps we should only make this valid filenames? */
-    0    /* MyCurrArgC */
+  struct FileData ListFile = {
+    .DumpMode = 't', /* DumpMode - set to text by default */
+    .DumpFlag = '0', /* DumpFlag */ /* It's official - this wants to be a char */
+    .SearchDirection = '\0', /* SearchDirection */
     };  /* ... the end of the struct init */
   /* Initialises struct to empty - yep, everything! - lclint complains*/
   struct FileData *fi; /* Define an associated pointer... doesn't this have to be alloc'ed? */
