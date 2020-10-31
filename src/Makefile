@@ -18,6 +18,7 @@ SRCDIR = src
 LDFLAGS = -s
 OLDFLAGS = -s -nostdlibs -L/home/chroot/usr/lib -lc
 LIBS = -lcurses
+# STATICLIBS = -l:libcurses.a -l:libtinfo.a -l:libgpm.a -static-libgcc
 CCMALLOC = ccmalloc
 OPTFLAGS = -O3
 BIN = /usr/local/bin
@@ -46,8 +47,9 @@ oldlist: $(OLDOBJECTS)
 list_d: $(DOBJECTS)
 	$(CC) -o list_d $(DOBJECTS) $(LIBS) 
 
-list_static: $(OBJECTS)
-	$(CC) $(LDFLAGS) -static -o list_static $(OBJECTS) $(LIBS)
+# Comment this out, as it seems to choke on gpm functions linked in from ncurses
+# list_static: $(OBJECTS)
+#	$(CC) -static -o list_static $(OBJECTS) $(STATICLIBS)
 
 list_profile: $(OBJECTS)
 	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
