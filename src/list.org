@@ -415,6 +415,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 ,* Handle multiple files specified on the commandline.
 
 #+END_SRC
+
 * Utility programs
 These are some of the functions I used within list. Some of the functions are stubs because at the
 time I didn't know how to write safe versions of this. I'm not sure I'd be much better now, but
