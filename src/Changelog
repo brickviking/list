@@ -293,6 +293,9 @@
 **         functions in input.c can't use it, even with the "list.h" header in place. Go figure.
 **         Only found this out when Jason Nunn (of nighthawk and funktracker
 **         fame) found this trying to compile again.
+** June 28th, 2021
+** 0.7.31  Tweaked -h very slightly, explicitly calling out Monochrome instead
+**         of Mono (which wasn't around in 1998)
 **  WARNING: program in semi-stable (read - BETA) state at the moment...it's usable, but a few bugs remain.
 **
 **  Released under the GPL version 2, Copyright (c) 2002 by Eric Gillespie

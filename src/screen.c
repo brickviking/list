@@ -43,7 +43,7 @@ void Usage(void) {
   printf("\t 8: 8-bit ASCII (MS-DOS-like)\n");
   printf("\t l: line numbers (in text mode)");
   printf("\t e: show line endings\n");
-  printf("\t m: Mono version");
+  printf("\t m: Monochrome version");
   printf("\t f: specify filename to open\n");
   printf("\t r: rows to use, c: columns to use\n");
   printf("\t (*) means I haven't finished coding this bit yet\n");

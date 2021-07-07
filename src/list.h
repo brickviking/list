@@ -1,7 +1,7 @@
 /* Now called list.h instead of hexdump.h */
 /* Global defines */
 #define LISTVERSION 0
-#define LISTMINOR 30
+#define LISTMINOR 31
 #define LISTMAJOR 7
 /* Had to include this one, since it's disappeared from 2.2 linux kernel or something... */
 #ifndef PATH_MAX
@@ -102,7 +102,8 @@ int CmdMode(struct FileData *);
 struct FileData *FileCommand(struct FileData *); / * Returns the command to run on the file * /
 DIR *GetDirectory(DIR *, char *); / * Feeds back the directory mentioned in char * */
 FILE *GetItem(DIR *); /* Feeds back one item from a directory */
-void PrintDirectory(void); /* Prints list on screen */
+char *ReadSortedDirectory(DIR *);
+int PrintDirectory(void); /* Prints list on screen */
 
 /* - bugwrite routines */
 int BugWrite(struct FileData *);

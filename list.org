@@ -30,7 +30,8 @@ I'm not including the Changelog in here, though it's a distinct idea. If I do in
 should probably put it up near the top of this .org document.
 
 ** Man page
-   :PROPERTIES: header-args :tangle list.1
+   :PROPERTIES:
+   :header-args:roff :tangle list.1
    :END:
 
 #+BEGIN_SRC nroff
@@ -380,7 +381,9 @@ Handle multiple files specified on the commandline.
 #+END_SRC
 
 ** Readme file
-   :PROPERTIES: header-args :tangle ../README.md
+   :PROPERTIES:
+   :header-args:markdown
+   :tangle: README.md
    :END:
 #+BEGIN_SRC markdown
 # List, a text and hexdump program
@@ -425,7 +428,8 @@ standards have taken over. We still have to manage our own memory, although ther
 to help out with this for decades now.
 
 ** bugwrite.c
-   :PROPERTIES: header-args :tangle bugwrite.c
+   :PROPERTIES:
+   :header-args: :tangle: bugwrite.c
    :END:
 This was an attempt to set up a screen to write stuff into for a bug report to be saved to disk
 and relayed to myself later. I guess I could happily format this like a github issue these days.
@@ -570,7 +574,8 @@ int TakeNotes2(FILE *FileToWrite, struct FileData *fi)  {
 */
 #+END_SRC
 ** dequeue.c
-   :PROPERTIES: header-args :tangle dequeue.c
+   :PROPERTIES:
+   :header-args: :tangle dequeue.c
    :END:
 I'm pretty grateful for this Peter Yard gem from 1993, as it's exactly what I wanted at the time.
 I suspect that I'd still use this today in modern programming, but I might sanitise the memory
@@ -1348,7 +1353,8 @@ int     Q_Insert( queue *q, void *data, int Comp(const void *,
 
 #+END_SRC
 ** dequeue.h
-   :PROPERTIES: header-args :tangle dequeue.h
+   :PROPERTIES:
+   :header-args: :tangle dequeue.h
    :END:
 
 The header file for the .c above.
@@ -1423,7 +1429,8 @@ typedef int (*Comp)(void *, void *);
 
 #+END_SRC
 ** dirbrowse.c
-   :PROPERTIES: header-args :tangle dirbrowse.c
+   :PROPERTIES:
+   :header-args: :tangle dirbrowse.c
    :END:
 At the moment, this is a stubbed-out method until I know what code to put into here without
 blowing my program's brains out.  It's an attempt to read a directory from disk and display
@@ -1459,7 +1466,8 @@ int PrintDirectory(void) {
 }
 #+END_SRC
 ** filebrowse.c
-   :PROPERTIES: header-args :tangle filebrowse.c
+   :PROPERTIES:
+   :header-args: :tangle filebrowse.c
    :END:
 
 Appears to be what it says on the tin, ask for a dirname then go display list of files from
@@ -1569,7 +1577,8 @@ FILE *GetItem(DIR *ThisDir) {
 }
 #+END_SRC
 ** file.c
-   :PROPERTIES: header-args :tangle file.c
+   :PROPERTIES:
+   :header-args: :tangle file.c
    :END:
 
 Not quite sure what this was meant to be.
@@ -1939,7 +1948,8 @@ void CloseNCurses(void) {
 
 #+END_SRC
 ** input.c
-   :PROPERTIES: header-args :tangle input.c
+   :PROPERTIES:
+   :header-args: :tangle input.c
    :END:
 
 This has functions that take input from the user, and do stuff with that input.
@@ -2299,7 +2309,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
 #+END_SRC
 
 ** screen.c
-   :PROPERTIES: header-args :tangle screen.c
+   :PROPERTIES:
+   :header-args: :tangle screen.c
    :END:
 
 These are functions that deal with anything goisng to the screen through ncurses.
@@ -3560,7 +3571,8 @@ int MakeMenu(struct ListFile *fi)  {
 #+END_SRC
 * Main program
 ** list.c
-   :PROPERTIES: header-args :tangle list.c
+   :PROPERTIES:
+   :header-args: :tangle list.c
    :END:
 This is the main program, and includes quite a few functions I didn't shuttle off into
 other files. After all, I thought I had enough stray files littering the project already.
@@ -4211,7 +4223,8 @@ char squarebottom=" 192 ÀÄÄÁÄÄÄÄÄÄÙ 217";
 
 #+END_SRC
 ** list.h
-   :PROPERTIES: header-args :tangle list.h
+   :PROPERTIES:
+   :header-args: :tangle list.h
    :END:
 
 The obvious place to put declarations and defines. It's the header file for the main program.
@@ -4338,7 +4351,8 @@ having come up with their own and stuck with it. The one thing I'm missing seems
 makefile that'll work happily under Minix. How does that differ from BSDMake or GNU Make?
 
 ** BSDMakefile
-   :PROPERTIES: header-args :tangle BSDMakefile
+   :PROPERTIES:
+   :header-args: :tangle BSDMakefile
    :END:
 #+BEGIN_SRC make
 DEBUGFLAGS = -g -O2
@@ -4396,7 +4410,8 @@ uninstall:
 #+END_SRC
 
 ** Gnu Makefile
-   :PROPERTIES: header-args :tangle Makefile
+   :PROPERTIES:
+   :header-args: :tangle Makefile
    :END:
 #+BEGIN_SRC make
 DEBUGFLAGS = -g -O2
