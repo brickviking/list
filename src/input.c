@@ -123,7 +123,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
       fi->FPosn=strtol(buf2, &buf2p, 0); /* Set fileposition */
       if(errno) {
 	      CloseNCurses();
-	      Bye(4, __LINE__);
+	      Bye(BR_BADSTRING, __LINE__);
       }
       /* Have to check for FPosn within 0 <= FPosn <= FEnd  */
       if(fi->FPosn > fi->FEnd) {
@@ -320,14 +320,14 @@ char WhatNext(struct FileData *fi) { /* 1 */
        BackPage(fi, fi->Scrn_y - 1);
        if(NULL == (strcpy(OldFName, fi->FName))) /* Make sure fi doesn't get clobbered until necessary */ {
          CloseNCurses();
-         Bye(4, __LINE__); /* Bail out with an "String handling error" message */
+         Bye(BR_BADSTRING, __LINE__); /* Bail out with an "String handling error" message */
        }
        fclose(fi->FPtr);  /* I'd better close it before editing - two processes can't have access at the same time */
        if(-1 == EditFunction(fi)) { /* If this function returned error... */
          debug_function("Cannot edit file - hit any key to return (q to quit)", 0, fi->Scrn_y, __LINE__);
    if(NULL == (fi->FPtr = fopen(fi->FName, "rb"))) /* Reopens, bails out if can't open */  {
      CloseNCurses();
-     Bye(7, __LINE__); /* Want the "Can't open file" message */
+     Bye(BR_FILEPERM, __LINE__); /* Want the "Can't open file" message */
    }
          free(OldFName); /* Free this, it's not needed any more */
    }

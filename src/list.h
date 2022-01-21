@@ -21,6 +21,21 @@ void getmaxyx(WINDOW *, int, int);
 typedef unsigned long u_long;
 #endif
 
+enum ByeReason (BR_NOERR, /* 0 */
+		BR_NOMEM, /* 1 */
+		BR_DEBUGEND, /* 2 */
+		BR_FILE_ERR, /* 3 */
+		BR_BADSTRING, /* 4 */
+		BR_DIRNOTFILE, /* 5 */
+		BR_NOCOLOR, /* 6 */
+		BR_FILEPERM, /* 7 */
+		BR_NOTFILE, /* 8 */
+		BR_TINYCOLS, /* 9 */
+		BR_TINYLINES, /* 10 */
+		BR_USAGE, /* 11 */
+		BR_NOFILENAME /* 12 */
+	   );
+
 #define QUIT_CHAR 'q'
 /* Global variables */
 /* typedef unsigned long u_long; * not needed - declared in <sys/types.h> */

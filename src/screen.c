@@ -24,7 +24,7 @@ void Usage(void) {
   char *tempstring;
   if(debug) {
     if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 128)))   /* We shouldn't need more than this */
-      Bye(1, __LINE__); /* .. and if we can't get it, then we bail out... */
+      Bye(BR_NOMEM, __LINE__); /* .. and if we can't get it, then we bail out... */
     sprintf(tempstring, "Debugging version %1d.%1d.%1d %s %s build\n", LISTVERSION, LISTMAJOR, LISTMINOR,  __DATE__, __TIME__ );
     printf(tempstring);
   }
@@ -371,7 +371,7 @@ int ShowStats(struct FileData *fi) {
   int c, y=0, x=0, EightBitDisplay;
   if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 1024))) {
     CloseNCurses();
-    Bye(1, __LINE__);
+    Bye(BR_NOMEM, __LINE__);
   }
 /*  clear(); */
   if(fi->Scrn_x < 56 || fi->Scrn_y < 18 ) {
@@ -568,7 +568,7 @@ int Dump(struct FileData *fi) { /* 1 */
   tempstring = (char *) malloc(sizeof tempstring * 1024);
   if(tempstring == NULL) {
 	  CloseNCurses();
-	  Bye(1, __LINE__);
+	  Bye(BR_NOMEM, __LINE__);
   }
   /* Define nice big fat amount, since we nearly hit the 256 limit with a
    * 160 char wide screen (imagine what would happen on a 21" screen @ 1600x1200) */
@@ -583,7 +583,7 @@ int Dump(struct FileData *fi) { /* 1 */
      )  /* If this calloc fails (NULL return) */
      {
 	CloseNCurses();
-    Bye(1, __LINE__);  /* Then bomb with "No memory available" message */
+    Bye(BR_NOMEM, __LINE__);  /* Then bomb with "No memory available" message */
      }
   fi->FPosn=fi->Start;  /* Set pos'n to requested Start */
 /*  if(not exist DISPLAY) do next line, else continue  */
@@ -603,7 +603,7 @@ int Dump(struct FileData *fi) { /* 1 */
     ScanForCr(fi);
     if(!(fi->CrArray=calloc(fi->FLines, sizeof(u_long)))) {
 	    CloseNCurses();
-	    Bye(1, __LINE__);
+	    Bye(BR_NOMEM, __LINE__);
     }
     fi->CrArray=AllocateLines(fi); /* This allocates the line ends */
   }
@@ -783,7 +783,7 @@ int Dump(struct FileData *fi) { /* 1 */
        /* What I want to do here is to count CRs or complete Scrn_y-wide lines in a screen *
        * kind of like:
        for(i=fi->FPosn; i < (fi->FPosn + ((fi->Scrn_x) * (ruler) ?  (fi->Scrn_y-2) : (fi->Scrn_y-1 ))); i++)  {
-         if(!fread(buf, sizeof(char), fi->Scrn_x, fi->FPtr)) Bye(1);
+         if(!fread(buf, sizeof(char), fi->Scrn_x, fi->FPtr)) Bye(BR_NOMEM);
           */
 /*      clear();
       refresh(); */
@@ -1015,7 +1015,7 @@ void PrintLine(struct FileData *fi)  {
   char *tempstring;
   if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 1024))) {
     CloseNCurses();
-    Bye(1, __LINE__); /* Whoops - ran out of memory - we're out of here!*/
+    Bye(BR_NOMEM, __LINE__); /* Whoops - ran out of memory - we're out of here!*/
   }
   attron(A_REVERSE); /* Replace attron(A_BOLD) */
 /* ******************* beginning of ruler print code ******************* */
@@ -1228,7 +1228,7 @@ void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine) 
 
   if( QUIT_CHAR == (c=getch())) {
 	  CloseNCurses();
-	  Bye(2, SourceLine);
+	  Bye(BR_DEBUG, SourceLine);
   }
         refresh();
 }

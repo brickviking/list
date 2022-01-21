@@ -46,6 +46,7 @@ void getmaxyx(WINDOW *win, int Cols, int Rows)  {
  Cols = (win)->_maxx;
  Rows = (win)->_maxy;
 }
+
 int has_colors(void){
   return 0;  /* returns 0 if no color, 1 otherwise... */
   }
@@ -71,16 +72,16 @@ int main(int argc, char **argv)
 /*   struct stat *ListFileInfo; / * ... and create an associated pointer... */
 
   struct FileData ListFile = {
-    .DumpMode = 't', /* DumpMode - set to text by default */
-    .DumpFlag = '0', /* DumpFlag */ /* It's official - this wants to be a char */
-    .SearchDirection = '\0', /* SearchDirection */
+    DumpMode = 't', /* DumpMode - set to text by default */
+    DumpFlag = '0', /* DumpFlag */ /* It's official - this wants to be a char */
+    SearchDirection = '\0', /* SearchDirection */
     };  /* ... the end of the struct init */
   /* Initialises struct to empty - yep, everything! - lclint complains*/
   struct FileData *fi; /* Define an associated pointer... doesn't this have to be alloc'ed? */
   fi=&ListFile; /* ... and point it to our just-filled ListFile struct */
   fi->FileInfoPtr = &fi->FileInfo;
   tempstring = (char *) malloc(sizeof tempstring * 1024); /* Does this limit need re-evaluating? */
-  if(tempstring == NULL) Bye(1, __LINE__); /* died due to lack of memory */
+  if(tempstring == NULL) Bye(BR_NOMEM, __LINE__); /* died due to lack of memory */
   /* ... otherwise, continue as planned... */
   (void) Q_Init(&fi->DirQueuePtr); /* Initialises the queue created - lclint suggests return a void */
 
@@ -90,17 +91,29 @@ int main(int argc, char **argv)
 
   if(argc < 2) {
     errno = ENOENT;
-    Bye(12, __LINE__); /* 'Nother Dion bug squashed */
+    Bye(BR_NOMEM2, __LINE__); /* 'Nother Dion bug squashed */
   }
   /* Now copy the argc and argv to our localspace */
   fi->MyArgc = argc;
   fi->MyArgv = argv; /* Will this work?  I don't know... */
   /* Okay - should we shove all THIS into a separate function too? */
   while ((c=getopt(fi->MyArgc, fi->MyArgv, "vf:s:r:c:n:b:eqltx78dmh?"))!= -1) {
-/* v - version  f: filename s: start_byte r: rows to display  c: columns to display n: num_bytes b: taB size
- * e - show line Endings q - QuickHexmode l - show line numbers in text mode  t - text  x - hexadecimal
- * 7/8 - 7/8-bit display d - debug m - monochrome usage h/? - Usage 
- *
+/* v - version
+   f: filename
+   s: start_byte
+   r: rows to display
+   c: columns to display
+   n: num_bytes
+   b: taB size
+ * e - show line Endings
+   q - QuickHexmode
+   l - show line numbers in text mode
+   t - text
+   x - hexadecimal
+ * 7/8 - 7/8-bit display
+   d - debug
+   m - monochrome usage
+   h/? - Usage 
  */
     switch(c) {
       case 'v':    /* Spits out version information */
@@ -220,7 +233,7 @@ int main(int argc, char **argv)
           /* MS-DOSism   setmode(fileno(stdin), O_BINARY);  ... try the above instead.. */
           /*    addstr("list: No filename specified on commandline\n"); */
 					CloseNCurses();
-    Bye(12, __LINE__); /* We dump out by telling the user we can't open file at the moment... */
+    Bye(BR_NOMEM2, __LINE__); /* We dump out by telling the user we can't open file at the moment... */
   }
   /* ncurses code can FINALLY start here! */
   initscr();
@@ -237,7 +250,7 @@ int main(int argc, char **argv)
       init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLUE);
     } /* 2e */
   } /* 1e */
-/*    Bye(6, __LINE__);  / * This line will be replaced soon - just give me time to write the monochrome equivalents */
+/*    Bye(BR_NOCOLOR, __LINE__);  / * This line will be replaced soon - just give me time to write the monochrome equivalents */
   noecho();
   cbreak();
   keypad(stdscr, TRUE);
@@ -260,19 +273,19 @@ int main(int argc, char **argv)
   if(!(fi->FPtr==stdin)) { /* if the FPtr is NOT == stdin, then ... */
     if( !( fi->FPtr = fopen( fi->FName, "rb"))) { /* ...find out if the file can be opened for reading, if not ... */
 			CloseNCurses();
-      Bye(7, __LINE__);
+      Bye(BR_FILEPERM, __LINE__);
     } /* End of failure to open */
     if(fi->Scrn_x < 40) { /* Darn - this witty comment gets lost in the Bye() call */
 /*      addstr("list: Um, I don't have enough columns to display the file in hex format,");
       addstr("      So am defaulting to text mode!  Hope you don't mind!");  */
 			CloseNCurses();
-      Bye(9,__LINE__);
+      Bye(BR_TINYCOLS,__LINE__);
     }
     if(fi->Scrn_y < 24) { /* Darn - this witty comment gets lost in the Bye() call */
 /*            addstr("list: Err, there aren't enough lines here to do justice to this");
             addstr("      file - I need to get out of here! (Reason:Claustrophobia)"); */
 			CloseNCurses();
-      Bye(10,__LINE__);
+      Bye(BR_NOMEM0,__LINE__);
     }
 /*    stat(fi->FName, ListFileInfo); / * Second time this file is stat'ed - is this necessary? */
     /* Here are a few sanity checks... */
@@ -302,7 +315,7 @@ int main(int argc, char **argv)
     cbreak();
     noecho();
     /*      nodelay(); */
-    /*    if((c=getchar())=='Q') Bye(2, __LINE__); */
+    /*    if((c=getchar())=='Q') Bye(BR_DEBUG, __LINE__); */
 /*    while(c!=EOF) c=getchar();  wait for key ... */
     fseek(fi->FPtr, 0, SEEK_END);
     if(!(fi->FEnd=ftell(fi->FPtr))) {
@@ -317,7 +330,7 @@ int main(int argc, char **argv)
   /*  ScanForCr(fi);    / * this should hopefully give me the correct
                      * number of lines in my data * /
   / * looks like I'm getting a mismatch - revamp the routine?  * /
-  if(!(fi->CrArray=calloc(fi->FLines, sizeof(u_long)))) Bye(1, __LINE__);
+  if(!(fi->CrArray=calloc(fi->FLines, sizeof(u_long)))) Bye(BR_NOMEM, __LINE__);
   fi->CrArray=AllocateLines(fi); / * This allocates the line ends */
   /*******************************************************/
   if (fi->Count==0)
@@ -421,7 +434,7 @@ void *ecalloc(int count, unsigned int size) {
     return (p);
 /*  error("Cannot allocate memory", NULL_PARG);
   quit(QUIT_ERROR);   */
-  Bye(1, __LINE__);
+  Bye(BR_NOMEM, __LINE__);
   /*NOTREACHED*/
   exit(1);
 }
