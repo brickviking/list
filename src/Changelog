@@ -296,6 +296,9 @@
 ** June 28th, 2021
 ** 0.7.31  Tweaked -h very slightly, explicitly calling out Monochrome instead
 **         of Mono (which wasn't around in 1998)
+** 0.7.32  Instead of using a series of arbitrary integers for Bye(), I changed them
+**         into an enum, and played whack-a-mole - so far the only remaining
+**         regression bug seems to be that I can now open .. (like, huh?)
 **  WARNING: program in semi-stable (read - BETA) state at the moment...it's usable, but a few bugs remain.
 **
 **  Released under the GPL version 2, Copyright (c) 2002 by Eric Gillespie
