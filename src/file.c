@@ -284,14 +284,14 @@ int Search(struct FileData *fi)  { /* 1s */
   return 0;
 } /* 1e */
 
-int Bye(enum ByeReason, int LineCalled)  {
+int Bye(enum ByeReason WhyBye, int LineCalled)  {
   char *ErrMessage = (char *) malloc(sizeof(ErrMessage) * 127);
   if(ErrMessage == NULL) {
     printf("list: Wow! We are REALLY out of memory here!\n");
     exit(EXIT_FAILURE);
     }
   /* Stick all the curses clean-up here at the top, so it's not shared... waste of good code otherwise */
-  switch(ByeReason) {
+  switch(WhyBye) {
     case BR_NOMEM:
          sprintf(ErrMessage, "list: Ooops - out of memory at line %d", LineCalled);
          break;
@@ -353,7 +353,7 @@ int Bye(enum ByeReason, int LineCalled)  {
    break;
     }
   perror(ErrMessage);
-  exit(ByeReason);  /* Might as well exit using the reason as a return value - at least until I find a better reason not to */
+  exit((int) WhyBye);  /* Might as well exit using the reason as a return value - at least until I find a better reason not to */
 }
 
 void CloseNCurses(void) {

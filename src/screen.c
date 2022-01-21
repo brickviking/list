@@ -1228,7 +1228,7 @@ void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine) 
 
   if( QUIT_CHAR == (c=getch())) {
 	  CloseNCurses();
-	  Bye(BR_DEBUG, SourceLine);
+	  Bye(BR_DEBUGEND, SourceLine);
   }
         refresh();
 }

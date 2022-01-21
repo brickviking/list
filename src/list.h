@@ -21,7 +21,7 @@ void getmaxyx(WINDOW *, int, int);
 typedef unsigned long u_long;
 #endif
 
-enum ByeReason (BR_NOERR, /* 0 */
+enum ByeReason {BR_NOERR, /* 0 */
 		BR_NOMEM, /* 1 */
 		BR_DEBUGEND, /* 2 */
 		BR_FILE_ERR, /* 3 */
@@ -34,7 +34,7 @@ enum ByeReason (BR_NOERR, /* 0 */
 		BR_TINYLINES, /* 10 */
 		BR_USAGE, /* 11 */
 		BR_NOFILENAME /* 12 */
-	   );
+} WhyBye;
 
 #define QUIT_CHAR 'q'
 /* Global variables */
@@ -87,7 +87,7 @@ __inline__ void BackPage(struct FileData *, long int);
 #else
 void BackPage(struct FileData *, long int);
 #endif
-int Bye(int, int);
+int Bye(enum ByeReason, int);
 void CartWheel(void);
 void debug_function(char *, int, int, int);
 int ShowStats(struct FileData *);

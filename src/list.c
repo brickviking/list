@@ -72,9 +72,9 @@ int main(int argc, char **argv)
 /*   struct stat *ListFileInfo; / * ... and create an associated pointer... */
 
   struct FileData ListFile = {
-    DumpMode = 't', /* DumpMode - set to text by default */
-    DumpFlag = '0', /* DumpFlag */ /* It's official - this wants to be a char */
-    SearchDirection = '\0', /* SearchDirection */
+    .DumpMode = 't', /* DumpMode - set to text by default */
+    .DumpFlag = '0', /* DumpFlag */ /* It's official - this wants to be a char */
+    .SearchDirection = '\0', /* SearchDirection */
     };  /* ... the end of the struct init */
   /* Initialises struct to empty - yep, everything! - lclint complains*/
   struct FileData *fi; /* Define an associated pointer... doesn't this have to be alloc'ed? */
@@ -91,7 +91,7 @@ int main(int argc, char **argv)
 
   if(argc < 2) {
     errno = ENOENT;
-    Bye(BR_NOMEM2, __LINE__); /* 'Nother Dion bug squashed */
+    Bye(BR_NOMEM, __LINE__); /* 'Nother Dion bug squashed */
   }
   /* Now copy the argc and argv to our localspace */
   fi->MyArgc = argc;
@@ -233,7 +233,7 @@ int main(int argc, char **argv)
           /* MS-DOSism   setmode(fileno(stdin), O_BINARY);  ... try the above instead.. */
           /*    addstr("list: No filename specified on commandline\n"); */
 					CloseNCurses();
-    Bye(BR_NOMEM2, __LINE__); /* We dump out by telling the user we can't open file at the moment... */
+    Bye(BR_NOMEM, __LINE__); /* We dump out by telling the user we can't open file at the moment... */
   }
   /* ncurses code can FINALLY start here! */
   initscr();
@@ -285,7 +285,7 @@ int main(int argc, char **argv)
 /*            addstr("list: Err, there aren't enough lines here to do justice to this");
             addstr("      file - I need to get out of here! (Reason:Claustrophobia)"); */
 			CloseNCurses();
-      Bye(BR_NOMEM0,__LINE__);
+      Bye(BR_NOMEM,__LINE__);
     }
 /*    stat(fi->FName, ListFileInfo); / * Second time this file is stat'ed - is this necessary? */
     /* Here are a few sanity checks... */
