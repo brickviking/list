@@ -62,13 +62,13 @@ install: list
 	install -m644 list.1 $(MAN)/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-	cd .. && tar czvf $(DISTFILE) $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/filebrowse.c $(SRCDIR)/bugwrite.c $(SRCDIR)/Makefile $(SRCDIR)/BSDMakefile $(SRCDIR)/screen.c $(SRCDIR)/file.c $(SRCDIR)/input.c 
+	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/filebrowse.c $(SRCDIR)/bugwrite.c $(SRCDIR)/Makefile $(SRCDIR)/BSDMakefile $(SRCDIR)/screen.c $(SRCDIR)/file.c $(SRCDIR)/input.c 
 
-dist-bin: list list_static list_d
-	cd .. && tar czvf $(DISTBINFILE) $(SRCDIR)/list $(SRCDIR)/list_static $(SRCDIR)/list_d $(SRCDIR)/list.1
+dist-bin: list list_d #list_static
+	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
 
 clean:
-	rm -f *.o list list_d list_static
+	rm -f *.o list list_d #list_static
 
 uninstall:
 	rm $(BIN)/list

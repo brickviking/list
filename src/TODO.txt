@@ -1,2 +1,4 @@
 1: Fix the 8-bit problem!! There's no reason it should look butt-ugly under ncurses.
 2: get list to actually take note of -c (columns) and -r (rows)
+3: add LICENSE to the tarball, or to the SRCDIR to scoop up with the dist tarball.
+4: rebase the tarball root to list-${VERSION}/ and source files in list-${VERSION}/src/
