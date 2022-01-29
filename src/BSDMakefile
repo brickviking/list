@@ -40,10 +40,11 @@ dist: list.c screen.c file.c input.c list.h
 	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/filebrowse.c $(SRCDIR)/bugwrite.c $(SRCDIR)/Makefile $(SRCDIR)/BSDMakefile $(SRCDIR)/screen.c $(SRCDIR)/file.c $(SRCDIR)/input.c 
 
 dist-bin: list list_d # list_static
-	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_static $(SRCDIR)/list_d $(SRCDIR)/list.1
+	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
 
+#removed $(SRCDIR)/list_static as we can't make it on linux, haven't checked on {Free,Net,Open)BSD
 clean:
-	rm -f *.o list list_d list_static
+	rm -f *.o list list_d
 
 uninstall:
 	rm /usr/local/bin/list

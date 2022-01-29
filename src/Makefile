@@ -68,7 +68,8 @@ dist-bin: list list_d #list_static
 	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
 
 clean:
-	rm -f *.o list list_d #list_static
+	rm -f *.o list list_d
+#removed list_static
 
 uninstall:
 	rm $(BIN)/list
