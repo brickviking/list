@@ -1,7 +1,7 @@
 DEBUGFLAGS = -g -O2
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.30
+VERSION = 0.7.32
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 #SRCDIR = list-$(VERSION)

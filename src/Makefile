@@ -2,14 +2,14 @@ DEBUGFLAGS = -g -O2
 ifeq ($(OS), minix)
 CC = cc
 CFLAGS = -Wall
-VERSION = 0730
+VERSION = 0732
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = listb$(VERSION).tgz
 else
 CC = gcc
 CFLAGS = -Wall -W -pedantic
 OLDCFLAGS = -Wall -W -fdefault-inline -pedantic -nostdinc -I/home/chroot/usr/include
-VERSION = 0.7.30
+VERSION = 0.7.32
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 endif

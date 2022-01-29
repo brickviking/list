@@ -29,3 +29,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 * Handle multiple files specified on the commandline.
 
+* I really need to add the LICENSE file to the dist tarball.
+
+* As list_static isn't compiled any more, any attempt to `make dist-bin` will fail. Either I fix
+  list_static, or remove list_static from the requires for dist-bin.
