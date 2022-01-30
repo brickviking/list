@@ -91,7 +91,7 @@ int main(int argc, char **argv)
 
   if(argc < 2) {
     errno = ENOENT;
-    Bye(BR_NOMEM, __LINE__); /* 'Nother Dion bug squashed */
+    Bye(BR_NOFILENAME, __LINE__); /* no args specified, we need FileName */
   }
   /* Now copy the argc and argv to our localspace */
   fi->MyArgc = argc;
