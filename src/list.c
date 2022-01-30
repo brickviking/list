@@ -74,7 +74,7 @@ int main(int argc, char **argv)
   struct FileData ListFile = {
     .DumpMode = 't', /* DumpMode - set to text by default */
     .DumpFlag = '0', /* DumpFlag */ /* It's official - this wants to be a char */
-    .SearchDirection = '\0', /* SearchDirection */
+    .SearchDirection = '\0', /* SearchDirection - needs to be 0x0 (\0), not 0x30 (0)*/
     };  /* ... the end of the struct init */
   /* Initialises struct to empty - yep, everything! - lclint complains*/
   struct FileData *fi; /* Define an associated pointer... doesn't this have to be alloc'ed? */
