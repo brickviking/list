@@ -88,7 +88,10 @@ void ShowHelp(struct FileData *fi) {
                                +-----+------+------------------------+-----+------+------------------------+ 
 	 * */
 /* char tmpstr[COLS+1]; */
-  char *tempstring=(char *) malloc(sizeof(tempstring) * 1024);  /* To give us some room */
+  char *tempstring = 0;
+  if (NULL == (char *) malloc(sizeof(tempstring) * 1024))  /* To give us some room */
+    /* We should be failing if we can't malloc here */
+    Bye(BR_NOMEM, __LINE__);
   int c, middle, x, y, EightBitDisplay;
   WINDOW *HelpWin;
   if(fi->Scrn_x < 80 || fi->Scrn_y < 25)  { /* This shouldn't be a show stopper */
