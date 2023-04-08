@@ -564,8 +564,11 @@ int Dump(struct FileData *fi) { /* 1 */
   unsigned char buf[1024];
   /* For the hexdump processing buffer - have a decent amount of room
    * now we aren't dealing strictly with 16 byte blocks any more */
-  char promptbuf[256]; /* Buffer for prompt of bytes/lines - strictly this should be enlarged too for stupidity */
-  char *promptbufp;
+  /*  char promptbuf[256]; / * Buffer for prompt of bytes/lines - strictly this should be enlarged too for stupidity */
+  /* Define nice big fat amount, since we nearly hit the 256 limit with a
+   * 160 char wide screen (imagine what would happen on a 21" screen @ 1600x1200) */
+  /* char *promptbufp=&promptbuf[0]; Don't need this - yet */
+
   int linecount=0; /* Obvious name for a counter */
   char *prtln; /* output line, bumped up from 82, changed from signed */
   tempstring = (char *) malloc(sizeof tempstring * 1024);
@@ -573,10 +576,7 @@ int Dump(struct FileData *fi) { /* 1 */
 	  CloseNCurses();
 	  Bye(BR_NOMEM, __LINE__);
   }
-  /* Define nice big fat amount, since we nearly hit the 256 limit with a
-   * 160 char wide screen (imagine what would happen on a 21" screen @ 1600x1200) */
-  promptbufp=&promptbuf[0];
-
+  
   /*   fi->DumpFlag = '8'; /X* Hey, we've got a questionable line here... */
   memset(buf, 0,  (sizeof(char) * 1024)); /* Clear both buffers before using... */
   if(NULL ==
