@@ -2313,7 +2313,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
    :header-args: :tangle screen.c
    :END:
 
-These are functions that deal with anything goisng to the screen through ncurses.
+These are functions that deal with anything going to the screen through ncurses.
 #+BEGIN_SRC c
 /* Included with list, split off on advice from bronaugh
  * Now all I have to do is include all the needed includes
