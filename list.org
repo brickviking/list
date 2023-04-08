@@ -2466,15 +2466,15 @@ void ShowHelp(struct FileData *fi) {
   /*   standout(); */
   x = 1; /* Starts "list" in the middle, increment y each line */
   if(EightBitDisplay) {
-    mvwaddstr(HelpWin, y++, x, "                 °°   °°                °°                                  ");  /* Ln 0 */
-    mvwaddstr(HelpWin, y++, x, "                 °°                     °°                                  ");  /* Ln 1 */
-    mvwaddstr(HelpWin, y++, x, "                 ±±   ±±   Ü±±±±±±Ü  ±±±±±±±±         By                    ");  /* Ln 2 */
-    mvwaddstr(HelpWin, y++, x, "                 ±±   ±±   ±      ß     ±±       Eric Gillespie             ");  /* Ln 3 */
-    mvwaddstr(HelpWin, y++, x, "                 ²²   ²²    ²²²²²²      ²²                                  ");  /* Ln 4 */
-    mvwaddstr(HelpWin, y++, x, "                 ²²   ²²   Ü      ²     ²²                                  ");  /* Ln 5 */
-    mvwaddstr(HelpWin, y++, x, "                 ÛÛ   ÛÛ   ßÛÛÛÛÛÛß     ÛÛ                                  ");  /* Ln 6 */
-    mvwaddstr(HelpWin, y++, x, "                 ÛÛ                                                         ");  /* Ln 7 */
-    mvwaddstr(HelpWin, y, x,   "                 ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ                               ");  /* Ln 8 */
+    mvwaddstr(HelpWin, y++, x, "                 Â°Â°   Â°Â°                Â°Â°                                  ");  /* Ln 0 */
+    mvwaddstr(HelpWin, y++, x, "                 Â°Â°                     Â°Â°                                  ");  /* Ln 1 */
+    mvwaddstr(HelpWin, y++, x, "                 Â±Â±   Â±Â±   ÃœÂ±Â±Â±Â±Â±Â±Ãœ  Â±Â±Â±Â±Â±Â±Â±Â±         By                    ");  /* Ln 2 */
+    mvwaddstr(HelpWin, y++, x, "                 Â±Â±   Â±Â±   Â±      ÃŸ     Â±Â±       Eric Gillespie             ");  /* Ln 3 */
+    mvwaddstr(HelpWin, y++, x, "                 Â²Â²   Â²Â²    Â²Â²Â²Â²Â²Â²      Â²Â²                                  ");  /* Ln 4 */
+    mvwaddstr(HelpWin, y++, x, "                 Â²Â²   Â²Â²   Ãœ      Â²     Â²Â²                                  ");  /* Ln 5 */
+    mvwaddstr(HelpWin, y++, x, "                 Ã›Ã›   Ã›Ã›   ÃŸÃ›Ã›Ã›Ã›Ã›Ã›ÃŸ     Ã›Ã›                                  ");  /* Ln 6 */
+    mvwaddstr(HelpWin, y++, x, "                 Ã›Ã›                                                         ");  /* Ln 7 */
+    mvwaddstr(HelpWin, y, x,   "                 Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›Ã›                               ");  /* Ln 8 */
   }
   else {
     mvwaddstr(HelpWin, y++, x, "   aawaawaa             _aasasa.                       .wwwaww,            ");
@@ -2529,43 +2529,43 @@ void ShowHelp(struct FileData *fi) {
   mvwaddstr(HelpWin, y++, x, "Keys to use within list: (Q to exit help, any other key to continue)"); /* Ln 12 */
   x = 1;   /* reset x to left hand side of the screen plus one to balance */
   if(EightBitDisplay) {
-    mvwaddstr(HelpWin, y++, x, "ÚÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿"); /* Ln 13 */
-    mvwaddstr(HelpWin, y++, x, "³ Key ³ Mode ³         Action         ³  Key  ³ Mode ³       Action          ³"); /* Ln 14 */
-    mvwaddstr(HelpWin, y++, x, "ÃÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´"); /* Ln 15 */
-    mvwaddstr(HelpWin, y, x,   "³  B  ³ Text ³ Move back one page     ³   B   ³ Hex  ³ Move back");
+    mvwaddstr(HelpWin, y++, x, "ÃšÃ„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â¿"); /* Ln 13 */
+    mvwaddstr(HelpWin, y++, x, "Â³ Key Â³ Mode Â³         Action         Â³  Key  Â³ Mode Â³       Action          Â³"); /* Ln 14 */
+    mvwaddstr(HelpWin, y++, x, "ÃƒÃ„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â´"); /* Ln 15 */
+    mvwaddstr(HelpWin, y, x,   "Â³  B  Â³ Text Â³ Move back one page     Â³   B   Â³ Hex  Â³ Move back");
     sprintf(tempstring, "%-5d", -(fi->Scrn_y-1-(ruler)) * fi->ScrnWide);
     x += 64;
     mvwaddstr(HelpWin, y, x, tempstring);
     x += 6;
-    mvwaddstr(HelpWin, y++, x,                    " bytes ³");  /* Ln 16 */
+    mvwaddstr(HelpWin, y++, x,                    " bytes Â³");  /* Ln 16 */
     x = 1; /* Reset back to the left of the screen plus one for balancing */
-/*    mvwaddstr(HelpWin, x++, y, "³ Up (j) ³  16 bytes   ³    One line backward       ³(E)nd ³    End of file    ³"); / * Ln 17 */
-    mvwaddstr(HelpWin, y, x,   "³   Up   ³");
+/*    mvwaddstr(HelpWin, x++, y, "Â³ Up (j) Â³  16 bytes   Â³    One line backward       Â³(E)nd Â³    End of file    Â³"); / * Ln 17 */
+    mvwaddstr(HelpWin, y, x,   "Â³   Up   Â³");
     x += 10;
     sprintf(tempstring, "  %-4d", fi->ScrnWide);
     mvwaddstr(HelpWin, y, x, tempstring);
     x = 17; /* 63 chars from the right hand side */
-    mvwaddstr(HelpWin, y++, x, " bytes ³    One line backward       ³(E)nd ³   End of file   ³"); /* Ln 17 */
+    mvwaddstr(HelpWin, y++, x, " bytes Â³    One line backward       Â³(E)nd Â³   End of file   Â³"); /* Ln 17 */
     x = 1;
-    mvwaddstr(HelpWin, y, x, "³  Down  ³");
+    mvwaddstr(HelpWin, y, x, "Â³  Down  Â³");
     x += 10;
     sprintf(tempstring, "  %-4d", fi->ScrnWide);
     mvwaddstr(HelpWin, y, x, tempstring);
     x = 17; /* 63 chars from the right hand side */
-    mvwaddstr(HelpWin, y++, x, " bytes ³    One line forward        ³(G)o  ³ Goto byte/line  ³"); /* Ln 18 */
+    mvwaddstr(HelpWin, y++, x, " bytes Â³    One line forward        Â³(G)o  Â³ Goto byte/line  Â³"); /* Ln 18 */
     x = 1;
-    mvwaddstr(HelpWin, y, x,   "³ Space  ³ +");
+    mvwaddstr(HelpWin, y, x,   "Â³ Space  Â³ +");
     sprintf(tempstring, "%-5d", (fi->Scrn_y - 1 - (ruler)) * fi->ScrnWide);
     waddstr(HelpWin, tempstring);
     x += 17;
-    mvwaddstr(HelpWin, y, x,                    "bytes ³ 1 page (");
+    mvwaddstr(HelpWin, y, x,                    "bytes Â³ 1 page (");
     x += 35;
     sprintf(tempstring, "%-4d", (int)fi->Scrn_y-1-ruler);
     waddstr(HelpWin, tempstring);
     waddstr(HelpWin,                                               " lines) forward");
-    mvwaddstr(HelpWin, y++, x,                                                     "³  %   ³ Goto % of file  ³"); /* Ln 19 */
+    mvwaddstr(HelpWin, y++, x,                                                     "Â³  %   Â³ Goto % of file  Â³"); /* Ln 19 */
     x = 1;  /* Reset back to the left of the screen plus one for balancing */
-    mvwaddstr(HelpWin, y, x,   "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ"); /* Ln 25 */
+    mvwaddstr(HelpWin, y, x,   "Ã€Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã™"); /* Ln 25 */
   } /* now, that deals with a non-X screen... what about a screen under X? */
   else  { /* Here goes ... */
     mvwaddstr(HelpWin, y++, x, ".________._____________.____________________________.______._________________.");
@@ -2642,25 +2642,25 @@ void ShowHelp(struct FileData *fi) {
        
     y = 0, x = 1;
     if(EightBitDisplay) {
-      mvwaddstr(HelpWin, y++, x, "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿"); /* Ln 1 */
-      mvwaddstr(HelpWin, y++, x, "³                               Other keys                                   ³"); /* Ln 2 */
-      mvwaddstr(HelpWin, y++, x, "ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´"); /* Ln 3 */
-      mvwaddstr(HelpWin, y++, x, "³   Z/z: toggle debug flag     H/h: this help screen   S: statistics on file ³"); /* Ln 4 */
-      mvwaddstr(HelpWin, y++, x, "³   O/o: toggles offset address in hex mode between decimal and hexadecimal  ³"); /* Ln 5 */
-      mvwaddstr(HelpWin, y++, x, "³   7: toggle printable chars    8: toggle all chars    *: show line ends    ³"); /* Ln 6 */
-      mvwaddstr(HelpWin, y++, x, "³   l: toggle line numbers (only in text mode)                               ³"); /* Added: Ln 7 */
-      mvwaddstr(HelpWin, y++, x, "³   t/x: toggles text/hex mode  Q/q: Quit (Hasta La Vista!)                  ³"); /* Ln 8 */
-      mvwaddstr(HelpWin, y++, x, "³   /  to search forward                     \\ to search backwards           ³"); /* Ln 9 */
-      mvwaddstr(HelpWin, y++, x, "³   n  repeats a previous search in the same direction                       ³"); /* Ln 10 */
-      mvwaddstr(HelpWin, y++, x, "³           Other stuff will be put in here soon, as I make up the code      ³"); /* Ln 11 */
-      mvwaddstr(HelpWin, y++, x, "³                                                                            ³"); /* Ln 12 */
-      mvwaddstr(HelpWin, y++, x, "³   e  fires up an editor on the file     w  write bug report                ³"); /* Ln 13 */
+      mvwaddstr(HelpWin, y++, x, "ÃšÃ„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â¿"); /* Ln 1 */
+      mvwaddstr(HelpWin, y++, x, "Â³                               Other keys                                   Â³"); /* Ln 2 */
+      mvwaddstr(HelpWin, y++, x, "ÃƒÃ„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â´"); /* Ln 3 */
+      mvwaddstr(HelpWin, y++, x, "Â³   Z/z: toggle debug flag     H/h: this help screen   S: statistics on file Â³"); /* Ln 4 */
+      mvwaddstr(HelpWin, y++, x, "Â³   O/o: toggles offset address in hex mode between decimal and hexadecimal  Â³"); /* Ln 5 */
+      mvwaddstr(HelpWin, y++, x, "Â³   7: toggle printable chars    8: toggle all chars    *: show line ends    Â³"); /* Ln 6 */
+      mvwaddstr(HelpWin, y++, x, "Â³   l: toggle line numbers (only in text mode)                               Â³"); /* Added: Ln 7 */
+      mvwaddstr(HelpWin, y++, x, "Â³   t/x: toggles text/hex mode  Q/q: Quit (Hasta La Vista!)                  Â³"); /* Ln 8 */
+      mvwaddstr(HelpWin, y++, x, "Â³   /  to search forward                     \\ to search backwards           Â³"); /* Ln 9 */
+      mvwaddstr(HelpWin, y++, x, "Â³   n  repeats a previous search in the same direction                       Â³"); /* Ln 10 */
+      mvwaddstr(HelpWin, y++, x, "Â³           Other stuff will be put in here soon, as I make up the code      Â³"); /* Ln 11 */
+      mvwaddstr(HelpWin, y++, x, "Â³                                                                            Â³"); /* Ln 12 */
+      mvwaddstr(HelpWin, y++, x, "Â³   e  fires up an editor on the file     w  write bug report                Â³"); /* Ln 13 */
       for(y = 13; y < 22; y++) {
-        mvwaddstr(HelpWin, y, x, "³                                                                            ³");
+        mvwaddstr(HelpWin, y, x, "Â³                                                                            Â³");
       }  /* Gives us the next few lines the lazy way... */
-      mvwaddstr(HelpWin, y++, x, "³                     Hit any key to continue                                ³"); /* Ln 24 */
+      mvwaddstr(HelpWin, y++, x, "Â³                     Hit any key to continue                                Â³"); /* Ln 24 */
       y = 23;
-      mvwaddstr(HelpWin, y, x,   "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ"); /* Ln 25 */
+      mvwaddstr(HelpWin, y, x,   "Ã€Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã™"); /* Ln 25 */
       wrefresh(HelpWin);
       c = getch();
     }
@@ -2736,9 +2736,9 @@ int ShowStats(struct FileData *fi) {
   }
 /*  wmove(StatWin, y++, x); */
   if(EightBitDisplay)  {
-    mvwaddstr(StatWin, y++, x, "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿"); /* Ln 0 */
+    mvwaddstr(StatWin, y++, x, "ÃšÃ„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â¿"); /* Ln 0 */
 /*     wmove(StatWin, y++, x); */
-    mvwaddstr(StatWin, y, x,   "³                   ");
+    mvwaddstr(StatWin, y, x,   "Â³                   ");
     x += 20;
     if(!fi->Monochrome)  {
       wattron(StatWin, COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
@@ -2753,57 +2753,57 @@ int ShowStats(struct FileData *fi) {
     } else  {
       wattroff(StatWin, A_BOLD);
     }
-    mvwaddstr(StatWin, y++, x,                                    "                    ³"); /* Ln 1 */
+    mvwaddstr(StatWin, y++, x,                                    "                    Â³"); /* Ln 1 */
     x = 0;
-    mvwaddstr(StatWin, y++, x, "ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´"); /* Ln 2 */
-    mvwaddstr(StatWin, y, x,   "³  FPosn:    ");
+    mvwaddstr(StatWin, y++, x, "ÃƒÃ„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â´"); /* Ln 2 */
+    mvwaddstr(StatWin, y, x,   "Â³  FPosn:    ");
     x += 13;
-    sprintf(tempstring,                       "%6ld /* Current file position */        ³", fi->FPosn); /* Ln 3 */
+    sprintf(tempstring,                       "%6ld /* Current file position */        Â³", fi->FPosn); /* Ln 3 */
     mvwaddstr(StatWin, y++, x, tempstring);
     x = 0;
-    sprintf(tempstring, "³  FEnd:     %6ld /* Total bytes */                  ³", fi->FEnd); /* Ln 4 */
+    sprintf(tempstring, "Â³  FEnd:     %6ld /* Total bytes */                  Â³", fi->FEnd); /* Ln 4 */
     mvwaddstr(StatWin, y++, x, tempstring);
-    sprintf(tempstring, "³  FLines:   %6ld /* Num CR-terminated lines */      ³", fi->FLines); /* Ln 5 */
+    sprintf(tempstring, "Â³  FLines:   %6ld /* Num CR-terminated lines */      Â³", fi->FLines); /* Ln 5 */
     mvwaddstr(StatWin, y++, x, tempstring);
-    sprintf(tempstring, "³  FLineCtr: %6ld /* Current line within file */     ³", fi->FLineCtr); /* Ln 6 */
+    sprintf(tempstring, "Â³  FLineCtr: %6ld /* Current line within file */     Â³", fi->FLineCtr); /* Ln 6 */
     mvwaddstr(StatWin, y++, x, tempstring);
-    sprintf(tempstring, "³  Start:    %6ld   Count:    %6ld                 ³", fi->Start, fi->Count); /* Ln 7 */
+    sprintf(tempstring, "Â³  Start:    %6ld   Count:    %6ld                 Â³", fi->Start, fi->Count); /* Ln 7 */
     mvwaddstr(StatWin, y++, x, tempstring);
-    sprintf(tempstring, "³  Scrn_y: %3d  Scrn_x: %3d ScrnWide: %3d              ³", fi->Scrn_y, fi->Scrn_x, fi->ScrnWide); /* Ln 8 */
+    sprintf(tempstring, "Â³  Scrn_y: %3d  Scrn_x: %3d ScrnWide: %3d              Â³", fi->Scrn_y, fi->Scrn_x, fi->ScrnWide); /* Ln 8 */
     mvwaddstr(StatWin, y++, x, tempstring);
-    sprintf(tempstring, "³  *FName: %s ",   /* there's a bit of trickery here - let the preprocessor do the work - the next lines ARE correct */
+    sprintf(tempstring, "Â³  *FName: %s ",   /* there's a bit of trickery here - let the preprocessor do the work - the next lines ARE correct */
 #ifndef _MINIX
     basename
 #endif
     (fi->FName)); /* Should we squeeze in the dirname? */
     mvwaddstr(StatWin, y, x, tempstring);
     x += 27;
-    mvwaddstr(StatWin, y++, x, " /* The file's basename */  ³"); /* Ln 9 */
+    mvwaddstr(StatWin, y++, x, " /* The file's basename */  Â³"); /* Ln 9 */
     x = 0;
-    sprintf(tempstring, "³  DumpMode: %s /* Either hex or text */             ³", (fi->DumpMode=='t') ? "text" : "hex "); /* Ln 10 */
+    sprintf(tempstring, "Â³  DumpMode: %s /* Either hex or text */             Â³", (fi->DumpMode=='t') ? "text" : "hex "); /* Ln 10 */
     mvwaddstr(StatWin, y++, x, tempstring);
-    sprintf(tempstring, "³  DumpFlag: %c /* Either '7' or '8' or '*' */          ³", fi->DumpFlag); /* Ln 11 */
+    sprintf(tempstring, "Â³  DumpFlag: %c /* Either '7' or '8' or '*' */          Â³", fi->DumpFlag); /* Ln 11 */
     mvwaddstr(StatWin, y++, x, tempstring);
-    sprintf(tempstring, "³  addrflag: %7s  /* Hex or decimal addresses */   ³", ((fi->addrflag) ? "Decimal" : "Hex    "));   /* Ln 12 */
+    sprintf(tempstring, "Â³  addrflag: %7s  /* Hex or decimal addresses */   Â³", ((fi->addrflag) ? "Decimal" : "Hex    "));   /* Ln 12 */
     mvwaddstr(StatWin, y++, x, tempstring);
-    sprintf(tempstring, "³  EofSet: %s   /* At End of File? */                 ³", ((fi->EofSet)? "yes" : "no "));  /* Ln 13 */
+    sprintf(tempstring, "Â³  EofSet: %s   /* At End of File? */                 Â³", ((fi->EofSet)? "yes" : "no "));  /* Ln 13 */
     mvwaddstr(StatWin, y++, x, tempstring);
-    sprintf(tempstring, "³  SPosn: %ld", fi->SPosn);
+    sprintf(tempstring, "Â³  SPosn: %ld", fi->SPosn);
     mvwaddstr(StatWin, y, x, tempstring);
     x += 16;
-    mvwaddstr(StatWin, y++, x,                 " /* String Position */                 ³"); /* Ln 14 */
+    mvwaddstr(StatWin, y++, x,                 " /* String Position */                 Â³"); /* Ln 14 */
     x = 0;
-    mvwaddstr(StatWin, y++, x, "ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´"); /* Ln 15 */
-/*    sprintf(tempstring,  "³                "); */
-    mvwaddstr(StatWin, y, x,   "³                ");  /* Ln 16 */
+    mvwaddstr(StatWin, y++, x, "ÃƒÃ„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â´"); /* Ln 15 */
+/*    sprintf(tempstring,  "Â³                "); */
+    mvwaddstr(StatWin, y, x,   "Â³                ");  /* Ln 16 */
     x += 17;
     wattron(StatWin, A_BOLD);
     mvwaddstr(StatWin, y, x,                    "Hit any key to continue"); /* Ln 16 */
     x += 23;
     wattroff(StatWin, A_BOLD);
-    mvwaddstr(StatWin, y++, x,                                         "               ³");  /* Ln 16 */
+    mvwaddstr(StatWin, y++, x,                                         "               Â³");  /* Ln 16 */
     x = 0;
-    mvwaddstr(StatWin, y++, x, "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ"); /* Ln 17 */
+    mvwaddstr(StatWin, y++, x, "Ã€Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã™"); /* Ln 17 */
   }
   else  {
     mvwaddstr(StatWin, y++, x, ".______________________________________________________.");
@@ -4225,11 +4225,11 @@ int CmdMode(struct FileData *fi)  { /* 1s */
 
 /*
 void AsciiTable(void) {
-char    squaretop=" 218 ÚÄÄÄÄÄÂÄÄÄ¿ 191 ";
-char     whatever=" 179 ³ 196 194 ³ 179 ";
-char   squarejoin=" 195 Ã 197 Å   ´ 180";
-char   squareside=" 179 ³ 193     ³ ";
-char squarebottom=" 192 ÀÄÄÁÄÄÄÄÄÄÙ 217";
+char    squaretop=" 218 ÃšÃ„Ã„Ã„Ã„Ã„Ã‚Ã„Ã„Ã„Â¿ 191 ";
+char     whatever=" 179 Â³ 196 194 Â³ 179 ";
+char   squarejoin=" 195 Ãƒ 197 Ã…   Â´ 180";
+char   squareside=" 179 Â³ 193     Â³ ";
+char squarebottom=" 192 Ã€Ã„Ã„ÃÃ„Ã„Ã„Ã„Ã„Ã„Ã™ 217";
 }
 */
 
