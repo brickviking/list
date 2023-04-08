@@ -22,12 +22,19 @@ a git repository. I was contacted about it, and while browsing their copy I got 
 surprise. There was my tarball of list source, pretty as you please!
 
 * Documentation
-Yup, docs are pretty much required, so I provide a man page here written in nroff and perhaps
+Yup, docs are pretty much required, so as to understand not only the program itself and its functions,
+but also the mindset that I had while I was writing the program. I've used Org-mode from emacs to write
+this up, and you can use org-mode to extract all the files for the project—eventually.
+
+Currently, I provide a man page here written in nroff and perhaps
 a .tex file later. I made the docs originally before I was well aware of LaTeX, and I think I
 snagged the output format from other manpages. I'm also including the README.md file whole.
 
 I'm not including the Changelog in here, though it's a distinct idea. If I do include it, I
 should probably put it up near the top of this .org document.
+
+Future plans for this org document are to include all the source files so that you can take this
+single document and extract everything else that you need to get the source files as I wrote them.
 
 ** Man page
    :PROPERTIES:
@@ -385,6 +392,11 @@ Handle multiple files specified on the commandline.
    :header-args:markdown
    :tangle: README.md
    :END:
+
+Every good project deserves a README, and these days, it's a README.md (i.e. markdown), which
+will render perfectly well here in github, but might be a bit foreign to most text editors.
+I'm currently writing this up in Emacs, which includes a form of markdown in its org-mode.
+
 #+BEGIN_SRC markdown
 # List, a text and hexdump program
 
