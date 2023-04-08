@@ -54,7 +54,7 @@ should probably put it up near the top of this .org document.
 .\" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 .\"
 .\"
-.TH LIST 1 "19th May 2021" "List" \" -*- nroff -*-
+.TH LIST 1 "31st Jan 2022" "List" \" -*- nroff -*-
 .SH NAME
 list \- Curses-based file lister
 .\"
@@ -4358,7 +4358,7 @@ makefile that'll work happily under Minix. How does that differ from BSDMake or 
 DEBUGFLAGS = -g -O2
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.30
+VERSION = 0.7.32
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 #SRCDIR = list-$(VERSION)
@@ -4418,21 +4418,19 @@ DEBUGFLAGS = -g -O2
 ifeq ($(OS), minix)
 CC = cc
 CFLAGS = -Wall
-VERSION = 0730
+VERSION = 0732
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = listb$(VERSION).tgz
 else
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-OLDCFLAGS = -Wall -W -fdefault-inline -pedantic -nostdinc -I/home/chroot/usr/include
-VERSION = 0.7.30
+VERSION = 0.7.32
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 endif
 #SRCDIR = list-$(VERSION)
 SRCDIR = src
 LDFLAGS = -s
-OLDFLAGS = -s -nostdlibs -L/home/chroot/usr/lib -lc
 LIBS = -lcurses
 # STATICLIBS = -l:libcurses.a -l:libtinfo.a -l:libgpm.a -static-libgcc
 CCMALLOC = ccmalloc
