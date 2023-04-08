@@ -134,7 +134,8 @@ int main(int argc, char **argv)
            break;
       case 'c': /*  Set number of columns different from present screen  */
            x=strtol(optarg, &bufp, 0);
-           if(x < fi->Scrn_x)
+           if(x < fi->Scrn_x)  /* incorrect comparison here, as Scrn_x is 0 initially. */
+	     /*	should perhaps be != but we run into problems where x might be > than screen X */
                fi->Scrn_x = x;
            break;
       case 'n': /* Count off (N)um bytes */
