@@ -8,7 +8,6 @@ DISTBINFILE = listb$(VERSION).tgz
 else
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-OLDCFLAGS = -Wall -W -fdefault-inline -pedantic -nostdinc -I/home/chroot/usr/include
 VERSION = 0.7.32
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
@@ -16,7 +15,6 @@ endif
 #SRCDIR = list-$(VERSION)
 SRCDIR = src
 LDFLAGS = -s
-OLDFLAGS = -s -nostdlibs -L/home/chroot/usr/lib -lc
 LIBS = -lcurses
 # STATICLIBS = -l:libcurses.a -l:libtinfo.a -l:libgpm.a -static-libgcc
 CCMALLOC = ccmalloc
@@ -26,7 +24,6 @@ MAN = /usr/local/man
 
 OBJECTS = list.o dequeue.o bugwrite.o screen.o file.o input.o
 DOBJECTS = listd.o dequeued.o bugwrited.o screend.o filed.o inputd.o
-OLDOBJECTS = list.o dequeue.o bugwrite.o screen.o file.o input.o
 
 all: list
 
@@ -40,9 +37,6 @@ $(DOBJECTS): %d.o: %.c
 
 list: $(OBJECTS)
 	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
-
-oldlist: $(OLDOBJECTS)
-	$(CC) $(OLDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_d: $(DOBJECTS)
 	$(CC) -o list_d $(DOBJECTS) $(LIBS) 
@@ -62,10 +56,10 @@ install: list
 	install -m644 list.1 $(MAN)/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/filebrowse.c $(SRCDIR)/bugwrite.c $(SRCDIR)/Makefile $(SRCDIR)/BSDMakefile $(SRCDIR)/screen.c $(SRCDIR)/file.c $(SRCDIR)/input.c 
+	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c 
 
 dist-bin: list list_d #list_static
-	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
+	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d  $(SRCDIR)/list.1
 
 clean:
 	rm -f *.o list list_d
