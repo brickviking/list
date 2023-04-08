@@ -4386,21 +4386,22 @@ list: $(OBJECTS)
 list_d: $(DOBJECTS)
 	$(CC) -o list_d $(DOBJECTS) $(LIBS)
 
-list_static:
-	$(CC) $(LDFLAGS) -static -o list_static $(OBJECTS) $(LIBS)
+#list_static:
+#	$(CC) $(LDFLAGS) -static -o list_static $(OBJECTS) $(LIBS)
 
 install:
 	install -m755 list /usr/local/bin/list
 	install -m644 list.1 /usr/local/man/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-	cd .. && tar czvf $(DISTFILE) $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/filebrowse.c $(SRCDIR)/bugwrite.c $(SRCDIR)/Makefile $(SRCDIR)/BSDMakefile $(SRCDIR)/screen.c $(SRCDIR)/file.c $(SRCDIR)/input.c 
+	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c 
 
-dist-bin: list list_static list_d
-	cd .. && tar czvf $(DISTBINFILE) $(SRCDIR)/list $(SRCDIR)/list_static $(SRCDIR)/list_d $(SRCDIR)/list.1
+dist-bin: list list_d # list_static
+	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
+#removed $(SRCDIR)/list_static as we can't make it on linux, haven't checked on {Free,Net,Open)BSD
 
 clean:
-	rm -f *.o list list_d list_static
+	rm -f *.o list list_d
 
 uninstall:
 	rm /usr/local/bin/list
@@ -4440,7 +4441,6 @@ MAN = /usr/local/man
 
 OBJECTS = list.o dequeue.o bugwrite.o screen.o file.o input.o
 DOBJECTS = listd.o dequeued.o bugwrited.o screend.o filed.o inputd.o
-OLDOBJECTS = list.o dequeue.o bugwrite.o screen.o file.o input.o
 
 all: list
 
@@ -4454,9 +4454,6 @@ $(DOBJECTS): %d.o: %.c
 
 list: $(OBJECTS)
 	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
-
-oldlist: $(OLDOBJECTS)
-	$(CC) $(OLDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_d: $(DOBJECTS)
 	$(CC) -o list_d $(DOBJECTS) $(LIBS) 
@@ -4476,17 +4473,19 @@ install: list
 	install -m644 list.1 $(MAN)/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-	cd .. && tar czvf $(DISTFILE) $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/filebrowse.c $(SRCDIR)/bugwrite.c $(SRCDIR)/Makefile $(SRCDIR)/BSDMakefile $(SRCDIR)/screen.c $(SRCDIR)/file.c $(SRCDIR)/input.c 
+	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c 
 
-dist-bin: list list_static list_d
-	cd .. && tar czvf $(DISTBINFILE) $(SRCDIR)/list $(SRCDIR)/list_static $(SRCDIR)/list_d $(SRCDIR)/list.1
+dist-bin: list list_d #list_static
+	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d  $(SRCDIR)/list.1
 
 clean:
-	rm -f *.o list list_d list_static
+	rm -f *.o list list_d
+#removed list_static
 
 uninstall:
 	rm $(BIN)/list
 	rm $(MAN)/man1/list.1
+
 
 
 #+END_SRC
