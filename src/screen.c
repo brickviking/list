@@ -727,7 +727,7 @@ int Dump(struct FileData *fi) { /* 1 */
                  sprintf(prtln + i + 11 + (fi->ScrnWide*3), "%c", '.');
                else
                  sprintf(prtln + i + 11 + (fi->ScrnWide*3), "%c", ' ');
-                 break;
+               break;
              default:
                  if(fi->DumpFlag == '7') /* but does it interfere with this? */
                    sprintf(prtln + 11 + i + (fi->ScrnWide * 3), "%c", (isprint(buf[i])) ? buf[i] : '.');
