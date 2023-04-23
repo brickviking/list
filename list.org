@@ -38,7 +38,7 @@ single document and extract everything else that you need to get the source file
 
 ** Man page
    :PROPERTIES:
-   :header-args:roff :tangle list.1
+   :header-args: roff :tangle list.1
    :END:
 
 #+BEGIN_SRC nroff
@@ -389,8 +389,7 @@ Handle multiple files specified on the commandline.
 
 ** Readme file
    :PROPERTIES:
-   :header-args:markdown
-   :tangle: README.md
+   :header-args: markdown :tangle README.md
    :END:
 
 Every good project deserves a README, and these days, it's a README.md (i.e. markdown), which

@@ -31,19 +31,19 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 * Handle multiple files specified on the commandline.
 
+* Handle multiple files specified on the commandline.
+
 * Better help screen. I wrote it in the days when I didn't know better. I'd like it to look better than that now.
 
 * Compressed file support. Tricky. After all, I have wanted to peek at the raw file, not always the uncompressed contents.
 
 * Mouse support, to scroll up and down within the file.
 
-## Things I won't be adding
-
-* Dialer. I mean, who actually has a physical modem these days anyway?
+'## Things I won't be adding
 
 * LISTR/LISTS - at the moment, my code roughly duplicates what's available with LISTS (small) but without the size limits. 
 
-* There is no file list browser, certainly no dialer. 
+* There is currently no file list browser, certainly no dialer. I mean, who actually has a physical modem these days anyway?
 
 * No management of files either, a la Norton's COMMANDER/Midnight Commander or even XTree Gold.
 
@@ -51,7 +51,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 * The help screen is already minimal, but that's because I haven't written a large amount of content in the program.
 
-* GUI. This is first and foremost a console program much like the original DOS environment would have been. It won't have widgets nor a pretty toolbar, nice though those things would be to have.
+* No GUI. This is first and foremost a console program much like the original DOS environment would have been. It won't have widgets nor a pretty toolbar, nice though those things would be to have.
 
 * No CUI support (i.e. Ctl-V/Ctl-C/Ctl-X). It's not an editor, folks. If you want an editor, then list can run one for you, it'll be vim.
 
