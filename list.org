@@ -416,7 +416,6 @@ list is most definitely still beta software. it is also only designed to reliabl
 
 I haven't confirmed that this'll work under anything much aside from gcc, so for example I've never tried compiling this under WatcomC, or Open Watcom as it's now known. I might have to see (first) if I can source some libs to work with Open Watcom.
 
-
 Also, when going to the End of a file with the End key, you need to go down an extra line to actually display the last line. I haven't tried getting Colour curses modes to work well. In particular, reverse video is not always rendered correctly on some terminal types, and xterms. I have also noticed that xterms do not handle the ALT_GR charset well, unless a suitable font is used in the .Xdefaults file for xterm fonts. But far be it for me to supply a suitable font - let it suffice to say that I developed this originally to display IBM-charset on the screen.
 
 How I would convert to using under an EBCDIC system, I would have no idea about! I have heard that a font called vga will display generally all of the correct high-bit characters (those above 127) unless you have these re-mapped, as most European languages do. I have also not managed to reliably make the code accept input from STDIN, or from any sort of a pipe. This requires expertise that I don't currently have, and my C language skills are limited enough, thank you. Still, this is my first major project - yeah, I would choose such a beast. Wish me luck... Also, it will throw a wobbly if you don't have vim on the system.
