@@ -39,7 +39,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 * Mouse support, to scroll up and down within the file.
 
-'## Things I won't be adding
+## Things I won't be adding
 
 * LISTR/LISTS - at the moment, my code roughly duplicates what's available with LISTS (small) but without the size limits. 
 
