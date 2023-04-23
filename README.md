@@ -28,3 +28,37 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 * Better handling in xterms etc. It can also be messy under a telnet session if the client hasn't been written well, to handle clearline and clearscreen or scrollscreen sequences.
 
 * Handle multiple files specified on the commandline.
+
+* Better help screen. I wrote it in the days when I didn't know better. I'd like it to look better than that now.
+
+* Compressed file support. Tricky. After all, I have wanted to peek at the raw file, not always the uncompressed contents.
+
+* Mouse support, to scroll up and down within the file.
+
+## Things I won't be adding
+
+* Dialer. I mean, who actually has a physical modem these days anyway?
+
+* LISTR/LISTS - at the moment, my code roughly duplicates what's available with LISTS (small) but without the size limits. 
+
+* There is no file list browser, certainly no dialer. 
+
+* No management of files either, a la Norton's COMMANDER/Midnight Commander or even XTree Gold.
+
+* It has no screensaver function, and no drop-to-DOS (or shell, in this case). 
+
+* The help screen is already minimal, but that's because I haven't written a large amount of content in the program.
+
+* GUI. This is first and foremost a console program much like the original DOS environment would have been. It won't have widgets nor a pretty toolbar, nice though those things would be to have.
+
+* No CUI support (i.e. Ctl-V/Ctl-C/Ctl-X). It's not an editor, folks. If you want an editor, then list can run one for you, it'll be vim.
+
+* (Currently) no preferences support. I don't know how to create them, I don't know how to use them. There may be some support for that in the distant future, but first I will square away the code so that it doesn't fall over at a sneeze. And initially, there won't even be any sanity checking on the preferences, like deciding you want white text on white background. 
+
+* There won't be any 256-colour support. This is because the console in DOS didn't have it. CGA was four colours, EGA was (I think) 16 colours for DOS. I don't even know how I'd get more than that out of curses anyhow, though it's more common now than it ever used to be.
+
+* Raw screen writes. That was for DOS, and Linux doesn't really let you do that these days, at least not without dancing through hoops to get there.
+
+* BIOS screen writes. Same as above.
+
+* Telephone, FAX, and BBS support. Do you really want to dial me up in New Zealand at 3:30 am to tell me you can't run this program? These days the support (what little there is) is severely hobbled by my lack of coding knowledge. Yes, I'll get better, but it'll take time. I don't even _have_ a FAX.
