@@ -1583,7 +1583,7 @@ struct FileData *FileCommand(struct FileData *fi)  {
 DIR *GetDirectory(DIR *TmpDir, char *DirectoryName)  {
 /*   fi->FPtr= something I don't yet know - ; */
     TmpDir = opendir(DirectoryName);
-    if(TmpDir != NULL) Bye(5, __LINE__);
+    if(TmpDir != NULL) Bye(BR_DIRNOTFILE, __LINE__);
 /* Couldn't I get this to return the dir ptr instead of 0? */
     return 0;
 }
