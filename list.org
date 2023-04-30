@@ -474,7 +474,7 @@ at least I'm now aware of these functions. C was tricky, and hasn't got a lot be
 standards have taken over. We still have to manage our own memory, although there's been libraries
 to help out with this for decades now.
 
-** bugwrite.c
+** DONE bugwrite.c
    :PROPERTIES:
    :header-args: :tangle: bugwrite.c
    :END:
@@ -620,7 +620,7 @@ int TakeNotes2(FILE *FileToWrite, struct FileData *fi)  {
 }
 */
 #+END_SRC
-** dequeue.c
+** DONE dequeue.c
    :PROPERTIES:
    :header-args: :tangle dequeue.c
    :END:
@@ -1399,7 +1399,7 @@ int     Q_Insert( queue *q, void *data, int Comp(const void *,
 }
 
 #+END_SRC
-** dequeue.h
+** DONE dequeue.h
    :PROPERTIES:
    :header-args: :tangle dequeue.h
    :END:
@@ -1475,7 +1475,7 @@ typedef int (*Comp)(void *, void *);
 #endif /* DEQUEUE__H */
 
 #+END_SRC
-** dirbrowse.c
+** DONE dirbrowse.c
    :PROPERTIES:
    :header-args: :tangle dirbrowse.c
    :END:
@@ -1512,7 +1512,7 @@ int PrintDirectory(void) {
   return 0; /* STUB */
 }
 #+END_SRC
-** filebrowse.c
+** DONE filebrowse.c
    :PROPERTIES:
    :header-args: :tangle filebrowse.c
    :END:
@@ -2365,7 +2365,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
 
 #+END_SRC
 
-** screen.c
+** TODO screen.c
    :PROPERTIES:
    :header-args: :tangle screen.c
    :END:
@@ -3627,7 +3627,7 @@ int MakeMenu(struct ListFile *fi)  {
 
 #+END_SRC
 * Main program
-** list.c
+** TODO list.c
    :PROPERTIES:
    :header-args: :tangle list.c
    :END:
@@ -4279,7 +4279,7 @@ char squarebottom=" 192 ÀÄÄÁÄÄÄÄÄÄÙ 217";
 */
 
 #+END_SRC
-** list.h
+** DONE list.h
    :PROPERTIES:
    :header-args: :tangle list.h
    :END:
