@@ -1994,12 +1994,18 @@ void CloseNCurses(void) {
 }
 
 #+END_SRC
-** input.c
+** DONE input.c
    :PROPERTIES:
    :header-args: :tangle input.c
    :END:
 
-This has functions that take input from the user, and do stuff with that input.
+These are functions that take input from the user, and do stuff with that input.
++ SearchPrompt
+  Asks for string from the user
++ WhatNext
+  Main key handling routine while in List.
++ More to add
+
 #+BEGIN_SRC c
 #include <stdlib.h>
 #include <dirent.h>
