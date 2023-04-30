@@ -251,7 +251,7 @@ funny char they use in MS\-DOS or biew yet.
 edits the file, if the file can be edited by the user running the list program.
 Be aware that the name of the editor will be what is defined in your EDITOR
 environment variable, if you have one defined.  Otherwise, the program will
-attempt to call the editor vi.
+attempt to call the vim editor.
 .TP
 .I "W"
 starts a bugwrite feature \- just enter text into the blank screen, and it will
@@ -288,11 +288,11 @@ display 8 bit characters properly.
 This will be used by the
 .I "E"
 function, if it exists.  Otherwise,
-.I vi
+.I vim
 will be selected as the default editor.  Again, this will fall over if
 you don't actually
 .B have
-vi on the system.  I should ask the user for an editor to use, but haven't
+vim on the system.  I should ask the user for an editor to use, but haven't
 got there yet...
 .PP
 .\"
