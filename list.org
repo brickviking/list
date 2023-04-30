@@ -1,6 +1,7 @@
 #+TITLE: List
 #+SUBTITLE: a poorly-executed less
 #+AUTHOR: brickviking
+#+DATE: whenever
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
