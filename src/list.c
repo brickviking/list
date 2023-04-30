@@ -1,5 +1,4 @@
 /* vim:ts=2:ww=0:
- *
 **
 **  WARNING: program in semi-stable (read - BETA) state at the moment...it's usable, but a few bugs remain.
 **
