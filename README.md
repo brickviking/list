@@ -2,12 +2,11 @@
 
 ## Description
 
-list is a curses-based interactive file listing program that combines the functions of less and hexdump into one handy program. It displays text on the screen in one of two different formats, either in hexadecimal dump format (a la MS-DOS debug.com format), or in text format, similar to what the programs less and more do.
+list is a curses-based interactive file listing program that combines the functions of less and hexdump into one handy program. It displays text on the screen in one of two different formats, either in hexadecimal dump format (a la MS-DOS debug.com format or xxd), or in text format, similar to what the programs less and more do.
 
-The original list program that I saw started out as a program under MS-DOS, created by Vernon Buerg, to whom I acknowledge the initial idea. However, there was not an equivalent program under Linux, though people had tried. There is a hexdump program, which provides something like what I wanted, but I also wanted to have a text display at the press of one key (without macros, please...) I note there's also
-the same ability but wrapped up in a nice file manager too, Midnight Commander.
+The original list program that I saw started out as an excellent program under MS-DOS created by Vernon Buerg, to whom I acknowledge the initial idea. However, there was not an equivalent program under Linux, although people had tried. There are two hexdump programs which provide something like what I wanted, but I also wanted to have a text display at the press of one key (without macros, please...). I note that Midnight Commander also provides the same ability but wrapped up in a nice file manager too.
 
-This is (pretty much) all my own code, based on routines slipped in from the dequeue, hexdump and srchfile packages from SNIPPETS, which was maintained by Bob Stout until his death. Mirrors of the SNIPPETS code still exist as of 2020 over on GitHub. List was first created to run under DJGPP, and then again into a UNIX C/curses program. A number of bugs appeared to have been squashed in this move, but, needless to say, several still remain.
+list is (pretty much) all my own code, but is based on routines slipped in from the dequeue, hexdump and srchfile packages from SNIPPETS, which was maintained by Bob Stout until his death. Mirrors of the SNIPPETS code still exist as of 2020 over on GitHub. List was first created to run under DJGPP, and then again into a UNIX C/curses program. A number of bugs appeared to have been squashed in this move, but, needless to say, several still remain.
 
 Naturally, things have evolved since then, but I've finally recovered a copy of this program's source, and will continue to work on it, as and when I get better at coding.
 
