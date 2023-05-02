@@ -2398,7 +2398,7 @@ void Usage(void) {
   char *tempstring;
   if(debug) {
     if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 128)))   /* We shouldn't need more than this */
-      Bye(1, __LINE__); /* .. and if we can't get it, then we bail out... */
+      Bye(BR_NOMEM, __LINE__); /* .. and if we can't get it, then we bail out... */
     sprintf(tempstring, "Debugging version %1d.%1d.%1d %s %s build\n", LISTVERSION, LISTMAJOR, LISTMINOR,  __DATE__, __TIME__ );
     printf(tempstring);
   }
@@ -2745,7 +2745,7 @@ int ShowStats(struct FileData *fi) {
   int c, y=0, x=0, EightBitDisplay;
   if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 1024))) {
     CloseNCurses();
-    Bye(1, __LINE__);
+    Bye(BR_NOMEM, __LINE__);
   }
 /*  clear(); */
   if(fi->Scrn_x < 56 || fi->Scrn_y < 18 ) {
@@ -2942,7 +2942,7 @@ int Dump(struct FileData *fi) { /* 1 */
   tempstring = (char *) malloc(sizeof tempstring * 1024);
   if(tempstring == NULL) {
 	  CloseNCurses();
-	  Bye(1, __LINE__);
+	  Bye(BR_NOMEM, __LINE__);
   }
   /* Define nice big fat amount, since we nearly hit the 256 limit with a
    * 160 char wide screen (imagine what would happen on a 21" screen @ 1600x1200) */
@@ -2957,7 +2957,7 @@ int Dump(struct FileData *fi) { /* 1 */
      )  /* If this calloc fails (NULL return) */
      {
 	CloseNCurses();
-    Bye(1, __LINE__);  /* Then bomb with "No memory available" message */
+    Bye(BR_NOMEM, __LINE__);  /* Then bomb with "No memory available" message */
      }
   fi->FPosn=fi->Start;  /* Set pos'n to requested Start */
 /*  if(not exist DISPLAY) do next line, else continue  */
@@ -2977,7 +2977,7 @@ int Dump(struct FileData *fi) { /* 1 */
     ScanForCr(fi);
     if(!(fi->CrArray=calloc(fi->FLines, sizeof(u_long)))) {
 	    CloseNCurses();
-	    Bye(1, __LINE__);
+	    Bye(BR_NOMEM, __LINE__);
     }
     fi->CrArray=AllocateLines(fi); /* This allocates the line ends */
   }
@@ -3389,7 +3389,7 @@ void PrintLine(struct FileData *fi)  {
   char *tempstring;
   if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 1024))) {
     CloseNCurses();
-    Bye(1, __LINE__); /* Whoops - ran out of memory - we're out of here!*/
+    Bye(BR_NOMEM, __LINE__); /* Whoops - ran out of memory - we're out of here!*/
   }
   attron(A_REVERSE); /* Replace attron(A_BOLD) */
 /* ******************* beginning of ruler print code ******************* */
@@ -3714,7 +3714,7 @@ int main(int argc, char **argv)
   fi=&ListFile; /* ... and point it to our just-filled ListFile struct */
   fi->FileInfoPtr = &fi->FileInfo;
   tempstring = (char *) malloc(sizeof tempstring * 1024); /* Does this limit need re-evaluating? */
-  if(tempstring == NULL) Bye(1, __LINE__); /* died due to lack of memory */
+  if(tempstring == NULL) Bye(BR_NOMEM, __LINE__); /* died due to lack of memory */
   /* ... otherwise, continue as planned... */
   (void) Q_Init(&fi->DirQueuePtr); /* Initialises the queue created - lclint suggests return a void */
 
@@ -3951,7 +3951,7 @@ int main(int argc, char **argv)
   /*  ScanForCr(fi);    / * this should hopefully give me the correct
                      * number of lines in my data * /
   / * looks like I'm getting a mismatch - revamp the routine?  * /
-  if(!(fi->CrArray=calloc(fi->FLines, sizeof(u_long)))) Bye(1, __LINE__);
+  if(!(fi->CrArray=calloc(fi->FLines, sizeof(u_long)))) Bye(BR_NOMEM, __LINE__);
   fi->CrArray=AllocateLines(fi); / * This allocates the line ends */
   /*******************************************************/
   if (fi->Count==0)
@@ -4055,7 +4055,7 @@ void *ecalloc(int count, unsigned int size) {
     return (p);
 /*  error("Cannot allocate memory", NULL_PARG);
   quit(QUIT_ERROR);   */
-  Bye(1, __LINE__);
+  Bye(BR_NOMEM, __LINE__);
   /*NOTREACHED*/
   exit(1);
 }
