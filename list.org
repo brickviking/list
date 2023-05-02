@@ -3602,7 +3602,7 @@ void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine) 
 
   if( QUIT_CHAR == (c=getch())) {
 	  CloseNCurses();
-	  Bye(2, SourceLine);
+	  Bye(BR_DEBUGEND, SourceLine);
   }
         refresh();
 }
@@ -3724,7 +3724,7 @@ int main(int argc, char **argv)
 
   if(argc < 2) {
     errno = ENOENT;
-    Bye(12, __LINE__); /* 'Nother Dion bug squashed */
+    Bye(BR_NOFILENAME, __LINE__); /* 'Nother Dion bug squashed */
   }
   /* Now copy the argc and argv to our localspace */
   fi->MyArgc = argc;
@@ -3854,7 +3854,7 @@ int main(int argc, char **argv)
           /* MS-DOSism   setmode(fileno(stdin), O_BINARY);  ... try the above instead.. */
           /*    addstr("list: No filename specified on commandline\n"); */
 					CloseNCurses();
-    Bye(12, __LINE__); /* We dump out by telling the user we can't open file at the moment... */
+    Bye(BR_NOFILENAME, __LINE__); /* We dump out by telling the user we can't open file at the moment... */
   }
   /* ncurses code can FINALLY start here! */
   initscr();
@@ -3871,7 +3871,7 @@ int main(int argc, char **argv)
       init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLUE);
     } /* 2e */
   } /* 1e */
-/*    Bye(6, __LINE__);  / * This line will be replaced soon - just give me time to write the monochrome equivalents */
+/*    Bye(BR_NOCOLOR, __LINE__);  / * This line will be replaced soon - just give me time to write the monochrome equivalents */
   noecho();
   cbreak();
   keypad(stdscr, TRUE);
@@ -3894,19 +3894,19 @@ int main(int argc, char **argv)
   if(!(fi->FPtr==stdin)) { /* if the FPtr is NOT == stdin, then ... */
     if( !( fi->FPtr = fopen( fi->FName, "rb"))) { /* ...find out if the file can be opened for reading, if not ... */
 			CloseNCurses();
-      Bye(7, __LINE__);
+      Bye(BR_FILEPERM, __LINE__);
     } /* End of failure to open */
     if(fi->Scrn_x < 40) { /* Darn - this witty comment gets lost in the Bye() call */
 /*      addstr("list: Um, I don't have enough columns to display the file in hex format,");
       addstr("      So am defaulting to text mode!  Hope you don't mind!");  */
 			CloseNCurses();
-      Bye(9,__LINE__);
+      Bye(BR_TINYCOLS,__LINE__);
     }
     if(fi->Scrn_y < 24) { /* Darn - this witty comment gets lost in the Bye() call */
 /*            addstr("list: Err, there aren't enough lines here to do justice to this");
             addstr("      file - I need to get out of here! (Reason:Claustrophobia)"); */
 			CloseNCurses();
-      Bye(10,__LINE__);
+      Bye(BR_TINYLINES,__LINE__);
     }
 /*    stat(fi->FName, ListFileInfo); / * Second time this file is stat'ed - is this necessary? */
     /* Here are a few sanity checks... */
@@ -3936,7 +3936,7 @@ int main(int argc, char **argv)
     cbreak();
     noecho();
     /*      nodelay(); */
-    /*    if((c=getchar())=='Q') Bye(2, __LINE__); */
+    /*    if((c=getchar())=='Q') Bye(BR_DEBUGEND, __LINE__); */
 /*    while(c!=EOF) c=getchar();  wait for key ... */
     fseek(fi->FPtr, 0, SEEK_END);
     if(!(fi->FEnd=ftell(fi->FPtr))) {
