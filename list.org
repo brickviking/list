@@ -2462,7 +2462,7 @@ void ShowHelp(struct FileData *fi) {
                                +-----+------+------------------------+-----+------+------------------------+ 
 	 * */
 /* char tmpstr[COLS+1]; */
-  char *tempstring=(char *) malloc(sizeof(tempstring) * 1024);  /* To give us some room */
+  char *tempstring = (char *) malloc(sizeof(tempstring) * 1024);  /* To give us some room */
   if (tempstring == NULL)
     /* We should be failing if we can't malloc here */
     Bye(BR_NOMEM, __LINE__);
