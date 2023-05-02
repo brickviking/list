@@ -1623,7 +1623,7 @@ FILE *GetItem(DIR *ThisDir) {
     else return ThisFile;
 }
 #+END_SRC
-** TODO file.c
+** DONE file.c
    :PROPERTIES:
    :header-args: :tangle file.c
    :END:
