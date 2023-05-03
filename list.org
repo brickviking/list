@@ -430,8 +430,6 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 ,* Handle multiple files specified on the commandline.
 
-,* Handle multiple files specified on the commandline.
-
 ,* Better help screen. I wrote it in the days when I didn't know better. I'd like it to look better than that now.
 
 ,* Compressed file support. Tricky. After all, I have wanted to peek at the raw file, not always the uncompressed contents.
