@@ -1760,7 +1760,7 @@ long *AllocateLines(struct FileData *fi) {
   refresh();
   addstr("list: Counting lines ... please wait"); /* This takes far longer than it needs to */
   for(i = 0, j = 1; i < fi->FEnd;)  {
-/*    for (linelength = 0, c=0; linelength < 80 ; linelength++ ) */
+/*    for (linelength = 0, c = 0; linelength < 80 ; linelength++ ) */
     for (linelength = 0, c = 0; linelength < fi->Scrn_x - 10; linelength++)  /* Took 10 bytes off to add in line numbers */
        {
   c = fgetc(fi->FPtr);
@@ -2276,7 +2276,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
     fclose(fi->FPtr);  /* I'd better close it before opening another one */
     free(fi->FName); /* frees the memory associated with the name... */
     free(fi->CrArray); /* ... same as above ... */
-/*    fi->FName=buf2p; */
+/*    fi->FName = buf2p; */
 /*    fi=NewFile(fi, buf2p); / * This *should* open the new fi->FName */
 /* Whoops - looks like there are some troubles with this method */
 /*    fseek(fi->FPtr, fi->FPosn, SEEK_SET); * This line shouldn't happen, after an fclose */
@@ -3195,7 +3195,7 @@ int Dump(struct FileData *fi) { /* 1 */
             addstr("Seeking...");
             move(oldx, 0);
             /x*     c = getchar();   / * Yes, this is broken because of the surrounding comment * /
-                   while(c != EOF) c=getchar(); *x/
+                   while(c != EOF) c = getchar(); *x/
             refresh();
           } */
           fseek(fi->FPtr, fi->FPosn, SEEK_SET); /* Seeks to where the file position is set */
@@ -3612,7 +3612,7 @@ void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine) 
   move(y, x); /* Now stick me back where I was... */
   attroff(A_BOLD);
 
-  if( QUIT_CHAR == (c=getch())) {
+  if( QUIT_CHAR == (c = getch())) {
           CloseNCurses();
           Bye(BR_DEBUGEND, SourceLine);
   }
