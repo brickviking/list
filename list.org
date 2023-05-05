@@ -475,7 +475,7 @@ to help out with this for decades now.
 
 ** DONE bugwrite.c
    :PROPERTIES:
-   :header-args: :tangle: bugwrite.c
+   :header-args: :tangle bugwrite.c
    :END:
 This was an attempt to set up a screen to write stuff into for a bug report to be saved to disk
 and relayed to myself later. I guess I could happily format this like a github issue these days.
