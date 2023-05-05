@@ -1,3 +1,4 @@
+# -*- mode: org; indent-tabs-mode: nil -*-
 #+TITLE: List
 #+SUBTITLE: a poorly-executed less
 #+AUTHOR: brickviking
