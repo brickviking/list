@@ -3648,7 +3648,7 @@ other files. After all, I thought I had enough stray files littering the project
   ,**
   ,**  Released under the GPL version 2, Copyright (c) 2002,2021,2023 brickviking
   ,**  Last updated 2020, made ready to import to github repository
-  ,**  and on an ongoing basis since
+  ,**  and on an ongoing basis since then.
   ,*/
 
   #ifndef __linux__
