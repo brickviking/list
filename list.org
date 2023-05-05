@@ -46,7 +46,7 @@ single document and extract everything else that you need to get the source file
 #+BEGIN_SRC nroff
 .\"
 .\" list - a file listing program
-.\" Copyright (C) 1999,2002,2021  Eric Gillespie (viking@caverock.net.nz)
+.\" Copyright (C) 1999,2002,2021,2023 brickviking (brickviking@gmail.com)
 .\"
 .\" This program is free software; you can redistribute it and/or
 .\" modify it under the terms of the GNU General Public License
@@ -2412,7 +2412,7 @@ void Usage(void) {
     sprintf(tempstring, "Debugging version %1d.%1d.%1d %s %s build\n", LISTVERSION, LISTMAJOR, LISTMINOR,  __DATE__, __TIME__ );
     printf(tempstring);
   }
-  printf("List, by Eric Gillespie, released under the GNU Public License version 2\n");
+  printf("List, by brickviking, released under the GNU Public License version 2\n");
   printf("Usage: list [-?|-h] [-v] [-d] [-x|t] [-7|8] [-s start] [-n count]\n\t");
 /*  printf("[-b tabsize] "); */
   printf("[-l] [-e] [-m] [-f] file_name [-r] rows [-c] columns [-q] \n");
@@ -2527,7 +2527,7 @@ void ShowHelp(struct FileData *fi) {
     mvwaddstr(HelpWin, y++, x, "                 °°   °°                °°                                  ");  /* Ln 0 */
     mvwaddstr(HelpWin, y++, x, "                 °°                     °°                                  ");  /* Ln 1 */
     mvwaddstr(HelpWin, y++, x, "                 ±±   ±±   Ü±±±±±±Ü  ±±±±±±±±         By                    ");  /* Ln 2 */
-    mvwaddstr(HelpWin, y++, x, "                 ±±   ±±   ±      ß     ±±       Eric Gillespie             ");  /* Ln 3 */
+    mvwaddstr(HelpWin, y++, x, "                 ±±   ±±   ±      ß     ±±       brickviking             ");  /* Ln 3 */
     mvwaddstr(HelpWin, y++, x, "                 ²²   ²²    ²²²²²²      ²²                                  ");  /* Ln 4 */
     mvwaddstr(HelpWin, y++, x, "                 ²²   ²²   Ü      ²     ²²                                  ");  /* Ln 5 */
     mvwaddstr(HelpWin, y++, x, "                 ÛÛ   ÛÛ   ßÛÛÛÛÛÛß     ÛÛ                                  ");  /* Ln 6 */
@@ -2539,9 +2539,9 @@ void ShowHelp(struct FileData *fi) {
     mvwaddstr(HelpWin, y++, x, "   mWWWQWW#    By       jQWWWWW:                       :QWWWQW(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             )TY?Y?Y`                       :QQQQQQ(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             _______       ._aaaaas,,.    wawQQQQQQwaac         ");
-    mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#   Eric      jQQQQQQ;    <yQQQWWWWWQQQw,  QWWQQQQQQQQQk         ");
+    mvwaddstr(HelpWin, y++, x, "   mQQQQQQ# brickviking jQQQQQQ;    <yQQQWWWWWQQQw,  QWWQQQQQQQQQk         ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;   jWQQQQW\?\?YQWQWWQ, ^~)QQQQQQr~^`         ");
-    mvwaddstr(HelpWin, y++, x, "   mQQQQQQ# Gillespie   jQQQQQQ;   mWQQQQQws,==----    :QQQQQQ(            ");
+    mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;   mWQQQQQws,==----    :QQQQQQ(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;   ]QQQQQQWWQQQmwa,    :QQQQQQ(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;    -?YUWWQQQQQQQQQw   :QQQQQQ(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;  __i___s ~\"?QWQQQQQ   :QQQQQQ[   ._,      ");
@@ -2555,7 +2555,7 @@ void ShowHelp(struct FileData *fi) {
     mvwaddstr(HelpWin, y++, x, "                 ..   ..                ..                                  ");         / * Ln 0 * /
     mvwaddstr(HelpWin, y++, x, "                 ::                     ::                                  ");        / * Ln 1 * /
     mvwaddstr(HelpWin, y++, x, "                 %%   ;;    ;;;;;;   ;;;;;;;;         By                    "); / * Ln 2 * /
-    mvwaddstr(HelpWin, y++, x, "                 %%   %%   ;      '     %%       Eric Gillespie             "); / * Ln 3 * /
+    mvwaddstr(HelpWin, y++, x, "                 %%   %%   ;      '     %%          brickviking             "); / * Ln 3 * /
     mvwaddstr(HelpWin, y++, x, "                 &&   %%    %%%%%%      %%                                  "); / * Ln 4 * /
     mvwaddstr(HelpWin, y++, x, "                 &&   &&   ,      :     &&                                  "); / * Ln 5 * /
     mvwaddstr(HelpWin, y++, x, "                 ##   ##    ######      ##                                  "); / * Ln 6 * /
@@ -3651,8 +3651,9 @@ other files. After all, I thought I had enough stray files littering the project
   /* -*- mode: c; indent-tab-mode: nil; -*- */
   ,**  WARNING: program in semi-stable (read - BETA) state at the moment...it's usable, but a few bugs remain.
   ,**
-  ,**  Released under the GPL version 2, Copyright (c) 2002 by Eric Gillespie
+  ,**  Released under the GPL version 2, Copyright (c) 2002,2021,2023 brickviking
   ,**  Last updated 2020, made ready to import to github repository
+  ,**  and on an ongoing basis since
   ,*/
 
   #ifndef __linux__
@@ -3756,7 +3757,7 @@ other files. After all, I thought I had enough stray files littering the project
        ,*/
       switch(c) {
       case 'v':    /* Spits out version information */
-        printf("list: Version %1d.%1d.%1d, compiled on %s at %s, by %s\n", LISTVERSION, LISTMAJOR, LISTMINOR, __DATE__, __TIME__, "Eric Gillespie");  /* Why don't we run this through Bye()? Because there's no ERROR, that's why!!! */
+        printf("list: Version %1d.%1d.%1d, compiled on %s at %s, by %s\n", LISTVERSION, LISTMAJOR, LISTMINOR, __DATE__, __TIME__, "brickviking");  /* Why don't we run this through Bye()? Because there's no ERROR, that's why!!! */
         exit(0);
         break;  /* never gets to this line... 8-) this should be tidier */
       case 'f': /* Load following filename */
