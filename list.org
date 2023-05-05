@@ -726,8 +726,7 @@ allocations better.
 /* The index: a pointer to pointers */
 static  void        **ppindex;
 static  datanode    **posn_index;
-static int Q_BSearch( queue *q, void *key,
-							 int Comp( const void *, const void *));
+static int Q_BSearch( queue *q, void *key, int Comp( const void *, const void *));
 /***
  ** function    : Q_Init
  ** purpose     : Initialise queue object and pointers.
@@ -891,8 +890,8 @@ int  Old_Q_PushHead( queue *q, void *d ) {
 
     node    *n ;
     datanode *p;
-	 q->head->prev = (*(malloc( sizeof(datanode) )));
-	     if ( q->head->prev == NULL )
+    q->head->prev = (*(malloc( sizeof(datanode) )));
+    if ( q->head->prev == NULL )
         return FALSE;
 
     n = q->head;
@@ -1492,11 +1491,11 @@ char *ReadSortedDirectory(DIR *) {  /* Once we have type of returned list, chang
   /* Things I'll need to know how to do:
    * extract a list of files from a provided directory
      fail if we can't access/read the directory itself
-     * open directory; fail if eperm
-        for number_of_entries
-        do { read entry 
-	add entry.name to list 
-	} while (--entries > 0)
+   * open directory; fail if eperm
+     for number_of_entries
+     do { read entry
+       add entry.name to list
+     } while (--entries > 0)
 
    * sort a list of files
    * return a pointer to the sorted list of files 
@@ -1604,7 +1603,7 @@ int ListDirectory(DIR *TempDir)  {
 
 /*
 static int one (struct dirent *unused) {
-	     return 1;
+             return 1;
      }
 */
 
@@ -1709,7 +1708,7 @@ void ScanForCr(struct FileData *fi) {
       {
         switch (c = fgetc(fi->FPtr))
           {
-	    /* Takes no account of <CR> or \r, I should really have known better even in 1997 */
+            /* Takes no account of <CR> or \r, I should really have known better even in 1997 */
           case '\n':
             j++;
             llflag++;
@@ -1995,8 +1994,8 @@ void CloseNCurses(void) {
   refresh();
   nl();
   nocbreak();
-	endwin();
-	return;
+        endwin();
+        return;
 }
 
 #+END_SRC
@@ -2147,8 +2146,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
       errno = 0;
       fi->FPosn = strtol(buf2, &buf2p, 0); /* Set fileposition */
       if(errno) {
-	      CloseNCurses();
-	      Bye(BR_BADSTRING, __LINE__);
+              CloseNCurses();
+              Bye(BR_BADSTRING, __LINE__);
       }
       /* Have to check for FPosn within 0 <= FPosn <= FEnd  */
       if(fi->FPosn > fi->FEnd) {
@@ -2333,7 +2332,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
        refresh();
        getstr(buf2);  /* Input a new filename */
        /* I don't know what happens if I enter nothing - I WANT it to use a
-	* default value of $HOME/list.debug */
+        * default value of $HOME/list.debug */
        noecho();
        fi->BugWriteFName = buf2; /* Throw it into the struct */
        BugWrite(fi);
@@ -2399,13 +2398,13 @@ These are functions that deal with anything going to the screen through ncurses.
 #include "list.h"
 
 void Usage(void) {
-	/* ECG: 9-Oct-2001
-	 * This has been pointed out as not needed by bronaugh - we should
-	 * make it non-curses-reliant - done.
-	 * Hmmm, just wondering if we could integrate this into Bye somehow?
-	 * Say, call it from Bye? After all, we DO exit the program at this stage.
-	 * Any other notes I will add to head of list.c
-	 */
+/* ECG: 9-Oct-2001
+ * This has been pointed out as not needed by bronaugh - we should
+ * make it non-curses-reliant - done.
+ * Hmmm, just wondering if we could integrate this into Bye somehow?
+ * Say, call it from Bye? After all, we DO exit the program at this stage.
+ * Any other notes I will add to head of list.c
+*/
   char *tempstring;
   if(debug) {
     if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 128)))   /* We shouldn't need more than this */
@@ -2445,8 +2444,8 @@ void ShowHelp(struct FileData *fi) {
  * I have also had the idea of displaying a second help screen - seeing as the
  * first is keys, the second can be for search + description.
  */
-	/* This help screen layout has been suggested by bronaugh
-	 *
+        /* This help screen layout has been suggested by bronaugh
+         *
                                +-----+------+------------------------+-----+------+------------------------+ 
                                | Key | Mode |         Action         | Key | Mode |         Action         |
                                +-----+------+------------------------+-----+------+------------------------+ 
@@ -2471,7 +2470,7 @@ void ShowHelp(struct FileData *fi) {
                                | G   | Text | Jump to line in file   | G   | Hex  | Jump to byte in file   |
                                | %   | All  | Move to n% offset file |     |      |                        |
                                +-----+------+------------------------+-----+------+------------------------+ 
-	 * */
+         * */
 /* char tmpstr[COLS+1]; */
   char *tempstring = (char *) malloc(sizeof(tempstring) * 1024);  /* To give us some room */
   if (tempstring == NULL)
@@ -2955,8 +2954,8 @@ int Dump(struct FileData *fi) { /* 1 */
   char *prtln; /* output line, bumped up from 82, changed from signed */
   tempstring = (char *) malloc(sizeof tempstring * 1024);
   if(tempstring == NULL) {
-	  CloseNCurses();
-	  Bye(BR_NOMEM, __LINE__);
+          CloseNCurses();
+          Bye(BR_NOMEM, __LINE__);
   }
   /* Define nice big fat amount, since we nearly hit the 256 limit with a
    * 160 char wide screen (imagine what would happen on a 21" screen @ 1600x1200) */
@@ -2969,7 +2968,7 @@ int Dump(struct FileData *fi) { /* 1 */
       )
      )  /* If this calloc fails (NULL return) */
      {
-	CloseNCurses();
+        CloseNCurses();
     Bye(BR_NOMEM, __LINE__);  /* Then bomb with "No memory available" message */
      }
   fi->FPosn = fi->Start;  /* Set pos'n to requested Start */
@@ -2989,8 +2988,8 @@ int Dump(struct FileData *fi) { /* 1 */
   if(!fi->Quick) { /* If the Quick switch is set, say for large 120 meg files ... then forget these */
     ScanForCr(fi);
     if(!(fi->CrArray = calloc(fi->FLines, sizeof(u_long)))) {
-	    CloseNCurses();
-	    Bye(BR_NOMEM, __LINE__);
+            CloseNCurses();
+            Bye(BR_NOMEM, __LINE__);
     }
     fi->CrArray = AllocateLines(fi); /* This allocates the line ends */
   }
@@ -3036,11 +3035,11 @@ int Dump(struct FileData *fi) { /* 1 */
             clrtoeol();
           }
           move(fi->Scrn_y - 1, 0);
-	  /* Now, how do I set up the EndOfFile flag? Ah, there it is...see if this works... */
+          /* Now, how do I set up the EndOfFile flag? Ah, there it is...see if this works... */
           fi->EofSet++;
           PrintLine(fi);
           break;
-	}
+        }
         memset(prtln, ' ', sizeof(char) * 1024);
      /* first, print the offset in whatever form... */
         if(!(fi->addrflag)) 
@@ -3120,10 +3119,10 @@ int Dump(struct FileData *fi) { /* 1 */
                     /* returns . if 7-bit, else _should_ return itself */
                  break;
           }
-	if(j < fi->ScrnWide) {
+        if(j < fi->ScrnWide) {
           for(i = j; i < fi->ScrnWide; i++)
             sprintf(prtln + 11 + i + (fi->ScrnWide * 3), "%c", ' ');
-/*	  PrintLine(fi); ECG: Added 6-3-2001 ->*/
+/*        PrintLine(fi); ECG: Added 6-3-2001 ->*/
 /*          refresh(); */
           fi->EofSet++;
 /*            sprintf( prtln+(9 + i + (fi->ScrnWide*3)), "%c",  ((buf[i]=='\n') ? '.' : buf[i]));  / * again, this is dependent on screensize... */
@@ -3159,7 +3158,7 @@ int Dump(struct FileData *fi) { /* 1 */
           } /* end of FPosn:FEnd check */
           refresh();  /* added this here to reduce the time of refresh  */
           break; /* now which one does *this* break out of??? */
-	} /* End of full page check */
+        } /* End of full page check */
       move(linecount, 0);  /* this was added to see if it cures the problem of 0410: 0410: etc ... */
       }
     } /* Matches beginning of loop for hexdump */
@@ -3614,27 +3613,28 @@ void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine) 
   attroff(A_BOLD);
 
   if( QUIT_CHAR == (c=getch())) {
-	  CloseNCurses();
-	  Bye(BR_DEBUGEND, SourceLine);
+          CloseNCurses();
+          Bye(BR_DEBUGEND, SourceLine);
   }
         refresh();
 }
 
 /* New stuff for menus * /
 int MakeMenu(struct ListFile *fi)  {
-	MENU *TopMenu;
-	char MenuString[] = {"File","Edit","Search","Help" };
-	char FileString[] = { "Open", "Quit"};
-	char EditString[] = { "Edit file", "Write notes"};
-	char SearchString[] = { "Search Forward", "Search Backwards", "Repeat search" };
-	char HelpString[] = { "Keys", "File Info", "About" };
-	ITEM *TopMenuItems[SIZEOF(MenuString)];
-	ITEM **TopMenuPtr = TopMenuItems;
-	/ * Beginning of Pseudocode until I work out what I DO need 
-	 * TopMenu = MakeMenu(MenuString, size_x, size_y); * This function should draw the main menu on screen 
-	* /	
+        MENU *TopMenu;
+        char MenuString[] = {"File","Edit","Search","Help" };
+        char FileString[] = { "Open", "Quit"};
+        char EditString[] = { "Edit file", "Write notes"};
+        char SearchString[] = { "Search Forward", "Search Backwards", "Repeat search" };
+        char HelpString[] = { "Keys", "File Info", "About" };
+        ITEM *TopMenuItems[SIZEOF(MenuString)];
+        ITEM **TopMenuPtr = TopMenuItems;
+        / * Beginning of Pseudocode until I work out what I DO need
+         * TopMenu = MakeMenu(MenuString, size_x, size_y);
+         * This function should draw the main menu on screen
+        * /
 / * Make sure I finish this function - some way! * /
-	return 0;
+        return 0;
 }
  end of Menu code */
 
@@ -3756,110 +3756,110 @@ other files. After all, I thought I had enough stray files littering the project
        ,*/
       switch(c) {
       case 'v':    /* Spits out version information */
-	printf("list: Version %1d.%1d.%1d, compiled on %s at %s, by %s\n", LISTVERSION, LISTMAJOR, LISTMINOR, __DATE__, __TIME__, "Eric Gillespie");  /* Why don't we run this through Bye()? Because there's no ERROR, that's why!!! */
-	exit(0);
-	break;  /* never gets to this line... 8-) this should be tidier */
+        printf("list: Version %1d.%1d.%1d, compiled on %s at %s, by %s\n", LISTVERSION, LISTMAJOR, LISTMINOR, __DATE__, __TIME__, "Eric Gillespie");  /* Why don't we run this through Bye()? Because there's no ERROR, that's why!!! */
+        exit(0);
+        break;  /* never gets to this line... 8-) this should be tidier */
       case 'f': /* Load following filename */
-	/* This gets duplicated down the bottom if the -f switch wasn't used... hmmm */
-	NewFile(fi, optarg);
-	break;
+        /* This gets duplicated down the bottom if the -f switch wasn't used... hmmm */
+        NewFile(fi, optarg);
+        break;
       case 's': /* Start position */
-	fi->Start = strtol(optarg, &bufp, 0);
-	break;
+        fi->Start = strtol(optarg, &bufp, 0);
+        break;
       case 'r': /* Set number of rows (lines) different from present screen */
-	y = strtol(optarg, &bufp, 0);
-	if (y < fi->Scrn_y)
-	  fi->Scrn_y = y;
-	break;
+        y = strtol(optarg, &bufp, 0);
+        if (y < fi->Scrn_y)
+          fi->Scrn_y = y;
+        break;
       case 'c': /*  Set number of columns different from present screen  */
-	x = strtol(optarg, &bufp, 0);
-	if (x < fi->Scrn_x)
-	  fi->Scrn_x = x;
-	break;
+        x = strtol(optarg, &bufp, 0);
+        if (x < fi->Scrn_x)
+          fi->Scrn_x = x;
+        break;
       case 'n': /* Count off (N)um bytes */
-	fi->Count = strtol(optarg, &bufp, 0);
-	break;
+        fi->Count = strtol(optarg, &bufp, 0);
+        break;
       case 'b': /* ta(B) size */
-	fi->TabSize = strtol(optarg, &bufp, 0);
-	break;
+        fi->TabSize = strtol(optarg, &bufp, 0);
+        break;
       case 'e': /* Show line ends */
-	fi->DumpFlag = '*';
-	break;
+        fi->DumpFlag = '*';
+        break;
       case 'l': /* Show line numbers in text mode */
-	fi->LineNumbers = 1;
-	break;
+        fi->LineNumbers = 1;
+        break;
       case 't': /* Start in Text mode (default) */
-	if (!fi->Quick)
-	  fi->DumpMode = 't';
-	else  {
-	  fi->DumpMode = 'x';
-	  printf("You selected Quickmode - displaying hex only\n");
-	}
-	break;
-	/*    case 'A':   80x86 asm mode (Intel or AT&T?) : see how biew has done it...
-	      case 'a':
-	      fi->DumpMode = 'a';
-	      break;             end of comment */
+        if (!fi->Quick)
+          fi->DumpMode = 't';
+        else  {
+          fi->DumpMode = 'x';
+          printf("You selected Quickmode - displaying hex only\n");
+        }
+        break;
+        /*    case 'A':   80x86 asm mode (Intel or AT&T?) : see how biew has done it...
+              case 'a':
+              fi->DumpMode = 'a';
+              break;             end of comment */
       case 'x': /* Start in Hexdump mode */
-	fi->DumpMode = 'x';
-	break;
+        fi->DumpMode = 'x';
+        break;
       case '7': /* Use 7-bit (Unixy) dump mode */
-	/* This displays only characters in the range 0x20 - 0x7E, all others show as '.' */
-	fi->DumpFlag = '7';
-	break;
+        /* This displays only characters in the range 0x20 - 0x7E, all others show as '.' */
+        fi->DumpFlag = '7';
+        break;
       case '8': /* Use 8-bit (DOS) mode - display all characters except 0x0 - 0x1F, 0x7F
-		   This mode works well in situations where 0x80 - 0xFF map exactly to IBM's
-		   idea of what they should be, alas in the Unix world, this is very rarely
-		   the case.  In fact, a lot of the time, they're not even like that in the
-		   DOS world if codepages are installed, or when Windows has a different charset */
-	fi->DumpFlag = '8';
-	break;
+                   This mode works well in situations where 0x80 - 0xFF map exactly to IBM's
+                   idea of what they should be, alas in the Unix world, this is very rarely
+                   the case.  In fact, a lot of the time, they're not even like that in the
+                   DOS world if codepages are installed, or when Windows has a different charset */
+        fi->DumpFlag = '8';
+        break;
       case 'd': /* Turn on the debugging flag - beware - this singlesteps most main procedures */
-	debug++;
-	break;
+        debug++;
+        break;
       case 'm':   /* this line added to deal with debugging for minix when in Linux */
-	fi->Monochrome++; /* Oooops - this value is asked for before we set it - naughty... */
-	break;
+        fi->Monochrome++; /* Oooops - this value is asked for before we set it - naughty... */
+        break;
       case 'q': /* This is only in while I get around the textwrap problems... */
-	fi->Quick++;
-	fi->DumpMode = 'x'; /* Force this into hexmode dump */
-	break;
+        fi->Quick++;
+        fi->DumpMode = 'x'; /* Force this into hexmode dump */
+        break;
       case 'h': /* Well, I guess this gives a helpscreen and exits */
       case '?':
-	/* Added by Dion the Bugfinder - after all, we want to see the helpscreen before it gets whisked away. */
-	/*           c = getch();  kinda made irrelevant by making the Usage into
-	 ,*           Printf */
-	Usage();
-	/* After exiting from Usage(), could I go to the file selection screen?
-	 ,* Maybe not, if my options are too seriously screwed up ... */
-	return (EXIT_SUCCESS); /* (Not FAILURE) After all, it did what we wanted... */
-	break;
+        /* Added by Dion the Bugfinder - after all, we want to see the helpscreen before it gets whisked away. */
+        /*           c = getch();  kinda made irrelevant by making the Usage into
+         ,*           Printf */
+        Usage();
+        /* After exiting from Usage(), could I go to the file selection screen?
+         ,* Maybe not, if my options are too seriously screwed up ... */
+        return (EXIT_SUCCESS); /* (Not FAILURE) After all, it did what we wanted... */
+        break;
       default: /* Well, we don't know what this is... */
-	refresh();
-	endwin();
-	printf("list: Unknown switch\n");
-	Usage();
-	return (EXIT_FAILURE);
+        refresh();
+        endwin();
+        printf("list: Unknown switch\n");
+        Usage();
+        return (EXIT_FAILURE);
       }  /* end of switch statement */
     } /* end of while loop */
       /* Process any non-flag arguments following the flags using optind
-	 as index to next argument.
-	 getopt() sets the global variable optind set to the next
-	 argument to process.  After the loop above it is pointing to the
-	 first command line argument following processed flags and their args. */
+         as index to next argument.
+         getopt() sets the global variable optind set to the next
+         argument to process.  After the loop above it is pointing to the
+         first command line argument following processed flags and their args. */
     /* Perhaps I should change this to if (!fi->FPtr) { NewFile(fi, fi->MyArgv[optind]; } */
     /* Old line: */
     for( ; optind < fi->MyArgc; optind++ ) {
       if (!fi->FPtr) {
-	/* This line below is incorrect - it should be Newfile on the first filename only...
-	 ,* and besides which, what happens when I go beyond argc?
-	 ,*/
-	NewFile(fi, fi->MyArgv[optind]); /* This is where all the file opening work is done */
-	/* Another point - this will end up opening the *last* file on the commandline -
-	 ,* I should shove these into a linked list dequeue-style, perhaps add a new function - AddFile()?
-	 ,* Each list would have filename, previous filename, and next filename in its entry
-	 ,* Of course, I guess I could call Dump() on each...
-	 ,* Hey, this might fit in better with DirRead() and filebrowse.c ...*/
+        /* This line below is incorrect - it should be Newfile on the first filename only...
+         ,* and besides which, what happens when I go beyond argc?
+         ,*/
+        NewFile(fi, fi->MyArgv[optind]); /* This is where all the file opening work is done */
+        /* Another point - this will end up opening the *last* file on the commandline -
+         ,* I should shove these into a linked list dequeue-style, perhaps add a new function - AddFile()?
+         ,* Each list would have filename, previous filename, and next filename in its entry
+         ,* Of course, I guess I could call Dump() on each...
+         ,* Hey, this might fit in better with DirRead() and filebrowse.c ...*/
       }
     }
     if (fi->FName == 0) {  /* If nothing else specified on commandline .. */
@@ -3878,15 +3878,15 @@ other files. After all, I thought I had enough stray files littering the project
     initscr();
     if (!fi->Monochrome) { /* 1s If we're NOT in mono ... */
       if ( has_colors()) {  /* 2s - test we have color available. Hey, what happens if i want to run in monochrome? */
-	start_color();
-	init_pair(COLOR_BLACK, COLOR_BLACK, COLOR_BLACK);
-	init_pair(COLOR_CYAN, COLOR_CYAN, COLOR_BLUE);
-	init_pair(COLOR_RED, COLOR_RED, COLOR_BLACK);
-	init_pair(COLOR_GREEN, COLOR_YELLOW, COLOR_RED);  /* Set this to unusual pairing */
-	init_pair(COLOR_WHITE, COLOR_WHITE, COLOR_BLACK);
-	init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(COLOR_BLUE, COLOR_BLUE, COLOR_BLUE);
-	init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLUE);
+        start_color();
+        init_pair(COLOR_BLACK, COLOR_BLACK, COLOR_BLACK);
+        init_pair(COLOR_CYAN, COLOR_CYAN, COLOR_BLUE);
+        init_pair(COLOR_RED, COLOR_RED, COLOR_BLACK);
+        init_pair(COLOR_GREEN, COLOR_YELLOW, COLOR_RED);  /* Set this to unusual pairing */
+        init_pair(COLOR_WHITE, COLOR_WHITE, COLOR_BLACK);
+        init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
+        init_pair(COLOR_BLUE, COLOR_BLUE, COLOR_BLUE);
+        init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLUE);
       } /* 2e */
     } /* 1e */
     /*    Bye(BR_NOCOLOR, __LINE__);  / * This line will be replaced soon - just give me time to write the monochrome equivalents */
@@ -3900,7 +3900,7 @@ other files. After all, I thought I had enough stray files littering the project
 
     if (debug) { /* We will have a future conflict here when we finally include stdin */
       sprintf(tempstring,"FName: %s          DumpMode: %c\n\rStart: %ld        Count: %ld\n\r",
-	      fi->FName, fi->DumpMode, fi->Start, fi->Count);
+              fi->FName, fi->DumpMode, fi->Start, fi->Count);
       debug_function(tempstring, 0, fi->Scrn_y, __LINE__);
     }
     /* end of getopt section - this had better work...
@@ -3911,40 +3911,40 @@ other files. After all, I thought I had enough stray files littering the project
     /* First, a check on the fi->FName, to see if it has budged from 0 */
     if (!(fi->FPtr == stdin)) { /* if the FPtr is NOT == stdin, then ... */
       if ( !( fi->FPtr = fopen( fi->FName, "rb"))) { /* ...find out if the file can be opened for reading, if not ... */
-	CloseNCurses();
-	Bye(BR_FILEPERM, __LINE__);
+        CloseNCurses();
+        Bye(BR_FILEPERM, __LINE__);
       } /* End of failure to open */
       if (fi->Scrn_x < 40) { /* Darn - this witty comment gets lost in the Bye() call */
-	/*      addstr("list: Um, I don't have enough columns to display the file in hex format,");
-		addstr("      So am defaulting to text mode!  Hope you don't mind!");  */
-	CloseNCurses();
-	Bye(BR_TINYCOLS,__LINE__);
+        /*      addstr("list: Um, I don't have enough columns to display the file in hex format,");
+                addstr("      So am defaulting to text mode!  Hope you don't mind!");  */
+        CloseNCurses();
+        Bye(BR_TINYCOLS,__LINE__);
       }
       if (fi->Scrn_y < 24) { /* Darn - this witty comment gets lost in the Bye() call */
-	/*            addstr("list: Err, there aren't enough lines here to do justice to this");
-		      addstr("      file - I need to get out of here! (Reason:Claustrophobia)"); */
-	CloseNCurses();
-	Bye(BR_TINYLINES,__LINE__);
+        /*            addstr("list: Err, there aren't enough lines here to do justice to this");
+                      addstr("      file - I need to get out of here! (Reason:Claustrophobia)"); */
+        CloseNCurses();
+        Bye(BR_TINYLINES,__LINE__);
       }
       /*    stat(fi->FName, ListFileInfo); / * Second time this file is stat'ed - is this necessary? */
       /* Here are a few sanity checks... */
       if (fi->FileInfo.st_size == 0) {  /* get the filesize... */
-	addstr("list: Hmmm, the file appears to be of zero length!!");
-	refresh();
-	endwin();
-	exit(EXIT_FAILURE);
+        addstr("list: Hmmm, the file appears to be of zero length!!");
+        refresh();
+        endwin();
+        exit(EXIT_FAILURE);
       } /* End of "File is zero bytes in size" */
       else if (fi->Count < 1) {
-	addstr("list: You're trying to ask for too few bytes...!!");
-	refresh();
-	endwin();
-	exit(EXIT_FAILURE);
+        addstr("list: You're trying to ask for too few bytes...!!");
+        refresh();
+        endwin();
+        exit(EXIT_FAILURE);
       }
       else if (fi->Start > fi->FileInfo.st_size) {
-	addstr("list: You're asking for bytes starting past the end of the file...");
-	refresh();
-	endwin();
-	exit(EXIT_FAILURE);
+        addstr("list: You're asking for bytes starting past the end of the file...");
+        refresh();
+        endwin();
+        exit(EXIT_FAILURE);
       }
       fi->FEnd = fi->FileInfo.st_size;
     }
@@ -3958,10 +3958,10 @@ other files. After all, I thought I had enough stray files littering the project
       /*    while(c != EOF) c = getchar();  wait for key ... */
       fseek(fi->FPtr, 0, SEEK_END);
       if (!(fi->FEnd = ftell(fi->FPtr))) {
-	addstr("list: Ooops - selected file is empty\n");
-	refresh();
-	endwin();
-	exit(EXIT_FAILURE);
+        addstr("list: Ooops - selected file is empty\n");
+        refresh();
+        endwin();
+        exit(EXIT_FAILURE);
       }  /* end of if file empty */
     } /* end of else file == STDIN */
       /* Ummm, seems these lines are not needed...they already get seen to in NewFile() */
@@ -4072,7 +4072,7 @@ other files. After all, I thought I had enough stray files littering the project
     if (p != NULL)
       return (p);
     /*  error("Cannot allocate memory", NULL_PARG);
-	quit(QUIT_ERROR);   */
+        quit(QUIT_ERROR);   */
     Bye(BR_NOMEM, __LINE__);
     /*NOTREACHED*/
     exit(1);
@@ -4092,7 +4092,7 @@ other files. After all, I thought I had enough stray files littering the project
 
     for (bufsize = 0x4000; bufsize >= minbuf; bufsize >>= 1) {
       if (NULL != (buffer = (char *) malloc(bufsize)))
-	break;
+        break;
     }
     if (NULL == buffer)
       return 0;
@@ -4146,18 +4146,18 @@ other files. After all, I thought I had enough stray files littering the project
 
     while (EOF != ch) {  /* 2nd in */
       if (EOF == (ch = fgetc(fi->FPtr)))
-	break;
+        break;
       if ((int)*fi->SearchString == ch) {  /* 3rd in */
-	tempOffset = ftell(fi->FPtr);
-	if (size - 1 > fread(sbuf, sizeof(char), size - 1, fi->FPtr))
-	  goto FDONE;
-	if (0L == memcmp(sbuf, &fi->SearchString[1], size - 1)) {  /* 4th in */
-	  if (0L == --N) {  /* 5th in */
-	    pos = tempOffset - 1L;
-	    goto  FDONE;
-	  }  /* 5th out */
-	}  /* 4th out */
-	fi->SPosn = ftell(fi->FPtr);  /* uh?  this doesn't seem to work... */
+        tempOffset = ftell(fi->FPtr);
+        if (size - 1 > fread(sbuf, sizeof(char), size - 1, fi->FPtr))
+          goto FDONE;
+        if (0L == memcmp(sbuf, &fi->SearchString[1], size - 1)) {  /* 4th in */
+          if (0L == --N) {  /* 5th in */
+            pos = tempOffset - 1L;
+            goto  FDONE;
+          }  /* 5th out */
+        }  /* 4th out */
+        fi->SPosn = ftell(fi->FPtr);  /* uh?  this doesn't seem to work... */
 
       } /* 3rd out */
     } /* 2nd out */
@@ -4213,25 +4213,25 @@ other files. After all, I thought I had enough stray files littering the project
 
     while (0L <= tempos)
       {
-	fseek(fi->FPtr, tempos, SEEK_SET);
-	if (EOF == (ch = fgetc(fi->FPtr)))
-	  break;
-	if ((int)*fi->SearchString == ch)
-	  {
-	    if (size - 1 <= fread(sbuf, sizeof(char), size - 1, fi->FPtr))
-	      {
-		if (0L == memcmp(sbuf, &fi->SearchString[1], size - 1))
-		  {
-		    if (0 == --N)
-		      {
-			pos = tempos;
-			goto RDONE;
-		      }
-		  }
-	      }
-	    tempos -= skip;
-	  }
-	else  --tempos;
+        fseek(fi->FPtr, tempos, SEEK_SET);
+        if (EOF == (ch = fgetc(fi->FPtr)))
+          break;
+        if ((int)*fi->SearchString == ch)
+          {
+            if (size - 1 <= fread(sbuf, sizeof(char), size - 1, fi->FPtr))
+              {
+                if (0L == memcmp(sbuf, &fi->SearchString[1], size - 1))
+                  {
+                    if (0 == --N)
+                      {
+                        pos = tempos;
+                        goto RDONE;
+                      }
+                  }
+              }
+            tempos -= skip;
+          }
+        else  --tempos;
       }
 
     /* Clean up and leave */
@@ -4277,8 +4277,8 @@ other files. After all, I thought I had enough stray files littering the project
       NewFile(fi, WhatDoIPutInHere);
       break;
       /*  case 'Q':          / * Quit - (Hasta La Vista!) * /
-	  case 'q':
-	  return 0;  / * Hmmm, why should we quit from here? */
+          case 'q':
+          return 0;  / * Hmmm, why should we quit from here? */
     default:
       return 0;
       break;
@@ -4332,39 +4332,39 @@ typedef unsigned long u_long;
 /* typedef unsigned long u_long; * not needed - declared in <sys/types.h> */
 
 struct FileData {
-	long FPosn; /* Current position within file */
-	long FEnd; /* Total bytes */
-	long FLines; /* Total number of CR-terminated lines */
-	long *CrArray; /* Array to store line-endings in */
-	long LnAtTopOfScrn; /* Will contain the line number at top of screen */
-	long FLineCtr; /* Current line within file - last line looked at so far */
-	long LineCount; /* Screen lines printed * added for debugging */
-	long Start; /* Where to start */
-	long Count; /* How many bytes to read */
+        long FPosn; /* Current position within file */
+        long FEnd; /* Total bytes */
+        long FLines; /* Total number of CR-terminated lines */
+        long *CrArray; /* Array to store line-endings in */
+        long LnAtTopOfScrn; /* Will contain the line number at top of screen */
+        long FLineCtr; /* Current line within file - last line looked at so far */
+        long LineCount; /* Screen lines printed * added for debugging */
+        long Start; /* Where to start */
+        long Count; /* How many bytes to read */
         int Scrn_y, Scrn_x, ScrnWide;
-	FILE *FPtr;  /* Stream pointing to file */
-	char *FName; /* set this to point to the filename... */
-	char DumpMode; /* Either 'x' or 't' */
-	char DumpFlag; /* Either '7' or '8' or '*' */
+        FILE *FPtr;  /* Stream pointing to file */
+        char *FName; /* set this to point to the filename... */
+        char DumpMode; /* Either 'x' or 't' */
+        char DumpFlag; /* Either '7' or '8' or '*' */
         char LineNumbers; /* Set to on or off */
-	char Monochrome;
-	char TabSize; /* a number from 1 to _about_ 8 */
-	int addrflag;  /* Either hex or decimal addresses (only in hex view) */
-	int EofSet;    /* Has the End of the File been reached? */
-	int FgColour, BgColour; /* Colours */
-/* Search stuff... */	
-	char SearchDirection; /* Forward or backward */
-	char *SearchString;  /* Search String */
-	long SPosn; /* Search Position - has to be long int */
-	struct stat FileInfo; /* Do these two work? */
-	struct stat *FileInfoPtr;
-	int Quick; /* This was defined so it didn't take so long to display a file in hex mode */
+        char Monochrome;
+        char TabSize; /* a number from 1 to _about_ 8 */
+        int addrflag;  /* Either hex or decimal addresses (only in hex view) */
+        int EofSet;    /* Has the End of the File been reached? */
+        int FgColour, BgColour; /* Colours */
+/* Search stuff... */
+        char SearchDirection; /* Forward or backward */
+        char *SearchString;  /* Search String */
+        long SPosn; /* Search Position - has to be long int */
+        struct stat FileInfo; /* Do these two work? */
+        struct stat *FileInfoPtr;
+        int Quick; /* This was defined so it didn't take so long to display a file in hex mode */
 /* Have we defined the queue object? i.e. included dequeue.h ?*/
         queue DirQueuePtr; /* From dequeue.h (finally!) */
-	char *BugWriteFName; /* Filename of bugwrite file */
+        char *BugWriteFName; /* Filename of bugwrite file */
         int MyArgc;
         char **MyArgv;
-	int MyCurrArgC;  /* This is added to utilise positioning within MyArgv[] */
+        int MyCurrArgC;  /* This is added to utilise positioning within MyArgv[] */
 };
 
 int debug;
@@ -4450,37 +4450,37 @@ all: list
 debug: list_d
 
 .c.o:
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+        $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
 $(DOBJECTS): %d.o: %.c
-	$(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
+        $(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
 
 list: $(OBJECTS)
-	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+        $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_d: $(DOBJECTS)
-	$(CC) -o list_d $(DOBJECTS) $(LIBS)
+        $(CC) -o list_d $(DOBJECTS) $(LIBS)
 
 #list_static:
-#	$(CC) $(LDFLAGS) -static -o list_static $(OBJECTS) $(LIBS)
+#       $(CC) $(LDFLAGS) -static -o list_static $(OBJECTS) $(LIBS)
 
 install:
-	install -m755 list /usr/local/bin/list
-	install -m644 list.1 /usr/local/man/man1/list.1
+        install -m755 list /usr/local/bin/list
+        install -m644 list.1 /usr/local/man/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c 
+        cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c
 
 dist-bin: list list_d # list_static
-	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
+        cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
 #removed $(SRCDIR)/list_static as we can't make it on linux, haven't checked on {Free,Net,Open)BSD
 
 clean:
-	rm -f *.o list list_d
+        rm -f *.o list list_d
 
 uninstall:
-	rm /usr/local/bin/list
-	rm /usr/local/man/man1/list.1
+        rm /usr/local/bin/list
+        rm /usr/local/man/man1/list.1
 
 
 #+END_SRC
@@ -4522,44 +4522,44 @@ all: list
 debug: list_d
 
 .c.o:
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+        $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
 $(DOBJECTS): %d.o: %.c
-	$(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
+        $(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
 
 list: $(OBJECTS)
-	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+        $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_d: $(DOBJECTS)
-	$(CC) -o list_d $(DOBJECTS) $(LIBS) 
+        $(CC) -o list_d $(DOBJECTS) $(LIBS)
 
 # Comment this out, as it seems to choke on gpm functions linked in from ncurses
 # list_static: $(OBJECTS)
-#	$(CC) -static -o list_static $(OBJECTS) $(STATICLIBS)
+#       $(CC) -static -o list_static $(OBJECTS) $(STATICLIBS)
 
 list_profile: $(OBJECTS)
-	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+        $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_ccmalloc: $(DOBJECTS)
-	 $(CCMALLOC) $(CC) $(LDFLAGS) -o clist $(DOBJECTS) $(LIBS)
+         $(CCMALLOC) $(CC) $(LDFLAGS) -o clist $(DOBJECTS) $(LIBS)
 
 install: list
-	install -m755 list $(BIN)/list
-	install -m644 list.1 $(MAN)/man1/list.1
+        install -m755 list $(BIN)/list
+        install -m644 list.1 $(MAN)/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c 
+        cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c
 
 dist-bin: list list_d #list_static
-	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d  $(SRCDIR)/list.1
+        cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d  $(SRCDIR)/list.1
 
 clean:
-	rm -f *.o list list_d
+        rm -f *.o list list_d
 #removed list_static
 
 uninstall:
-	rm $(BIN)/list
-	rm $(MAN)/man1/list.1
+        rm $(BIN)/list
+        rm $(MAN)/man1/list.1
 
 
 
