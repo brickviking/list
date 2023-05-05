@@ -494,13 +494,13 @@ and relayed to myself later. I guess I could happily format this like a github i
  * stored in the home directory of the user, but another idea could be to
  * email this file off to another user.
  */
-int BugWrite(struct FileData *fi)  {
+int BugWrite(struct FileData *fi) {
   FILE *NewFile;
   char *TempPath = (char *) malloc(sizeof(TempPath) * PATH_MAX);
   char *Tempstring = (char *) malloc(sizeof(Tempstring) * 1024);
  /* Of course I could always prompt user for a filename here...
    */
-  if(NULL == fi->BugWriteFName) { 
+  if(NULL == fi->BugWriteFName) {
     if(!getenv("TEMP"))  /* Whoops, no TEMP variable defined */
       strcpy(TempPath, "/tmp/list.debug"); /* This should be the last resort filename, not the default */
     else {
@@ -514,7 +514,7 @@ int BugWrite(struct FileData *fi)  {
   else
      strcpy(TempPath, fi->BugWriteFName);
   /* First, we attempt to open the file for writing to ... */
-  if(NULL == (NewFile = fopen(TempPath, "a+")))  { /* This opens the file to write to... */
+  if(NULL == (NewFile = fopen(TempPath, "a+"))) { /* This opens the file to write to... */
 
     debug_function("Cannot open temporary file for writing to - hit any key to return", 0, fi->Scrn_y, __LINE__); /* 66 chars long */
     /* Should we add a var to struct for whether tmpfile was able to be written? */
@@ -544,7 +544,7 @@ int WriteToFile(void) {
   return 0;
 }
 
-int EmailToUser(struct FileData *fi)  {
+int EmailToUser(struct FileData *fi) {
 #ifndef __linux__
   debug_function("Sorry, can't mail on this system", 0, fi->Scrn_y, __LINE__ );
 #else
@@ -553,7 +553,7 @@ int EmailToUser(struct FileData *fi)  {
   return 0;
 }
 
-int TakeNotes(FILE *FileToWrite, struct FileData *fi)  {
+int TakeNotes(FILE *FileToWrite, struct FileData *fi) {
    WINDOW *DebugEntry, *DebugEntryFrame; /* Only need DebugEntryFrame here - will need to create a Form inside this window. */
    time_t *MyTime = (time_t *) malloc(sizeof(MyTime) * sizeof(time_t));
    int TimeWritten = 0;
@@ -613,7 +613,7 @@ int TakeNotes(FILE *FileToWrite, struct FileData *fi)  {
 }
 
 /*
-int TakeNotes2(FILE *FileToWrite, struct FileData *fi)  {
+int TakeNotes2(FILE *FileToWrite, struct FileData *fi) {
   FIELD *NotePad = new_field(24,78,0,0,128,1);
   return 0;
 }
@@ -773,7 +773,7 @@ int  Q_End( queue *q ) {
  ** parameters  : 'queue' pointer
  ** returns     : TRUE if empty queue, else  FALSE
  ***/
-int  Q_Empty( queue *q ){
+int  Q_Empty( queue *q ) {
 
     return (q->size == 0);
 }
@@ -1166,8 +1166,7 @@ int     Q_Put( queue *q, void *data ) {
  *                For description of Comp see Q_Sort.
  *                Queue cursor left on position found item else at end.
  ***/
-int     Q_Find( queue *q, void *data,
-            int Comp(const void *, const void *) ) {
+int Q_Find( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     void  *d;
     d = Q_First( q );
@@ -1188,8 +1187,7 @@ int     Q_Find( queue *q, void *data,
 /*========  Sorted Queue and Index functions   ========= */
 
 
-static void QuickSort( void *list[], int low, int high,
-                        int Comp( const void *, const void * ) ) {
+static void QuickSort( void *list[], int low, int high, int Comp( const void *, const void * ) ) {
 
     int     flag = 1, i, j ;
     void    *key, *temp ;
@@ -1246,7 +1244,7 @@ static void QuickSort( void *list[], int low, int high,
  *                If queue is already sorted it frees the memory of the
  *                old index and starts again.
  ***/
-int     Q_Sort( queue *q, int Comp(const void *, const void *) ) {
+int Q_Sort( queue *q, int Comp(const void *, const void *) ) {
 
     int         i ;
     void        *d;
@@ -1311,8 +1309,7 @@ int     Q_Sort( queue *q, int Comp(const void *, const void *) ) {
  *                or -1 if not found.
  ** comments    : see Q_Sort for description of 'Comp' function.
  ***/
- static  int    Q_BSearch(  queue *q, void *key,
-                            int Comp(const void *, const void*) ) {
+static int Q_BSearch(  queue *q, void *key, int Comp(const void *, const void*) ) {
     int     low, mid, hi, val;
 
     low = 0;
@@ -1351,8 +1348,7 @@ int     Q_Sort( queue *q, int Comp(const void *, const void *) ) {
  *                not sort queue.
  ** comments    : see Q_Sort for description of 'Comp' function.
  ***/
-void    *Q_Seek( queue *q, void *data, int Comp(const void *,
-                    const void *) ) {
+void *Q_Seek( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     int     idx;
 
@@ -1385,8 +1381,7 @@ void    *Q_Seek( queue *q, void *data, int Comp(const void *,
  *                the insertion of the odd element ,not the piecemeal
  *                building of an entire queue.
  ***/
-int     Q_Insert( queue *q, void *data, int Comp(const void *,
-                    const void *) ) {
+int Q_Insert( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     Q_PushHead( q, data );
 
@@ -1569,7 +1564,7 @@ which to choose a file to display.
 
 /* User routines... */
 
-struct FileData *FileCommand(struct FileData *fi)  {
+struct FileData *FileCommand(struct FileData *fi) {
    fi->FPtr = GetItem((DIR *)"./");
    /* What can we provide here?
    0 for read file, other ints for other commands
@@ -1578,7 +1573,7 @@ struct FileData *FileCommand(struct FileData *fi)  {
    return 0;
 }
 
-DIR *GetDirectory(DIR *TmpDir, char *DirectoryName)  {
+DIR *GetDirectory(DIR *TmpDir, char *DirectoryName) {
 /*   fi->FPtr= something I don't yet know - ; */
     TmpDir = opendir(DirectoryName);
     if(TmpDir != NULL)
@@ -1587,11 +1582,11 @@ DIR *GetDirectory(DIR *TmpDir, char *DirectoryName)  {
     return 0;
 }
 
-int ListDirectory(DIR *TempDir)  {
+int ListDirectory(DIR *TempDir) {
     struct dirent **This_Directory;
     int n;
     n = scandir("./", &This_Directory, 0, alphasort);
-    if(n > 0)  {
+    if(n > 0) {
         int cnt;
         for(cnt = 0; cnt < n; ++cnt)
             printf("%s\n", This_Directory[cnt]->d_name);
@@ -1702,7 +1697,7 @@ int NewFile(struct FileData *fi, char *NewName) {
 void ScanForCr(struct FileData *fi) {
   /* We'll start with an array of CrInFile size and expand it if necessary */
   long int i, j, linelength, llflag = 0, c;
-  for(i = 0, j = 1; i < fi->FEnd;)  {
+  for(i = 0, j = 1; i < fi->FEnd;) {
    for (linelength = 0, c = 0; linelength < fi->Scrn_x - 10; linelength++) /* finish should actually be 4096 or something...
    hmmm, how about making it say, one screen - 1 line in size, so that we don't lose lines when we go down one line? */
       {
@@ -1740,7 +1735,7 @@ long *AllocateLines(struct FileData *fi) {
    * For example:
    * MainEngine {
    * Len = ReadALinesLength(fi->FPtr, fi->FPos);
-   * do  {
+   * do {
    *   fi->CrArray[LineCtr++] = fi->FPos;
    *   fi->FPos += COLS;
    *   Len -= COLS;
@@ -1748,7 +1743,7 @@ long *AllocateLines(struct FileData *fi) {
    * until (Len <= COLS);
    * } / * End of MainEngine * /
    *
-   * ReadALinesLength(fi)  {
+   * ReadALinesLength(fi) {
    *   pseudocode is:
    *   Line begins at n, finishes at CR, return CR position or EOF if End Of File hit first
    */
@@ -1759,7 +1754,7 @@ long *AllocateLines(struct FileData *fi) {
   clear();
   refresh();
   addstr("list: Counting lines ... please wait"); /* This takes far longer than it needs to */
-  for(i = 0, j = 1; i < fi->FEnd;)  {
+  for(i = 0, j = 1; i < fi->FEnd;) {
 /*    for (linelength = 0, c = 0; linelength < 80 ; linelength++ ) */
     for (linelength = 0, c = 0; linelength < fi->Scrn_x - 10; linelength++)  /* Took 10 bytes off to add in line numbers */
        {
@@ -1885,7 +1880,7 @@ int EditFunction(struct FileData *fi) {
   return RetVal;
 }
 
-int Search(struct FileData *fi)  { /* 1s */
+int Search(struct FileData *fi) { /* 1s */
   switch (fi->SearchDirection) { /* 2s */
     case 'f':
        fi->SPosn = ffsearch(fi, 1); /* First, get the strings position if found... */
@@ -1899,10 +1894,10 @@ int Search(struct FileData *fi)  { /* 1s */
   if((-1L) == fi->SPosn) { /* ... Hasn't died yet, so check if string was _not_ found ... 2s */
       debug_function("String not found - hit any key to return", 0, fi->Scrn_y, __LINE__);
   } /* 2e...*/
-  else  {   /* String was found - so ... 2s */
+  else {   /* String was found - so ... 2s */
       if(fi->DumpMode == 'x')
         fi->FPosn = fi->SPosn; /* ... set the file position to where the search was found... */
-      else  { /* We have to seek to the nearest line... 3s */
+      else { /* We have to seek to the nearest line... 3s */
         for(fi->FLineCtr = 0; fi->FLineCtr < fi->FLines; fi->FLineCtr++ ) { /* 4s */
         /* sets initial fi->FLineCtr for line p'sn retrieval */
           if(*(fi->CrArray + fi->FLineCtr) >= fi->SPosn) { /* 5s */
@@ -1917,7 +1912,7 @@ int Search(struct FileData *fi)  { /* 1s */
   return 0;
 } /* 1e */
 
-int Bye(enum ByeReason WhyBye, int LineCalled)  {
+int Bye(enum ByeReason WhyBye, int LineCalled) {
   char *ErrMessage = (char *) malloc(sizeof(ErrMessage) * 127);
   if(ErrMessage == NULL) {
     printf("list: Wow! We are REALLY out of memory here!\n");
@@ -1932,7 +1927,7 @@ int Bye(enum ByeReason WhyBye, int LineCalled)  {
          sprintf(ErrMessage, "list: exiting debug loop and leaving Program...\n");
          break;
     case BR_FILE_ERR:
-         switch (errno)  {
+         switch (errno) {
            case ENOENT:
                sprintf(ErrMessage, "list: File not found when called from line %d!\n", LineCalled);
                break;
@@ -2130,7 +2125,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
     move(fi->Scrn_y - 1, 0);
     clrtoeol();
     attron(A_BOLD);
-    if(fi->DumpMode == 'x')  {
+    if(fi->DumpMode == 'x') {
       addstr("Byte offset: ");
     }
     else
@@ -2245,7 +2240,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
   case 'h':
   case 'H':
     BackPage(fi, fi->Scrn_y - 1);
-    if(fi->Scrn_x < 80 )  {
+    if(fi->Scrn_x < 80 ) {
       debug_function("Can't display - not wide enough", 0, fi->Scrn_y - 1, __LINE__);
       break;
     }
@@ -2256,7 +2251,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
   case 'S':
   case 's':
     BackPage(fi, fi->Scrn_y - 1);
-    if(fi->Scrn_x < 80 )  {
+    if(fi->Scrn_x < 80 ) {
       debug_function("Can't display - not wide enough", 0, fi->Scrn_y - 1, __LINE__);
       break;
     }
@@ -2478,7 +2473,7 @@ void ShowHelp(struct FileData *fi) {
     Bye(BR_NOMEM, __LINE__);
   int c, middle, x, y, EightBitDisplay;
   WINDOW *HelpWin;
-  if(fi->Scrn_x < 80 || fi->Scrn_y < 25)  { /* This shouldn't be a show stopper */
+  if(fi->Scrn_x < 80 || fi->Scrn_y < 25) { /* This shouldn't be a show stopper */
     debug_function("Cannot display help - screen too small", 0, fi->Scrn_y, __LINE__);
     refresh();
     return;
@@ -2489,7 +2484,7 @@ void ShowHelp(struct FileData *fi) {
   x = 0; y = 0;
   HelpWin = newwin(24, 80, (middle - 12), 0);
 /*  wclear(HelpWin); */
-  if(!fi->Monochrome)  {
+  if(!fi->Monochrome) {
     wbkgd(HelpWin, ' ' | COLOR_PAIR(COLOR_BLUE));
   }
   else {
@@ -2504,10 +2499,10 @@ void ShowHelp(struct FileData *fi) {
     EightBitDisplay = 0; /* This is to sort out those cases in which I don't
                  * have Linux on board - it's a safety measure */
   if(EightBitDisplay)
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(HelpWin, A_ALTCHARSET | COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
     }
-    else  {  /* We're in mono */
+    else {  /* We're in mono */
       wattron(HelpWin, A_ALTCHARSET |  A_BOLD);
     }
   else { /* Can't use ALT_CHARSET */
@@ -2551,7 +2546,7 @@ void ShowHelp(struct FileData *fi) {
                                                                    
   }
 /*
-  else  {
+  else {
     mvwaddstr(HelpWin, y++, x, "                 ..   ..                ..                                  ");         / * Ln 0 * /
     mvwaddstr(HelpWin, y++, x, "                 ::                     ::                                  ");        / * Ln 1 * /
     mvwaddstr(HelpWin, y++, x, "                 %%   ;;    ;;;;;;   ;;;;;;;;         By                    "); / * Ln 2 * /
@@ -2564,16 +2559,16 @@ void ShowHelp(struct FileData *fi) {
 / * Gawd, this needs some work! * /
   } End of commented out code */
   /*   standend(); */
-  if(!fi->Monochrome)  {
+  if(!fi->Monochrome) {
     wattroff( HelpWin,  COLOR_PAIR(COLOR_YELLOW)); /* reset attribs to cyan on blue */
     if(EightBitDisplay) {
         wattron( HelpWin, A_ALTCHARSET | COLOR_PAIR(COLOR_CYAN));
       }
-    else  {
+    else {
       wattron( HelpWin, COLOR_PAIR(COLOR_CYAN));
     }
   }
-  else  {
+  else {
     wattroff( HelpWin, A_BOLD);
   }
   if(debug) {
@@ -2625,7 +2620,7 @@ void ShowHelp(struct FileData *fi) {
     x = 1;  /* Reset back to the left of the screen plus one for balancing */
     mvwaddstr(HelpWin, y, x,   "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ"); /* Ln 25 */
   } /* now, that deals with a non-X screen... what about a screen under X? */
-  else  { /* Here goes ... */
+  else { /* Here goes ... */
     mvwaddstr(HelpWin, y++, x, ".________._____________.____________________________.______._________________.");
     mvwaddstr(HelpWin, y++, x, "| Key    |  Hex mode   |       Text mode            | Keys |  Location       |"); /* Ln 14 */
     mvwaddstr(HelpWin, y++, x, "+--------+-------------+----------------------------+------+-----------------+"); /* Ln 15 */
@@ -2722,7 +2717,7 @@ void ShowHelp(struct FileData *fi) {
       wrefresh(HelpWin);
       c = getch();
     }
-    else  {
+    else {
       mvwaddstr(HelpWin, y++, x, ".----------------------------------------------------------------------------."); /* Ln 1 */
       mvwaddstr(HelpWin, y++, x, "|                            Other keys                                      |"); /* Ln 2 */
       mvwaddstr(HelpWin, y++, x, ":----------------------------------------------------------------------------:"); /* Ln 3 */
@@ -2778,37 +2773,37 @@ int ShowStats(struct FileData *fi) {
 #endif
     EightBitDisplay = 0;
   if(EightBitDisplay) {
-    if(!fi->Monochrome)  { /* If in colour mode... */
+    if(!fi->Monochrome) { /* If in colour mode... */
       wbkgd(StatWin, ' ' | A_ALTCHARSET | COLOR_PAIR(COLOR_BLUE));
-    }  else  { /* Nope, mono */
+    }  else { /* Nope, mono */
       wbkgd(StatWin, ' ' | A_ALTCHARSET | A_BOLD);
     }
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(StatWin, A_ALTCHARSET | COLOR_PAIR(COLOR_CYAN));
     }
   }
   else {
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(StatWin, COLOR_PAIR(COLOR_CYAN));
     }
   }
 /*  wmove(StatWin, y++, x); */
-  if(EightBitDisplay)  {
+  if(EightBitDisplay) {
     mvwaddstr(StatWin, y++, x, "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿"); /* Ln 0 */
 /*     wmove(StatWin, y++, x); */
     mvwaddstr(StatWin, y, x,   "³                   ");
     x += 20;
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(StatWin, COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
-    } else  {
+    } else {
       wattron(StatWin, A_BOLD);
     }
     mvwaddstr(StatWin, y, x,                       "File Statistics");
     x += 15;
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattroff(StatWin, COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
       wattron(StatWin,  COLOR_PAIR(COLOR_CYAN));
-    } else  {
+    } else {
       wattroff(StatWin, A_BOLD);
     }
     mvwaddstr(StatWin, y++, x,                                    "                    ³"); /* Ln 1 */
@@ -2863,17 +2858,17 @@ int ShowStats(struct FileData *fi) {
     x = 0;
     mvwaddstr(StatWin, y++, x, "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ"); /* Ln 17 */
   }
-  else  {
+  else {
     mvwaddstr(StatWin, y++, x, ".______________________________________________________.");
     mvwaddstr(StatWin, y, x,"|                   ");
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(StatWin, COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
     } else {
       wattron(StatWin, A_BOLD);
     }
     x += 20;
     mvwaddstr(StatWin, y, x, "File Statistics");
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
     wattroff(StatWin, COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
     wattron(StatWin,  COLOR_PAIR(COLOR_CYAN));
     } else {
@@ -2933,7 +2928,7 @@ int ShowStats(struct FileData *fi) {
    
   }
   /* Here's the next screen...shows argc and argv... */
-  if(!fi->Monochrome)  {
+  if(!fi->Monochrome) {
     wattroff(StatWin, A_ALTCHARSET | COLOR_PAIR(COLOR_YELLOW));
   }
   delwin(StatWin);
@@ -3168,7 +3163,7 @@ int Dump(struct FileData *fi) { /* 1 */
      else if(fi->DumpMode == 't') {
        /* What I want to do here is to count CRs or complete Scrn_y-wide lines in a screen *
        * kind of like:
-       for(i = fi->FPosn; i < (fi->FPosn + ((fi->Scrn_x) * (ruler) ?  (fi->Scrn_y-2) : (fi->Scrn_y - 1 ))); i++)  {
+       for(i = fi->FPosn; i < (fi->FPosn + ((fi->Scrn_x) * (ruler) ?  (fi->Scrn_y-2) : (fi->Scrn_y - 1 ))); i++) {
          if(!fread(buf, sizeof(char), fi->Scrn_x, fi->FPtr)) Bye(1);
           */
 /*      clear();
@@ -3396,7 +3391,7 @@ int Dump(struct FileData *fi) { /* 1 */
   return(0);
 } /* End of Dump() */
 
-void PrintLine(struct FileData *fi)  {
+void PrintLine(struct FileData *fi) {
   int i; /* , RulerIsSet */ 
   char *tempstring;
   if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 1024))) {
@@ -3418,7 +3413,7 @@ void PrintLine(struct FileData *fi)  {
       /* Now the rest of the ruler line... */
       for(i = ((fi->LineNumbers) ? 11 : 1); i <= fi->Scrn_x -
       ((fi->LineNumbers) ? 0 : 10)  /* Remove this when we find out how to do lines properly in textmode */
-      ; i++)  {
+      ; i++) {
         switch (fi->LineNumbers) {
            case 1:
               thisIval = i - 10;
@@ -3427,8 +3422,8 @@ void PrintLine(struct FileData *fi)  {
               thisIval = i;
               break;
         }
-   if(fi->addrflag)  {
-           switch (thisIval % 10)  {
+   if(fi->addrflag) {
+           switch (thisIval % 10) {
              case 0:
       if(thisIval < 100)
                     sprintf(tempstring + i - 1, "%d", (thisIval /10));
@@ -3451,7 +3446,7 @@ void PrintLine(struct FileData *fi)  {
            } /* end of switch */
          }  /* fi->addrflag (decimal) */
          else  /* !fi->addrflag (hex) */
-           switch (thisIval % 16)  {
+           switch (thisIval % 16) {
              case 0:
                if(thisIval < 256)
                  sprintf(tempstring + i - 1, "%X", thisIval /16);
@@ -3493,7 +3488,7 @@ void PrintLine(struct FileData *fi)  {
              sprintf(tempstring + 10 + ((i - 1) * 3), "%02X ", i);
         }
         sprintf(tempstring + 10 + (fi->ScrnWide * 3), "%c", ' ');
-  for(i = 1; i <= fi->ScrnWide; i++)  {
+  for(i = 1; i <= fi->ScrnWide; i++) {
           if(fi->addrflag)  /* Same here as above test */
       sprintf(tempstring + 10 + (fi->ScrnWide * 3) + i , "%01d ",  (i % 10)); /* 'nother bug squashed */
           else
@@ -3505,7 +3500,7 @@ void PrintLine(struct FileData *fi)  {
 /* To think that all the above code replaces the single line below 8-) */
 /*        addstr("Offset  00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F   0123456789ABCDEF"); */
   }
-    else if(fi->DumpMode == 'd')  {
+    else if(fi->DumpMode == 'd') {
   sprintf(tempstring, "%s", "Offset  ");
   for(i = 0; i < fi->ScrnWide; i++) {
      if(fi->addrflag)  /* This switch displays either hex or decimal address */
@@ -3514,7 +3509,7 @@ void PrintLine(struct FileData *fi)  {
              sprintf(tempstring + 10 + (i * 4), "%03X ", i);
         }
         sprintf(tempstring + 10 + (fi->ScrnWide * 4), "%c", ' ');
-  for(i = 0; i < fi->ScrnWide; i++)  {
+  for(i = 0; i < fi->ScrnWide; i++) {
           if(fi->addrflag)  /* Same here as above test */
       sprintf(tempstring + 11 + (fi->ScrnWide * 4) + i , "%01d ",  i % 10);
           else
@@ -3573,9 +3568,9 @@ void PrintLine(struct FileData *fi)  {
 } /* End of PrintLine */
 
 #ifndef _MINIX
-extern __inline__ void BackPage(struct FileData *fi, long int LinesToBackUp)  { /* 1st in */
+extern __inline__ void BackPage(struct FileData *fi, long int LinesToBackUp) { /* 1st in */
 #else
-void BackPage(struct FileData *fi, long int LinesToBackUp)  { /* 1st in */
+void BackPage(struct FileData *fi, long int LinesToBackUp) { /* 1st in */
 #endif
   if(fi->DumpMode == 't') { /* 2nd in */
     fi->FLineCtr -= (ruler) ?
@@ -3600,7 +3595,7 @@ void BackPage(struct FileData *fi, long int LinesToBackUp)  { /* 1st in */
 }
 
 
-void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine)  {
+void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine) {
   int c, y, x;
   getyx(stdscr, y, x); /* Get and stash where I am... */
   move(Screen_y, 0); /* Move to bottom of screen... */
@@ -3620,7 +3615,7 @@ void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine) 
 }
 
 /* New stuff for menus * /
-int MakeMenu(struct ListFile *fi)  {
+int MakeMenu(struct ListFile *fi) {
         MENU *TopMenu;
         char MenuString[] = {"File","Edit","Search","Help" };
         char FileString[] = { "Open", "Quit"};
@@ -3792,7 +3787,7 @@ other files. After all, I thought I had enough stray files littering the project
       case 't': /* Start in Text mode (default) */
         if (!fi->Quick)
           fi->DumpMode = 't';
-        else  {
+        else {
           fi->DumpMode = 'x';
           printf("You selected Quickmode - displaying hex only\n");
         }
@@ -3990,7 +3985,7 @@ other files. After all, I thought I had enough stray files littering the project
     return (EXIT_SUCCESS);
   }  /* End of main() */
 
-  void CartWheel(void)  {
+  void CartWheel(void) {
     int i;
     char tst[2];
     char *tstr = &tst[0];
@@ -4242,14 +4237,14 @@ other files. After all, I thought I had enough stray files littering the project
     return pos;
   }
 
-  char *SearchParse(const char *Search)  {
+  char *SearchParse(const char *Search) {
     char *NewSearch;
     NewSearch = (char *) malloc(sizeof(NewSearch) * (strlen(Search) + 1));
     /* This is where things need to be looked for, such as \ processing */
     return NewSearch;
   }
 
-  int CmdMode(struct FileData *fi)  { /* 1s */
+  int CmdMode(struct FileData *fi) { /* 1s */
     /* In here, I'd like to define a vim-like interface for adding commands like (N)ext file/(P)rev file... */
     /* First, steal a little code, massage a little code... */
     /* Various switches go through here...
