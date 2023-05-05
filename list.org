@@ -3901,8 +3901,8 @@ other files. After all, I thought I had enough stray files littering the project
     }
     /* end of getopt section - this had better work...
      ,* Incidentally, I've noticed OpenBSD 2.7 doesn't
-     ,* I don't know about any other forms of BSD
      ,* handle getopt parameters the same way as Linux.
+     ,* I don't know about any other forms of BSD
      ,*/
     /* First, a check on the fi->FName, to see if it has budged from 0 */
     if (!(fi->FPtr == stdin)) { /* if the FPtr is NOT == stdin, then ... */
