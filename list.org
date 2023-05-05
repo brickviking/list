@@ -499,8 +499,7 @@ int BugWrite(struct FileData *fi) {
   FILE *NewFile;
   char *TempPath = (char *) malloc(sizeof(TempPath) * PATH_MAX);
   char *Tempstring = (char *) malloc(sizeof(Tempstring) * 1024);
- /* Of course I could always prompt user for a filename here...
-   */
+ /* Of course I could always prompt user for a filename here... */
   if(NULL == fi->BugWriteFName) {
     if(!getenv("TEMP"))  /* Whoops, no TEMP variable defined */
       strcpy(TempPath, "/tmp/list.debug"); /* This should be the last resort filename, not the default */
@@ -3739,7 +3738,7 @@ other files. After all, I thought I had enough stray files littering the project
 
     if (argc < 2) {
       errno = ENOENT;
-      Bye(BR_NOFILENAME, __LINE__); /* 'Nother Dion bug squashed */
+      Bye(BR_NOFILENAME, __LINE__); /* no args specified, we need filename */
     }
     /* Now copy the argc and argv to our localspace */
     fi->MyArgc = argc;
