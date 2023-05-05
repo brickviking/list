@@ -33,7 +33,8 @@ a .tex file later. I made the docs originally before I was well aware of LaTeX, 
 snagged the output format from other manpages. I'm also including the README.md file whole.
 
 I'm not including the Changelog in here, though it's a distinct idea. If I do include it, I
-should probably put it up near the top of this .org document.
+should probably put it up near the top of this .org document. As it stands, it's currently in
+the src directory and will be kept up to date. Sort of.
 
 Future plans for this org document are to include all the source files so that you can take this
 single document and extract everything else that you need to get the source files as I wrote them.
