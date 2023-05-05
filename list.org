@@ -4430,7 +4430,7 @@ makefile that'll work happily under Minix. How does that differ from BSDMake or 
 DEBUGFLAGS = -g -O2
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.32
+VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 #SRCDIR = list-$(VERSION)
@@ -4497,7 +4497,7 @@ DISTBINFILE = listb$(VERSION).tgz
 else
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.32
+VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 endif
