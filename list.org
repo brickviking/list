@@ -2088,8 +2088,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
   case 'Q':          /* Quit - (Hasta La Vista!) */
   case 'q':
     return 0;
-  case 'o':
   case 'O':
+  case 'o':
 /*    if(!fi->addrflag)
       fi->addrflag=1;
     else
@@ -2121,8 +2121,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
   case ':':
 /*    CmdMode(fi); */ /* Comment this out until the related routine works */
     break;
-  case 'g':  /* Go to a specific position/line... */
   case 'G':  /* I can basically steal this code for % (go to % of file) */
+  case 'g':  /* Go to a specific position/line... */
     move(fi->Scrn_y - 1, 0);
     clrtoeol();
     attron(A_BOLD);
@@ -2218,8 +2218,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
     BackPage(fi, fi->Scrn_y);
     break;
   case KEY_PPAGE:  /* One page backwards */
-  case 'b':
   case 'B':
+  case 'b':
     BackPage(fi, fi->Scrn_y *2 - 2);
     break;
   case KEY_HOME:   /* Beginning of file... */
@@ -2238,8 +2238,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
     else
       fi->LineNumbers++;
     break;
-  case 'h':
   case 'H':
+  case 'h':
     BackPage(fi, fi->Scrn_y - 1);
     if(fi->Scrn_x < 80 ) {
       debug_function("Can't display - not wide enough", 0, fi->Scrn_y - 1, __LINE__);
@@ -2312,8 +2312,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
        BackPage(fi, fi->Scrn_y - 2);
        Search(fi);  /* Ahhh, yes. This seems a lot simpler than what I had...we already have string, so repeat search */
        break;
-  case 'z':
   case 'Z':
+  case 'z':
        debug = debug ? 0 : 1;
        break;
   case 'W':
