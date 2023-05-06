@@ -1,3 +1,4 @@
+# -*- mode: org; indent-tabs-mode: nil -*-
 #+TITLE: List
 #+SUBTITLE: a poorly-executed less
 #+AUTHOR: brickviking
@@ -32,7 +33,8 @@ a .tex file later. I made the docs originally before I was well aware of LaTeX, 
 snagged the output format from other manpages. I'm also including the README.md file whole.
 
 I'm not including the Changelog in here, though it's a distinct idea. If I do include it, I
-should probably put it up near the top of this .org document.
+should probably put it up near the top of this .org document. As it stands, it's currently in
+the src directory and will be kept up to date. Sort of.
 
 Future plans for this org document are to include all the source files so that you can take this
 single document and extract everything else that you need to get the source files as I wrote them.
@@ -45,7 +47,7 @@ single document and extract everything else that you need to get the source file
 #+BEGIN_SRC nroff
 .\"
 .\" list - a file listing program
-.\" Copyright (C) 1999,2002,2021  Eric Gillespie (viking@caverock.net.nz)
+.\" Copyright (C) 1999,2002,2021,2023 brickviking (brickviking@gmail.com)
 .\"
 .\" This program is free software; you can redistribute it and/or
 .\" modify it under the terms of the GNU General Public License
@@ -474,7 +476,7 @@ to help out with this for decades now.
 
 ** DONE bugwrite.c
    :PROPERTIES:
-   :header-args: :tangle: bugwrite.c
+   :header-args: :tangle bugwrite.c
    :END:
 This was an attempt to set up a screen to write stuff into for a bug report to be saved to disk
 and relayed to myself later. I guess I could happily format this like a github issue these days.
@@ -493,13 +495,12 @@ and relayed to myself later. I guess I could happily format this like a github i
  * stored in the home directory of the user, but another idea could be to
  * email this file off to another user.
  */
-int BugWrite(struct FileData *fi)  {
+int BugWrite(struct FileData *fi) {
   FILE *NewFile;
   char *TempPath = (char *) malloc(sizeof(TempPath) * PATH_MAX);
   char *Tempstring = (char *) malloc(sizeof(Tempstring) * 1024);
- /* Of course I could always prompt user for a filename here...
-   */
-  if(NULL == fi->BugWriteFName) { 
+ /* Of course I could always prompt user for a filename here... */
+  if(NULL == fi->BugWriteFName) {
     if(!getenv("TEMP"))  /* Whoops, no TEMP variable defined */
       strcpy(TempPath, "/tmp/list.debug"); /* This should be the last resort filename, not the default */
     else {
@@ -513,7 +514,7 @@ int BugWrite(struct FileData *fi)  {
   else
      strcpy(TempPath, fi->BugWriteFName);
   /* First, we attempt to open the file for writing to ... */
-  if(NULL == (NewFile = fopen(TempPath, "a+")))  { /* This opens the file to write to... */
+  if(NULL == (NewFile = fopen(TempPath, "a+"))) { /* This opens the file to write to... */
 
     debug_function("Cannot open temporary file for writing to - hit any key to return", 0, fi->Scrn_y, __LINE__); /* 66 chars long */
     /* Should we add a var to struct for whether tmpfile was able to be written? */
@@ -543,7 +544,7 @@ int WriteToFile(void) {
   return 0;
 }
 
-int EmailToUser(struct FileData *fi)  {
+int EmailToUser(struct FileData *fi) {
 #ifndef __linux__
   debug_function("Sorry, can't mail on this system", 0, fi->Scrn_y, __LINE__ );
 #else
@@ -552,7 +553,7 @@ int EmailToUser(struct FileData *fi)  {
   return 0;
 }
 
-int TakeNotes(FILE *FileToWrite, struct FileData *fi)  {
+int TakeNotes(FILE *FileToWrite, struct FileData *fi) {
    WINDOW *DebugEntry, *DebugEntryFrame; /* Only need DebugEntryFrame here - will need to create a Form inside this window. */
    time_t *MyTime = (time_t *) malloc(sizeof(MyTime) * sizeof(time_t));
    int TimeWritten = 0;
@@ -612,7 +613,7 @@ int TakeNotes(FILE *FileToWrite, struct FileData *fi)  {
 }
 
 /*
-int TakeNotes2(FILE *FileToWrite, struct FileData *fi)  {
+int TakeNotes2(FILE *FileToWrite, struct FileData *fi) {
   FIELD *NotePad = new_field(24,78,0,0,128,1);
   return 0;
 }
@@ -725,8 +726,7 @@ allocations better.
 /* The index: a pointer to pointers */
 static  void        **ppindex;
 static  datanode    **posn_index;
-static int Q_BSearch( queue *q, void *key,
-							 int Comp( const void *, const void *));
+static int Q_BSearch( queue *q, void *key, int Comp( const void *, const void *));
 /***
  ** function    : Q_Init
  ** purpose     : Initialise queue object and pointers.
@@ -773,7 +773,7 @@ int  Q_End( queue *q ) {
  ** parameters  : 'queue' pointer
  ** returns     : TRUE if empty queue, else  FALSE
  ***/
-int  Q_Empty( queue *q ){
+int  Q_Empty( queue *q ) {
 
     return (q->size == 0);
 }
@@ -890,8 +890,8 @@ int  Old_Q_PushHead( queue *q, void *d ) {
 
     node    *n ;
     datanode *p;
-	 q->head->prev = (*(malloc( sizeof(datanode) )));
-	     if ( q->head->prev == NULL )
+    q->head->prev = (*(malloc( sizeof(datanode) )));
+    if ( q->head->prev == NULL )
         return FALSE;
 
     n = q->head;
@@ -1166,8 +1166,7 @@ int     Q_Put( queue *q, void *data ) {
  *                For description of Comp see Q_Sort.
  *                Queue cursor left on position found item else at end.
  ***/
-int     Q_Find( queue *q, void *data,
-            int Comp(const void *, const void *) ) {
+int Q_Find( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     void  *d;
     d = Q_First( q );
@@ -1188,8 +1187,7 @@ int     Q_Find( queue *q, void *data,
 /*========  Sorted Queue and Index functions   ========= */
 
 
-static void QuickSort( void *list[], int low, int high,
-                        int Comp( const void *, const void * ) ) {
+static void QuickSort( void *list[], int low, int high, int Comp( const void *, const void * ) ) {
 
     int     flag = 1, i, j ;
     void    *key, *temp ;
@@ -1246,7 +1244,7 @@ static void QuickSort( void *list[], int low, int high,
  *                If queue is already sorted it frees the memory of the
  *                old index and starts again.
  ***/
-int     Q_Sort( queue *q, int Comp(const void *, const void *) ) {
+int Q_Sort( queue *q, int Comp(const void *, const void *) ) {
 
     int         i ;
     void        *d;
@@ -1311,8 +1309,7 @@ int     Q_Sort( queue *q, int Comp(const void *, const void *) ) {
  *                or -1 if not found.
  ** comments    : see Q_Sort for description of 'Comp' function.
  ***/
- static  int    Q_BSearch(  queue *q, void *key,
-                            int Comp(const void *, const void*) ) {
+static int Q_BSearch(  queue *q, void *key, int Comp(const void *, const void*) ) {
     int     low, mid, hi, val;
 
     low = 0;
@@ -1351,8 +1348,7 @@ int     Q_Sort( queue *q, int Comp(const void *, const void *) ) {
  *                not sort queue.
  ** comments    : see Q_Sort for description of 'Comp' function.
  ***/
-void    *Q_Seek( queue *q, void *data, int Comp(const void *,
-                    const void *) ) {
+void *Q_Seek( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     int     idx;
 
@@ -1385,8 +1381,7 @@ void    *Q_Seek( queue *q, void *data, int Comp(const void *,
  *                the insertion of the odd element ,not the piecemeal
  *                building of an entire queue.
  ***/
-int     Q_Insert( queue *q, void *data, int Comp(const void *,
-                    const void *) ) {
+int Q_Insert( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     Q_PushHead( q, data );
 
@@ -1491,11 +1486,11 @@ char *ReadSortedDirectory(DIR *) {  /* Once we have type of returned list, chang
   /* Things I'll need to know how to do:
    * extract a list of files from a provided directory
      fail if we can't access/read the directory itself
-     * open directory; fail if eperm
-        for number_of_entries
-        do { read entry 
-	add entry.name to list 
-	} while (--entries > 0)
+   * open directory; fail if eperm
+     for number_of_entries
+     do { read entry
+       add entry.name to list
+     } while (--entries > 0)
 
    * sort a list of files
    * return a pointer to the sorted list of files 
@@ -1569,8 +1564,8 @@ which to choose a file to display.
 
 /* User routines... */
 
-struct FileData *FileCommand(struct FileData *fi)  {
-   fi->FPtr=GetItem((DIR *)"./");
+struct FileData *FileCommand(struct FileData *fi) {
+   fi->FPtr = GetItem((DIR *)"./");
    /* What can we provide here?
    0 for read file, other ints for other commands
    -1 for exit of program
@@ -1578,31 +1573,32 @@ struct FileData *FileCommand(struct FileData *fi)  {
    return 0;
 }
 
-DIR *GetDirectory(DIR *TmpDir, char *DirectoryName)  {
+DIR *GetDirectory(DIR *TmpDir, char *DirectoryName) {
 /*   fi->FPtr= something I don't yet know - ; */
     TmpDir = opendir(DirectoryName);
-    if(TmpDir != NULL) Bye(BR_DIRNOTFILE, __LINE__);
+    if(TmpDir != NULL)
+        Bye(BR_DIRNOTFILE, __LINE__);
 /* Couldn't I get this to return the dir ptr instead of 0? */
     return 0;
 }
 
-int ListDirectory(DIR *TempDir)  {
+int ListDirectory(DIR *TempDir) {
     struct dirent **This_Directory;
     int n;
     n = scandir("./", &This_Directory, 0, alphasort);
-    if(n > 0)  {
-	 int cnt;
-	 for(cnt = 0; cnt < n; ++cnt) 
-		 printf("%s\n", This_Directory[cnt]->d_name);
-	 }
+    if(n > 0) {
+        int cnt;
+        for(cnt = 0; cnt < n; ++cnt)
+            printf("%s\n", This_Directory[cnt]->d_name);
+    }
     else
-	 perror("Couldn't open the directory!");
+        perror("Couldn't open the directory!");
     return 0;
 }
 
 /*
 static int one (struct dirent *unused) {
-	     return 1;
+             return 1;
      }
 */
 
@@ -1651,8 +1647,10 @@ int NewFile(struct FileData *fi, char *NewName) {
  * from any previous uses */
   /* Now the def'n for PATH_MAX has disappeared, we have to #define it somewhere... */
   /* OOOPS!!!! What if FName overruns 256 bytes? Or PATH_MAX bytes? */
-  if(NULL == (fi->FName = (char *) malloc(sizeof(NewName) * PATH_MAX))) Bye(BR_NOMEM, __LINE__); /* Previously freed, or not alloc'ed until here */
-  if(NewName=="") {
+  if(NULL == (fi->FName = (char *) malloc(sizeof(NewName) * PATH_MAX))) {
+    Bye(BR_NOMEM, __LINE__); /* Previously freed, or not alloc'ed until here */
+  }
+  if(NewName == "") {
     Bye(BR_FILEPERM, __LINE__);
   }
   strcpy(fi->FName, NewName);
@@ -1699,13 +1697,13 @@ int NewFile(struct FileData *fi, char *NewName) {
 void ScanForCr(struct FileData *fi) {
   /* We'll start with an array of CrInFile size and expand it if necessary */
   long int i, j, linelength, llflag = 0, c;
-  for(i = 0, j = 1; i < fi->FEnd;)  {
+  for(i = 0, j = 1; i < fi->FEnd;) {
    for (linelength = 0, c = 0; linelength < fi->Scrn_x - 10; linelength++) /* finish should actually be 4096 or something...
    hmmm, how about making it say, one screen - 1 line in size, so that we don't lose lines when we go down one line? */
       {
-        switch (c=fgetc(fi->FPtr))
+        switch (c = fgetc(fi->FPtr))
           {
-	    /* Takes no account of <CR> or \r, I should really have known better even in 1997 */
+            /* Takes no account of <CR> or \r, I should really have known better even in 1997 */
           case '\n':
             j++;
             llflag++;
@@ -1724,7 +1722,7 @@ void ScanForCr(struct FileData *fi) {
     } /* end of llflag check */
     else llflag--;
   }
-  fi->FLines=j;
+  fi->FLines = j;
   fseek(fi->FPtr, 0, SEEK_SET); /* back to beginning of file for further operations */
   return;
 }
@@ -1737,7 +1735,7 @@ long *AllocateLines(struct FileData *fi) {
    * For example:
    * MainEngine {
    * Len = ReadALinesLength(fi->FPtr, fi->FPos);
-   * do  {
+   * do {
    *   fi->CrArray[LineCtr++] = fi->FPos;
    *   fi->FPos += COLS;
    *   Len -= COLS;
@@ -1745,26 +1743,26 @@ long *AllocateLines(struct FileData *fi) {
    * until (Len <= COLS);
    * } / * End of MainEngine * /
    *
-   * ReadALinesLength(fi)  {
+   * ReadALinesLength(fi) {
    *   pseudocode is:
    *   Line begins at n, finishes at CR, return CR position or EOF if End Of File hit first
    */
-  int linelength, llflag=0, c;
+  int linelength, llflag = 0, c;
   long int i, j;
-  fi->CrArray[0]=0;
+  fi->CrArray[0] = 0;
   move(fi->Scrn_y - 1, 0);
   clear();
   refresh();
   addstr("list: Counting lines ... please wait"); /* This takes far longer than it needs to */
-  for(i = 0, j = 1; i < fi->FEnd;)  {
-/*    for (linelength = 0, c=0; linelength < 80 ; linelength++ ) */
+  for(i = 0, j = 1; i < fi->FEnd;) {
+/*    for (linelength = 0, c = 0; linelength < 80 ; linelength++ ) */
     for (linelength = 0, c = 0; linelength < fi->Scrn_x - 10; linelength++)  /* Took 10 bytes off to add in line numbers */
        {
   c = fgetc(fi->FPtr);
         switch (c)
           {
           case '\n':
-            *(fi->CrArray+j)=i+1;
+            *(fi->CrArray+j) = i+1;
             j++;
             llflag++;
 /*            if(debug) {
@@ -1805,14 +1803,14 @@ long *AllocateLines(struct FileData *fi) {
       if(debug) {
         char tmpstr[81];
 /*      char tmpstr[COLS+1]; */
-        char *tempstring=&tmpstr[0];
-        sprintf(tempstring,"L:%ld %ld\t", i-1, j);
+        char *tempstring = &tmpstr[0];
+        sprintf(tempstring, "L:%ld %ld\t", i-1, j);
         addstr(tempstring);
       }
     } /* end of llflag check */
     else llflag--;
   } /* end of first for loop */
-  fi->FLines=j;
+  fi->FLines = j;
   fseek(fi->FPtr, 0, SEEK_SET);
   return fi->CrArray;  /* can I do this???? */
 }
@@ -1882,7 +1880,7 @@ int EditFunction(struct FileData *fi) {
   return RetVal;
 }
 
-int Search(struct FileData *fi)  { /* 1s */
+int Search(struct FileData *fi) { /* 1s */
   switch (fi->SearchDirection) { /* 2s */
     case 'f':
        fi->SPosn = ffsearch(fi, 1); /* First, get the strings position if found... */
@@ -1896,13 +1894,13 @@ int Search(struct FileData *fi)  { /* 1s */
   if((-1L) == fi->SPosn) { /* ... Hasn't died yet, so check if string was _not_ found ... 2s */
       debug_function("String not found - hit any key to return", 0, fi->Scrn_y, __LINE__);
   } /* 2e...*/
-  else  {   /* String was found - so ... 2s */
+  else {   /* String was found - so ... 2s */
       if(fi->DumpMode == 'x')
         fi->FPosn = fi->SPosn; /* ... set the file position to where the search was found... */
-      else  { /* We have to seek to the nearest line... 3s */
+      else { /* We have to seek to the nearest line... 3s */
         for(fi->FLineCtr = 0; fi->FLineCtr < fi->FLines; fi->FLineCtr++ ) { /* 4s */
         /* sets initial fi->FLineCtr for line p'sn retrieval */
-          if(*(fi->CrArray+fi->FLineCtr) >= fi->SPosn) { /* 5s */
+          if(*(fi->CrArray + fi->FLineCtr) >= fi->SPosn) { /* 5s */
       /* Step through the lines until we find one that is greater than SearchPosition */
       fi->FPosn = *(fi->CrArray + fi->FLineCtr - 1);  /* ... set the required file position ... */
        /* Not sure why it needs one line taken off, but I guess the line itself needs to be included */
@@ -1914,7 +1912,7 @@ int Search(struct FileData *fi)  { /* 1s */
   return 0;
 } /* 1e */
 
-int Bye(enum ByeReason WhyBye, int LineCalled)  {
+int Bye(enum ByeReason WhyBye, int LineCalled) {
   char *ErrMessage = (char *) malloc(sizeof(ErrMessage) * 127);
   if(ErrMessage == NULL) {
     printf("list: Wow! We are REALLY out of memory here!\n");
@@ -1929,7 +1927,7 @@ int Bye(enum ByeReason WhyBye, int LineCalled)  {
          sprintf(ErrMessage, "list: exiting debug loop and leaving Program...\n");
          break;
     case BR_FILE_ERR:
-         switch (errno)  {
+         switch (errno) {
            case ENOENT:
                sprintf(ErrMessage, "list: File not found when called from line %d!\n", LineCalled);
                break;
@@ -1991,8 +1989,8 @@ void CloseNCurses(void) {
   refresh();
   nl();
   nocbreak();
-	endwin();
-	return;
+        endwin();
+        return;
 }
 
 #+END_SRC
@@ -2022,7 +2020,7 @@ char *SearchPrompt(struct FileData *fi) {
   char *Direction = (char *) calloc(sizeof (Direction) * 9, sizeof(Direction)); /* forward or backward prompt string */
   fi->SPosn = (long) NULL; /* set the current position */
   /* search string forwards - ifnot found (-1), prompt user */
-  move(fi->Scrn_y - 1,0);
+  move(fi->Scrn_y - 1, 0);
   clrtoeol();
   echo();
   attron(A_REVERSE);
@@ -2066,62 +2064,72 @@ char WhatNext(struct FileData *fi) { /* 1 */
   char buf2[PATH_MAX]; /* Make this somewhat safer for overflow */
   char *buf2p;
 /* Why don't I just allocate a section of memory? */
-  buf2p=&buf2[0];
+  buf2p = &buf2[0];
 
-  switch(c=getch()) { /* 2 */
+  switch(c = getch()) { /* 2 */
     /* We need processing for esc chars here... */
   case ' ':          /* next page or (LINES*16) bytes */
   case KEY_NPAGE:
 /*    clear();  / * Added this to see what happens... */
     break;
   case '7':
-    BackPage(fi, fi->Scrn_y-1);
-    fi->DumpFlag='7';
+    BackPage(fi, fi->Scrn_y - 1);
+    fi->DumpFlag = '7';
     break;
   case '8':
-    BackPage(fi, fi->Scrn_y-1);
-    fi->DumpFlag='8';
+    BackPage(fi, fi->Scrn_y - 1);
+    fi->DumpFlag = '8';
     break;
   case '*':
-    BackPage(fi, fi->Scrn_y-1);
-    fi->DumpFlag='*';
+    BackPage(fi, fi->Scrn_y - 1);
+    fi->DumpFlag = '*';
     break;
   case 'Q':          /* Quit - (Hasta La Vista!) */
   case 'q':
     return 0;
-  case 'o':
   case 'O':
+  case 'o':
 /*    if(!fi->addrflag)
       fi->addrflag=1;
     else
       fi->addrflag=0; * This code replaced by the single line below...simple, isn't it? */
     fi->addrflag = fi->addrflag ? 0 : 1; /* If it isn't zeroed - zero it, else set it */
-    BackPage(fi, fi->Scrn_y-1);
+    BackPage(fi, fi->Scrn_y - 1);
     break;
     /*    if(getenv(TERM)=="linux") { */
   case KEY_END:
     if(fi->DumpMode == 'x') {
-      fi->FPosn= (ruler) ? fi->FEnd - ((fi->Scrn_y-2) * fi->ScrnWide) : fi->FEnd - (fi->Scrn_y * fi->ScrnWide);
+      /* if ruler is set (not zero) then
+             assign "fi->FEnd - ((fi->Scrn_y-2) * fi->ScrnWide)" to fi->FPosn
+         otherwise
+             assign "fi->FEnd - (fi->Scrn_y * fi->ScrnWide)" to fi->FPosn
+      */
+      fi->FPosn = (ruler) ? fi->FEnd - ((fi->Scrn_y - 2) * fi->ScrnWide) : fi->FEnd - (fi->Scrn_y * fi->ScrnWide);
     }
     else if (fi->DumpMode == 't') {
+      /* if ruler is set (not zero) then
+             assign "fi->FLines - fi->Scrn_y - 2" to fi->FLineCtr
+         otherwise
+             assign "fi->FLines - fi->Scrn_y - 1" to fi->FLineCtr
+      */
       fi->FLineCtr=(ruler) ? fi->FLines - fi->Scrn_y - 2 :  fi->FLines - fi->Scrn_y - 1;
-      fi->FPosn=(*(fi->CrArray+fi->FLineCtr));
+      fi->FPosn = (*(fi->CrArray + fi->FLineCtr));
     }
     fseek(fi->FPtr, fi->FPosn, SEEK_SET);
     break;
   case ':':
 /*    CmdMode(fi); */ /* Comment this out until the related routine works */
     break;
-  case 'g':  /* Go to a specific position/line... */
   case 'G':  /* I can basically steal this code for % (go to % of file) */
-    move(fi->Scrn_y-1,0);
+  case 'g':  /* Go to a specific position/line... */
+    move(fi->Scrn_y - 1, 0);
     clrtoeol();
     attron(A_BOLD);
-    if(fi->DumpMode=='x')  {
+    if(fi->DumpMode == 'x') {
       addstr("Byte offset: ");
     }
     else
-      {
+      { /* <<< We'll catch this up */
         addstr("Line offset: ");
       }
     attroff(A_BOLD);
@@ -2129,35 +2137,35 @@ char WhatNext(struct FileData *fi) { /* 1 */
     echo();
     getstr(buf2);  /* Input an offset (numerical) */
     noecho();
-    if(fi->DumpMode=='x') {
+    if(fi->DumpMode == 'x') {
       errno = 0;
-      fi->FPosn=strtol(buf2, &buf2p, 0); /* Set fileposition */
+      fi->FPosn = strtol(buf2, &buf2p, 0); /* Set fileposition */
       if(errno) {
-	      CloseNCurses();
-	      Bye(BR_BADSTRING, __LINE__);
+              CloseNCurses();
+              Bye(BR_BADSTRING, __LINE__);
       }
       /* Have to check for FPosn within 0 <= FPosn <= FEnd  */
       if(fi->FPosn > fi->FEnd) {
-        fi->FPosn = (ruler) ? (fi->FEnd - (fi->Scrn_y-1)*fi->ScrnWide) : (fi->FEnd - (fi->Scrn_y*fi->ScrnWide));
+        fi->FPosn = (ruler) ? (fi->FEnd - (fi->Scrn_y - 1)*fi->ScrnWide) : (fi->FEnd - (fi->Scrn_y*fi->ScrnWide));
       }
       else
         if(fi->FPosn < 0)
-          fi->FPosn=0;
+          fi->FPosn = 0;
     }
-    else if(fi->DumpMode=='t') {
-      fi->FLineCtr=strtol(buf2, &buf2p, 0); /* Set fi->FPosnition */
+    else if(fi->DumpMode == 't') {
+      fi->FLineCtr = strtol(buf2, &buf2p, 0); /* Set fi->FPosnition */
       if (fi->FLineCtr >= fi->FLines)
         fi->FLineCtr = (ruler) ? (fi->FLines - fi->Scrn_y - 2) : (fi->FLines - fi->Scrn_y - 1);
       else if(fi->FLineCtr < 0)
-        fi->FLineCtr=0;
-      fi->FPosn=*(fi->CrArray+fi->FLineCtr);
+        fi->FLineCtr = 0;
+      fi->FPosn = *(fi->CrArray + fi->FLineCtr);
     }
     fseek(fi->FPtr, fi->FPosn, SEEK_SET);
     clear();
     refresh();
     break;
   case '%':
-    move(fi->Scrn_y-1,0);
+    move(fi->Scrn_y - 1, 0);
     clrtoeol();
     attron(A_BOLD);
     addstr("Percentage offset (0-100%): ");
@@ -2167,29 +2175,28 @@ char WhatNext(struct FileData *fi) { /* 1 */
     getstr(buf2);  /* Input an offset (numerical) */
     noecho();
     /* I basically need to go to bytes_of_file * percent_input...now how large is fi? */
-    fi->FPosn=(((strtol(buf2, &buf2p, 0))*fi->FEnd)/100);
+    fi->FPosn = (((strtol(buf2, &buf2p, 0)) * fi->FEnd) / 100); /* int rounding */
     /* Set the fileposition that we want */
       /* Have to check for FPosn within 0 <= FPosn <= FEnd ... or do we? */
     if(fi->FPosn > fi->FEnd) {
-        fi->FPosn = (ruler) ? (fi->FEnd - (fi->Scrn_y-1)*16) : (fi->FEnd - (fi->Scrn_y*16));
+        fi->FPosn = (ruler) ? (fi->FEnd - (fi->Scrn_y - 1) * 16) : (fi->FEnd - (fi->Scrn_y * 16));
       }
       else
         if(fi->FPosn < 0)
-          fi->FPosn=0;
+          fi->FPosn = 0;
     fseek(fi->FPtr, fi->FPosn, SEEK_SET);
     clear();
     refresh();
     break;
-
   case 'R':         /* Toggle the ruler  */
   case 'r':
-    BackPage(fi, fi->Scrn_y-1);
+    BackPage(fi, fi->Scrn_y - 1);
     if(!ruler) ruler++;
     else ruler--;
     break;
   case 'T':  /* Go back one page, change to text dump - like less */
   case 't':
-    BackPage(fi, fi->Scrn_y-1);
+    BackPage(fi, fi->Scrn_y - 1);
     if(!fi->Quick)
       fi->DumpMode='t';
     else
@@ -2200,40 +2207,40 @@ char WhatNext(struct FileData *fi) { /* 1 */
     break;
   case 'X':  /* go back one page then display hex dump */
   case 'x':
-    BackPage(fi, fi->Scrn_y-1);
-    fi->DumpMode='x';
+    BackPage(fi, fi->Scrn_y - 1);
+    fi->DumpMode = 'x';
     break;
   case KEY_DOWN:          /* one line forward */
-    BackPage(fi, fi->Scrn_y-2);
+    BackPage(fi, fi->Scrn_y - 2);
     break;
   case KEY_UP:  /* One line backward */
     BackPage(fi, fi->Scrn_y);
     break;
   case KEY_PPAGE:  /* One page backwards */
-  case 'b':
   case 'B':
-    BackPage(fi, fi->Scrn_y*2-2);
+  case 'b':
+    BackPage(fi, fi->Scrn_y *2 - 2);
     break;
   case KEY_HOME:   /* Beginning of file... */
     fi->Start=0;
     rewind(fi->FPtr);
     fi->FPosn = 0;
-    fi->FLineCtr=0;
+    fi->FLineCtr = 0;
     clear();
     refresh();
     break;
   case 'L':
   case 'l': /* This one's a toggle, folks */
-    BackPage(fi, fi->Scrn_y-1);
+    BackPage(fi, fi->Scrn_y - 1);
     if(fi->LineNumbers)
-      fi->LineNumbers= 0;
+      fi->LineNumbers = 0;
     else
       fi->LineNumbers++;
     break;
-  case 'h':
   case 'H':
+  case 'h':
     BackPage(fi, fi->Scrn_y - 1);
-    if(fi->Scrn_x < 80 )  {
+    if(fi->Scrn_x < 80 ) {
       debug_function("Can't display - not wide enough", 0, fi->Scrn_y - 1, __LINE__);
       break;
     }
@@ -2244,7 +2251,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
   case 'S':
   case 's':
     BackPage(fi, fi->Scrn_y - 1);
-    if(fi->Scrn_x < 80 )  {
+    if(fi->Scrn_x < 80 ) {
       debug_function("Can't display - not wide enough", 0, fi->Scrn_y - 1, __LINE__);
       break;
     }
@@ -2252,7 +2259,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
     break;
   case 'F':
   case 'f':
-    move(fi->Scrn_y - 1,0);
+    move(fi->Scrn_y - 1, 0);
     clrtoeol();
     echo();
     attron(A_REVERSE);
@@ -2264,7 +2271,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
     fclose(fi->FPtr);  /* I'd better close it before opening another one */
     free(fi->FName); /* frees the memory associated with the name... */
     free(fi->CrArray); /* ... same as above ... */
-/*    fi->FName=buf2p; */
+/*    fi->FName = buf2p; */
 /*    fi=NewFile(fi, buf2p); / * This *should* open the new fi->FName */
 /* Whoops - looks like there are some troubles with this method */
 /*    fseek(fi->FPtr, fi->FPosn, SEEK_SET); * This line shouldn't happen, after an fclose */
@@ -2304,8 +2311,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
        BackPage(fi, fi->Scrn_y - 2);
        Search(fi);  /* Ahhh, yes. This seems a lot simpler than what I had...we already have string, so repeat search */
        break;
-  case 'z':
   case 'Z':
+  case 'z':
        debug = debug ? 0 : 1;
        break;
   case 'W':
@@ -2320,7 +2327,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
        refresh();
        getstr(buf2);  /* Input a new filename */
        /* I don't know what happens if I enter nothing - I WANT it to use a
-	* default value of $HOME/list.debug */
+        * default value of $HOME/list.debug */
        noecho();
        fi->BugWriteFName = buf2; /* Throw it into the struct */
        BugWrite(fi);
@@ -2363,7 +2370,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
 
 #+END_SRC
 
-** TODO screen.c
+** DONE screen.c
    :PROPERTIES:
    :header-args: :tangle screen.c
    :END:
@@ -2386,13 +2393,13 @@ These are functions that deal with anything going to the screen through ncurses.
 #include "list.h"
 
 void Usage(void) {
-	/* ECG: 9-Oct-2001
-	 * This has been pointed out as not needed by bronaugh - we should
-	 * make it non-curses-reliant - done.
-	 * Hmmm, just wondering if we could integrate this into Bye somehow?
-	 * Say, call it from Bye? After all, we DO exit the program at this stage.
-	 * Any other notes I will add to head of list.c
-	 */
+/* ECG: 9-Oct-2001
+ * This has been pointed out as not needed by bronaugh - we should
+ * make it non-curses-reliant - done.
+ * Hmmm, just wondering if we could integrate this into Bye somehow?
+ * Say, call it from Bye? After all, we DO exit the program at this stage.
+ * Any other notes I will add to head of list.c
+*/
   char *tempstring;
   if(debug) {
     if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 128)))   /* We shouldn't need more than this */
@@ -2400,7 +2407,7 @@ void Usage(void) {
     sprintf(tempstring, "Debugging version %1d.%1d.%1d %s %s build\n", LISTVERSION, LISTMAJOR, LISTMINOR,  __DATE__, __TIME__ );
     printf(tempstring);
   }
-  printf("List, by Eric Gillespie, released under the GNU Public License version 2\n");
+  printf("List, by brickviking, released under the GNU Public License version 2\n");
   printf("Usage: list [-?|-h] [-v] [-d] [-x|t] [-7|8] [-s start] [-n count]\n\t");
 /*  printf("[-b tabsize] "); */
   printf("[-l] [-e] [-m] [-f] file_name [-r] rows [-c] columns [-q] \n");
@@ -2432,8 +2439,8 @@ void ShowHelp(struct FileData *fi) {
  * I have also had the idea of displaying a second help screen - seeing as the
  * first is keys, the second can be for search + description.
  */
-	/* This help screen layout has been suggested by bronaugh
-	 *
+        /* This help screen layout has been suggested by bronaugh
+         *
                                +-----+------+------------------------+-----+------+------------------------+ 
                                | Key | Mode |         Action         | Key | Mode |         Action         |
                                +-----+------+------------------------+-----+------+------------------------+ 
@@ -2458,7 +2465,7 @@ void ShowHelp(struct FileData *fi) {
                                | G   | Text | Jump to line in file   | G   | Hex  | Jump to byte in file   |
                                | %   | All  | Move to n% offset file |     |      |                        |
                                +-----+------+------------------------+-----+------+------------------------+ 
-	 * */
+         * */
 /* char tmpstr[COLS+1]; */
   char *tempstring = (char *) malloc(sizeof(tempstring) * 1024);  /* To give us some room */
   if (tempstring == NULL)
@@ -2466,7 +2473,7 @@ void ShowHelp(struct FileData *fi) {
     Bye(BR_NOMEM, __LINE__);
   int c, middle, x, y, EightBitDisplay;
   WINDOW *HelpWin;
-  if(fi->Scrn_x < 80 || fi->Scrn_y < 25)  { /* This shouldn't be a show stopper */
+  if(fi->Scrn_x < 80 || fi->Scrn_y < 25) { /* This shouldn't be a show stopper */
     debug_function("Cannot display help - screen too small", 0, fi->Scrn_y, __LINE__);
     refresh();
     return;
@@ -2477,7 +2484,7 @@ void ShowHelp(struct FileData *fi) {
   x = 0; y = 0;
   HelpWin = newwin(24, 80, (middle - 12), 0);
 /*  wclear(HelpWin); */
-  if(!fi->Monochrome)  {
+  if(!fi->Monochrome) {
     wbkgd(HelpWin, ' ' | COLOR_PAIR(COLOR_BLUE));
   }
   else {
@@ -2485,17 +2492,17 @@ void ShowHelp(struct FileData *fi) {
   }
 #ifdef __linux__
  /* I really really shouldn't have to do this... but BSD being what it is... */
-  if(getenv("DISPLAY")==NULL)
+  if(getenv("DISPLAY") ==  NULL)
     EightBitDisplay=1;
   else
 #endif
-    EightBitDisplay=0; /* This is to sort out those cases in which I don't
+    EightBitDisplay = 0; /* This is to sort out those cases in which I don't
                  * have Linux on board - it's a safety measure */
   if(EightBitDisplay)
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(HelpWin, A_ALTCHARSET | COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
     }
-    else  {  /* We're in mono */
+    else {  /* We're in mono */
       wattron(HelpWin, A_ALTCHARSET |  A_BOLD);
     }
   else { /* Can't use ALT_CHARSET */
@@ -2515,7 +2522,7 @@ void ShowHelp(struct FileData *fi) {
     mvwaddstr(HelpWin, y++, x, "                 °°   °°                °°                                  ");  /* Ln 0 */
     mvwaddstr(HelpWin, y++, x, "                 °°                     °°                                  ");  /* Ln 1 */
     mvwaddstr(HelpWin, y++, x, "                 ±±   ±±   Ü±±±±±±Ü  ±±±±±±±±         By                    ");  /* Ln 2 */
-    mvwaddstr(HelpWin, y++, x, "                 ±±   ±±   ±      ß     ±±       Eric Gillespie             ");  /* Ln 3 */
+    mvwaddstr(HelpWin, y++, x, "                 ±±   ±±   ±      ß     ±±       brickviking             ");  /* Ln 3 */
     mvwaddstr(HelpWin, y++, x, "                 ²²   ²²    ²²²²²²      ²²                                  ");  /* Ln 4 */
     mvwaddstr(HelpWin, y++, x, "                 ²²   ²²   Ü      ²     ²²                                  ");  /* Ln 5 */
     mvwaddstr(HelpWin, y++, x, "                 ÛÛ   ÛÛ   ßÛÛÛÛÛÛß     ÛÛ                                  ");  /* Ln 6 */
@@ -2527,9 +2534,9 @@ void ShowHelp(struct FileData *fi) {
     mvwaddstr(HelpWin, y++, x, "   mWWWQWW#    By       jQWWWWW:                       :QWWWQW(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             )TY?Y?Y`                       :QQQQQQ(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             _______       ._aaaaas,,.    wawQQQQQQwaac         ");
-    mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#   Eric      jQQQQQQ;    <yQQQWWWWWQQQw,  QWWQQQQQQQQQk         ");
+    mvwaddstr(HelpWin, y++, x, "   mQQQQQQ# brickviking jQQQQQQ;    <yQQQWWWWWQQQw,  QWWQQQQQQQQQk         ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;   jWQQQQW\?\?YQWQWWQ, ^~)QQQQQQr~^`         ");
-    mvwaddstr(HelpWin, y++, x, "   mQQQQQQ# Gillespie   jQQQQQQ;   mWQQQQQws,==----    :QQQQQQ(            ");
+    mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;   mWQQQQQws,==----    :QQQQQQ(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;   ]QQQQQQWWQQQmwa,    :QQQQQQ(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;    -?YUWWQQQQQQQQQw   :QQQQQQ(            ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQ#             jQQQQQQ;  __i___s ~\"?QWQQQQQ   :QQQQQQ[   ._,      ");
@@ -2539,11 +2546,11 @@ void ShowHelp(struct FileData *fi) {
                                                                    
   }
 /*
-  else  {
+  else {
     mvwaddstr(HelpWin, y++, x, "                 ..   ..                ..                                  ");         / * Ln 0 * /
     mvwaddstr(HelpWin, y++, x, "                 ::                     ::                                  ");        / * Ln 1 * /
     mvwaddstr(HelpWin, y++, x, "                 %%   ;;    ;;;;;;   ;;;;;;;;         By                    "); / * Ln 2 * /
-    mvwaddstr(HelpWin, y++, x, "                 %%   %%   ;      '     %%       Eric Gillespie             "); / * Ln 3 * /
+    mvwaddstr(HelpWin, y++, x, "                 %%   %%   ;      '     %%          brickviking             "); / * Ln 3 * /
     mvwaddstr(HelpWin, y++, x, "                 &&   %%    %%%%%%      %%                                  "); / * Ln 4 * /
     mvwaddstr(HelpWin, y++, x, "                 &&   &&   ,      :     &&                                  "); / * Ln 5 * /
     mvwaddstr(HelpWin, y++, x, "                 ##   ##    ######      ##                                  "); / * Ln 6 * /
@@ -2552,16 +2559,16 @@ void ShowHelp(struct FileData *fi) {
 / * Gawd, this needs some work! * /
   } End of commented out code */
   /*   standend(); */
-  if(!fi->Monochrome)  {
+  if(!fi->Monochrome) {
     wattroff( HelpWin,  COLOR_PAIR(COLOR_YELLOW)); /* reset attribs to cyan on blue */
     if(EightBitDisplay) {
         wattron( HelpWin, A_ALTCHARSET | COLOR_PAIR(COLOR_CYAN));
       }
-    else  {
+    else {
       wattron( HelpWin, COLOR_PAIR(COLOR_CYAN));
     }
   }
-  else  {
+  else {
     wattroff( HelpWin, A_BOLD);
   }
   if(debug) {
@@ -2579,7 +2586,7 @@ void ShowHelp(struct FileData *fi) {
     mvwaddstr(HelpWin, y++, x, "³ Key ³ Mode ³         Action         ³  Key  ³ Mode ³       Action          ³"); /* Ln 14 */
     mvwaddstr(HelpWin, y++, x, "ÃÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´"); /* Ln 15 */
     mvwaddstr(HelpWin, y, x,   "³  B  ³ Text ³ Move back one page     ³   B   ³ Hex  ³ Move back");
-    sprintf(tempstring, "%-5d", -(fi->Scrn_y-1-(ruler)) * fi->ScrnWide);
+    sprintf(tempstring, "%-5d", -(fi->Scrn_y - 1 -(ruler)) * fi->ScrnWide);
     x += 64;
     mvwaddstr(HelpWin, y, x, tempstring);
     x += 6;
@@ -2606,25 +2613,25 @@ void ShowHelp(struct FileData *fi) {
     x += 17;
     mvwaddstr(HelpWin, y, x,                    "bytes ³ 1 page (");
     x += 35;
-    sprintf(tempstring, "%-4d", (int)fi->Scrn_y-1-ruler);
+    sprintf(tempstring, "%-4d", (int)fi->Scrn_y - 1 - ruler);
     waddstr(HelpWin, tempstring);
     waddstr(HelpWin,                                               " lines) forward");
     mvwaddstr(HelpWin, y++, x,                                                     "³  %   ³ Goto % of file  ³"); /* Ln 19 */
     x = 1;  /* Reset back to the left of the screen plus one for balancing */
     mvwaddstr(HelpWin, y, x,   "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ"); /* Ln 25 */
   } /* now, that deals with a non-X screen... what about a screen under X? */
-  else  { /* Here goes ... */
+  else { /* Here goes ... */
     mvwaddstr(HelpWin, y++, x, ".________._____________.____________________________.______._________________.");
     mvwaddstr(HelpWin, y++, x, "| Key    |  Hex mode   |       Text mode            | Keys |  Location       |"); /* Ln 14 */
     mvwaddstr(HelpWin, y++, x, "+--------+-------------+----------------------------+------+-----------------+"); /* Ln 15 */
     mvwaddstr(HelpWin, y, x,   "|(B)ackUp|");
-    sprintf(tempstring, "%-5d", -(fi->Scrn_y-1-(ruler)) * fi->ScrnWide);
+    sprintf(tempstring, "%-5d", -(fi->Scrn_y - 1 - (ruler)) * fi->ScrnWide);
     x += 11;
     mvwaddstr(HelpWin, y, x, tempstring);
     x += 5;
     mvwaddstr(HelpWin, y, x,                " bytes | 1 page (");
     x += 17;
-    sprintf(tempstring, "%-4d", (int)fi->Scrn_y-1-ruler);
+    sprintf(tempstring, "%-4d", (int)fi->Scrn_y - 1 - ruler);
     mvwaddstr(HelpWin, y, x, tempstring);
     x += 3;
                                      mvwaddstr(HelpWin, y, x, "lines) backward");
@@ -2649,12 +2656,12 @@ void ShowHelp(struct FileData *fi) {
     x = 1;
     mvwaddstr(HelpWin, y, x,   "| Space  | +");
     x += 12;
-    sprintf(tempstring, "%-5d", (fi->Scrn_y-1-(ruler)) * fi->ScrnWide);
+    sprintf(tempstring, "%-5d", (fi->Scrn_y - 1 - (ruler)) * fi->ScrnWide);
     mvwaddstr(HelpWin, y, x, tempstring);
     x += 5;
     mvwaddstr(HelpWin, y, x,                   "bytes | 1 page (");
     x += 16;
-    sprintf(tempstring, "%-4d", (int)fi->Scrn_y-1-ruler);
+    sprintf(tempstring, "%-4d", (int)fi->Scrn_y - 1 - ruler);
     mvwaddstr(HelpWin, y, x, tempstring);
     x += 3;
     mvwaddstr(HelpWin, y, x,                                       " lines) forward");
@@ -2710,7 +2717,7 @@ void ShowHelp(struct FileData *fi) {
       wrefresh(HelpWin);
       c = getch();
     }
-    else  {
+    else {
       mvwaddstr(HelpWin, y++, x, ".----------------------------------------------------------------------------."); /* Ln 1 */
       mvwaddstr(HelpWin, y++, x, "|                            Other keys                                      |"); /* Ln 2 */
       mvwaddstr(HelpWin, y++, x, ":----------------------------------------------------------------------------:"); /* Ln 3 */
@@ -2743,7 +2750,7 @@ void ShowHelp(struct FileData *fi) {
 int ShowStats(struct FileData *fi) {
   char *termtype, *tempstring;
   WINDOW *StatWin;
-  int c, y=0, x=0, EightBitDisplay;
+  int c, y = 0, x = 0, EightBitDisplay;
   if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 1024))) {
     CloseNCurses();
     Bye(BR_NOMEM, __LINE__);
@@ -2755,48 +2762,48 @@ int ShowStats(struct FileData *fi) {
     return 0;
   }
   StatWin = newwin(18, 56, 5, 5);
-  termtype=(char *) malloc(sizeof(termtype) * (strlen(getenv("TERM"))+1));
+  termtype = (char *) malloc(sizeof(termtype) * (strlen(getenv("TERM")) + 1));
   /* What did I define this  previous line for? */
 #ifdef __linux__  /* For some reason, this compiles under BSD and Linux, but LINUX isn't defined here...
  * anywayI should be using the value of xterm instead of LINUX here...
  */
-  if(getenv("DISPLAY")==NULL)
-    EightBitDisplay=1;
+  if(getenv("DISPLAY") == NULL)
+    EightBitDisplay = 1;
   else
 #endif
-    EightBitDisplay=0;
+    EightBitDisplay = 0;
   if(EightBitDisplay) {
-    if(!fi->Monochrome)  { /* If in colour mode... */
+    if(!fi->Monochrome) { /* If in colour mode... */
       wbkgd(StatWin, ' ' | A_ALTCHARSET | COLOR_PAIR(COLOR_BLUE));
-    }  else  { /* Nope, mono */
+    }  else { /* Nope, mono */
       wbkgd(StatWin, ' ' | A_ALTCHARSET | A_BOLD);
     }
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(StatWin, A_ALTCHARSET | COLOR_PAIR(COLOR_CYAN));
     }
   }
   else {
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(StatWin, COLOR_PAIR(COLOR_CYAN));
     }
   }
 /*  wmove(StatWin, y++, x); */
-  if(EightBitDisplay)  {
+  if(EightBitDisplay) {
     mvwaddstr(StatWin, y++, x, "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿"); /* Ln 0 */
 /*     wmove(StatWin, y++, x); */
     mvwaddstr(StatWin, y, x,   "³                   ");
     x += 20;
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(StatWin, COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
-    } else  {
+    } else {
       wattron(StatWin, A_BOLD);
     }
     mvwaddstr(StatWin, y, x,                       "File Statistics");
     x += 15;
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattroff(StatWin, COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
       wattron(StatWin,  COLOR_PAIR(COLOR_CYAN));
-    } else  {
+    } else {
       wattroff(StatWin, A_BOLD);
     }
     mvwaddstr(StatWin, y++, x,                                    "                    ³"); /* Ln 1 */
@@ -2851,17 +2858,17 @@ int ShowStats(struct FileData *fi) {
     x = 0;
     mvwaddstr(StatWin, y++, x, "ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ"); /* Ln 17 */
   }
-  else  {
+  else {
     mvwaddstr(StatWin, y++, x, ".______________________________________________________.");
     mvwaddstr(StatWin, y, x,"|                   ");
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
       wattron(StatWin, COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
     } else {
       wattron(StatWin, A_BOLD);
     }
     x += 20;
     mvwaddstr(StatWin, y, x, "File Statistics");
-    if(!fi->Monochrome)  {
+    if(!fi->Monochrome) {
     wattroff(StatWin, COLOR_PAIR(COLOR_YELLOW) | A_BOLD);
     wattron(StatWin,  COLOR_PAIR(COLOR_CYAN));
     } else {
@@ -2921,7 +2928,7 @@ int ShowStats(struct FileData *fi) {
    
   }
   /* Here's the next screen...shows argc and argv... */
-  if(!fi->Monochrome)  {
+  if(!fi->Monochrome) {
     wattroff(StatWin, A_ALTCHARSET | COLOR_PAIR(COLOR_YELLOW));
   }
   delwin(StatWin);
@@ -2938,12 +2945,12 @@ int Dump(struct FileData *fi) { /* 1 */
    * now we aren't dealing strictly with 16 byte blocks any more */
   /*  char promptbuf[256]; / * Buffer for prompt of bytes/lines - strictly this should be enlarged too for stupidity */
   /* char *promptbufp = &promptbuf[0]; Don't need this - yet */
-  int linecount=0; /* Obvious name for a counter */
+  int linecount = 0; /* Obvious name for a counter */
   char *prtln; /* output line, bumped up from 82, changed from signed */
   tempstring = (char *) malloc(sizeof tempstring * 1024);
   if(tempstring == NULL) {
-	  CloseNCurses();
-	  Bye(BR_NOMEM, __LINE__);
+          CloseNCurses();
+          Bye(BR_NOMEM, __LINE__);
   }
   /* Define nice big fat amount, since we nearly hit the 256 limit with a
    * 160 char wide screen (imagine what would happen on a 21" screen @ 1600x1200) */
@@ -2956,10 +2963,10 @@ int Dump(struct FileData *fi) { /* 1 */
       )
      )  /* If this calloc fails (NULL return) */
      {
-	CloseNCurses();
+        CloseNCurses();
     Bye(BR_NOMEM, __LINE__);  /* Then bomb with "No memory available" message */
      }
-  fi->FPosn=fi->Start;  /* Set pos'n to requested Start */
+  fi->FPosn = fi->Start;  /* Set pos'n to requested Start */
 /*  if(not exist DISPLAY) do next line, else continue  */
 #ifdef __linux__  /* I shouldn't have to use this... */
   if((getenv("DISPLAY"))==NULL)
@@ -2970,16 +2977,16 @@ int Dump(struct FileData *fi) { /* 1 */
   /* I should call ScanForCR() from here instead of from within
    * NewFile() */
   sprintf(tempstring, "list: Please wait while I go find all the lines...\n");
-  move(8,0); /* Move to a place the user can see us... */
+  move(8, 0); /* Move to a place the user can see us... */
   addstr(tempstring);
   refresh();  /* ... and now, display it */
   if(!fi->Quick) { /* If the Quick switch is set, say for large 120 meg files ... then forget these */
     ScanForCr(fi);
-    if(!(fi->CrArray=calloc(fi->FLines, sizeof(u_long)))) {
-	    CloseNCurses();
-	    Bye(BR_NOMEM, __LINE__);
+    if(!(fi->CrArray = calloc(fi->FLines, sizeof(u_long)))) {
+            CloseNCurses();
+            Bye(BR_NOMEM, __LINE__);
     }
-    fi->CrArray=AllocateLines(fi); /* This allocates the line ends */
+    fi->CrArray = AllocateLines(fi); /* This allocates the line ends */
   }
   for(;;) {  /* (2) i.e forever... or at least until I kill it ... */
     if(debug) 
@@ -3019,15 +3026,15 @@ int Dump(struct FileData *fi) { /* 1 */
         if(j == 0) {   /* This deals with the case of no more to read from file... */
           for(a = linecount; a < fi->Scrn_y - 1; a++) {
        /* Something's funny with the linecount var - it's Scrn_y whatever I do... */
-            move(a,0);
+            move(a, 0);
             clrtoeol();
           }
-          move(fi->Scrn_y-1,0);
-	  /* Now, how do I set up the EndOfFile flag? Ah, there it is...see if this works... */
+          move(fi->Scrn_y - 1, 0);
+          /* Now, how do I set up the EndOfFile flag? Ah, there it is...see if this works... */
           fi->EofSet++;
           PrintLine(fi);
           break;
-	}
+        }
         memset(prtln, ' ', sizeof(char) * 1024);
      /* first, print the offset in whatever form... */
         if(!(fi->addrflag)) 
@@ -3036,13 +3043,13 @@ int Dump(struct FileData *fi) { /* 1 */
           sprintf(prtln, "%06ld:   ", fi->FPosn);
      /* ... now print the hex bytes... */
         for (i = 0; i < j; i++) {  /* 5s - this prints off the hex bytes */
-          sprintf(prtln+((i*3+10)), "%02X ", buf[i]); /* 5e  - Will this fix it? */
+          sprintf(prtln + (( i * 3 + 10)), "%02X ", buf[i]); /* 5e  - Will this fix it? */
         }
         if(j < (fi->ScrnWide)) {
            int count;
            fi->EofSet++;
-           for(count=j; count < fi->ScrnWide; count++)
-             sprintf(prtln+((count*3+10)), "   ");  /* This clears off the rest of the chars */
+           for(count = j; count < fi->ScrnWide; count++)
+             sprintf(prtln + ((count * 3 + 10)), "   ");  /* This clears off the rest of the chars */
 /*           for(a = (++linecount); a < fi->Scrn_y - 1; a++) {
        / * Something's funny with the linecount var - it's Scrn_y whatever I do... * /
             move(a,0);
@@ -3055,7 +3062,7 @@ int Dump(struct FileData *fi) { /* 1 */
           sprintf(tempst, "Line:%d\ti:%ld\tj:%ld", linecount, i, j);
           debug_function(tempst, 0, fi->Scrn_y - 1, __LINE__);
         }
-        sprintf(prtln+(10+(fi->ScrnWide*3)), " "); /* this adds a gap */
+        sprintf(prtln + (10 + (fi->ScrnWide * 3)), " "); /* this adds a gap */
      /* now do it again for the chars... */
         for(i = 0; i < j; i++)
           switch(buf[i]) {
@@ -3107,10 +3114,10 @@ int Dump(struct FileData *fi) { /* 1 */
                     /* returns . if 7-bit, else _should_ return itself */
                  break;
           }
-	if(j < fi->ScrnWide) {
+        if(j < fi->ScrnWide) {
           for(i = j; i < fi->ScrnWide; i++)
             sprintf(prtln + 11 + i + (fi->ScrnWide * 3), "%c", ' ');
-/*	  PrintLine(fi); ECG: Added 6-3-2001 ->*/
+/*        PrintLine(fi); ECG: Added 6-3-2001 ->*/
 /*          refresh(); */
           fi->EofSet++;
 /*            sprintf( prtln+(9 + i + (fi->ScrnWide*3)), "%c",  ((buf[i]=='\n') ? '.' : buf[i]));  / * again, this is dependent on screensize... */
@@ -3131,14 +3138,14 @@ int Dump(struct FileData *fi) { /* 1 */
         linecount++;
         memset(buf, 0, sizeof(buf));
         /* cleans out the buffer for the next  bytes */
-        if((linecount%(fi->Scrn_y-1))==0) { /* is the page full yet? */
-          move(fi->Scrn_y-1,0); /**/
+        if((linecount % (fi->Scrn_y - 1)) == 0) { /* is the page full yet? */
+          move(fi->Scrn_y - 1, 0); /**/
           PrintLine(fi);
           if (fi->FPosn >= (fi->FEnd-1)) {
 /* Ah!  This is where I should blank the remaining lines...? */
-            fi->FPosn=fi->FEnd-1;
-            move(fi->Scrn_y-1,68);
-/*              move(fi->Screen_y-1, 68); */
+            fi->FPosn = fi->FEnd - 1;
+            move(fi->Scrn_y - 1, 68);
+/*              move(fi->Screen_y - 1, 68); */
             attron(A_BOLD);
             addstr("End of file");  /* This needs to turn up whenever we get to end of file, not just at end of screen */
             attroff(A_BOLD);
@@ -3146,17 +3153,17 @@ int Dump(struct FileData *fi) { /* 1 */
           } /* end of FPosn:FEnd check */
           refresh();  /* added this here to reduce the time of refresh  */
           break; /* now which one does *this* break out of??? */
-	} /* End of full page check */
+        } /* End of full page check */
       move(linecount, 0);  /* this was added to see if it cures the problem of 0410: 0410: etc ... */
       }
     } /* Matches beginning of loop for hexdump */
 
  /* ***********************    text version   ****************************** */
 
-     else if(fi->DumpMode=='t') {
+     else if(fi->DumpMode == 't') {
        /* What I want to do here is to count CRs or complete Scrn_y-wide lines in a screen *
        * kind of like:
-       for(i=fi->FPosn; i < (fi->FPosn + ((fi->Scrn_x) * (ruler) ?  (fi->Scrn_y-2) : (fi->Scrn_y-1 ))); i++)  {
+       for(i = fi->FPosn; i < (fi->FPosn + ((fi->Scrn_x) * (ruler) ?  (fi->Scrn_y-2) : (fi->Scrn_y - 1 ))); i++) {
          if(!fread(buf, sizeof(char), fi->Scrn_x, fi->FPtr)) Bye(1);
           */
 /*      clear();
@@ -3166,24 +3173,24 @@ int Dump(struct FileData *fi) { /* 1 */
       /* gives me either legal values within file, or file beginning or end. */
       for(fi->FLineCtr = 0; fi->FLineCtr < fi->FLines; fi->FLineCtr++ ) {
         /* sets initial fi->FLineCtr for line p'sn retrieval */
-        if(*(fi->CrArray+fi->FLineCtr) >= fi->FPosn)
+        if(*(fi->CrArray + fi->FLineCtr) >= fi->FPosn)
           break;
       }  /* Now I've got the right line, step through the chars ... */
       for(;;)
         {
 /*    char TabVal;  * Stick this back in once we work out how to do Tabs elegantly - yeah, right... */
-          memset(prtln,0,(sizeof(prtln) * 1024)); /* clear out the build string ... */
+          memset(prtln, 0, (sizeof(prtln) * 1024)); /* clear out the build string ... */
           memset(tempstring, 0, (sizeof(tempstring) * 1024 )); /* ... and clear out the printing string... */
 
           /* beginning of loop 4eva - don't know what other limit to use */
           if(debug) debug_function("Seeking...", fi->Scrn_x - 11, fi->Scrn_y - 1, __LINE__);
 /*          {
-            int oldx=linecount;
-            move(LINES-1,69);
+            int oldx = linecount;
+            move(LINES - 1, 69);
             addstr("Seeking...");
-            move(oldx,0);
-            /x*     c=getchar();
-                   while(c != EOF) c=getchar(); *x/
+            move(oldx, 0);
+            /x*     c = getchar();   / * Yes, this is broken because of the surrounding comment * /
+                   while(c != EOF) c = getchar(); *x/
             refresh();
           } */
           fseek(fi->FPtr, fi->FPosn, SEEK_SET); /* Seeks to where the file position is set */
@@ -3219,7 +3226,7 @@ int Dump(struct FileData *fi) { /* 1 */
          debug_function(TmpString, fi->Scrn_x - 40, fi->Scrn_y - 1, __LINE__);
         free(TmpString);
         }
-            move(linecount,0);  /* Set to the beginning of the screenline */
+            move(linecount, 0);  /* Set to the beginning of the screenline */
 /*            refresh(); */
 /************************** Added program code 5 Oct 2000 - ECG *******************************/
             if(fi->LineNumbers) { /* This could maybe be toggled hex/decimal ... possibly ... */
@@ -3227,18 +3234,18 @@ int Dump(struct FileData *fi) { /* 1 */
             }
 /*********************** End of added program code 5 Oct 2000 - ECG *******************************/
             for( i = 0;
-/*                 i <= (*(fi->CrArray+fi->FLineCtr - 1) - *(fi->CrArray+(fi->FLineCtr))); */
+/*                 i <= (*(fi->CrArray + fi->FLineCtr - 1) - *(fi->CrArray + (fi->FLineCtr))); */
                    i < l;
                  i++ ) { /* [3] loop through each char */
 /*              if(prtln[i] == 0x0a || prtln[i] == 0x0d)
                 if(fi->DumpFlag!='*')
-                  prtln[i]=' ';
+                  prtln[i] = ' ';
 / * This stops line-ends showing * /
-                else prtln[i]='.';
+                else prtln[i] = '.';
               if( prtln[i] <= 0x1F )
-                prtln[i]='.';
+                prtln[i] = '.';
               if(  prtln[i] == 0x7F )
-                prtln[i]='.'; */
+                prtln[i] = '.'; */
 /* The previous lines have been replaced with this following cleaner switch statement
    The only thing remains is to see which is faster, the switch or the if statement?
  */
@@ -3332,19 +3339,19 @@ int Dump(struct FileData *fi) { /* 1 */
             fi->LnAtTopOfScrn = fi->FLineCtr - linecount; /* at least, I _think_ this is right... naah, not the right value, so what now?...*/
       fi->LineCount = linecount;
             linecount++;
-            fi->FPosn=*(fi->CrArray+fi->FLineCtr);
+            fi->FPosn = *(fi->CrArray + fi->FLineCtr);
           } /* Matches with if(fread) */
           else {  /* No, fread didn't read all the bytes... */
       /* Another bug ready to be squashed *splat* this one's eating the last line of file */
       clrtoeol();
       if(debug) debug_function("End of file hit?", fi->Scrn_x - 16, fi->Scrn_y - 1, linecount);
-            linecount=fi->Scrn_y-1; /* End of file or Error */
+            linecount = fi->Scrn_y - 1; /* End of file or Error */
             fi->EofSet++;
           } /* End of fread function() */
 
 /* Now, since the main work is done, now follows a few tests */
 
-          if(fi->FPosn>=(fi->FEnd-1)) {
+          if(fi->FPosn >= (fi->FEnd - 1)) {
           /* If fileposition is >= end of file,  (should this be at this point, or one screen back? )*/
       for(a = linecount; a < fi->Scrn_y - 1; a++) { /* ... clear off the rest of the lines  */
          move(a, 0);
@@ -3352,24 +3359,24 @@ int Dump(struct FileData *fi) { /* 1 */
          }
             fi->LnAtTopOfScrn = fi->FLineCtr - linecount; /* at least, I _think_ this is right... naah, not the right value, so what now?...*/
       fi->LineCount = linecount;
-            fi->FPosn=(*(fi->CrArray+fi->FLineCtr-1));
-            linecount=fi->Scrn_y-1;
+            fi->FPosn = (*(fi->CrArray + fi->FLineCtr - 1));
+            linecount = fi->Scrn_y - 1;
           }
           /* Original spot block taken from */
-          if (linecount>=fi->Scrn_y-1) {
+          if (linecount >= fi->Scrn_y - 1) {
       for(a = (linecount + 1); a <= fi->Scrn_y - 1; a++) { /* Stick this here, what does it do?  */
          move(a, 0);
          clrtoeol();
          }
             fi->LnAtTopOfScrn = fi->FLineCtr - linecount; /* at least, I _think_ this is right... naah, not the right value, so what now?...*/
       fi->LineCount = linecount;
-            move(fi->Scrn_y-1,0);
+            move(fi->Scrn_y - 1, 0);
             PrintLine(fi);
             refresh();
             break;
           }
           if(fi->EofSet) {
-            move(fi->Scrn_y-1,68);
+            move(fi->Scrn_y - 1, 68);
             attron(A_BOLD);
             addstr("End of file");
             attroff(A_BOLD);
@@ -3378,13 +3385,13 @@ int Dump(struct FileData *fi) { /* 1 */
           refresh();  /* is this where I should place it? */
         } /* End of loop 4eva */
     }  /* End of fi->DumpMode=='t' test */
-    if((fi->DumpMode=WhatNext(fi))==0) /* Goes and asks what to do next */
+    if((fi->DumpMode = WhatNext(fi)) == 0) /* Goes and asks what to do next */
       break;
   } /* end of loop forever through file loop */
   return(0);
 } /* End of Dump() */
 
-void PrintLine(struct FileData *fi)  {
+void PrintLine(struct FileData *fi) {
   int i; /* , RulerIsSet */ 
   char *tempstring;
   if(NULL == (tempstring = (char *) malloc(sizeof(tempstring) * 1024))) {
@@ -3396,9 +3403,9 @@ void PrintLine(struct FileData *fi)  {
 /* *** Could we make this more efficient? *** */
   if(ruler) {
     int thisIval;
-    move(0,0);
+    move(0, 0);
     clrtoeol();
-    if(fi->DumpMode=='t') {
+    if(fi->DumpMode == 't') {
     /* First, we deal with the case of (if linenumbers are shown) */
       if(fi->LineNumbers) {
         sprintf(tempstring, "Line No:    ");
@@ -3406,7 +3413,7 @@ void PrintLine(struct FileData *fi)  {
       /* Now the rest of the ruler line... */
       for(i = ((fi->LineNumbers) ? 11 : 1); i <= fi->Scrn_x -
       ((fi->LineNumbers) ? 0 : 10)  /* Remove this when we find out how to do lines properly in textmode */
-      ; i++)  {
+      ; i++) {
         switch (fi->LineNumbers) {
            case 1:
               thisIval = i - 10;
@@ -3415,8 +3422,8 @@ void PrintLine(struct FileData *fi)  {
               thisIval = i;
               break;
         }
-   if(fi->addrflag)  {
-           switch (thisIval % 10)  {
+   if(fi->addrflag) {
+           switch (thisIval % 10) {
              case 0:
       if(thisIval < 100)
                     sprintf(tempstring + i - 1, "%d", (thisIval /10));
@@ -3439,7 +3446,7 @@ void PrintLine(struct FileData *fi)  {
            } /* end of switch */
          }  /* fi->addrflag (decimal) */
          else  /* !fi->addrflag (hex) */
-           switch (thisIval % 16)  {
+           switch (thisIval % 16) {
              case 0:
                if(thisIval < 256)
                  sprintf(tempstring + i - 1, "%X", thisIval /16);
@@ -3472,16 +3479,16 @@ void PrintLine(struct FileData *fi)  {
       memset(tempstring, 0, sizeof(char) * 1024);  /* Clear out the string... */
     }
     else
-      if(fi->DumpMode=='x') {
+      if(fi->DumpMode == 'x') {
   sprintf(tempstring, "%s", "Offset    ");
   for(i = 1; i <= fi->ScrnWide; i++) {
      if(fi->addrflag)  /* This switch displays either hex or decimal address */
-       sprintf(tempstring + 10 + ((i-1) * 3), "%02d ", i);
+       sprintf(tempstring + 10 + ((i - 1) * 3), "%02d ", i);
      else
              sprintf(tempstring + 10 + ((i - 1) * 3), "%02X ", i);
         }
         sprintf(tempstring + 10 + (fi->ScrnWide * 3), "%c", ' ');
-  for(i = 1; i <= fi->ScrnWide; i++)  {
+  for(i = 1; i <= fi->ScrnWide; i++) {
           if(fi->addrflag)  /* Same here as above test */
       sprintf(tempstring + 10 + (fi->ScrnWide * 3) + i , "%01d ",  (i % 10)); /* 'nother bug squashed */
           else
@@ -3493,7 +3500,7 @@ void PrintLine(struct FileData *fi)  {
 /* To think that all the above code replaces the single line below 8-) */
 /*        addstr("Offset  00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F   0123456789ABCDEF"); */
   }
-    else if(fi->DumpMode == 'd')  {
+    else if(fi->DumpMode == 'd') {
   sprintf(tempstring, "%s", "Offset  ");
   for(i = 0; i < fi->ScrnWide; i++) {
      if(fi->addrflag)  /* This switch displays either hex or decimal address */
@@ -3502,7 +3509,7 @@ void PrintLine(struct FileData *fi)  {
              sprintf(tempstring + 10 + (i * 4), "%03X ", i);
         }
         sprintf(tempstring + 10 + (fi->ScrnWide * 4), "%c", ' ');
-  for(i = 0; i < fi->ScrnWide; i++)  {
+  for(i = 0; i < fi->ScrnWide; i++) {
           if(fi->addrflag)  /* Same here as above test */
       sprintf(tempstring + 11 + (fi->ScrnWide * 4) + i , "%01d ",  i % 10);
           else
@@ -3512,7 +3519,7 @@ void PrintLine(struct FileData *fi)  {
         memset(tempstring, 0, sizeof(char) * 1024);
   refresh();
     }
-    move(fi->Scrn_y-1,0); /* Move to the bottom of the screen, ready for the footer */
+    move(fi->Scrn_y - 1, 0); /* Move to the bottom of the screen, ready for the footer */
   }
 /* ********************** End of ruler test ***************************** */
 /* Now the turn of the footer */
@@ -3522,7 +3529,7 @@ void PrintLine(struct FileData *fi)  {
     debug_function(tempstring, 0, fi->Scrn_y - 1, __LINE__ );
     attron(A_REVERSE);
   }
-  if(fi->FPtr!=stdin) {   /* remove the stdin stuff - whoops, this doesn't need to be
+  if(fi->FPtr != stdin) {   /* remove the stdin stuff - whoops, this doesn't need to be
   printed if we're in text mode...*/
     sprintf(tempstring, "%s   byte: %ld %4ld%%  ", fi->FName, /* First the name, */
             (fi->FPosn <= fi->FEnd) ? fi->FPosn : fi->FEnd, /* ... then the pos or end, */
@@ -3536,7 +3543,7 @@ void PrintLine(struct FileData *fi)  {
   addstr(tempstring);
   memset(tempstring, 0, sizeof(char) * 1024);
   refresh();
-  if(fi->DumpMode=='t') {
+  if(fi->DumpMode == 't') {
 /* There's a bug here... it doesn't come up with the correct value for the top of the screen line */
     sprintf(tempstring,"line: %ld - %ld LnCt: %ld", fi->LnAtTopOfScrn, fi->FLineCtr, fi->LineCount);
     /* Bug**squashed!, well not yet */
@@ -3549,7 +3556,7 @@ void PrintLine(struct FileData *fi)  {
   addstr("  h=help");
   free(tempstring);
   if(fi->EofSet) {
-    move(fi->Scrn_y-1,68);
+    move(fi->Scrn_y - 1, 68);
     attron(A_BOLD);
     addstr("End of file");  /* This needs to turn up whenever we get to end of file, not just at end of screen */
     attroff(A_BOLD);
@@ -3561,22 +3568,22 @@ void PrintLine(struct FileData *fi)  {
 } /* End of PrintLine */
 
 #ifndef _MINIX
-extern __inline__ void BackPage(struct FileData *fi, long int LinesToBackUp)  { /* 1st in */
+extern __inline__ void BackPage(struct FileData *fi, long int LinesToBackUp) { /* 1st in */
 #else
-void BackPage(struct FileData *fi, long int LinesToBackUp)  { /* 1st in */
+void BackPage(struct FileData *fi, long int LinesToBackUp) { /* 1st in */
 #endif
-  if(fi->DumpMode=='t') { /* 2nd in */
-    fi->FLineCtr-= (ruler) ?
-      (fi->FLineCtr >=(LinesToBackUp-1)) ?
-      (LinesToBackUp-1) :
+  if(fi->DumpMode == 't') { /* 2nd in */
+    fi->FLineCtr -= (ruler) ?
+      (fi->FLineCtr >= (LinesToBackUp - 1)) ?
+      (LinesToBackUp - 1) :
       fi->FLineCtr :
-      (fi->FLineCtr >=LinesToBackUp) ?
+      (fi->FLineCtr >= LinesToBackUp) ?
       LinesToBackUp :
       fi->FLineCtr;
-    fi->FPosn=(*(fi->CrArray+fi->FLineCtr));
+    fi->FPosn = (*(fi->CrArray + fi->FLineCtr));
   } /* 2nd out */
-  else if(fi->DumpMode=='x') {
-    fi->FPosn-= (ruler) ?   /* first check is for ruler on or off */
+  else if(fi->DumpMode == 'x') {
+    fi->FPosn -= (ruler) ?   /* first check is for ruler on or off */
       ( fi->FPosn >= (( LinesToBackUp - 1) * fi->ScrnWide) ) ?  /* if so, is file position less than one page away from end? */
       ( ( LinesToBackUp - 1 ) * fi->ScrnWide ) : /* if so, subtract from fi->FPosn */
       (fi->FPosn) : /* ... else, just return itself - end of return _with_ ruler set */
@@ -3588,7 +3595,7 @@ void BackPage(struct FileData *fi, long int LinesToBackUp)  { /* 1st in */
 }
 
 
-void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine)  {
+void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine) {
   int c, y, x;
   getyx(stdscr, y, x); /* Get and stash where I am... */
   move(Screen_y, 0); /* Move to bottom of screen... */
@@ -3600,683 +3607,690 @@ void debug_function(char *debugstr, int Screen_x, int Screen_y, int SourceLine) 
   move(y, x); /* Now stick me back where I was... */
   attroff(A_BOLD);
 
-  if( QUIT_CHAR == (c=getch())) {
-	  CloseNCurses();
-	  Bye(BR_DEBUGEND, SourceLine);
+  if( QUIT_CHAR == (c = getch())) {
+          CloseNCurses();
+          Bye(BR_DEBUGEND, SourceLine);
   }
         refresh();
 }
 
 /* New stuff for menus * /
-int MakeMenu(struct ListFile *fi)  {
-	MENU *TopMenu;
-	char MenuString[] = {"File","Edit","Search","Help" };
-	char FileString[] = { "Open", "Quit"};
-	char EditString[] = { "Edit file", "Write notes"};
-	char SearchString[] = { "Search Forward", "Search Backwards", "Repeat search" };
-	char HelpString[] = { "Keys", "File Info", "About" };
-	ITEM *TopMenuItems[SIZEOF(MenuString)];
-	ITEM **TopMenuPtr = TopMenuItems;
-	/ * Beginning of Pseudocode until I work out what I DO need 
-	 * TopMenu = MakeMenu(MenuString, size_x, size_y); * This function should draw the main menu on screen 
-	* /	
+int MakeMenu(struct ListFile *fi) {
+        MENU *TopMenu;
+        char MenuString[] = {"File","Edit","Search","Help" };
+        char FileString[] = { "Open", "Quit"};
+        char EditString[] = { "Edit file", "Write notes"};
+        char SearchString[] = { "Search Forward", "Search Backwards", "Repeat search" };
+        char HelpString[] = { "Keys", "File Info", "About" };
+        ITEM *TopMenuItems[SIZEOF(MenuString)];
+        ITEM **TopMenuPtr = TopMenuItems;
+        / * Beginning of Pseudocode until I work out what I DO need
+         * TopMenu = MakeMenu(MenuString, size_x, size_y);
+         * This function should draw the main menu on screen
+        * /
 / * Make sure I finish this function - some way! * /
-	return 0;
+        return 0;
 }
  end of Menu code */
 
 #+END_SRC
 * Main program
-** TODO list.c
+** DONE list.c
    :PROPERTIES:
    :header-args: :tangle list.c
    :END:
 This is the main program, and includes quite a few functions I didn't shuttle off into
 other files. After all, I thought I had enough stray files littering the project already.
 #+BEGIN_SRC c
-/* vim:ts=2:ww=0:
-  **  WARNING: program in semi-stable (read - BETA) state at the moment...it's usable, but a few bugs remain.
-  **
-  **  Released under the GPL version 2, Copyright (c) 2002 by Eric Gillespie
-  **  Last updated 2020, made ready to import to github repository
-*/
-#ifndef __linux__
-#ifndef __OpenBSD__  /* Then is it NetBSD? */
-#ifndef __NetBSD__ /* Nope, FreeBSD? */
-#ifndef __FreeBSD__  /* No, try DOS */ 
-#ifndef __DJGPP__ /* Must be minix... */
-#include <lib.h>  
-/* Sheesh - want to #define _MINIX but I'm striking trouble,
-   this file is the only one to #define _MINIX
-*/
-#endif  /* !DJGPP (i.e. MINIX) */
-#endif  /* !BSD - this doesn't take DOS into account */
-#endif /* !FreeBSD */
-#endif /* !OpenBSD */
-#endif /* !__linux__ */
-#ifndef _MINIX  /* because MINIX hasn't got a basename() */
-#include <libgen.h>  /* Just for basename() */
-#endif
-#include <stdlib.h>
-#include <errno.h> /* For ... you guessed it! */
-#include <string.h> /* ... though I thought basename was in here... */
-#include <fcntl.h>
-#include <curses.h>
-#include <ctype.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <dirent.h>  /*  Do we need this here, or in filebrowse? */
-/* User includes */
-#include "list.h"
-#include "dequeue.h"
+  /* vim:ts=2:ww=0:
+  /* -*- mode: c; indent-tab-mode: nil; -*- */
+  ,**  WARNING: program in semi-stable (read - BETA) state at the moment...it's usable, but a few bugs remain.
+  ,**
+  ,**  Released under the GPL version 2, Copyright (c) 2002,2021,2023 brickviking
+  ,**  Last updated 2020, made ready to import to github repository
+  ,**  and on an ongoing basis since then.
+  ,*/
 
-/* User Definitions */
-/* Have stuck this here, seeing as list.h is shared between here and filebrowse,
- * and it is a little inappropriate to have two declarations of the same function
- */
-#ifdef _MINIX
-/* Have had to define this here, 'cos there isn't such a function in minix */
-void getmaxyx(WINDOW *win, int Cols, int Rows)  {
- Cols = (win)->_maxx;
- Rows = (win)->_maxy;
-}
-int has_colors(void){
-  return 0;  /* returns 0 if no color, 1 otherwise... */
+  #ifndef __linux__
+  #ifndef __OpenBSD__  /* Then is it NetBSD? */
+  #ifndef __NetBSD__ /* Nope, FreeBSD? */
+  #ifndef __FreeBSD__  /* No, try DOS */
+  #ifndef __DJGPP__ /* Must be minix... */
+  #include <lib.h>
+  /* Sheesh - want to #define _MINIX but I'm striking trouble,
+     this file is the only one to #define _MINIX
+  ,*/
+  #endif  /* !DJGPP (i.e. MINIX) */
+  #endif  /* !BSD - this doesn't take DOS into account */
+  #endif /* !FreeBSD */
+  #endif /* !OpenBSD */
+  #endif /* !__linux__ */
+
+  #ifndef _MINIX  /* because MINIX hasn't got a basename() */
+  #include <libgen.h>  /* Just for basename() */
+  #endif
+
+  #include <stdlib.h>
+  #include <errno.h> /* For ... you guessed it! */
+  #include <string.h> /* ... though I thought basename was in here... */
+  #include <fcntl.h>
+  #include <curses.h>
+  #include <ctype.h>
+  #include <sys/stat.h>
+  #include <unistd.h>
+  #include <dirent.h>  /*  Do we need this here, or in filebrowse? */
+
+  /* User includes */
+  #include "list.h"
+  #include "dequeue.h"
+
+  /* User Definitions */
+  /* Have stuck this here, seeing as list.h is shared between here and filebrowse,
+   ,* and it is a little inappropriate to have two declarations of the same function
+   ,*/
+  #ifdef _MINIX
+  /* Have had to define this here, 'cos there isn't such a function in minix */
+  void getmaxyx(WINDOW *win, int Cols, int Rows) {
+    Cols = (win)->_maxx;
+    Rows = (win)->_maxy;
   }
 
-void start_color(void) {
-}
+  int has_colors(void) {
+    return 0;  /* returns 0 if no color, 1 otherwise... */
+  }
 
-/* minix pukes on this next definition.. the compiler packs a SIGSEV */
-void init_color(int First, int Second, int Third) { /* There! Will this cure the problem? */
-}
-#endif
+  void start_color(void) { /* dunno if this is meant to be empty, at least on Minix */
+  }
 
-/* Ah! This is here, 'cos I can't define it in a shared header file */
-static size_t fsetup(FILE *, size_t);
+  /* minix pukes on this next definition.. the compiler packs a SIGSEV */
+  void init_color(int First, int Second, int Third) { /* There! Will this cure the problem? */
+  }
+  #endif
 
-int main(int argc, char **argv)
-{
-  char *bufp;
-  char *tempstring;  /* Don't forget to malloc later on... */
-  int c, y=0, x=0;
-  /* I have to fix this - I HAVE to initialise this struct before referencing it... */
-/*   struct stat FileInfo; / * stat from <sys/stat.h> - 2 lines - bits to delete... */
-/*   struct stat *ListFileInfo; / * ... and create an associated pointer... */
+  /* Ah! This is here, 'cos I can't define it in a shared header file */
+  static size_t fsetup(FILE *, size_t);
 
-  struct FileData ListFile = {
-    .DumpMode = 't', /* DumpMode - set to text by default */
-    .DumpFlag = '0', /* DumpFlag */ /* It's official - this wants to be a char */
-    .SearchDirection = '\0', /* SearchDirection */
+  int main(int argc, char **argv) {
+    char *bufp;
+    char *tempstring;  /* Don't forget to malloc later on... */
+    int c, y = 0, x = 0;
+    /* I have to fix this - I HAVE to initialise this struct before referencing it... */
+    /*   struct stat FileInfo; / * stat from <sys/stat.h> - 2 lines - bits to delete... */
+    /*   struct stat *ListFileInfo; / * ... and create an associated pointer... */
+
+    struct FileData ListFile = {
+      .DumpMode = 't', /* DumpMode - set to text by default */
+      .DumpFlag = '0', /* DumpFlag */ /* It's official - this wants to be a char */
+      .SearchDirection = '\0', /* SearchDirection */
     };  /* ... the end of the struct init */
-  /* Initialises struct to empty - yep, everything! - lclint complains*/
-  struct FileData *fi; /* Define an associated pointer... doesn't this have to be alloc'ed? */
-  fi=&ListFile; /* ... and point it to our just-filled ListFile struct */
-  fi->FileInfoPtr = &fi->FileInfo;
-  tempstring = (char *) malloc(sizeof tempstring * 1024); /* Does this limit need re-evaluating? */
-  if(tempstring == NULL) Bye(BR_NOMEM, __LINE__); /* died due to lack of memory */
-  /* ... otherwise, continue as planned... */
-  (void) Q_Init(&fi->DirQueuePtr); /* Initialises the queue created - lclint suggests return a void */
+    /* Initialises struct to empty - yep, everything! - lclint complains*/
+    struct FileData *fi; /* Define an associated pointer... doesn't this have to be alloc'ed? */
+    fi = &ListFile; /* ... and point it to our just-filled ListFile struct */
+    fi->FileInfoPtr = &fi->FileInfo;
+    tempstring = (char *) malloc(sizeof tempstring * 1024); /* Does this limit need re-evaluating? */
+    if (tempstring == NULL) Bye(BR_NOMEM, __LINE__); /* died due to lack of memory */
+    /* ... otherwise, continue as planned... */
+    (void) Q_Init(&fi->DirQueuePtr); /* Initialises the queue created - lclint suggests return a void */
 
-  /* getopt parser */
-  debug=0;
-  opterr = 0;
+    /* getopt parser */
+    debug = 0;
+    opterr = 0;
 
-  if(argc < 2) {
-    errno = ENOENT;
-    Bye(BR_NOFILENAME, __LINE__); /* 'Nother Dion bug squashed */
-  }
-  /* Now copy the argc and argv to our localspace */
-  fi->MyArgc = argc;
-  fi->MyArgv = argv; /* Will this work?  I don't know... */
-  /* Okay - should we shove all THIS into a separate function too? */
-  while ((c=getopt(fi->MyArgc, fi->MyArgv, "vf:s:r:c:n:b:eqltx78dmh?"))!= -1) {
-/* v - version  f: filename s: start_byte r: rows to display  c: columns to display n: num_bytes b: taB size
- * e - show line Endings q - QuickHexmode l - show line numbers in text mode  t - text  x - hexadecimal
- * 7/8 - 7/8-bit display d - debug m - monochrome usage h/? - Usage 
- *
- */
-    switch(c) {
+    if (argc < 2) {
+      errno = ENOENT;
+      Bye(BR_NOFILENAME, __LINE__); /* no args specified, we need filename */
+    }
+    /* Now copy the argc and argv to our localspace */
+    fi->MyArgc = argc;
+    fi->MyArgv = argv; /* Will this work?  I don't know... */
+    /* Okay - should we shove all THIS into a separate function too? */
+    while ((c = getopt(fi->MyArgc, fi->MyArgv, "vf:s:r:c:n:b:eqltx78dmh?"))!= -1) {
+      /* v - version  f: filename s: start_byte r: rows to display  c: columns to display n: num_bytes b: taB size
+       ,* e - show line Endings q - QuickHexmode l - show line numbers in text mode  t - text  x - hexadecimal
+       ,* 7/8 - 7/8-bit display d - debug m - monochrome usage h/? - Usage 
+       ,*
+       ,*/
+      switch(c) {
       case 'v':    /* Spits out version information */
-           printf("list: Version %1d.%1d.%1d, compiled on %s at %s, by %s\n", LISTVERSION, LISTMAJOR, LISTMINOR, __DATE__, __TIME__, "Eric Gillespie");  /* Why don't we run this through Bye()? Because there's no ERROR, that's why!!! */
-           exit(0);
-           break;  /* never gets to this line... 8-) this should be tidier */
+        printf("list: Version %1d.%1d.%1d, compiled on %s at %s, by %s\n", LISTVERSION, LISTMAJOR, LISTMINOR, __DATE__, __TIME__, "brickviking");  /* Why don't we run this through Bye()? Because there's no ERROR, that's why!!! */
+        exit(0);
+        break;  /* never gets to this line... 8-) this should be tidier */
       case 'f': /* Load following filename */
-           /* This gets duplicated down the bottom if the -f switch wasn't used... hmmm */
-           NewFile(fi, optarg);
-           break;
+        /* This gets duplicated down the bottom if the -f switch wasn't used... hmmm */
+        NewFile(fi, optarg);
+        break;
       case 's': /* Start position */
-           fi->Start=strtol(optarg, &bufp, 0);
-           break;
+        fi->Start = strtol(optarg, &bufp, 0);
+        break;
       case 'r': /* Set number of rows (lines) different from present screen */
-           y=strtol(optarg, &bufp, 0);
-           if(y < fi->Scrn_y)
-              fi->Scrn_y = y;
-           break;
+        y = strtol(optarg, &bufp, 0);
+        if (y < fi->Scrn_y)
+          fi->Scrn_y = y;
+        break;
       case 'c': /*  Set number of columns different from present screen  */
-           x=strtol(optarg, &bufp, 0);
-           if(x < fi->Scrn_x)
-               fi->Scrn_x = x;
-           break;
+        x = strtol(optarg, &bufp, 0);
+        if (x < fi->Scrn_x)
+          fi->Scrn_x = x;
+        break;
       case 'n': /* Count off (N)um bytes */
-           fi->Count=strtol(optarg, &bufp, 0);
-           break;
+        fi->Count = strtol(optarg, &bufp, 0);
+        break;
       case 'b': /* ta(B) size */
-           fi->TabSize = strtol(optarg, &bufp, 0);
-           break;
+        fi->TabSize = strtol(optarg, &bufp, 0);
+        break;
       case 'e': /* Show line ends */
-           fi->DumpFlag = '*';
-           break;
+        fi->DumpFlag = '*';
+        break;
       case 'l': /* Show line numbers in text mode */
-           fi->LineNumbers = 1;
-           break;
+        fi->LineNumbers = 1;
+        break;
       case 't': /* Start in Text mode (default) */
-           if(!fi->Quick)
-             fi->DumpMode = 't';
-           else  {
-                   fi->DumpMode = 'x';
-                   printf("You selected Quickmode - displaying hex only\n");
-           }
-           break;
-/*    case 'A':   80x86 asm mode (Intel or AT&T?) : see how biew has done it...
-      case 'a':
-           fi->DumpMode='a';
-           break;             end of comment */
+        if (!fi->Quick)
+          fi->DumpMode = 't';
+        else {
+          fi->DumpMode = 'x';
+          printf("You selected Quickmode - displaying hex only\n");
+        }
+        break;
+        /*    case 'A':   80x86 asm mode (Intel or AT&T?) : see how biew has done it...
+              case 'a':
+              fi->DumpMode = 'a';
+              break;             end of comment */
       case 'x': /* Start in Hexdump mode */
-           fi->DumpMode='x';
-           break;
+        fi->DumpMode = 'x';
+        break;
       case '7': /* Use 7-bit (Unixy) dump mode */
-      /* This displays only characters in the range 0x20 - 0x7E, all others show as '.' */
-           fi->DumpFlag = '7';
-           break;
+        /* This displays only characters in the range 0x20 - 0x7E, all others show as '.' */
+        fi->DumpFlag = '7';
+        break;
       case '8': /* Use 8-bit (DOS) mode - display all characters except 0x0 - 0x1F, 0x7F
-               This mode works well in situations where 0x80 - 0xFF map exactly to IBM's
-               idea of what they should be, alas in the Unix world, this is very rarely
-               the case.  In fact, a lot of the time, they're not even like that in the
-               DOS world if codepages are installed, or when Windows has a different charset */
-           fi->DumpFlag = '8';
-           break;
+                   This mode works well in situations where 0x80 - 0xFF map exactly to IBM's
+                   idea of what they should be, alas in the Unix world, this is very rarely
+                   the case.  In fact, a lot of the time, they're not even like that in the
+                   DOS world if codepages are installed, or when Windows has a different charset */
+        fi->DumpFlag = '8';
+        break;
       case 'd': /* Turn on the debugging flag - beware - this singlesteps most main procedures */
-           debug++;
-           break;
+        debug++;
+        break;
       case 'm':   /* this line added to deal with debugging for minix when in Linux */
-           fi->Monochrome++; /* Oooops - this value is asked for before we set it - naughty... */
-           break;
+        fi->Monochrome++; /* Oooops - this value is asked for before we set it - naughty... */
+        break;
       case 'q': /* This is only in while I get around the textwrap problems... */
-           fi->Quick++;
-           fi->DumpMode='x'; /* Force this into hexmode dump */
-           break;
+        fi->Quick++;
+        fi->DumpMode = 'x'; /* Force this into hexmode dump */
+        break;
       case 'h': /* Well, I guess this gives a helpscreen and exits */
       case '?':
- /* Added by Dion the Bugfinder - after all, we want to see the helpscreen before it gets whisked away. */
-/*           c = getch();  kinda made irrelevant by making the Usage into
- *           Printf */
-           Usage();
-/* After exiting from Usage(), could I go to the file selection screen?
- * Maybe not, if my options are too seriously screwed up ... */
-           return (EXIT_SUCCESS); /* (Not FAILURE) After all, it did what we wanted... */
-           break;
+        /* Added by Dion the Bugfinder - after all, we want to see the helpscreen before it gets whisked away. */
+        /*           c = getch();  kinda made irrelevant by making the Usage into
+         ,*           Printf */
+        Usage();
+        /* After exiting from Usage(), could I go to the file selection screen?
+         ,* Maybe not, if my options are too seriously screwed up ... */
+        return (EXIT_SUCCESS); /* (Not FAILURE) After all, it did what we wanted... */
+        break;
       default: /* Well, we don't know what this is... */
-           refresh();
-           endwin();
-           printf("list: Unknown switch\n");
-           Usage();
-           return (EXIT_FAILURE);
-    }  /* end of switch statement */
-  } /* end of while loop */
-  /* Process any non-flag arguments following the flags using optind
-     as index to next argument.
-     getopt() sets the global variable optind set to the next
-     argument to process.  After the loop above it is pointing to the
-     first command line argument following processed flags and their args. */
-/* Perhaps I should change this to if(!fi->FPtr) { NewFile(fi, fi->MyArgv[optind]; } */
-/* Old line: */
-  for( ; optind < fi->MyArgc; optind++ ) {
-    if(!fi->FPtr) {
-/* This line below is incorrect - it should be Newfile on the first filename only...
- * and besides which, what happens when I go beyond argc?
- */
-      NewFile(fi, fi->MyArgv[optind]); /* This is where all the file opening work is done */
-    /* Another point - this will end up opening the *last* file on the commandline -
-     * I should shove these into a linked list dequeue-style, perhaps add a new function - AddFile()?
-     * Each list would have filename, previous filename, and next filename in its entry
-     * Of course, I guess I could call Dump() on each...
-     * Hey, this might fit in better with DirRead() and filebrowse.c ...*/
-     }
-  }
-  if(fi->FName==0) {  /* If nothing else specified on commandline .. */
+        refresh();
+        endwin();
+        printf("list: Unknown switch\n");
+        Usage();
+        return (EXIT_FAILURE);
+      }  /* end of switch statement */
+    } /* end of while loop */
+      /* Process any non-flag arguments following the flags using optind
+         as index to next argument.
+         getopt() sets the global variable optind set to the next
+         argument to process.  After the loop above it is pointing to the
+         first command line argument following processed flags and their args. */
+    /* Perhaps I should change this to if (!fi->FPtr) { NewFile(fi, fi->MyArgv[optind]; } */
+    /* Old line: */
+    for( ; optind < fi->MyArgc; optind++ ) {
+      if (!fi->FPtr) {
+        /* This line below is incorrect - it should be Newfile on the first filename only...
+         ,* and besides which, what happens when I go beyond argc?
+         ,*/
+        NewFile(fi, fi->MyArgv[optind]); /* This is where all the file opening work is done */
+        /* Another point - this will end up opening the *last* file on the commandline -
+         ,* I should shove these into a linked list dequeue-style, perhaps add a new function - AddFile()?
+         ,* Each list would have filename, previous filename, and next filename in its entry
+         ,* Of course, I guess I could call Dump() on each...
+         ,* Hey, this might fit in better with DirRead() and filebrowse.c ...*/
+      }
+    }
+    if (fi->FName == 0) {  /* If nothing else specified on commandline .. */
 
-    /* fi->FPtr=stdin;   /x* We might have to scrap this, I think... */
-    /* One way of dealing with the stdin would be (borrowed from an MS-DOS idea)
-           * is to copy the stdin to a temporary file, or to allocate a large array */
-    NewFile(fi, "stdin"); /* I should probably copy pipe data to a temp buffer - either memory or tempfile */
-          fflush(fi->FPtr); /* Just to satisfy the purists... */
-          /* MS-DOSism   setmode(fileno(stdin), O_BINARY);  ... try the above instead.. */
-          /*    addstr("list: No filename specified on commandline\n"); */
-					CloseNCurses();
-    Bye(BR_NOFILENAME, __LINE__); /* We dump out by telling the user we can't open file at the moment... */
-  }
-  /* ncurses code can FINALLY start here! */
-  initscr();
-  if(!fi->Monochrome) { /* 1s If we're NOT in mono ... */
-    if( has_colors()) {  /* 2s - test we have color available. Hey, what happens if i want to run in monochrome? */
-      start_color();
-      init_pair(COLOR_BLACK, COLOR_BLACK, COLOR_BLACK);
-      init_pair(COLOR_CYAN, COLOR_CYAN, COLOR_BLUE);
-      init_pair(COLOR_RED, COLOR_RED, COLOR_BLACK);
-      init_pair(COLOR_GREEN, COLOR_YELLOW, COLOR_RED);  /* Set this to unusual pairing */
-      init_pair(COLOR_WHITE, COLOR_WHITE, COLOR_BLACK);
-      init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
-      init_pair(COLOR_BLUE, COLOR_BLUE, COLOR_BLUE);
-      init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLUE);
-    } /* 2e */
-  } /* 1e */
-/*    Bye(BR_NOCOLOR, __LINE__);  / * This line will be replaced soon - just give me time to write the monochrome equivalents */
-  noecho();
-  cbreak();
-  keypad(stdscr, TRUE);
-  nonl();
-/*  bkgd(A_ALTCHARSET); */
- /* This line tell us the real screensize -in fact I've just found a duplication with a line inside Dump() */
-  getmaxyx(stdscr, fi->Scrn_y, fi->Scrn_x);
-  
-  if(debug) { /* We will have a future conflict here when we finally include stdin */
-    sprintf(tempstring,"FName: %s          DumpMode: %c\n\rStart: %ld        Count: %ld\n\r",
-            fi->FName, fi->DumpMode, fi->Start, fi->Count);
-    debug_function(tempstring, 0, fi->Scrn_y, __LINE__);
-  }
-  /* end of getopt section - this had better work...
-   * Incidentally, I've noticed OpenBSD 2.7 doesn't
-	 * I don't know about any other forms of BSD
-   * handle getopt parameters the same way as Linux.
-  */
-  /* First, a check on the fi->FName, to see if it has budged from 0 */
-  if(!(fi->FPtr==stdin)) { /* if the FPtr is NOT == stdin, then ... */
-    if( !( fi->FPtr = fopen( fi->FName, "rb"))) { /* ...find out if the file can be opened for reading, if not ... */
-			CloseNCurses();
-      Bye(BR_FILEPERM, __LINE__);
-    } /* End of failure to open */
-    if(fi->Scrn_x < 40) { /* Darn - this witty comment gets lost in the Bye() call */
-/*      addstr("list: Um, I don't have enough columns to display the file in hex format,");
-      addstr("      So am defaulting to text mode!  Hope you don't mind!");  */
-			CloseNCurses();
-      Bye(BR_TINYCOLS,__LINE__);
+      /* fi->FPtr = stdin;   /x* We might have to scrap this, I think... */
+      /* One way of dealing with the stdin would be (borrowed from an MS-DOS idea)
+       ,* is to copy the stdin to a temporary file, or to allocate a large array */
+      NewFile(fi, "stdin"); /* I should probably copy pipe data to a temp buffer - either memory or tempfile */
+      fflush(fi->FPtr); /* Just to satisfy the purists... */
+      /* MS-DOSism   setmode(fileno(stdin), O_BINARY);  ... try the above instead.. */
+      /*    addstr("list: No filename specified on commandline\n"); */
+      CloseNCurses();
+      Bye(BR_NOFILENAME, __LINE__); /* We dump out by telling the user we can't open file at the moment... */
     }
-    if(fi->Scrn_y < 24) { /* Darn - this witty comment gets lost in the Bye() call */
-/*            addstr("list: Err, there aren't enough lines here to do justice to this");
-            addstr("      file - I need to get out of here! (Reason:Claustrophobia)"); */
-			CloseNCurses();
-      Bye(BR_TINYLINES,__LINE__);
-    }
-/*    stat(fi->FName, ListFileInfo); / * Second time this file is stat'ed - is this necessary? */
-    /* Here are a few sanity checks... */
-    if(fi->FileInfo.st_size == 0) {  /* get the filesize... */
-      addstr("list: Hmmm, the file appears to be of zero length!!");
-      refresh();
-      endwin();
-      exit(EXIT_FAILURE);
-    } /* End of "File is zero bytes in size" */
-    else if(fi->Count < 1) {
-      addstr("list: You're trying to ask for too few bytes...!!");
-      refresh();
-      endwin();
-      exit(EXIT_FAILURE);
-    }
-    else if(fi->Start > fi->FileInfo.st_size) {
-      addstr("list: You're asking for bytes starting past the end of the file...");
-      refresh();
-      endwin();
-      exit(EXIT_FAILURE);
-    }
-    fi->FEnd=fi->FileInfo.st_size;
-  }
-  else { /* Huh? input _IS_ stdin? */
-    addstr("list: Seeking to end...");
-    refresh();
-    cbreak();
+    /* ncurses code can FINALLY start here! */
+    initscr();
+    if (!fi->Monochrome) { /* 1s If we're NOT in mono ... */
+      if ( has_colors()) {  /* 2s - test we have color available. Hey, what happens if i want to run in monochrome? */
+        start_color();
+        init_pair(COLOR_BLACK, COLOR_BLACK, COLOR_BLACK);
+        init_pair(COLOR_CYAN, COLOR_CYAN, COLOR_BLUE);
+        init_pair(COLOR_RED, COLOR_RED, COLOR_BLACK);
+        init_pair(COLOR_GREEN, COLOR_YELLOW, COLOR_RED);  /* Set this to unusual pairing */
+        init_pair(COLOR_WHITE, COLOR_WHITE, COLOR_BLACK);
+        init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
+        init_pair(COLOR_BLUE, COLOR_BLUE, COLOR_BLUE);
+        init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLUE);
+      } /* 2e */
+    } /* 1e */
+    /*    Bye(BR_NOCOLOR, __LINE__);  / * This line will be replaced soon - just give me time to write the monochrome equivalents */
     noecho();
-    /*      nodelay(); */
-    /*    if((c=getchar())=='Q') Bye(BR_DEBUGEND, __LINE__); */
-/*    while(c!=EOF) c=getchar();  wait for key ... */
-    fseek(fi->FPtr, 0, SEEK_END);
-    if(!(fi->FEnd=ftell(fi->FPtr))) {
-      addstr("list: Ooops - selected file is empty\n");
+    cbreak();
+    keypad(stdscr, TRUE);
+    nonl();
+    /*  bkgd(A_ALTCHARSET); */
+    /* This line tell us the real screensize -in fact I've just found a duplication with a line inside Dump() */
+    getmaxyx(stdscr, fi->Scrn_y, fi->Scrn_x);
+
+    if (debug) { /* We will have a future conflict here when we finally include stdin */
+      sprintf(tempstring,"FName: %s          DumpMode: %c\n\rStart: %ld        Count: %ld\n\r",
+              fi->FName, fi->DumpMode, fi->Start, fi->Count);
+      debug_function(tempstring, 0, fi->Scrn_y, __LINE__);
+    }
+    /* end of getopt section - this had better work...
+     ,* Incidentally, I've noticed OpenBSD 2.7 doesn't
+     ,* handle getopt parameters the same way as Linux.
+     ,* I don't know about any other forms of BSD
+     ,*/
+    /* First, a check on the fi->FName, to see if it has budged from 0 */
+    if (!(fi->FPtr == stdin)) { /* if the FPtr is NOT == stdin, then ... */
+      if ( !( fi->FPtr = fopen( fi->FName, "rb"))) { /* ...find out if the file can be opened for reading, if not ... */
+        CloseNCurses();
+        Bye(BR_FILEPERM, __LINE__);
+      } /* End of failure to open */
+      if (fi->Scrn_x < 40) { /* Darn - this witty comment gets lost in the Bye() call */
+        /*      addstr("list: Um, I don't have enough columns to display the file in hex format,");
+                addstr("      So am defaulting to text mode!  Hope you don't mind!");  */
+        CloseNCurses();
+        Bye(BR_TINYCOLS,__LINE__);
+      }
+      if (fi->Scrn_y < 24) { /* Darn - this witty comment gets lost in the Bye() call */
+        /*            addstr("list: Err, there aren't enough lines here to do justice to this");
+                      addstr("      file - I need to get out of here! (Reason:Claustrophobia)"); */
+        CloseNCurses();
+        Bye(BR_TINYLINES,__LINE__);
+      }
+      /*    stat(fi->FName, ListFileInfo); / * Second time this file is stat'ed - is this necessary? */
+      /* Here are a few sanity checks... */
+      if (fi->FileInfo.st_size == 0) {  /* get the filesize... */
+        addstr("list: Hmmm, the file appears to be of zero length!!");
+        refresh();
+        endwin();
+        exit(EXIT_FAILURE);
+      } /* End of "File is zero bytes in size" */
+      else if (fi->Count < 1) {
+        addstr("list: You're trying to ask for too few bytes...!!");
+        refresh();
+        endwin();
+        exit(EXIT_FAILURE);
+      }
+      else if (fi->Start > fi->FileInfo.st_size) {
+        addstr("list: You're asking for bytes starting past the end of the file...");
+        refresh();
+        endwin();
+        exit(EXIT_FAILURE);
+      }
+      fi->FEnd = fi->FileInfo.st_size;
+    }
+    else { /* Huh? input _IS_ stdin? */
+      addstr("list: Seeking to end...");
       refresh();
-      endwin();
-      exit(EXIT_FAILURE);
-    }  /* end of if file empty */
-  } /* end of else file==STDIN */
-  /* Ummm, seems these lines are not needed...they already get seen to in NewFile() */
-  /******************************************************/
-  /*  ScanForCr(fi);    / * this should hopefully give me the correct
-                     * number of lines in my data * /
-  / * looks like I'm getting a mismatch - revamp the routine?  * /
-  if(!(fi->CrArray=calloc(fi->FLines, sizeof(u_long)))) Bye(BR_NOMEM, __LINE__);
-  fi->CrArray=AllocateLines(fi); / * This allocates the line ends */
-  /*******************************************************/
-  if (fi->Count==0)
-    fi->Count = fi->FEnd;
-  if(fi->DumpFlag!='7' && fi->DumpFlag != '8')
-    fi->DumpFlag = '7';  /* sets allchars/printchars switch - make it 7 just for safety on binary files */
-  /* Go ahead and show the file on the screen */
-  Dump(fi);
-  /* Now shut down and tidy everything up */
-  fclose(fi->FPtr);
-  /*    fflush(stdout); *  is this needed? */
-  /*    setmode(fileno(stdin), O_TEXT); * Ooops, another DOS-ism crept in here */
-  free(fi->CrArray);
-  clear();
-  refresh();
-  endwin();
-  return (EXIT_SUCCESS);
-}  /* End of main() */
-
-void CartWheel(void)  {
-  int i;
-  char tst[2];
-  char *tstr=&tst[0];
-  char whirl[] = { '\\', '|', '/', '-' };
-  for(i = 0; i <= 3; i++) {
-    move(22,39);
-    sprintf(tstr,"%c", whirl[i]);
-    addstr(tstr);
+      cbreak();
+      noecho();
+      /*      nodelay(); */
+      /*    if ((c = getchar())=='Q') Bye(BR_DEBUGEND, __LINE__); */
+      /*    while(c != EOF) c = getchar();  wait for key ... */
+      fseek(fi->FPtr, 0, SEEK_END);
+      if (!(fi->FEnd = ftell(fi->FPtr))) {
+        addstr("list: Ooops - selected file is empty\n");
+        refresh();
+        endwin();
+        exit(EXIT_FAILURE);
+      }  /* end of if file empty */
+    } /* end of else file == STDIN */
+      /* Ummm, seems these lines are not needed...they already get seen to in NewFile() */
+      /******************************************************/
+      /*  ScanForCr(fi);    / * this should hopefully give me the correct
+       ,* number of lines in my data * /
+       / * looks like I'm getting a mismatch - revamp the routine?  * /
+       if (!(fi->CrArray = calloc(fi->FLines, sizeof(u_long)))) Bye(BR_NOMEM, __LINE__);
+       fi->CrArray = AllocateLines(fi); / * This allocates the line ends */
+      /*******************************************************/
+    if (fi->Count == 0)
+      fi->Count = fi->FEnd;
+    if (fi->DumpFlag != '7' && fi->DumpFlag != '8')
+      fi->DumpFlag = '7';  /* sets allchars/printchars switch - make it 7 just for safety on binary files */
+    /* Go ahead and show the file on the screen */
+    Dump(fi);
+    /* Now shut down and tidy everything up */
+    fclose(fi->FPtr);
+    /*    fflush(stdout); *  is this needed? */
+    /*    setmode(fileno(stdin), O_TEXT); * Ooops, another DOS-ism crept in here */
+    free(fi->CrArray);
+    clear();
     refresh();
-    /*    delay(100); */
+    endwin();
+    return (EXIT_SUCCESS);
+  }  /* End of main() */
+
+  void CartWheel(void) {
+    int i;
+    char tst[2];
+    char *tstr = &tst[0];
+    char whirl[] = { '\\', '|', '/', '-' };
+    for(i = 0; i <= 3; i++) {
+      move(22, 39);
+      sprintf(tstr, "%c", whirl[i]);
+      addstr(tstr);
+      refresh();
+      /*    delay(100); */
+    }
   }
-}
 
-/*
- * Is the specified file a directory?
- * (This code is lifted straight out of less 3.58 and de-K&R'ed)
- */
-#ifndef S_ISDIR
-#define S_ISDIR(m)      (((m) & S_IFMT) == S_IFDIR)
-#endif
-#ifndef S_ISREG
-#define S_ISREG(m)      (((m) & S_IFMT) == S_IFREG)
-#endif
+  /*
+   ,* Is the specified file a directory?
+   ,* (This code is lifted straight out of less 3.58 and de-K&R'ed)
+   ,*/
+  #ifndef S_ISDIR
+  #define S_ISDIR(m)      (((m) & S_IFMT) == S_IFDIR)
+  #endif
+  #ifndef S_ISREG
+  #define S_ISREG(m)      (((m) & S_IFMT) == S_IFREG)
+  #endif
 
-int is_dir(char *filename) { /* Hey, why do I need this routine, anyway? */
-  int isdir = 0;
+  int is_dir(char *filename) { /* Hey, why do I need this routine, anyway? */
+    int isdir = 0;
 
-  filename = unquote_file(filename);  /* this routine I'll have to duplicate too... */
-  {
-    int r;
-    struct stat statbuf;
+    filename = unquote_file(filename);  /* this routine I'll have to duplicate too... */
+    {
+      int r;
+      struct stat statbuf;
 
-    r = stat(filename, &statbuf);
-    isdir = (r >= 0 && S_ISDIR(statbuf.st_mode));
+      r = stat(filename, &statbuf);
+      isdir = (r >= 0 && S_ISDIR(statbuf.st_mode));
+    }
+    free(filename);
+    return (isdir);
   }
-  free(filename);
-  return (isdir);
-}
 
-/*
- *  * Remove quotes around a filename.
- *   */
-char * unquote_file(char *str) {
-  char *name;
-  char *p;
-  char openquote = '"';
-  char closequote = openquote;
+  /*
+   ,*  * Remove quotes around a filename.
+   ,*   */
+  char * unquote_file(char *str) {
+    char *name;
+    char *p;
+    char openquote = '"';
+    char closequote = openquote;
 
-  if (*str != openquote)
-  return (save(str));
-  name = (char *) ecalloc(strlen(str), sizeof(char));
-  strcpy(name, str+1);
-  p = name + strlen(name) - 1;
-  if (*p == closequote)
-  *p = '\0';
-  return (name);
-}
+    if (*str != openquote)
+      return (save(str));
+    name = (char *) ecalloc(strlen(str), sizeof(char));
+    strcpy(name, str+1);
+    p = name + strlen(name) - 1;
+    if (*p == closequote)
+      ,*p = '\0';
+    return (name);
+  }
 
 
-/*
- * Copy a string to a "safe" place
- * (that is, to a buffer allocated by calloc).
- */
-char *save(char *s) {
-   register char *p;
+  /*
+   ,* Copy a string to a "safe" place
+   ,* (that is, to a buffer allocated by calloc).
+   ,*/
+  char *save(char *s) {
+    register char *p;
 
-   p = (char *) ecalloc(strlen(s)+1, sizeof(char));
-   strcpy(p, s);
-   return (p);
-}
-
-/*
- * Allocate memory.
- * Like calloc(), but never returns an error (NULL).
- */
-void *ecalloc(int count, unsigned int size) {
-  register void *p;
-
-  p = (void *) calloc(count, size);
-  if (p != NULL)
+    p = (char *) ecalloc(strlen(s)+1, sizeof(char));
+    strcpy(p, s);
     return (p);
-/*  error("Cannot allocate memory", NULL_PARG);
-  quit(QUIT_ERROR);   */
-  Bye(BR_NOMEM, __LINE__);
-  /*NOTREACHED*/
-  exit(1);
-}
-
-
-/*
- *  Allocate a big buffer, use it to buffer a specified stream
- *  - but why does it have to be declared static?
- */
-
-static size_t fsetup(FILE *fp, size_t minbuf) {
-  register size_t bufsize;
-  register char *buffer;
-
-/* Allocate the largest buffer we can */
-
-  for (bufsize = 0x4000; bufsize >= minbuf; bufsize >>= 1) {
-  if (NULL != (buffer = (char *) malloc(bufsize)))
-    break;
   }
-  if (NULL == buffer)
-    return 0;
 
-  /* Use the buffer to buffer the file */
+  /*
+   ,* Allocate memory.
+   ,* Like calloc(), but never returns an error (NULL).
+   ,*/
+  void *ecalloc(int count, unsigned int size) {
+    register void *p;
 
-  if (0L == setvbuf(fp, buffer, _IOFBF, bufsize))
-    return bufsize;
-  else  return 0;
-}
-
-/*
- **  Search a file for a pattern match (forward)
- **
- **  Arguments: FILE pointer
- **             pattern to search for
- **             size of pattern
- **             find Nth occurrence
- **
- **  Returns: -1L if pattern not found
- **           -2L in case of error
-*/
-
-long ffsearch(struct FileData *fi, int N) {  /* 1st br */
-  /* Hmmm, seems we don't need size, we can surely get that from strlen(SearchString) */
-  long pos = -2L, tempOffset = 0L;
-  char *sbuf, *p;
-  size_t skip, size;
-  int ch = 0;
-  size = strlen(fi->SearchString);  /* We want the length of the string... 8-) */
-
-/* Allocate a search buffer */
-
-  if (NULL == (sbuf = (char *)malloc(size - 1)))
-    goto FDONE; /* Whoops, couldn't malloc, fall off end */
-
-  /* Buffer the file and position us within it */
-
-  if (0 == fsetup(fi->FPtr, size))
-    goto FDONE; /* Fall off end, might have had a malloc failure, or size = 0 */
-  pos = -1L;
-  fseek(fi->FPtr, fi->FPosn, SEEK_SET);
-
-  /* Set up for smart searching */
-
-  if (1 < strlen(fi->SearchString) && NULL != (p = strchr(fi->SearchString + 1, *fi->SearchString)))
-    skip = p - (char *)fi->SearchString;
-  else  skip = strlen(fi->SearchString);
-
-  /* Look for the pattern */
-
-  while (EOF != ch) {  /* 2nd in */
-    if (EOF == (ch = fgetc(fi->FPtr)))
-      break;
-    if ((int)*fi->SearchString == ch) {  /* 3rd in */
-       tempOffset = ftell(fi->FPtr);
-       if (size - 1 > fread(sbuf, sizeof(char), size - 1, fi->FPtr))
-         goto FDONE;
-       if (0L == memcmp(sbuf, &fi->SearchString[1], size - 1)) {  /* 4th in */
-         if (0L == --N) {  /* 5th in */
-           pos = tempOffset - 1L;
-     goto  FDONE;
-         }  /* 5th out */
-       }  /* 4th out */
-       fi->SPosn = ftell(fi->FPtr);  /* uh?  this doesn't seem to work... */
-
-     } /* 3rd out */
-  } /* 2nd out */
-/* Clean up and leave */
-
-FDONE:
-  free(sbuf);
-  return pos;
-} /* end of ffsearch */
+    p = (void *) calloc(count, size);
+    if (p != NULL)
+      return (p);
+    /*  error("Cannot allocate memory", NULL_PARG);
+        quit(QUIT_ERROR);   */
+    Bye(BR_NOMEM, __LINE__);
+    /*NOTREACHED*/
+    exit(1);
+  }
 
 
-/*
- **  Search a file for a pattern match (backwards)
- **
- **  Arguments: FILE pointer
- **             pattern to search for
- **             size of pattern
- **             find Nth occurrence
- **
- **  Returns: -1L if pattern not found
- **           -2L in case of error
-*/
+  /*
+   ,*  Allocate a big buffer, use it to buffer a specified stream
+   ,*  - but why does it have to be declared static?
+   ,*/
 
-long rfsearch(struct FileData *fi, int N) {
-/* Again, do we need size?  Again, size can be got from strlen(fi->SearchString) -
- * in fact, now I come to think of it, fi->SearchString could provide *fi->Search
- */
-  long pos = -2L, tempos;
-  char *sbuf, *p;
-  size_t skip, size;
-  int ch = 0;
-  size = strlen(fi->SearchString);
-  /* Allocate a search buffer */
+  static size_t fsetup(FILE *fp, size_t minbuf) {
+    register size_t bufsize;
+    register char *buffer;
 
-  if (NULL == (sbuf = (char *)malloc(size - 1)))
-    goto RDONE; /* Whoops, couldn't malloc, fall off end */
+    /* Allocate the largest buffer we can */
 
-  /* Buffer the file and position us within it */
+    for (bufsize = 0x4000; bufsize >= minbuf; bufsize >>= 1) {
+      if (NULL != (buffer = (char *) malloc(bufsize)))
+        break;
+    }
+    if (NULL == buffer)
+      return 0;
 
-  if (0 == fsetup(fi->FPtr, size))
-    goto RDONE;
-  pos = -1L;
-      fseek(fi->FPtr, fi->FPosn, SEEK_SET);
-      tempos = ftell(fi->FPtr) - strlen(fi->SearchString);
+    /* Use the buffer to buffer the file */
 
-      /* Set up for smart searching */
+    if (0L == setvbuf(fp, buffer, _IOFBF, bufsize))
+      return bufsize;
+    else  return 0;
+  }
 
-      if (1 < strlen(fi->SearchString) && NULL != (p = strrchr(fi->SearchString + 1, *fi->SearchString)))
-            skip = strlen(fi->SearchString) - (p - (char *)fi->SearchString);
-      else  skip = strlen(fi->SearchString);
+  /*
+  ,**  Search a file for a pattern match (forward)
+  ,**
+  ,**  Arguments: FILE pointer
+  ,**             pattern to search for
+  ,**             size of pattern
+  ,**             find Nth occurrence
+  ,**
+  ,**  Returns: -1L if pattern not found
+  ,**           -2L in case of error
+  ,*/
 
-      /* Look for the pattern */
+  long ffsearch(struct FileData *fi, int N) {  /* 1st br */
+    /* Hmmm, seems we don't need size, we can surely get that from strlen(SearchString) */
+    long pos = -2L, tempOffset = 0L;
+    char *sbuf, *p;
+    size_t skip, size;
+    int ch = 0;
+    size = strlen(fi->SearchString);  /* We want the length of the string... 8-) */
 
-      while (0L <= tempos)
+    /* Allocate a search buffer */
+
+    if (NULL == (sbuf = (char *)malloc(size - 1)))
+      goto FDONE; /* Whoops, couldn't malloc, fall off end */
+
+    /* Buffer the file and position us within it */
+
+    if (0 == fsetup(fi->FPtr, size))
+      goto FDONE; /* Fall off end, might have had a malloc failure, or size = 0 */
+    pos = -1L;
+    fseek(fi->FPtr, fi->FPosn, SEEK_SET);
+
+    /* Set up for smart searching */
+
+    if (1 < strlen(fi->SearchString) && NULL != (p = strchr(fi->SearchString + 1, *fi->SearchString)))
+      skip = p - (char *)fi->SearchString;
+    else  skip = strlen(fi->SearchString);
+
+    /* Look for the pattern */
+
+    while (EOF != ch) {  /* 2nd in */
+      if (EOF == (ch = fgetc(fi->FPtr)))
+        break;
+      if ((int)*fi->SearchString == ch) {  /* 3rd in */
+        tempOffset = ftell(fi->FPtr);
+        if (size - 1 > fread(sbuf, sizeof(char), size - 1, fi->FPtr))
+          goto FDONE;
+        if (0L == memcmp(sbuf, &fi->SearchString[1], size - 1)) {  /* 4th in */
+          if (0L == --N) {  /* 5th in */
+            pos = tempOffset - 1L;
+            goto  FDONE;
+          }  /* 5th out */
+        }  /* 4th out */
+        fi->SPosn = ftell(fi->FPtr);  /* uh?  this doesn't seem to work... */
+
+      } /* 3rd out */
+    } /* 2nd out */
+    /* Clean up and leave */
+
+   FDONE:
+    free(sbuf);
+    return pos;
+  } /* end of ffsearch */
+
+
+  /*
+  ,**  Search a file for a pattern match (backwards)
+  ,**
+  ,**  Arguments: FILE pointer
+  ,**             pattern to search for
+  ,**             size of pattern
+  ,**             find Nth occurrence
+  ,**
+  ,**  Returns: -1L if pattern not found
+  ,**           -2L in case of error
+  ,*/
+
+  long rfsearch(struct FileData *fi, int N) {
+    /* Again, do we need size?  Again, size can be got from strlen(fi->SearchString) -
+     ,* in fact, now I come to think of it, fi->SearchString could provide *fi->Search
+     ,*/
+    long pos = -2L, tempos;
+    char *sbuf, *p;
+    size_t skip, size;
+    int ch = 0;
+    size = strlen(fi->SearchString);
+    /* Allocate a search buffer */
+
+    if (NULL == (sbuf = (char *)malloc(size - 1)))
+      goto RDONE; /* Whoops, couldn't malloc, fall off end */
+
+    /* Buffer the file and position us within it */
+
+    if (0 == fsetup(fi->FPtr, size))
+      goto RDONE;
+    pos = -1L;
+    fseek(fi->FPtr, fi->FPosn, SEEK_SET);
+    tempos = ftell(fi->FPtr) - strlen(fi->SearchString);
+
+    /* Set up for smart searching */
+
+    if (1 < strlen(fi->SearchString) && NULL != (p = strrchr(fi->SearchString + 1, *fi->SearchString)))
+      skip = strlen(fi->SearchString) - (p - (char *)fi->SearchString);
+    else  skip = strlen(fi->SearchString);
+
+    /* Look for the pattern */
+
+    while (0L <= tempos)
       {
-            fseek(fi->FPtr, tempos, SEEK_SET);
-            if (EOF == (ch = fgetc(fi->FPtr)))
-                  break;
-            if ((int)*fi->SearchString == ch)
-            {
-                  if (size - 1 <= fread(sbuf, sizeof(char), size - 1, fi->FPtr))
+        fseek(fi->FPtr, tempos, SEEK_SET);
+        if (EOF == (ch = fgetc(fi->FPtr)))
+          break;
+        if ((int)*fi->SearchString == ch)
+          {
+            if (size - 1 <= fread(sbuf, sizeof(char), size - 1, fi->FPtr))
+              {
+                if (0L == memcmp(sbuf, &fi->SearchString[1], size - 1))
                   {
-                        if (0L == memcmp(sbuf, &fi->SearchString[1], size - 1))
-                        {
-                              if (0 == --N)
-                              {
-                                    pos = tempos;
-                                    goto RDONE;
-                              }
-                        }
+                    if (0 == --N)
+                      {
+                        pos = tempos;
+                        goto RDONE;
+                      }
                   }
-                  tempos -= skip;
-            }
-            else  --tempos;
+              }
+            tempos -= skip;
+          }
+        else  --tempos;
       }
 
-      /* Clean up and leave */
+    /* Clean up and leave */
 
-RDONE:
-      free(sbuf);
-      return pos;
-}
+   RDONE:
+    free(sbuf);
+    return pos;
+  }
 
-char *SearchParse(const char *Search)  {
-   char *NewSearch;
-   NewSearch = (char *) malloc(sizeof(NewSearch) * (strlen(Search) + 1));
-   /* This is where things need to be looked for, such as \ processing */
-   return NewSearch;
-}
+  char *SearchParse(const char *Search) {
+    char *NewSearch;
+    NewSearch = (char *) malloc(sizeof(NewSearch) * (strlen(Search) + 1));
+    /* This is where things need to be looked for, such as \ processing */
+    return NewSearch;
+  }
 
-int CmdMode(struct FileData *fi)  { /* 1s */
-/* In here, I'd like to define a vim-like interface for adding commands like (N)ext file/(P)rev file... */
-/* First, steal a little code, massage a little code... */
-/* Various switches go through here...
-  N - next file
-  P - Prev file
-  * - else, back to program
-  Q - obvious
- */
-  int c;
-  char *WhatDoIPutInHere = (char *) malloc(sizeof(WhatDoIPutInHere) * PATH_MAX);
-  char *OldFName = (char *) malloc(sizeof(OldFName) * PATH_MAX);
-  strcpy(OldFName, fi->FName);  /* This is supposed to provide a fallback filename */
-/* Assign WhatDoIPutInHere to a member of the array of filenames we were fed
- * at startup */
+  int CmdMode(struct FileData *fi) { /* 1s */
+    /* In here, I'd like to define a vim-like interface for adding commands like (N)ext file/(P)rev file... */
+    /* First, steal a little code, massage a little code... */
+    /* Various switches go through here...
+       N - next file
+       P - Prev file
+       ,* - else, back to program
+       Q - obvious
+    ,*/
+    int c;
+    char *WhatDoIPutInHere = (char *) malloc(sizeof(WhatDoIPutInHere) * PATH_MAX);
+    char *OldFName = (char *) malloc(sizeof(OldFName) * PATH_MAX);
+    strcpy(OldFName, fi->FName);  /* This is supposed to provide a fallback filename */
+    /* Assign WhatDoIPutInHere to a member of the array of filenames we were fed
+     ,* at startup */
 
-  switch(c=getch()) { /* 2 */
-    /* We need processing for esc chars here... */
-  case 'n':          /* next file */
-  case 'N':
-  /* Incidentally, what is argc at this stage? */
-    NewFile(fi, WhatDoIPutInHere);
-    break;
-  case 'p':          /* next file */
-  case 'P':
-  /* Incidentally, what is argc at this stage? */
-    NewFile(fi, WhatDoIPutInHere);
-    break;
-/*  case 'Q':          / * Quit - (Hasta La Vista!) * /
-  case 'q':
-    return 0;  / * Hmmm, why should we quit from here? */
-  default:
+    switch(c = getch()) { /* 2 */
+      /* We need processing for esc chars here... */
+    case 'n':          /* next file */
+    case 'N':
+      /* Incidentally, what is argc at this stage? */
+      NewFile(fi, WhatDoIPutInHere);
+      break;
+    case 'p':          /* next file */
+    case 'P':
+      /* Incidentally, what is argc at this stage? */
+      NewFile(fi, WhatDoIPutInHere);
+      break;
+      /*  case 'Q':          / * Quit - (Hasta La Vista!) * /
+          case 'q':
+          return 0;  / * Hmmm, why should we quit from here? */
+    default:
+      return 0;
+      break;
+    } /* 2e */
     return 0;
-    break;
-  } /* 2e */
- return 0;
-}
+  }
 
-/*
-void AsciiTable(void) {
-char    squaretop=" 218 ÚÄÄÄÄÄÂÄÄÄ¿ 191 ";
-char     whatever=" 179 ³ 196 194 ³ 179 ";
-char   squarejoin=" 195 Ã 197 Å   ´ 180";
-char   squareside=" 179 ³ 193     ³ ";
-char squarebottom=" 192 ÀÄÄÁÄÄÄÄÄÄÙ 217";
-}
-*/
+  /*
+    void AsciiTable(void) {
+    char    squaretop=" 218 ÚÄÄÄÄÄÂÄÄÄ¿ 191 ";
+    char     whatever=" 179 ³ 196 194 ³ 179 ";
+    char   squarejoin=" 195 Ã 197 Å   ´ 180";
+    char   squareside=" 179 ³ 193     ³ ";
+    char squarebottom=" 192 ÀÄÄÁÄÄÄÄÄÄÙ 217";
+    }
+  ,*/
 
 #+END_SRC
 ** DONE list.h
@@ -4314,39 +4328,39 @@ typedef unsigned long u_long;
 /* typedef unsigned long u_long; * not needed - declared in <sys/types.h> */
 
 struct FileData {
-	long FPosn; /* Current position within file */
-	long FEnd; /* Total bytes */
-	long FLines; /* Total number of CR-terminated lines */
-	long *CrArray; /* Array to store line-endings in */
-	long LnAtTopOfScrn; /* Will contain the line number at top of screen */
-	long FLineCtr; /* Current line within file - last line looked at so far */
-	long LineCount; /* Screen lines printed * added for debugging */
-	long Start; /* Where to start */
-	long Count; /* How many bytes to read */
+        long FPosn; /* Current position within file */
+        long FEnd; /* Total bytes */
+        long FLines; /* Total number of CR-terminated lines */
+        long *CrArray; /* Array to store line-endings in */
+        long LnAtTopOfScrn; /* Will contain the line number at top of screen */
+        long FLineCtr; /* Current line within file - last line looked at so far */
+        long LineCount; /* Screen lines printed * added for debugging */
+        long Start; /* Where to start */
+        long Count; /* How many bytes to read */
         int Scrn_y, Scrn_x, ScrnWide;
-	FILE *FPtr;  /* Stream pointing to file */
-	char *FName; /* set this to point to the filename... */
-	char DumpMode; /* Either 'x' or 't' */
-	char DumpFlag; /* Either '7' or '8' or '*' */
+        FILE *FPtr;  /* Stream pointing to file */
+        char *FName; /* set this to point to the filename... */
+        char DumpMode; /* Either 'x' or 't' */
+        char DumpFlag; /* Either '7' or '8' or '*' */
         char LineNumbers; /* Set to on or off */
-	char Monochrome;
-	char TabSize; /* a number from 1 to _about_ 8 */
-	int addrflag;  /* Either hex or decimal addresses (only in hex view) */
-	int EofSet;    /* Has the End of the File been reached? */
-	int FgColour, BgColour; /* Colours */
-/* Search stuff... */	
-	char SearchDirection; /* Forward or backward */
-	char *SearchString;  /* Search String */
-	long SPosn; /* Search Position - has to be long int */
-	struct stat FileInfo; /* Do these two work? */
-	struct stat *FileInfoPtr;
-	int Quick; /* This was defined so it didn't take so long to display a file in hex mode */
+        char Monochrome;
+        char TabSize; /* a number from 1 to _about_ 8 */
+        int addrflag;  /* Either hex or decimal addresses (only in hex view) */
+        int EofSet;    /* Has the End of the File been reached? */
+        int FgColour, BgColour; /* Colours */
+/* Search stuff... */
+        char SearchDirection; /* Forward or backward */
+        char *SearchString;  /* Search String */
+        long SPosn; /* Search Position - has to be long int */
+        struct stat FileInfo; /* Do these two work? */
+        struct stat *FileInfoPtr;
+        int Quick; /* This was defined so it didn't take so long to display a file in hex mode */
 /* Have we defined the queue object? i.e. included dequeue.h ?*/
         queue DirQueuePtr; /* From dequeue.h (finally!) */
-	char *BugWriteFName; /* Filename of bugwrite file */
+        char *BugWriteFName; /* Filename of bugwrite file */
         int MyArgc;
         char **MyArgv;
-	int MyCurrArgC;  /* This is added to utilise positioning within MyArgv[] */
+        int MyCurrArgC;  /* This is added to utilise positioning within MyArgv[] */
 };
 
 int debug;
@@ -4415,7 +4429,7 @@ makefile that'll work happily under Minix. How does that differ from BSDMake or 
 DEBUGFLAGS = -g -O2
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.32
+VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 #SRCDIR = list-$(VERSION)
@@ -4432,37 +4446,37 @@ all: list
 debug: list_d
 
 .c.o:
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+        $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
 $(DOBJECTS): %d.o: %.c
-	$(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
+        $(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
 
 list: $(OBJECTS)
-	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+        $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_d: $(DOBJECTS)
-	$(CC) -o list_d $(DOBJECTS) $(LIBS)
+        $(CC) -o list_d $(DOBJECTS) $(LIBS)
 
 #list_static:
-#	$(CC) $(LDFLAGS) -static -o list_static $(OBJECTS) $(LIBS)
+#       $(CC) $(LDFLAGS) -static -o list_static $(OBJECTS) $(LIBS)
 
 install:
-	install -m755 list /usr/local/bin/list
-	install -m644 list.1 /usr/local/man/man1/list.1
+        install -m755 list /usr/local/bin/list
+        install -m644 list.1 /usr/local/man/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c 
+        cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c
 
 dist-bin: list list_d # list_static
-	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
+        cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
 #removed $(SRCDIR)/list_static as we can't make it on linux, haven't checked on {Free,Net,Open)BSD
 
 clean:
-	rm -f *.o list list_d
+        rm -f *.o list list_d
 
 uninstall:
-	rm /usr/local/bin/list
-	rm /usr/local/man/man1/list.1
+        rm /usr/local/bin/list
+        rm /usr/local/man/man1/list.1
 
 
 #+END_SRC
@@ -4482,7 +4496,7 @@ DISTBINFILE = listb$(VERSION).tgz
 else
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.32
+VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 endif
@@ -4504,44 +4518,44 @@ all: list
 debug: list_d
 
 .c.o:
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+        $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
 $(DOBJECTS): %d.o: %.c
-	$(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
+        $(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
 
 list: $(OBJECTS)
-	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+        $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_d: $(DOBJECTS)
-	$(CC) -o list_d $(DOBJECTS) $(LIBS) 
+        $(CC) -o list_d $(DOBJECTS) $(LIBS)
 
 # Comment this out, as it seems to choke on gpm functions linked in from ncurses
 # list_static: $(OBJECTS)
-#	$(CC) -static -o list_static $(OBJECTS) $(STATICLIBS)
+#       $(CC) -static -o list_static $(OBJECTS) $(STATICLIBS)
 
 list_profile: $(OBJECTS)
-	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+        $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_ccmalloc: $(DOBJECTS)
-	 $(CCMALLOC) $(CC) $(LDFLAGS) -o clist $(DOBJECTS) $(LIBS)
+         $(CCMALLOC) $(CC) $(LDFLAGS) -o clist $(DOBJECTS) $(LIBS)
 
 install: list
-	install -m755 list $(BIN)/list
-	install -m644 list.1 $(MAN)/man1/list.1
+        install -m755 list $(BIN)/list
+        install -m644 list.1 $(MAN)/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c 
+        cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c
 
 dist-bin: list list_d #list_static
-	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d  $(SRCDIR)/list.1
+        cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d  $(SRCDIR)/list.1
 
 clean:
-	rm -f *.o list list_d
+        rm -f *.o list list_d
 #removed list_static
 
 uninstall:
-	rm $(BIN)/list
-	rm $(MAN)/man1/list.1
+        rm $(BIN)/list
+        rm $(MAN)/man1/list.1
 
 
 
