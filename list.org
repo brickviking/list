@@ -4446,37 +4446,37 @@ all: list
 debug: list_d
 
 .c.o:
-        $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
 $(DOBJECTS): %d.o: %.c
-        $(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
 
 list: $(OBJECTS)
-        $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_d: $(DOBJECTS)
-        $(CC) -o list_d $(DOBJECTS) $(LIBS)
+	$(CC) -o list_d $(DOBJECTS) $(LIBS)
 
 #list_static:
-#       $(CC) $(LDFLAGS) -static -o list_static $(OBJECTS) $(LIBS)
+#	$(CC) $(LDFLAGS) -static -o list_static $(OBJECTS) $(LIBS)
 
 install:
-        install -m755 list /usr/local/bin/list
-        install -m644 list.1 /usr/local/man/man1/list.1
+	install -m755 list /usr/local/bin/list
+	install -m644 list.1 /usr/local/man/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-        cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c
+	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c
 
 dist-bin: list list_d # list_static
-        cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
+	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d $(SRCDIR)/list.1
 #removed $(SRCDIR)/list_static as we can't make it on linux, haven't checked on {Free,Net,Open)BSD
 
 clean:
-        rm -f *.o list list_d
+	rm -f *.o list list_d
 
 uninstall:
-        rm /usr/local/bin/list
-        rm /usr/local/man/man1/list.1
+	rm /usr/local/bin/list
+	rm /usr/local/man/man1/list.1
 
 
 #+END_SRC
@@ -4518,44 +4518,44 @@ all: list
 debug: list_d
 
 .c.o:
-        $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
 $(DOBJECTS): %d.o: %.c
-        $(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(DEBUGFLAGS) $(CFLAGS) -c $< -o $@
 
 list: $(OBJECTS)
-        $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_d: $(DOBJECTS)
-        $(CC) -o list_d $(DOBJECTS) $(LIBS)
+	$(CC) -o list_d $(DOBJECTS) $(LIBS)
 
 # Comment this out, as it seems to choke on gpm functions linked in from ncurses
 # list_static: $(OBJECTS)
-#       $(CC) -static -o list_static $(OBJECTS) $(STATICLIBS)
+#	$(CC) -static -o list_static $(OBJECTS) $(STATICLIBS)
 
 list_profile: $(OBJECTS)
-        $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_ccmalloc: $(DOBJECTS)
-         $(CCMALLOC) $(CC) $(LDFLAGS) -o clist $(DOBJECTS) $(LIBS)
+	 $(CCMALLOC) $(CC) $(LDFLAGS) -o clist $(DOBJECTS) $(LIBS)
 
 install: list
-        install -m755 list $(BIN)/list
-        install -m644 list.1 $(MAN)/man1/list.1
+	install -m755 list $(BIN)/list
+	install -m644 list.1 $(MAN)/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-        cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c
+	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c
 
 dist-bin: list list_d #list_static
-        cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d  $(SRCDIR)/list.1
+	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d  $(SRCDIR)/list.1
 
 clean:
-        rm -f *.o list list_d
+	rm -f *.o list list_d
 #removed list_static
 
 uninstall:
-        rm $(BIN)/list
-        rm $(MAN)/man1/list.1
+	rm $(BIN)/list
+	rm $(MAN)/man1/list.1
 
 
 
