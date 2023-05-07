@@ -8,7 +8,7 @@ DISTBINFILE = listb$(VERSION).tgz
 else
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.32
+VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 endif
@@ -39,7 +39,7 @@ list: $(OBJECTS)
 	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
 list_d: $(DOBJECTS)
-	$(CC) -o list_d $(DOBJECTS) $(LIBS) 
+	$(CC) -o list_d $(DOBJECTS) $(LIBS)
 
 # Comment this out, as it seems to choke on gpm functions linked in from ncurses
 # list_static: $(OBJECTS)
@@ -56,7 +56,7 @@ install: list
 	install -m644 list.1 $(MAN)/man1/list.1
 
 dist: list.c screen.c file.c input.c list.h
-	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c 
+	cd .. && tar czvf $(DISTFILE) LICENSE README.md $(SRCDIR)/BSDMakefile $(SRCDIR)/ChangeLog $(SRCDIR)/Makefile $(SRCDIR)/TODO.txt $(SRCDIR)/bugwrite.c $(SRCDIR)/dequeue.c $(SRCDIR)/dequeue.h $(SRCDIR)/file.c $(SRCDIR)/filebrowse.c $(SRCDIR)/input.c $(SRCDIR)/list.1 $(SRCDIR)/list.c $(SRCDIR)/list.h $(SRCDIR)/screen.c
 
 dist-bin: list list_d #list_static
 	cd .. && tar czvf $(DISTBINFILE) LICENSE README.md $(SRCDIR)/list $(SRCDIR)/list_d  $(SRCDIR)/list.1
@@ -68,4 +68,3 @@ clean:
 uninstall:
 	rm $(BIN)/list
 	rm $(MAN)/man1/list.1
-

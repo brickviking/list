@@ -4423,7 +4423,7 @@ makefile that'll work happily under Minix. How does that differ from BSDMake or 
 
 ** BSDMakefile
    :PROPERTIES:
-   :header-args: :tangle BSDMakefile
+   :header-args: :tangle src/BSDMakefile
    :END:
 #+BEGIN_SRC make
 DEBUGFLAGS = -g -O2
@@ -4478,12 +4478,11 @@ uninstall:
 	rm /usr/local/bin/list
 	rm /usr/local/man/man1/list.1
 
-
 #+END_SRC
 
 ** Gnu Makefile
    :PROPERTIES:
-   :header-args: :tangle Makefile
+   :header-args: :tangle src/Makefile
    :END:
 #+BEGIN_SRC make
 DEBUGFLAGS = -g -O2
