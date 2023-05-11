@@ -81,7 +81,7 @@ list \- Curses-based file lister
 .B list
 [\-f ] list_file
 [\-s start_byte]
-[\-r] rows [\-c] columns
+.\" [\-r] rows [\-c] columns  *** comment these out, they don't seem to work
 .\" [\-n count_bytes]
 .\" [\-b taB size]  *** this doesn't work yet...
 [\-x|\-t|\-q]  [\-7|\-8|\-e] [\-l]
