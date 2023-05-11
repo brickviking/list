@@ -6,9 +6,9 @@
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
-large-scale projects and was an attempt to understand how to write to the screen using ncurses.
+large-scale(1) projects and was an attempt to understand how to write to the screen using ncurses.
 I was also programming this under DJGPP for DOS at the time, which was the first time I had
-extensive experience of the GNU toolchain and compiler.
+gained any extensive experience of the GNU toolchain and compiler.
 
 Later, I gained some experience with programming for cross-platform programs. This program could
 run under most modern BSDs, Solaris (probably), Minix, and Linux from 2.0.x, as well as DJGPP.
@@ -20,8 +20,12 @@ Just by total accident, I'd included the last tarball I'd made in another one of
 that I was committing to CVS at the time. Of course I backed out the CVS commit as soon as I
 found out, but by then the "damage" was done... or saved for posterity. I didn't find the tarball
 again for a number of years until someone duplicated the original CVS repo and updated it into
-a git repository. I was contacted about it, and while browsing their copy I got a very nice
-surprise. There was my tarball of list source, pretty as you please!
+a git repository. I was contacted about it as a courtesy, and while browsing their copy I got a
+very nice surprise. There was my last tarball of list source, pretty as you please! It only took
+me 19 years to find it again!
+
+(1) Well, large-scale for me, anyhow. I tend to like single-file projects. This was deliberately
+split across multiple files as a bit of an exercise.
 
 * Documentation
 Yup, docs are pretty much required, so as to understand not only the program itself and its functions,
@@ -161,7 +165,7 @@ all characters except ones with a value less than 0x20 (space).  These latter
 are displayed as "." \- however, this causes the screen to behave very strangely
 with certain files, usually binary files. Because of the different way that systems 
 choose to show these values, you could get differing results between machines or
-codepages.
+even codepages.
 .TP
 .I "\-e"
 Show line endings in text mode.
@@ -791,7 +795,6 @@ doesn't need to be in that. I can really just include it as straight text.
           Scrn_x being 0 initially.
   0.7.34  Many formatting changes, centred around spacing and consistency.
           Making more use of github and gitea issues from this release.
-         Haven't bumped version yet, will do that when everything is done.
 
 
 #+END_SRC
@@ -4887,6 +4890,12 @@ uninstall:
 
 
 #+END_SRC
+
+
+* Bugs
+(so far)
++ Possible initial copyright difference (issue #11)
++ ChangeLog states version number is in hexdump.h (which is now list.h)
 
 
 * Conclusions
