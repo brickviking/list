@@ -2414,7 +2414,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
   case '*':
     BackPage(fi, fi->Scrn_y - 1);
     fi->DumpFlag = '*';
-    break;
+    break; /* BUG: can't turn them back off again!!! */
   case 'Q':          /* Quit - (Hasta La Vista!) */
   case 'q':
     return 0;
