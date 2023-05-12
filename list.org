@@ -479,9 +479,10 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
    :END:
 
 
-Okay, okay. I can see the sense of including this now, but all I really need to do is pull it in via
-a source block. There's just one small problem - it's in C comment at the moment, but it really
-doesn't need to be in that. I can really just include it as straight text.
+I can see the sense of including this now, but all I really need to do is pull it in via
+a source block. It was originally in C comment form but it really doesn't need to be in that format
+any longer, I can really just include it as straight text, as I hadn't included it inline in the
+list.c file for over twenty years.
 
 #+BEGIN_SRC text
 
@@ -500,7 +501,7 @@ doesn't need to be in that. I can really just include it as straight text.
   Contributors:
      Myself of course (brickviking <brickviking@gmail.com>
      Some debugging and other points pointed out by Dion Bonner <bonner@xtra.co.nz>
-  Version   - stored in hexdump.h
+  Version   - stored in hexdump.h (now list.h)
   0.2 - 0.5 Further mods by Eric Gillespie 16 Jun 97 and Aug - Nov 1997
   0.6 - 0.6.2 Working on realloc...working...working  - Jan 1998
   0.6.3  Finally squashed the realloc bug!
@@ -798,6 +799,7 @@ doesn't need to be in that. I can really just include it as straight text.
 
 
 #+END_SRC
+
 * Utility programs
 These are some of the functions I used within list. Some of the functions are stubs because at the
 time I didn't know how to write safe versions of this. I'm not sure I'd be much better now, but
