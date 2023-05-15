@@ -448,7 +448,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 ,* LISTR/LISTS - at the moment, my code roughly duplicates what's available with LISTS (small) but without the size limits. 
 
-,* There is currently no dialer. I mean, who actually has a physical modem these days anyway?
+,* There is currently no dialer. I mean, who actually has a physical analog dialup modem these days anyway?
 
 ,* No management of files either, a la Norton's COMMANDER/Midnight Commander or even XTree Gold.
 
