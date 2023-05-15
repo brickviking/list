@@ -288,7 +288,7 @@ is being run on.  For example, in older Slackware systems,
 the \fIterminfo\fP database resides in \fI/usr/lib/terminfo\fP.  On
 RedHat Linux, it is in \fI/usr/share/terminfo\fP.  If the program
 complains about the terminal type, and the value of \fITERM\fP is
-correct, check into this.  Also check if the output looks really wierd \- for
+correct, check into this.  Also check if the output looks really weird \- for
 example if you get funny looking 8 bit output on a system that you know can
 display 8 bit characters properly.
 .TP
