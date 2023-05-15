@@ -475,7 +475,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 ** Changelog
    :PROPERTIES:
-   :header-args: :tangle ChangeLog
+   :header-args: :tangle src/Changelog
    :END:
 
 
