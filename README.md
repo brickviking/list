@@ -24,7 +24,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 ## The Future, or Things to add
 
-* A filebrowser function, to show a list of files on the screen to choose from.
+* A filebrowser function, to show a list of files on the screen to choose from. This will be a long way off.
 
 * Better handling in xterms etc. It can also be messy under a telnet session if the client hasn't been written well, to handle clearline and clearscreen or scrollscreen sequences.
 
@@ -40,7 +40,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 * LISTR/LISTS - at the moment, my code roughly duplicates what's available with LISTS (small) but without the size limits. 
 
-* There is currently no file list browser, certainly no dialer. I mean, who actually has a physical modem these days anyway?
+* There is currently no dialer. I mean, who actually has a physical modem these days anyway?
 
 * No management of files either, a la Norton's COMMANDER/Midnight Commander or even XTree Gold.
 
@@ -50,7 +50,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 * No GUI. This is first and foremost a console program much like the original DOS environment would have been. It won't have widgets nor a pretty toolbar, nice though those things would be to have.
 
-* No CUI support (i.e. Ctl-V/Ctl-C/Ctl-X). It's not an editor, folks. If you want an editor, then list can run one for you, it'll be vim.
+* No CUI support (i.e. Ctl-V/Ctl-C/Ctl-X). It's not an editor, folks. If you want an editor, then list can run one for you, it'll be vim. Additionally, the CUI keys are likely to be poached by the terminal you run this in anyhow.
 
 * (Currently) no preferences support. I don't know how to create them, I don't know how to use them. There may be some support for that in the distant future, but first I will square away the code so that it doesn't fall over at a sneeze. And initially, there won't even be any sanity checking on the preferences, like deciding you want white text on white background. 
 
@@ -60,4 +60,4 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 * BIOS screen writes. Same as above.
 
-* Telephone, FAX, and BBS support. Do you really want to dial me up in New Zealand at 3:30 am to tell me you can't run this program? These days the support (what little there is) is severely hobbled by my lack of coding knowledge. Yes, I'll get better, but it'll take time. I don't even _have_ a FAX.
+* Telephone, FAX, and BBS support. Do you really want to dial me up in New Zealand at 3:30 am to tell me you can't run this program? These days the support (what little there is) is severely hobbled by my lack of coding knowledge. Yes, I'll get better, but it'll take time. I don't even _have_ a FAX. Meanwhile, post an issue to the repository, I'll probably see it.
