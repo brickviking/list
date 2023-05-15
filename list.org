@@ -391,9 +391,27 @@ the client hasn't been written well, to handle clearline and clearscreen or
 scrollscreen sequences.
 .PP
 Handle multiple files specified on the commandline.
-
-
-
+.\"
+.\"
+.SH THINGS I WILL LEAVE OUT
+.\"
+.\"
+.PP
+Things that made sense for 1988 but not for 2023, such as support for dialup modems, screensaver and
+drop-to-DOS.
+.PP
+Extra management of files. Programs such as Midnight Commander already do this better than I
+could.
+.PP
+No preferences support, or settings file. At least not until I know how to do it.
+.PP
+Extra support options that aren\'t around anyway. This is an open\-source program, and doesn\'t have
+a team of people sitting at telephones or FAX machines. And there hasn\'t really been a BBS in operation
+for at least two decades here. What it does have is the usual support mechanism of Github issues.
+.PP
+I also won\'t be creating a set of forums or a mailing list. I\'m too small a project to warrant that.
+.\"
+.\"
 #+END_SRC
 
 ** Readme file
@@ -448,7 +466,7 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 ,* LISTR/LISTS - at the moment, my code roughly duplicates what's available with LISTS (small) but without the size limits. 
 
-,* There is currently no dialer. I mean, who actually has a physical analog dialup modem these days anyway?
+,* There will not be a dialer. I mean, who actually has a physical analog dialup modem these days anyway?
 
 ,* No management of files either, a la Norton's COMMANDER/Midnight Commander or even XTree Gold.
 
