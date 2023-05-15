@@ -47,7 +47,7 @@ generated source and making sure I don't blow away information I might need late
 
 ** Man page
    :PROPERTIES:
-   :header-args: roff :tangle list.1
+   :header-args: roff :tangle src/list.1
    :END:
 
 #+BEGIN_SRC nroff
@@ -177,14 +177,14 @@ future to reflect real lines, such as
 .B less
 presents to the user.
 .TP
-.I "\-r"
-Selects the number of rows the user wishes to display the file on the screen.
-.TP
-.I "\-c"
-Selects the number of columns the user wishes to display.  If either the rows or
-the columns figure are larger than the screen is capable of displaying, then list
-will display in the size of the screen available.
-.TP
+.\" .I "\-r"
+.\" Selects the number of rows used to display the file on the screen.
+.\" .TP
+.\" .I "\-c"
+.\" Selects the number of columns the user wishes to display.  If either the rows or
+.\" the columns figure are larger than the screen is capable of displaying, then list
+.\" will display in the size of the screen available.
+.\" .TP
 .\" .I "\-b tabsize"
 .\" Display the file using tabsize as the number of spaces that a tab takes up on
 .\"the screen.  Normally a Tab character only takes up one byte in the file,
