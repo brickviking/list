@@ -317,7 +317,7 @@ wanted, but I also wanted to have a text display at the press of one key
 .PP
 This is (pretty much) all my own code, based on routines slipped in from
 the dequeue, hexdump and srchfile packages from SNIPPETS.
-It was first converted to run under DJGPP, and then again into a UNIX
+It was first created to run under DJGPP, and then converted again into a UNIX
 C/curses program.  A number of bugs appeared to have been squashed in this
 move, but, needless to say, several still remain.
 .PP
