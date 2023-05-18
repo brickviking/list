@@ -41,39 +41,39 @@ enum ByeReason {BR_NOERR, /* 0 */
 /* typedef unsigned long u_long; * not needed - declared in <sys/types.h> */
 
 struct FileData {
-	long FPosn; /* Current position within file */
-	long FEnd; /* Total bytes */
-	long FLines; /* Total number of CR-terminated lines */
-	long *CrArray; /* Array to store line-endings in */
-	long LnAtTopOfScrn; /* Will contain the line number at top of screen */
-	long FLineCtr; /* Current line within file - last line looked at so far */
-	long LineCount; /* Screen lines printed * added for debugging */
-	long Start; /* Where to start */
-	long Count; /* How many bytes to read */
+        long FPosn; /* Current position within file */
+        long FEnd; /* Total bytes */
+        long FLines; /* Total number of CR-terminated lines */
+        long *CrArray; /* Array to store line-endings in */
+        long LnAtTopOfScrn; /* Will contain the line number at top of screen */
+        long FLineCtr; /* Current line within file - last line looked at so far */
+        long LineCount; /* Screen lines printed * added for debugging */
+        long Start; /* Where to start */
+        long Count; /* How many bytes to read */
         int Scrn_y, Scrn_x, ScrnWide;
-	FILE *FPtr;  /* Stream pointing to file */
-	char *FName; /* set this to point to the filename... */
-	char DumpMode; /* Either 'x' or 't' */
-	char DumpFlag; /* Either '7' or '8' or '*' */
+        FILE *FPtr;  /* Stream pointing to file */
+        char *FName; /* set this to point to the filename... */
+        char DumpMode; /* Either 'x' or 't' */
+        char DumpFlag; /* Either '7' or '8' or '*' */
         char LineNumbers; /* Set to on or off */
-	char Monochrome;
-	char TabSize; /* a number from 1 to _about_ 8 */
-	int addrflag;  /* Either hex or decimal addresses (only in hex view) */
-	int EofSet;    /* Has the End of the File been reached? */
-	int FgColour, BgColour; /* Colours */
-/* Search stuff... */	
-	char SearchDirection; /* Forward or backward */
-	char *SearchString;  /* Search String */
-	long SPosn; /* Search Position - has to be long int */
-	struct stat FileInfo; /* Do these two work? */
-	struct stat *FileInfoPtr;
-	int Quick; /* This was defined so it didn't take so long to display a file in hex mode */
+        char Monochrome;
+        char TabSize; /* a number from 1 to _about_ 8 */
+        int addrflag;  /* Either hex or decimal addresses (only in hex view) */
+        int EofSet;    /* Has the End of the File been reached? */
+        int FgColour, BgColour; /* Colours */
+/* Search stuff... */
+        char SearchDirection; /* Forward or backward */
+        char *SearchString;  /* Search String */
+        long SPosn; /* Search Position - has to be long int */
+        struct stat FileInfo; /* Do these two work? */
+        struct stat *FileInfoPtr;
+        int Quick; /* This was defined so it didn't take so long to display a file in hex mode */
 /* Have we defined the queue object? i.e. included dequeue.h ?*/
         queue DirQueuePtr; /* From dequeue.h (finally!) */
-	char *BugWriteFName; /* Filename of bugwrite file */
+        char *BugWriteFName; /* Filename of bugwrite file */
         int MyArgc;
         char **MyArgv;
-	int MyCurrArgC;  /* This is added to utilise positioning within MyArgv[] */
+        int MyCurrArgC;  /* This is added to utilise positioning within MyArgv[] */
 };
 
 int debug;
@@ -87,7 +87,7 @@ __inline__ void BackPage(struct FileData *, long int);
 #else
 void BackPage(struct FileData *, long int);
 #endif
-int Bye(enum ByeReason, int);
+int Bye(int, int);
 void CartWheel(void);
 void debug_function(char *, int, int, int);
 int ShowStats(struct FileData *);
@@ -126,4 +126,3 @@ int Choose(void);
 int WriteToFile(void);
 int EmailUser(struct FileData *);
 int TakeNotes(FILE *, struct FileData *);
-
