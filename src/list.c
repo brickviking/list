@@ -143,7 +143,7 @@ Set this aside while I sort out rows/cols handling */
       case 'c': / *  Set number of columns different from present screen  * /
         x = strtol(optarg, &bufp, 0);
         if (x < fi->Scrn_x)
-           / *	should perhaps be != but we run into problems where x might be > than screen X * /
+           / * should perhaps be != but we run into problems where x might be > than screen X * /
           fi->Scrn_x = x;
         break;     */
       case 'n': /* Count off (N)um bytes */
