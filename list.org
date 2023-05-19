@@ -4073,15 +4073,31 @@ other files. After all, I thought I had enough stray files littering the project
     fi->MyArgc = argc;
     fi->MyArgv = argv; /* Will this work?  I don't know... */
     /* Okay - should we shove all THIS into a separate function too? */
-  /*    while ((c = getopt(fi->MyArgc, fi->MyArgv, "vf:s:r:c:n:b:eqltx78dmh?"))!= -1) {  
-  Set this aside while I sort out rows/cols handling */
+#+END_SRC
+
+I did have a thought of gatekeepering this behind a #define so I can do limited testing without
+having to entirely tear down the source code to its bare functions to see what ncurses does with a
+window created at a certain size. I'll need to tweak this while loop and the case switch below.
+I'll use D_ROWCOL for the moment. I doubt I'll need too many of these switches, but anything that
+needs them needs to be watertight, i.e. the code can't fall over without the section behind defines.
+
+This is the beginning of working out whether a fix is feasible for issue #14.
+
+#+BEGIN_SRC c  
+  /* First the def variant (for debug), use -DD_ROWCOL in the makefile */
+  #ifdef D_ROWCOL
+      while ((c = getopt(fi->MyArgc, fi->MyArgv, "vf:s:r:c:n:b:eqltx78dmh?"))!= -1) {
+  #endif
+  /* Now the undef variant (for release) */
+  #ifndef D_ROWCOL
       while ((c = getopt(fi->MyArgc, fi->MyArgv, "vf:s:n:b:eqltx78dmh?"))!= -1) {
+  #endif
         /* 
     v - version
     f: filename
     s: start_byte
-    r: rows to display
-    c: columns to display
+    r: rows to display - only in debug version
+    c: columns to display - only in debug version
     n: num_bytes
     b: taB size
     e: show line Endings
@@ -4106,18 +4122,19 @@ other files. After all, I thought I had enough stray files littering the project
         case 's': /* Start position */
           fi->Start = strtol(optarg, &bufp, 0);
           break;
-  /* Disabled because of unreported issue */
-  /*      case 'r': / * Set number of rows (lines) different from present screen * /
+  #ifdef D_ROWCOL
+        case 'r': /* Set number of rows (lines) different from present screen */
           y = strtol(optarg, &bufp, 0);
           if (y < fi->Scrn_y)
             fi->Scrn_y = y;
           break;
-        case 'c': / *  Set number of columns different from present screen  * /
+        case 'c': /* Set number of columns different from present screen  */
           x = strtol(optarg, &bufp, 0);
           if (x < fi->Scrn_x)
-             / * should perhaps be != but we run into problems where x might be > than screen X * /
+             /* should perhaps be != but we run into problems where x might be > than Scrn_x */
             fi->Scrn_x = x;
-          break;     */
+          break;
+  #endif
         case 'n': /* Count off (N)um bytes */
           fi->Count = strtol(optarg, &bufp, 0);
           break;

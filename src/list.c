@@ -101,15 +101,21 @@ int main(int argc, char **argv) {
   fi->MyArgc = argc;
   fi->MyArgv = argv; /* Will this work?  I don't know... */
   /* Okay - should we shove all THIS into a separate function too? */
-/*    while ((c = getopt(fi->MyArgc, fi->MyArgv, "vf:s:r:c:n:b:eqltx78dmh?"))!= -1) {  
-Set this aside while I sort out rows/cols handling */
+
+/* First the def variant (for debug), use -DD_ROWCOL in the makefile */
+#ifdef D_ROWCOL
+    while ((c = getopt(fi->MyArgc, fi->MyArgv, "vf:s:r:c:n:b:eqltx78dmh?"))!= -1) {
+#endif
+/* Now the undef variant (for release) */
+#ifndef D_ROWCOL
     while ((c = getopt(fi->MyArgc, fi->MyArgv, "vf:s:n:b:eqltx78dmh?"))!= -1) {
+#endif
       /* 
   v - version
   f: filename
   s: start_byte
-  r: rows to display
-  c: columns to display
+  r: rows to display - only in debug version
+  c: columns to display - only in debug version
   n: num_bytes
   b: taB size
   e: show line Endings
@@ -134,18 +140,19 @@ Set this aside while I sort out rows/cols handling */
       case 's': /* Start position */
         fi->Start = strtol(optarg, &bufp, 0);
         break;
-/* Disabled because of unreported issue */
-/*      case 'r': / * Set number of rows (lines) different from present screen * /
+#ifdef D_ROWCOL
+      case 'r': /* Set number of rows (lines) different from present screen */
         y = strtol(optarg, &bufp, 0);
         if (y < fi->Scrn_y)
           fi->Scrn_y = y;
         break;
-      case 'c': / *  Set number of columns different from present screen  * /
+      case 'c': /* Set number of columns different from present screen  */
         x = strtol(optarg, &bufp, 0);
         if (x < fi->Scrn_x)
-           / * should perhaps be != but we run into problems where x might be > than screen X * /
+           /* should perhaps be != but we run into problems where x might be > than Scrn_x */
           fi->Scrn_x = x;
-        break;     */
+        break;
+#endif
       case 'n': /* Count off (N)um bytes */
         fi->Count = strtol(optarg, &bufp, 0);
         break;
