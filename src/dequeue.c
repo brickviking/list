@@ -95,8 +95,7 @@
 /* The index: a pointer to pointers */
 static  void        **ppindex;
 static  datanode    **posn_index;
-static int Q_BSearch( queue *q, void *key,
-							 int Comp( const void *, const void *));
+static int Q_BSearch( queue *q, void *key, int Comp( const void *, const void *));
 /***
  ** function    : Q_Init
  ** purpose     : Initialise queue object and pointers.
@@ -143,7 +142,7 @@ int  Q_End( queue *q ) {
  ** parameters  : 'queue' pointer
  ** returns     : TRUE if empty queue, else  FALSE
  ***/
-int  Q_Empty( queue *q ){
+int  Q_Empty( queue *q ) {
 
     return (q->size == 0);
 }
@@ -260,8 +259,8 @@ int  Old_Q_PushHead( queue *q, void *d ) {
 
     node    *n ;
     datanode *p;
-	 q->head->prev = (*(malloc( sizeof(datanode) )));
-	     if ( q->head->prev == NULL )
+    q->head->prev = (*(malloc( sizeof(datanode) )));
+    if ( q->head->prev == NULL )
         return FALSE;
 
     n = q->head;
@@ -536,8 +535,7 @@ int     Q_Put( queue *q, void *data ) {
  *                For description of Comp see Q_Sort.
  *                Queue cursor left on position found item else at end.
  ***/
-int     Q_Find( queue *q, void *data,
-            int Comp(const void *, const void *) ) {
+int Q_Find( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     void  *d;
     d = Q_First( q );
@@ -558,8 +556,7 @@ int     Q_Find( queue *q, void *data,
 /*========  Sorted Queue and Index functions   ========= */
 
 
-static void QuickSort( void *list[], int low, int high,
-                        int Comp( const void *, const void * ) ) {
+static void QuickSort( void *list[], int low, int high, int Comp( const void *, const void * ) ) {
 
     int     flag = 1, i, j ;
     void    *key, *temp ;
@@ -616,7 +613,7 @@ static void QuickSort( void *list[], int low, int high,
  *                If queue is already sorted it frees the memory of the
  *                old index and starts again.
  ***/
-int     Q_Sort( queue *q, int Comp(const void *, const void *) ) {
+int Q_Sort( queue *q, int Comp(const void *, const void *) ) {
 
     int         i ;
     void        *d;
@@ -681,8 +678,7 @@ int     Q_Sort( queue *q, int Comp(const void *, const void *) ) {
  *                or -1 if not found.
  ** comments    : see Q_Sort for description of 'Comp' function.
  ***/
- static  int    Q_BSearch(  queue *q, void *key,
-                            int Comp(const void *, const void*) ) {
+static int Q_BSearch(  queue *q, void *key, int Comp(const void *, const void*) ) {
     int     low, mid, hi, val;
 
     low = 0;
@@ -721,8 +717,7 @@ int     Q_Sort( queue *q, int Comp(const void *, const void *) ) {
  *                not sort queue.
  ** comments    : see Q_Sort for description of 'Comp' function.
  ***/
-void    *Q_Seek( queue *q, void *data, int Comp(const void *,
-                    const void *) ) {
+void *Q_Seek( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     int     idx;
 
@@ -755,8 +750,7 @@ void    *Q_Seek( queue *q, void *data, int Comp(const void *,
  *                the insertion of the odd element ,not the piecemeal
  *                building of an entire queue.
  ***/
-int     Q_Insert( queue *q, void *data, int Comp(const void *,
-                    const void *) ) {
+int Q_Insert( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     Q_PushHead( q, data );
 
@@ -765,4 +759,3 @@ int     Q_Insert( queue *q, void *data, int Comp(const void *,
 
     return TRUE;
 }
-

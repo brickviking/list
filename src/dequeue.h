@@ -65,4 +65,3 @@ typedef int (*Comp)(void *, void *);
                         int Comp(const void *, const void * ) ); */
 
 #endif /* DEQUEUE__H */
-

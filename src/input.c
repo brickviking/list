@@ -11,7 +11,7 @@ char *SearchPrompt(struct FileData *fi) {
   char *Direction = (char *) calloc(sizeof (Direction) * 9, sizeof(Direction)); /* forward or backward prompt string */
   fi->SPosn = (long) NULL; /* set the current position */
   /* search string forwards - ifnot found (-1), prompt user */
-  move(fi->Scrn_y - 1,0);
+  move(fi->Scrn_y - 1, 0);
   clrtoeol();
   echo();
   attron(A_REVERSE);
@@ -55,62 +55,72 @@ char WhatNext(struct FileData *fi) { /* 1 */
   char buf2[PATH_MAX]; /* Make this somewhat safer for overflow */
   char *buf2p;
 /* Why don't I just allocate a section of memory? */
-  buf2p=&buf2[0];
+  buf2p = &buf2[0];
 
-  switch(c=getch()) { /* 2 */
+  switch(c = getch()) { /* 2 */
     /* We need processing for esc chars here... */
   case ' ':          /* next page or (LINES*16) bytes */
   case KEY_NPAGE:
 /*    clear();  / * Added this to see what happens... */
     break;
   case '7':
-    BackPage(fi, fi->Scrn_y-1);
-    fi->DumpFlag='7';
+    BackPage(fi, fi->Scrn_y - 1);
+    fi->DumpFlag = '7';
     break;
   case '8':
-    BackPage(fi, fi->Scrn_y-1);
-    fi->DumpFlag='8';
+    BackPage(fi, fi->Scrn_y - 1);
+    fi->DumpFlag = '8';
     break;
   case '*':
-    BackPage(fi, fi->Scrn_y-1);
-    fi->DumpFlag='*';
-    break;
+    BackPage(fi, fi->Scrn_y - 1);
+    fi->DumpFlag = '*';
+    break; /* BUG: can't turn them back off again!!! */
   case 'Q':          /* Quit - (Hasta La Vista!) */
   case 'q':
     return 0;
-  case 'o':
   case 'O':
+  case 'o':
 /*    if(!fi->addrflag)
       fi->addrflag=1;
     else
       fi->addrflag=0; * This code replaced by the single line below...simple, isn't it? */
     fi->addrflag = fi->addrflag ? 0 : 1; /* If it isn't zeroed - zero it, else set it */
-    BackPage(fi, fi->Scrn_y-1);
+    BackPage(fi, fi->Scrn_y - 1);
     break;
     /*    if(getenv(TERM)=="linux") { */
   case KEY_END:
     if(fi->DumpMode == 'x') {
-      fi->FPosn= (ruler) ? fi->FEnd - ((fi->Scrn_y-2) * fi->ScrnWide) : fi->FEnd - (fi->Scrn_y * fi->ScrnWide);
+      /* if ruler is set (not zero) then
+             assign "fi->FEnd - ((fi->Scrn_y-2) * fi->ScrnWide)" to fi->FPosn
+         otherwise
+             assign "fi->FEnd - (fi->Scrn_y * fi->ScrnWide)" to fi->FPosn
+      */
+      fi->FPosn = (ruler) ? fi->FEnd - ((fi->Scrn_y - 2) * fi->ScrnWide) : fi->FEnd - (fi->Scrn_y * fi->ScrnWide);
     }
     else if (fi->DumpMode == 't') {
+      /* if ruler is set (not zero) then
+             assign "fi->FLines - fi->Scrn_y - 2" to fi->FLineCtr
+         otherwise
+             assign "fi->FLines - fi->Scrn_y - 1" to fi->FLineCtr
+      */
       fi->FLineCtr=(ruler) ? fi->FLines - fi->Scrn_y - 2 :  fi->FLines - fi->Scrn_y - 1;
-      fi->FPosn=(*(fi->CrArray+fi->FLineCtr));
+      fi->FPosn = (*(fi->CrArray + fi->FLineCtr));
     }
     fseek(fi->FPtr, fi->FPosn, SEEK_SET);
     break;
   case ':':
 /*    CmdMode(fi); */ /* Comment this out until the related routine works */
     break;
-  case 'g':  /* Go to a specific position/line... */
   case 'G':  /* I can basically steal this code for % (go to % of file) */
-    move(fi->Scrn_y-1,0);
+  case 'g':  /* Go to a specific position/line... */
+    move(fi->Scrn_y - 1, 0);
     clrtoeol();
     attron(A_BOLD);
-    if(fi->DumpMode=='x')  {
+    if(fi->DumpMode == 'x') {
       addstr("Byte offset: ");
     }
     else
-      {
+      { /* <<< We'll catch this up */
         addstr("Line offset: ");
       }
     attroff(A_BOLD);
@@ -118,35 +128,35 @@ char WhatNext(struct FileData *fi) { /* 1 */
     echo();
     getstr(buf2);  /* Input an offset (numerical) */
     noecho();
-    if(fi->DumpMode=='x') {
+    if(fi->DumpMode == 'x') {
       errno = 0;
-      fi->FPosn=strtol(buf2, &buf2p, 0); /* Set fileposition */
+      fi->FPosn = strtol(buf2, &buf2p, 0); /* Set fileposition */
       if(errno) {
-	      CloseNCurses();
-	      Bye(BR_BADSTRING, __LINE__);
+              CloseNCurses();
+              Bye(BR_BADSTRING, __LINE__);
       }
       /* Have to check for FPosn within 0 <= FPosn <= FEnd  */
       if(fi->FPosn > fi->FEnd) {
-        fi->FPosn = (ruler) ? (fi->FEnd - (fi->Scrn_y-1)*fi->ScrnWide) : (fi->FEnd - (fi->Scrn_y*fi->ScrnWide));
+        fi->FPosn = (ruler) ? (fi->FEnd - (fi->Scrn_y - 1)*fi->ScrnWide) : (fi->FEnd - (fi->Scrn_y*fi->ScrnWide));
       }
       else
         if(fi->FPosn < 0)
-          fi->FPosn=0;
+          fi->FPosn = 0;
     }
-    else if(fi->DumpMode=='t') {
-      fi->FLineCtr=strtol(buf2, &buf2p, 0); /* Set fi->FPosnition */
+    else if(fi->DumpMode == 't') {
+      fi->FLineCtr = strtol(buf2, &buf2p, 0); /* Set fi->FPosnition */
       if (fi->FLineCtr >= fi->FLines)
         fi->FLineCtr = (ruler) ? (fi->FLines - fi->Scrn_y - 2) : (fi->FLines - fi->Scrn_y - 1);
       else if(fi->FLineCtr < 0)
-        fi->FLineCtr=0;
-      fi->FPosn=*(fi->CrArray+fi->FLineCtr);
+        fi->FLineCtr = 0;
+      fi->FPosn = *(fi->CrArray + fi->FLineCtr);
     }
     fseek(fi->FPtr, fi->FPosn, SEEK_SET);
     clear();
     refresh();
     break;
   case '%':
-    move(fi->Scrn_y-1,0);
+    move(fi->Scrn_y - 1, 0);
     clrtoeol();
     attron(A_BOLD);
     addstr("Percentage offset (0-100%): ");
@@ -156,29 +166,28 @@ char WhatNext(struct FileData *fi) { /* 1 */
     getstr(buf2);  /* Input an offset (numerical) */
     noecho();
     /* I basically need to go to bytes_of_file * percent_input...now how large is fi? */
-    fi->FPosn=(((strtol(buf2, &buf2p, 0))*fi->FEnd)/100);
+    fi->FPosn = (((strtol(buf2, &buf2p, 0)) * fi->FEnd) / 100); /* int rounding */
     /* Set the fileposition that we want */
       /* Have to check for FPosn within 0 <= FPosn <= FEnd ... or do we? */
     if(fi->FPosn > fi->FEnd) {
-        fi->FPosn = (ruler) ? (fi->FEnd - (fi->Scrn_y-1)*16) : (fi->FEnd - (fi->Scrn_y*16));
+        fi->FPosn = (ruler) ? (fi->FEnd - (fi->Scrn_y - 1) * 16) : (fi->FEnd - (fi->Scrn_y * 16));
       }
       else
         if(fi->FPosn < 0)
-          fi->FPosn=0;
+          fi->FPosn = 0;
     fseek(fi->FPtr, fi->FPosn, SEEK_SET);
     clear();
     refresh();
     break;
-
   case 'R':         /* Toggle the ruler  */
   case 'r':
-    BackPage(fi, fi->Scrn_y-1);
+    BackPage(fi, fi->Scrn_y - 1);
     if(!ruler) ruler++;
     else ruler--;
     break;
   case 'T':  /* Go back one page, change to text dump - like less */
   case 't':
-    BackPage(fi, fi->Scrn_y-1);
+    BackPage(fi, fi->Scrn_y - 1);
     if(!fi->Quick)
       fi->DumpMode='t';
     else
@@ -189,40 +198,40 @@ char WhatNext(struct FileData *fi) { /* 1 */
     break;
   case 'X':  /* go back one page then display hex dump */
   case 'x':
-    BackPage(fi, fi->Scrn_y-1);
-    fi->DumpMode='x';
+    BackPage(fi, fi->Scrn_y - 1);
+    fi->DumpMode = 'x';
     break;
   case KEY_DOWN:          /* one line forward */
-    BackPage(fi, fi->Scrn_y-2);
+    BackPage(fi, fi->Scrn_y - 2);
     break;
   case KEY_UP:  /* One line backward */
     BackPage(fi, fi->Scrn_y);
     break;
   case KEY_PPAGE:  /* One page backwards */
-  case 'b':
   case 'B':
-    BackPage(fi, fi->Scrn_y*2-2);
+  case 'b':
+    BackPage(fi, fi->Scrn_y *2 - 2);
     break;
   case KEY_HOME:   /* Beginning of file... */
     fi->Start=0;
     rewind(fi->FPtr);
     fi->FPosn = 0;
-    fi->FLineCtr=0;
+    fi->FLineCtr = 0;
     clear();
     refresh();
     break;
   case 'L':
   case 'l': /* This one's a toggle, folks */
-    BackPage(fi, fi->Scrn_y-1);
+    BackPage(fi, fi->Scrn_y - 1);
     if(fi->LineNumbers)
-      fi->LineNumbers= 0;
+      fi->LineNumbers = 0;
     else
       fi->LineNumbers++;
     break;
-  case 'h':
   case 'H':
+  case 'h':
     BackPage(fi, fi->Scrn_y - 1);
-    if(fi->Scrn_x < 80 )  {
+    if(fi->Scrn_x < 80 ) {
       debug_function("Can't display - not wide enough", 0, fi->Scrn_y - 1, __LINE__);
       break;
     }
@@ -233,7 +242,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
   case 'S':
   case 's':
     BackPage(fi, fi->Scrn_y - 1);
-    if(fi->Scrn_x < 80 )  {
+    if(fi->Scrn_x < 80 ) {
       debug_function("Can't display - not wide enough", 0, fi->Scrn_y - 1, __LINE__);
       break;
     }
@@ -241,7 +250,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
     break;
   case 'F':
   case 'f':
-    move(fi->Scrn_y - 1,0);
+    move(fi->Scrn_y - 1, 0);
     clrtoeol();
     echo();
     attron(A_REVERSE);
@@ -253,7 +262,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
     fclose(fi->FPtr);  /* I'd better close it before opening another one */
     free(fi->FName); /* frees the memory associated with the name... */
     free(fi->CrArray); /* ... same as above ... */
-/*    fi->FName=buf2p; */
+/*    fi->FName = buf2p; */
 /*    fi=NewFile(fi, buf2p); / * This *should* open the new fi->FName */
 /* Whoops - looks like there are some troubles with this method */
 /*    fseek(fi->FPtr, fi->FPosn, SEEK_SET); * This line shouldn't happen, after an fclose */
@@ -293,8 +302,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
        BackPage(fi, fi->Scrn_y - 2);
        Search(fi);  /* Ahhh, yes. This seems a lot simpler than what I had...we already have string, so repeat search */
        break;
-  case 'z':
   case 'Z':
+  case 'z':
        debug = debug ? 0 : 1;
        break;
   case 'W':
@@ -309,7 +318,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
        refresh();
        getstr(buf2);  /* Input a new filename */
        /* I don't know what happens if I enter nothing - I WANT it to use a
-	* default value of $HOME/list.debug */
+        * default value of $HOME/list.debug */
        noecho();
        fi->BugWriteFName = buf2; /* Throw it into the struct */
        BugWrite(fi);
@@ -349,4 +358,3 @@ char WhatNext(struct FileData *fi) { /* 1 */
   }
   return fi->DumpMode;
 } /* End of WhatNext() */
-

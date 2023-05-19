@@ -11,13 +11,12 @@
  * stored in the home directory of the user, but another idea could be to
  * email this file off to another user.
  */
-int BugWrite(struct FileData *fi)  {
+int BugWrite(struct FileData *fi) {
   FILE *NewFile;
   char *TempPath = (char *) malloc(sizeof(TempPath) * PATH_MAX);
   char *Tempstring = (char *) malloc(sizeof(Tempstring) * 1024);
- /* Of course I could always prompt user for a filename here...
-   */
-  if(NULL == fi->BugWriteFName) { 
+ /* Of course I could always prompt user for a filename here... */
+  if(NULL == fi->BugWriteFName) {
     if(!getenv("TEMP"))  /* Whoops, no TEMP variable defined */
       strcpy(TempPath, "/tmp/list.debug"); /* This should be the last resort filename, not the default */
     else {
@@ -31,7 +30,7 @@ int BugWrite(struct FileData *fi)  {
   else
      strcpy(TempPath, fi->BugWriteFName);
   /* First, we attempt to open the file for writing to ... */
-  if(NULL == (NewFile = fopen(TempPath, "a+")))  { /* This opens the file to write to... */
+  if(NULL == (NewFile = fopen(TempPath, "a+"))) { /* This opens the file to write to... */
 
     debug_function("Cannot open temporary file for writing to - hit any key to return", 0, fi->Scrn_y, __LINE__); /* 66 chars long */
     /* Should we add a var to struct for whether tmpfile was able to be written? */
@@ -61,7 +60,7 @@ int WriteToFile(void) {
   return 0;
 }
 
-int EmailToUser(struct FileData *fi)  {
+int EmailToUser(struct FileData *fi) {
 #ifndef __linux__
   debug_function("Sorry, can't mail on this system", 0, fi->Scrn_y, __LINE__ );
 #else
@@ -70,7 +69,7 @@ int EmailToUser(struct FileData *fi)  {
   return 0;
 }
 
-int TakeNotes(FILE *FileToWrite, struct FileData *fi)  {
+int TakeNotes(FILE *FileToWrite, struct FileData *fi) {
    WINDOW *DebugEntry, *DebugEntryFrame; /* Only need DebugEntryFrame here - will need to create a Form inside this window. */
    time_t *MyTime = (time_t *) malloc(sizeof(MyTime) * sizeof(time_t));
    int TimeWritten = 0;
@@ -130,7 +129,7 @@ int TakeNotes(FILE *FileToWrite, struct FileData *fi)  {
 }
 
 /*
-int TakeNotes2(FILE *FileToWrite, struct FileData *fi)  {
+int TakeNotes2(FILE *FileToWrite, struct FileData *fi) {
   FIELD *NotePad = new_field(24,78,0,0,128,1);
   return 0;
 }

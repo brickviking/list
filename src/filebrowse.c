@@ -49,8 +49,8 @@
 
 /* User routines... */
 
-struct FileData *FileCommand(struct FileData *fi)  {
-   fi->FPtr=GetItem((DIR *)"./");
+struct FileData *FileCommand(struct FileData *fi) {
+   fi->FPtr = GetItem((DIR *)"./");
    /* What can we provide here?
    0 for read file, other ints for other commands
    -1 for exit of program
@@ -58,31 +58,32 @@ struct FileData *FileCommand(struct FileData *fi)  {
    return 0;
 }
 
-DIR *GetDirectory(DIR *TmpDir, char *DirectoryName)  {
+DIR *GetDirectory(DIR *TmpDir, char *DirectoryName) {
 /*   fi->FPtr= something I don't yet know - ; */
     TmpDir = opendir(DirectoryName);
-    if(TmpDir != NULL) Bye(BR_DIRNOTFILE, __LINE__);
+    if(TmpDir != NULL)
+        Bye(BR_DIRNOTFILE, __LINE__);
 /* Couldn't I get this to return the dir ptr instead of 0? */
     return 0;
 }
 
-int ListDirectory(DIR *TempDir)  {
+int ListDirectory(DIR *TempDir) {
     struct dirent **This_Directory;
     int n;
     n = scandir("./", &This_Directory, 0, alphasort);
-    if(n > 0)  {
-	 int cnt;
-	 for(cnt = 0; cnt < n; ++cnt) 
-		 printf("%s\n", This_Directory[cnt]->d_name);
-	 }
+    if(n > 0) {
+        int cnt;
+        for(cnt = 0; cnt < n; ++cnt)
+            printf("%s\n", This_Directory[cnt]->d_name);
+    }
     else
-	 perror("Couldn't open the directory!");
+        perror("Couldn't open the directory!");
     return 0;
 }
 
 /*
 static int one (struct dirent *unused) {
-	     return 1;
+             return 1;
      }
 */
 
