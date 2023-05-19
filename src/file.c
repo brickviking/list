@@ -21,8 +21,10 @@ int NewFile(struct FileData *fi, char *NewName) {
  * from any previous uses */
   /* Now the def'n for PATH_MAX has disappeared, we have to #define it somewhere... */
   /* OOOPS!!!! What if FName overruns 256 bytes? Or PATH_MAX bytes? */
-  if(NULL == (fi->FName = (char *) malloc(sizeof(NewName) * PATH_MAX))) Bye(BR_NOMEM, __LINE__); /* Previously freed, or not alloc'ed until here */
-  if(NewName=="") {
+  if(NULL == (fi->FName = (char *) malloc(sizeof(NewName) * PATH_MAX))) {
+    Bye(BR_NOMEM, __LINE__); /* Previously freed, or not alloc'ed until here */
+  }
+  if(NewName == "") {
     Bye(BR_FILEPERM, __LINE__);
   }
   strcpy(fi->FName, NewName);
@@ -69,13 +71,13 @@ int NewFile(struct FileData *fi, char *NewName) {
 void ScanForCr(struct FileData *fi) {
   /* We'll start with an array of CrInFile size and expand it if necessary */
   long int i, j, linelength, llflag = 0, c;
-  for(i = 0, j = 1; i < fi->FEnd;)  {
+  for(i = 0, j = 1; i < fi->FEnd;) {
    for (linelength = 0, c = 0; linelength < fi->Scrn_x - 10; linelength++) /* finish should actually be 4096 or something...
    hmmm, how about making it say, one screen - 1 line in size, so that we don't lose lines when we go down one line? */
       {
-        switch (c=fgetc(fi->FPtr))
+        switch (c = fgetc(fi->FPtr))
           {
-	    /* Takes no account of <CR> or \r, I should really have known better even in 1997 */
+            /* Takes no account of <CR> or \r, I should really have known better even in 1997 */
           case '\n':
             j++;
             llflag++;
@@ -94,7 +96,7 @@ void ScanForCr(struct FileData *fi) {
     } /* end of llflag check */
     else llflag--;
   }
-  fi->FLines=j;
+  fi->FLines = j;
   fseek(fi->FPtr, 0, SEEK_SET); /* back to beginning of file for further operations */
   return;
 }
@@ -107,7 +109,7 @@ long *AllocateLines(struct FileData *fi) {
    * For example:
    * MainEngine {
    * Len = ReadALinesLength(fi->FPtr, fi->FPos);
-   * do  {
+   * do {
    *   fi->CrArray[LineCtr++] = fi->FPos;
    *   fi->FPos += COLS;
    *   Len -= COLS;
@@ -115,26 +117,26 @@ long *AllocateLines(struct FileData *fi) {
    * until (Len <= COLS);
    * } / * End of MainEngine * /
    *
-   * ReadALinesLength(fi)  {
+   * ReadALinesLength(fi) {
    *   pseudocode is:
    *   Line begins at n, finishes at CR, return CR position or EOF if End Of File hit first
    */
-  int linelength, llflag=0, c;
+  int linelength, llflag = 0, c;
   long int i, j;
-  fi->CrArray[0]=0;
+  fi->CrArray[0] = 0;
   move(fi->Scrn_y - 1, 0);
   clear();
   refresh();
   addstr("list: Counting lines ... please wait"); /* This takes far longer than it needs to */
-  for(i = 0, j = 1; i < fi->FEnd;)  {
-/*    for (linelength = 0, c=0; linelength < 80 ; linelength++ ) */
+  for(i = 0, j = 1; i < fi->FEnd;) {
+/*    for (linelength = 0, c = 0; linelength < 80 ; linelength++ ) */
     for (linelength = 0, c = 0; linelength < fi->Scrn_x - 10; linelength++)  /* Took 10 bytes off to add in line numbers */
        {
   c = fgetc(fi->FPtr);
         switch (c)
           {
           case '\n':
-            *(fi->CrArray+j)=i+1;
+            *(fi->CrArray+j) = i+1;
             j++;
             llflag++;
 /*            if(debug) {
@@ -175,14 +177,14 @@ long *AllocateLines(struct FileData *fi) {
       if(debug) {
         char tmpstr[81];
 /*      char tmpstr[COLS+1]; */
-        char *tempstring=&tmpstr[0];
-        sprintf(tempstring,"L:%ld %ld\t", i-1, j);
+        char *tempstring = &tmpstr[0];
+        sprintf(tempstring, "L:%ld %ld\t", i-1, j);
         addstr(tempstring);
       }
     } /* end of llflag check */
     else llflag--;
   } /* end of first for loop */
-  fi->FLines=j;
+  fi->FLines = j;
   fseek(fi->FPtr, 0, SEEK_SET);
   return fi->CrArray;  /* can I do this???? */
 }
@@ -252,7 +254,7 @@ int EditFunction(struct FileData *fi) {
   return RetVal;
 }
 
-int Search(struct FileData *fi)  { /* 1s */
+int Search(struct FileData *fi) { /* 1s */
   switch (fi->SearchDirection) { /* 2s */
     case 'f':
        fi->SPosn = ffsearch(fi, 1); /* First, get the strings position if found... */
@@ -266,13 +268,13 @@ int Search(struct FileData *fi)  { /* 1s */
   if((-1L) == fi->SPosn) { /* ... Hasn't died yet, so check if string was _not_ found ... 2s */
       debug_function("String not found - hit any key to return", 0, fi->Scrn_y, __LINE__);
   } /* 2e...*/
-  else  {   /* String was found - so ... 2s */
+  else {   /* String was found - so ... 2s */
       if(fi->DumpMode == 'x')
         fi->FPosn = fi->SPosn; /* ... set the file position to where the search was found... */
-      else  { /* We have to seek to the nearest line... 3s */
+      else { /* We have to seek to the nearest line... 3s */
         for(fi->FLineCtr = 0; fi->FLineCtr < fi->FLines; fi->FLineCtr++ ) { /* 4s */
         /* sets initial fi->FLineCtr for line p'sn retrieval */
-          if(*(fi->CrArray+fi->FLineCtr) >= fi->SPosn) { /* 5s */
+          if(*(fi->CrArray + fi->FLineCtr) >= fi->SPosn) { /* 5s */
       /* Step through the lines until we find one that is greater than SearchPosition */
       fi->FPosn = *(fi->CrArray + fi->FLineCtr - 1);  /* ... set the required file position ... */
        /* Not sure why it needs one line taken off, but I guess the line itself needs to be included */
@@ -284,7 +286,7 @@ int Search(struct FileData *fi)  { /* 1s */
   return 0;
 } /* 1e */
 
-int Bye(enum ByeReason WhyBye, int LineCalled)  {
+int Bye(enum ByeReason WhyBye, int LineCalled) {
   char *ErrMessage = (char *) malloc(sizeof(ErrMessage) * 127);
   if(ErrMessage == NULL) {
     printf("list: Wow! We are REALLY out of memory here!\n");
@@ -299,7 +301,7 @@ int Bye(enum ByeReason WhyBye, int LineCalled)  {
          sprintf(ErrMessage, "list: exiting debug loop and leaving Program...\n");
          break;
     case BR_FILE_ERR:
-         switch (errno)  {
+         switch (errno) {
            case ENOENT:
                sprintf(ErrMessage, "list: File not found when called from line %d!\n", LineCalled);
                break;
@@ -361,7 +363,6 @@ void CloseNCurses(void) {
   refresh();
   nl();
   nocbreak();
-	endwin();
-	return;
+        endwin();
+        return;
 }
-

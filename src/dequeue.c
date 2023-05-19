@@ -87,7 +87,6 @@
  *
  ****************************************************************/
 
-
 #include <stdlib.h>
 
 #include "dequeue.h"
@@ -123,7 +122,6 @@ int  Q_Start( queue *q ) {
     return ( q->cursor == q->head );
 }
 
-
 /***
  ** function    : Q_End
  ** purpose     : boolean test if cursor at tail of queue
@@ -134,7 +132,6 @@ int  Q_End( queue *q ) {
 
     return ( q->cursor == q->tail );
 }
-
 
 /***
  ** function    : Q_Empty
@@ -174,7 +171,6 @@ void *Q_First( queue *q ) {
 
     return  q->cursor->data ;
 }
-
 
 /***
  ** function    : Q_Last
@@ -216,7 +212,6 @@ int Q_PushHead( queue *q, void *d ) {
 
   return TRUE;
 }
-
 
 int Q_PushTail( queue *q, void *d ) {
   node *n;
@@ -286,7 +281,6 @@ int  Old_Q_PushHead( queue *q, void *d ) {
 }
 */
 
-
 /***
  *
  ** function    : Q_PushTail
@@ -331,7 +325,6 @@ int  Old_Q_PushTail( queue *q, void *d ) {
 }
 */
 
-
 /***
  ** function    : Q_PopHead
  ** purpose     : remove and return the top element at the head of the
@@ -372,7 +365,6 @@ void *Q_PopHead( queue *q ) {
 
     return d;
 }
-
 
 /***
  ** function    : Q_PopTail
@@ -427,8 +419,6 @@ void *Q_Next( queue *q ) {
 
 }
 
-
-
 /***
  ** function    : Q_Previous
  ** purpose     : Opposite of Q_Next. Move to next element closer to the
@@ -447,8 +437,6 @@ void *Q_Previous( queue *q ) {
     return q->cursor->data ;
 
 }
-
-
 
 /***
  ** function    : Q_DelCur
@@ -490,8 +478,6 @@ void    *Q_DelCur( queue *q ) {
     return d;
 }
 
-
-
 /***
  ** function    : Q_Get
  ** purpose     : get the pointer to the data at the cursor location
@@ -504,8 +490,6 @@ void    *Q_Get( queue *q ) {
         return NULL ;
     return q->cursor->data ;
 }
-
-
 
 /***
  ** function    : Q_Put
@@ -521,7 +505,6 @@ int     Q_Put( queue *q, void *data ) {
     q->cursor->data = data ;
     return TRUE;
 }
-
 
 /***
  ** function    : Q_Find
@@ -554,7 +537,6 @@ int Q_Find( queue *q, void *data, int Comp(const void *, const void *) ) {
 }
 
 /*========  Sorted Queue and Index functions   ========= */
-
 
 static void QuickSort( void *list[], int low, int high, int Comp( const void *, const void * ) ) {
 
@@ -596,7 +578,6 @@ static void QuickSort( void *list[], int low, int high, int Comp( const void *, 
         QuickSort( list, j+1, high, Comp );
     }
 }
-
 
 /***
  ** function    : Q_Sort
@@ -668,7 +649,6 @@ int Q_Sort( queue *q, int Comp(const void *, const void *) ) {
     return TRUE;
 }
 
-
 /***
  ** function    : Q_BSearch
  ** purpose     : binary search of queue index for node containing key
@@ -707,7 +687,6 @@ static int Q_BSearch(  queue *q, void *key, int Comp(const void *, const void*) 
     return -1;
  }
 
-
 /***
  ** function    : Q_Seek
  ** purpose     : use index to locate data according to key in 'data'
@@ -734,8 +713,6 @@ void *Q_Seek( queue *q, void *data, int Comp(const void *, const void *) ) {
 
     return ppindex[idx];
 }
-
-
 
 /***
  ** function    : Q_Insert
