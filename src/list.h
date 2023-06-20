@@ -1,7 +1,7 @@
 /* Now called list.h instead of hexdump.h */
 /* Global defines */
 #define LISTVERSION 0
-#define LISTMINOR 32
+#define LISTMINOR 34
 #define LISTMAJOR 7
 /* Had to include this one, since it's disappeared from 2.2 linux kernel or something... */
 #ifndef PATH_MAX
@@ -22,18 +22,18 @@ typedef unsigned long u_long;
 #endif
 
 enum ByeReason {BR_NOERR, /* 0 */
-		BR_NOMEM, /* 1 */
-		BR_DEBUGEND, /* 2 */
-		BR_FILE_ERR, /* 3 */
-		BR_BADSTRING, /* 4 */
-		BR_DIRNOTFILE, /* 5 */
-		BR_NOCOLOR, /* 6 */
-		BR_FILEPERM, /* 7 */
-		BR_NOTFILE, /* 8 */
-		BR_TINYCOLS, /* 9 */
-		BR_TINYLINES, /* 10 */
-		BR_USAGE, /* 11 */
-		BR_NOFILENAME /* 12 */
+                BR_NOMEM, /* 1 */
+                BR_DEBUGEND, /* 2 */
+                BR_FILE_ERR, /* 3 */
+                BR_BADSTRING, /* 4 */
+                BR_DIRNOTFILE, /* 5 */
+                BR_NOCOLOR, /* 6 */
+                BR_FILEPERM, /* 7 */
+                BR_NOTFILE, /* 8 */
+                BR_TINYCOLS, /* 9 */
+                BR_TINYLINES, /* 10 */
+                BR_USAGE, /* 11 */
+                BR_NOFILENAME /* 12 */
 } WhyBye;
 
 #define QUIT_CHAR 'q'
@@ -87,7 +87,7 @@ __inline__ void BackPage(struct FileData *, long int);
 #else
 void BackPage(struct FileData *, long int);
 #endif
-int Bye(int, int);
+int Bye(enum, int);
 void CartWheel(void);
 void debug_function(char *, int, int, int);
 int ShowStats(struct FileData *);
