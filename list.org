@@ -4803,13 +4803,15 @@ The reason for two is that BSD and AT&T UNIX have never bothered to use GNU's ma
 having come up with their own and stuck with it. The one thing I'm missing seems to be a
 makefile that'll work happily under Minix. How does that differ from BSDMake or GNU Make?
 
+I stitched in a very small change for BSD, if gcc isn't installed, it'll use the cc that IS installed, as long as there is one.
+
 ** BSDMakefile
    :PROPERTIES:
    :header-args: :tangle src/BSDMakefile
    :END:
 #+BEGIN_SRC make
 DEBUGFLAGS = -g -O2
-CC = gcc
+CC = cc
 CFLAGS = -Wall -W -pedantic
 VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz

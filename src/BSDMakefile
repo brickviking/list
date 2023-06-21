@@ -1,5 +1,5 @@
 DEBUGFLAGS = -g -O2
-CC = gcc
+CC = cc
 CFLAGS = -Wall -W -pedantic
 VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz
