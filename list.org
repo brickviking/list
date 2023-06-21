@@ -4820,7 +4820,7 @@ DISTBINFILE = list-bin-$(VERSION).tar.gz
 SRCDIR = src
 LDFLAGS = -s
 LIBS = -lcurses
-OPTFLAGS = -O3
+OPTFLAGS = -O3 -fcommon
 
 OBJECTS = list.o dequeue.o bugwrite.o screen.o file.o input.o
 DOBJECTS = listd.o dequeued.o bugwrited.o screend.o filed.o inputd.o
