@@ -1,6 +1,5 @@
 /* vim:ts=2:ww=0:
 -*- mode: c; indent-tab-mode: nil; -*-
-*/
 **  WARNING: program in semi-stable (read - BETA) state at the moment...it's usable, but a few bugs remain.
 **
 **  Released under the GPL version 2, Copyright (c) 2002,2021,2023 brickviking

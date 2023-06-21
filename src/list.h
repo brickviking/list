@@ -15,6 +15,7 @@
  * even HAVE color in its ncurses so we have to make do with old
  * curses instead - there isn't a has_color
  */
+
 #ifdef _MINIX
 int has_color(void);
 void getmaxyx(WINDOW *, int, int);
@@ -87,7 +88,7 @@ __inline__ void BackPage(struct FileData *, long int);
 #else
 void BackPage(struct FileData *, long int);
 #endif
-int Bye(enum, int);
+int Bye(enum ByeReason, int);
 void CartWheel(void);
 void debug_function(char *, int, int, int);
 int ShowStats(struct FileData *);
