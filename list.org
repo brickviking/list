@@ -4948,6 +4948,58 @@ uninstall:
 #+END_SRC
 
 
+** Watcom Makefile
+   :PROPERTIES:
+   :header-args: :tangle src/Makefile.wcc
+   :END:
+
+This needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line.
+
+#+BEGIN_SRC c
+  DEBUGFLAGS = -g -O2
+  CC = wcc
+  CFLAGS = -bc -wx -od -d3
+  VERSION = 0734
+  DISTFILE = list$(VERSION).tgz
+  DISTBINFILE = lstb$(VERSION).tgz
+  SRCDIR = src
+  INCDIR = -i=c:\pdcurses-3.9\
+  LDFLAGS = -s
+  LIBS = -lpdcurses.lib
+  OPTFLAGS = -O3
+
+  OBJECTS = list.obj dequeue.obj bugwrite.obj screen.obj file.obj input.obj
+
+  all: list
+
+  .c.obj:
+          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+
+  list.obj: list.c
+          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+
+  screen.obj: screen.c
+          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+
+  file.obj: file.c
+          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+
+  dequeue.obj: dequeue.c
+          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+
+  bugwrite.obj: bugwrite.c
+          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+
+  input.obj: input.c
+          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+
+  list: $(OBJECTS)
+          $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+
+  clean:
+          del *.o list
+
+#+END_SRC
 * Bugs
 (so far)
 + Possible initial copyright difference (issue #11)
