@@ -8,11 +8,6 @@
 #include <curses.h>
 #include "list.h"
 
-/* I should really make the numerical digits into ENUMS so I can feed a simple enum var instead.
-   That way I can assign whatever numbers I want, and it shouldn't matter as long as I
-   recompile with the correct enum
-*/
-
 int NewFile(struct FileData *fi, char *NewName) {
 /* It seems I should abandon local variables and just work with the globals *
  * I already have fi->FName, so I could just work from that...though if I've
