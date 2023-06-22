@@ -4798,12 +4798,16 @@ The obvious place to put declarations and defines. It's the header file for the 
 
 #+END_SRC
 * Makefiles
-There's two of these; one for BSD systems, and one for the rest of the UNIX-likes.
-The reason for two is that BSD and AT&T UNIX have never bothered to use GNU's make syntax,
-having come up with their own and stuck with it. The one thing I'm missing seems to be a
-makefile that'll work happily under Minix. How does that differ from BSDMake or GNU Make?
+There's two of these; one for BSD systems, and one for the rest of the UNIX-likes.  The reason for
+two is that BSD and AT&T UNIX have never bothered to use GNU's make syntax, having come up with
+their own and stuck with it. The one thing I'm missing seems to be a makefile that'll work happily
+under Minix. How does that differ from BSDMake or GNU Make?
 
-I stitched in a very small change for BSD, if gcc isn't installed, it'll use the cc that IS installed, as long as there is one.
+I stitched in a very small change for BSD, if gcc isn't installed, it'll use the cc that IS
+installed, as long as there is one. In some cases this won't have been installed if compilers such
+as clang were installed and not done a symlink. This also seems to be relevant for Minix too, which
+has now switched (at least in part) to the NetBSD userland and now also uses clang as gcc no longer
+compiles well (gmp doesn't seem to want to compile).
 
 ** BSDMakefile
    :PROPERTIES:
