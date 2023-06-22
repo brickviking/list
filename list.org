@@ -4811,7 +4811,7 @@ compiles well (gmp doesn't seem to want to compile).
    :PROPERTIES:
    :header-args: :tangle src/BSDMakefile
    :END:
-#+BEGIN_SRC make
+#+BEGIN_SRC makefile
 DEBUGFLAGS = -g -O2
 CC = clang
 # Should be clang if no cc in system
@@ -4871,7 +4871,7 @@ uninstall:
    :PROPERTIES:
    :header-args: :tangle src/Makefile
    :END:
-#+BEGIN_SRC make
+#+BEGIN_SRC makefile
 DEBUGFLAGS = -g -O2
 ifeq ($(OS), minix)
 CC = clang
@@ -4956,49 +4956,49 @@ uninstall:
 This needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line. This also
 needs tabs where they need to be, I should have modified them in previous makefiles too.
 
-#+BEGIN_SRC make
-  DEBUGFLAGS = -g -O2
-  CC = wcc
-  CFLAGS = -bc -wx -od -d3
-  VERSION = 0734
-  DISTFILE = list$(VERSION).tgz
-  DISTBINFILE = lstb$(VERSION).tgz
-  SRCDIR = src
-  INCDIR = -i=c:\pdcurses-3.9\
-  LDFLAGS = -s
-  LIBS = -lpdcurses.lib
-  OPTFLAGS = -O3
+#+BEGIN_SRC makefile
+DEBUGFLAGS = -g -O2
+CC = wcc
+CFLAGS = -bc -wx -od -d3
+VERSION = 0734
+DISTFILE = list$(VERSION).tgz
+DISTBINFILE = lstb$(VERSION).tgz
+SRCDIR = src
+INCDIR = -i=c:\pdcurses-3.9\
+LDFLAGS = -s
+LIBS = -lpdcurses.lib
+OPTFLAGS = -O3
 
-  OBJECTS = list.obj dequeue.obj bugwrite.obj screen.obj file.obj input.obj
+OBJECTS = list.obj dequeue.obj bugwrite.obj screen.obj file.obj input.obj
 
-  all: list
+all: list
 
-  .c.obj:
-  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+.c.obj:
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
-  list.obj: list.c
-  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+list.obj: list.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
-  screen.obj: screen.c
-  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+screen.obj: screen.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
-  file.obj: file.c
-  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+file.obj: file.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
-  dequeue.obj: dequeue.c
-  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+dequeue.obj: dequeue.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
-  bugwrite.obj: bugwrite.c
-  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+bugwrite.obj: bugwrite.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
-  input.obj: input.c
-  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+input.obj: input.c
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
-  list: $(OBJECTS)
-  	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+list: $(OBJECTS)
+	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
-  clean:
-  	del *.o list
+clean:
+	del *.o list
 
 #+END_SRC
 * Bugs
