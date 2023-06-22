@@ -6,7 +6,7 @@ list is a curses-based interactive file listing program that combines the functi
 
 The original list program that I saw started out as an excellent program under MS-DOS created by Vernon Buerg, to whom I acknowledge the initial idea. However, there was not an equivalent program under Linux, although people had tried. There are two hexdump programs which provide something like what I wanted, but I also wanted to have a text display at the press of one key (without macros, please...). I note that Midnight Commander also provides the same ability but wrapped up in a nice file manager too.
 
-list is (pretty much) all my own code, but is based on routines slipped in from the dequeue, hexdump and srchfile packages from SNIPPETS, which was maintained by Bob Stout until his death. Mirrors of the SNIPPETS code still exist as of 2020 over on GitHub. List was first created to run under DJGPP, and then again into a UNIX C/curses program. A number of bugs appeared to have been squashed in this move, but, needless to say, several still remain.
+list is (pretty much) all my own code, but is based on routines slipped in from the dequeue, hexdump and srchfile packages from SNIPPETS, which was maintained by Bob Stout until his death. Mirrors of the SNIPPETS code still exist as of 2020 over on GitHub. List was first created to run under DJGPP, and then morphed into a UNIX C/curses program. A number of bugs appeared to have been squashed in this move, but, needless to say, several still remain.
 
 Naturally, things have evolved since then, but I've finally recovered a copy of this program's source, and will continue to work on it, as and when I get better at coding.
 
@@ -58,6 +58,8 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 * Raw screen writes. That was for DOS, and Linux doesn't really let you do that these days, at least not without dancing through hoops to get there.
 
-* BIOS screen writes. Same as above.
+* BIOS screen writes. Same reason as above.
+
+* Windows support. No. Just…no. There are too many variants of the Windows API (Windows 3.1 - Windows 11), and four separate versions of the shells that ran under Windows (COMMAND.COM (MS-DOS 2.0 - 7.0), CMD.EXE, powershell.exe, pwsh.exe).
 
 * Telephone, FAX, and BBS support. Do you really want to dial me up in New Zealand at 3:30 am to tell me you can't run this program? These days the support (what little there is) is severely hobbled by my lack of coding knowledge. Yes, I'll get better, but it'll take time. I don't even _have_ a FAX. Meanwhile, post an issue to the repository, I'll probably see it.
