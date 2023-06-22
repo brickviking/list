@@ -4816,6 +4816,7 @@ compiles well (gmp doesn't seem to want to compile).
 #+BEGIN_SRC make
 DEBUGFLAGS = -g -O2
 CC = cc
+# Should possibly be clang if no cc in system
 CFLAGS = -Wall -W -pedantic
 VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz
@@ -4875,9 +4876,9 @@ uninstall:
 #+BEGIN_SRC make
 DEBUGFLAGS = -g -O2
 ifeq ($(OS), minix)
-CC = cc
+CC = clang
 CFLAGS = -Wall
-VERSION = 0732
+VERSION = 0734
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = listb$(VERSION).tgz
 else

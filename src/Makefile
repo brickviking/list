@@ -1,8 +1,8 @@
 DEBUGFLAGS = -g -O2
 ifeq ($(OS), minix)
-CC = cc
+CC = clang
 CFLAGS = -Wall
-VERSION = 0732
+VERSION = 0734
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = listb$(VERSION).tgz
 else
