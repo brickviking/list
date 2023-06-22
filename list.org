@@ -28,13 +28,14 @@ me 19 years to find it again!
 split across multiple files as a bit of an exercise.
 
 * Documentation
-Yup, docs are pretty much required, so as to understand not only the program itself and its functions,
-but also the mindset that I had while I was writing the program. I've used Org-mode from emacs to write
-this up, and you can use org-mode to extract all the files for the project—eventually.
+Yup, docs are pretty much required, so as to understand not only the program itself and its
+functions, but also the mindset that I had while I was writing the program. I've used Org-mode from
+emacs to write this up, and you can use org-mode to extract all the files for the
+project—eventually.
 
-Currently, I provide a man page here written in nroff and perhaps
-a .tex file later. I made the docs originally before I was well aware of LaTeX, and I think I
-snagged the output format from other manpages. I'm also including the README.md file whole.
+Currently, I provide a man page here written in nroff and perhaps a .tex file later. I made the docs
+originally before I was well aware of LaTeX, and I think I snagged the output format from other
+manpages. I'm also including the README.md file whole.
 
 I wasn't originally going to include the Changelog in here, but have decided to in the end. As it
 stands, it's also currently in the src directory and will be kept up to date. Sort of.
