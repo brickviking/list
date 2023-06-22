@@ -4815,8 +4815,8 @@ compiles well (gmp doesn't seem to want to compile).
    :END:
 #+BEGIN_SRC make
 DEBUGFLAGS = -g -O2
-CC = cc
-# Should possibly be clang if no cc in system
+CC = clang
+# Should be clang if no cc in system
 CFLAGS = -Wall -W -pedantic
 VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz
