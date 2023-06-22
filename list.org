@@ -4952,7 +4952,9 @@ uninstall:
 (so far)
 + Possible initial copyright difference (issue #11)
 + ChangeLog states version number is in hexdump.h (which is now list.h)
-+ At least on minix, no cc, it's clang. (Addressed with Makefiles)
++ At least on minix, no cc, it's clang, which is addressed with Makefiles.
++ Makefile for minix doesn't detect that it's running under Minix
++ Plenty of compiling problems under FreeDOS, needs pdcurses. Missing lots of things.
 
 * Conclusions
 There. I think that's all.
