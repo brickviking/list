@@ -4964,7 +4964,7 @@ VERSION = 0734
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = lstb$(VERSION).tgz
 SRCDIR = src
-INCDIR = -i=c:\pdcurses-3.9\
+INCDIR = -i=c:\\pdcurses-3.9
 LDFLAGS = -s
 LIBS = -lpdcurses.lib
 OPTFLAGS = -O3
