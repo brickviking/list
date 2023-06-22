@@ -4953,9 +4953,10 @@ uninstall:
    :header-args: :tangle src/Makefile.wcc
    :END:
 
-This needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line.
+This needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line. This also
+needs tabs where they need to be, I should have modified them in previous makefiles too.
 
-#+BEGIN_SRC c
+#+BEGIN_SRC make
   DEBUGFLAGS = -g -O2
   CC = wcc
   CFLAGS = -bc -wx -od -d3
@@ -4973,31 +4974,31 @@ This needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every 
   all: list
 
   .c.obj:
-          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
   list.obj: list.c
-          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
   screen.obj: screen.c
-          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
   file.obj: file.c
-          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
   dequeue.obj: dequeue.c
-          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
   bugwrite.obj: bugwrite.c
-          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
   input.obj: input.c
-          $(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+  	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
 
   list: $(OBJECTS)
-          $(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+  	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
 
   clean:
-          del *.o list
+  	del *.o list
 
 #+END_SRC
 * Bugs
