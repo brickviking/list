@@ -84,7 +84,9 @@ int ruler;
 /* - main file (list.c) */
 long *AllocateLines(struct FileData *);
 #ifndef _MINIX
+#ifndef __DOS__
 __inline__ void BackPage(struct FileData *, long int);
+#endif
 #else
 void BackPage(struct FileData *, long int);
 #endif

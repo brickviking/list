@@ -1,7 +1,11 @@
 #include <stdlib.h>
 #include <sys/stat.h> /* Do I need this? */
 #include <curses.h>
+#ifndef __DOS__
 #include <dirent.h>
+#else /* We have DOS */
+#include <direct.h>
+#endif
 #include <time.h>
 /* #include <forms.h> */
 #include "list.h"

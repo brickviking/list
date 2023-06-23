@@ -9,7 +9,11 @@
 #include <ctype.h>
 #include <curses.h>
 #include <menu.h>
+#ifndef __DOS__
 #include <dirent.h>
+#else
+#include <direct.h>
+#endif
 #include <sys/stat.h>
 #include "list.h"
 

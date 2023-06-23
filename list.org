@@ -839,7 +839,11 @@ and relayed to myself later. I guess I could happily format this like a github i
 #include <stdlib.h>
 #include <sys/stat.h> /* Do I need this? */
 #include <curses.h>
+#ifndef __DOS__
 #include <dirent.h>
+#else /* We have DOS */
+#include <direct.h>
+#endif
 #include <time.h>
 /* #include <forms.h> */
 #include "list.h"
@@ -2714,7 +2718,11 @@ These are functions that deal with anything going to the screen through ncurses.
 #include <ctype.h>
 #include <curses.h>
 #include <menu.h>
+#ifndef __DOS__
 #include <dirent.h>
+#else
+#include <direct.h>
+#endif
 #include <sys/stat.h>
 #include "list.h"
 
@@ -4754,7 +4762,9 @@ The obvious place to put declarations and defines. It's the header file for the 
   /* - main file (list.c) */
   long *AllocateLines(struct FileData *);
   #ifndef _MINIX
+  #ifndef __DOS__
   __inline__ void BackPage(struct FileData *, long int);
+  #endif
   #else
   void BackPage(struct FileData *, long int);
   #endif
