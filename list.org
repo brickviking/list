@@ -4963,43 +4963,26 @@ needs tabs where they need to be, I should have modified them in previous makefi
 #+BEGIN_SRC makefile
 DEBUGFLAGS = -g -O2
 CC = wcc
-CFLAGS = -bc -wx -od -d3
+CL = wlink
+CFLAGS = -bc -wx -d3
 VERSION = 0734
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = lstb$(VERSION).tgz
 SRCDIR = src
 INCDIR = -i=c:\pdcurses
-LDFLAGS = -s
-LIBS = -lpdcurses.lib
-OPTFLAGS = -O3
+LDFLAGS = 
+LIBS = pdcurses.lib
+OPTFLAGS = -od
 
 OBJECTS = list.obj dequeue.obj bugwrite.obj screen.obj file.obj input.obj
 
 all: list
 
 .c.obj:
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
-
-list.obj: list.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
-
-screen.obj: screen.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
-
-file.obj: file.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
-
-dequeue.obj: dequeue.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
-
-bugwrite.obj: bugwrite.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
-
-input.obj: input.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
 list: $(OBJECTS)
-	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
+	$(CL) $(LDFLAGS) name list.exe file { $(OBJECTS) $(LIBS) }
 
 clean:
 	del *.o list
