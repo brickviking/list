@@ -4976,16 +4976,16 @@ OPTFLAGS = -od
 
 OBJECTS = list.obj dequeue.obj bugwrite.obj screen.obj file.obj input.obj
 
-all: list
+all: list.exe
 
 .c.obj:
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
-list: $(OBJECTS)
+list.exe: $(OBJECTS)
 	$(CL) $(LDFLAGS) name list.exe file { $(OBJECTS) $(LIBS) }
 
 clean:
-	del *.o list
+	del *.obj list.exe
 
 #+END_SRC
 * Bugs
