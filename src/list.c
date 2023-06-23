@@ -35,7 +35,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #ifdef __DOS__  /* does this also include WatcomC for DOS? */
-#include <direct.h
+#include <direct.h>
 #else
 #include <dirent.h>  /*  Do we need this here, or in filebrowse? */
 #endif
