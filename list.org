@@ -4968,7 +4968,7 @@ VERSION = 0734
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = lstb$(VERSION).tgz
 SRCDIR = src
-INCDIR = -i=c:\\pdcurses-3.9
+INCDIR = -i=c:\pdcurses
 LDFLAGS = -s
 LIBS = -lpdcurses.lib
 OPTFLAGS = -O3
@@ -4978,25 +4978,25 @@ OBJECTS = list.obj dequeue.obj bugwrite.obj screen.obj file.obj input.obj
 all: list
 
 .c.obj:
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
 
 list.obj: list.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
 
 screen.obj: screen.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
 
 file.obj: file.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
 
 dequeue.obj: dequeue.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
 
 bugwrite.obj: bugwrite.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
 
 input.obj: input.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) -c $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR)
 
 list: $(OBJECTS)
 	$(CC) $(LDFLAGS) -o list $(OBJECTS) $(LIBS)
