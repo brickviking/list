@@ -194,11 +194,11 @@ int Q_PushHead( queue *q, void *d ) {
 
   /* Park the current queue head node */
   n = q->head;
-  
+
   /* Set up the new node */
   q->head = malloc(sizeof(datanode));
   q->head->data = q->head->prev = q->head->next = NULL;
-  
+
   /* Update the node data, prev, next pointers */
   q->head->data = d;
   q->head->prev = n;    /* previous points down the queue */
@@ -218,11 +218,11 @@ int Q_PushTail( queue *q, void *d ) {
 
   /* Park the current queue tail node */
   n = q->tail;
-  
+
   /* Set up the new node */
   q->tail = malloc(sizeof(datanode));
   q->tail->data = q->tail->prev = q->tail->next = NULL;
-  
+
   /* Update the node data, prev, next pointers */
   q->tail->data = d;
   q->tail->next = n;    /* next points up the queue */
