@@ -4815,7 +4815,7 @@ compiles well (gmp doesn't seem to want to compile).
 DEBUGFLAGS = -g -O2
 CC = clang
 # Should be clang if no cc in system
-CFLAGS = -Wall -W -pedantic
+CFLAGS = -Wall -W -pedantic -fcommon
 VERSION = 0.7.34
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
