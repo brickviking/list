@@ -3,7 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#ifdef __DOS__
+#include <direct.h>
+#else
 #include <dirent.h>
+#endif
 #include <sys/stat.h>
 #include <curses.h>
 #include "list.h"
@@ -298,18 +302,22 @@ int Bye(enum ByeReason WhyBye, int LineCalled) {
     case BR_FILE_ERR:
          switch (errno) {
            case ENOENT:
-               sprintf(ErrMessage, "list: File not found when called from line %d!\n", LineCalled);
-               break;
+      	 sprintf(ErrMessage, "list: File not found when called from line %d!\n", LineCalled);
+      	 break;
            case EACCES:
-               sprintf(ErrMessage, "list: You do not have permission to look at this file\n");
-               break;
-#ifndef _MINIX
+      	 sprintf(ErrMessage, "list: You do not have permission to look at this file\n");
+      	 break;
+#ifndef _MINIX /* Won't work for DOS either */
+#ifdef __DOS__
+/* DOS has no symlinks, so do nothing */
+#else  /* Definitely not DOS */
            case ELOOP:
-               sprintf(ErrMessage, "list: Got caught trying to follow too many symbolic links\n");
-               break;
-#endif
+      	 sprintf(ErrMessage, "list: Got caught trying to follow too many symbolic links\n");
+      	 break;
+#endif /* It's not DOS, folks. Symlinks exist */
+#endif  /* !MINIX (i.e. everything else) */
            default:
-               sprintf(ErrMessage, "list: something unknown is wrong here when trying to open a file\n");
+      	 sprintf(ErrMessage, "list: something unknown is wrong here when trying to open a file\n");
          } /* End of switch for case 3... */
          break;
   case BR_BADSTRING:

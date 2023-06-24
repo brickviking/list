@@ -10,13 +10,15 @@
 #ifndef __linux__
 #ifndef __OpenBSD__  /* Then is it NetBSD? */
 #ifndef __NetBSD__ /* Nope, FreeBSD? */
-#ifndef __FreeBSD__  /* No, try DOS */
-#ifndef __DJGPP__ /* Must be minix... */
+#ifndef __FreeBSD__  /* No, try DJGPP */
+#ifndef __DJGPP__ /* It's not DJGPP, could be just DOS */
+#ifndef __DOS__ /* okay it's not DOS - must be Minix */
 #include <lib.h>
 /* Sheesh - want to #define _MINIX but I'm striking trouble,
    this file is the only one to #define _MINIX
 */
-#endif  /* !DJGPP (i.e. MINIX) */
+#endif  /* !DOS (i.e. MINIX) */
+#endif  /* !DJGPP */
 #endif  /* !BSD - this doesn't take DOS into account */
 #endif /* !FreeBSD */
 #endif /* !OpenBSD */

@@ -1,5 +1,9 @@
 #include <stdlib.h>
+#ifdef __DOS__
+#include <direct.h>
+#else
 #include <dirent.h>
+#endif
 #include <errno.h>
 #include <sys/stat.h>
 #include <curses.h>
