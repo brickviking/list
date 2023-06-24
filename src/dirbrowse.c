@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stat.h>
+/* Do I need sys/stat.h here? */
 #include "list.h"
 
 /* Should display a sorted directory */

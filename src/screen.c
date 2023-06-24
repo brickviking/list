@@ -168,7 +168,7 @@ void ShowHelp(struct FileData *fi) {
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQQaaaawaaaaw,  jQQQQQQ;  -QQQQQQga_amQQQQQD   :QQQQQQmawmQQQg     ");
     mvwaddstr(HelpWin, y++, x, "   mQQQQQQWQQQQWWQQQW(  jQQQQQQ;   \"9QQQQQWQQQQQQ@!`   -$QQQQQQWWQQQQ\?     ");
     mvwaddstr(HelpWin, y++, x, "   \?\?\?\?\?\?\?\?\?\?\?\?\?\?\?\?\?\?'  )!!!!!!`     -~\"\?\?T\?T\?!\"`        ~\"!\?\?\?\?\?\?\?\"`     ");
-
+                                                                 
   }
 /*
   else {
@@ -317,7 +317,7 @@ void ShowHelp(struct FileData *fi) {
         wattron(HelpWin,  A_BOLD);
       }
     }  
-
+     
     y = 0, x = 1;
     if(EightBitDisplay) {
       mvwaddstr(HelpWin, y++, x, "ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿"); /* Ln 1 */
@@ -550,7 +550,7 @@ int ShowStats(struct FileData *fi) {
   }
   wrefresh(StatWin);
    if( QUIT_CHAR != ( c = getch())) { /* use this char to decide whether we display the next stats screen... */
-
+ 
   }
   /* Here's the next screen...shows argc and argv... */
   if(!fi->Monochrome) {

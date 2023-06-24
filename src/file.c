@@ -139,10 +139,10 @@ long *AllocateLines(struct FileData *fi) {
             j++;
             llflag++;
 /*            if(debug) {
-              char *tempstring;
+      	char *tempstring;
         tempstring = (char *) malloc(sizeof(tempstring) * 80); / * Surely this should be long enough to list numbers up to several million? * /
-              sprintf(tempstring, "CR:%ld %ld\t", i-1, j);
-              debug_function(tempstring, 0, 0, __LINE__);
+      	sprintf(tempstring, "CR:%ld %ld\t", i-1, j);
+      	debug_function(tempstring, 0, 0, __LINE__);
         free(tempstring);
             } */
             break;
@@ -152,8 +152,8 @@ long *AllocateLines(struct FileData *fi) {
         if(linelength >= (COLS - fi->TabSize)) {
     linelength = COLS;
     break;
-              }
-              else
+      	}
+      	else
     linelength += 4; / * The case should be sorted out from here */
           default:
             break;

@@ -136,8 +136,8 @@ char WhatNext(struct FileData *fi) { /* 1 */
       errno = 0;
       fi->FPosn = strtol(buf2, &buf2p, 0); /* Set fileposition */
       if(errno) {
-              CloseNCurses();
-              Bye(BR_BADSTRING, __LINE__);
+      	CloseNCurses();
+      	Bye(BR_BADSTRING, __LINE__);
       }
       /* Have to check for FPosn within 0 <= FPosn <= FEnd  */
       if(fi->FPosn > fi->FEnd) {
@@ -241,7 +241,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
     }
     ShowHelp(fi);
     /*           if(!(fi->FPtr==stdin)) {
-                 } */
+      	   } */
     break;
   case 'S':
   case 's':
