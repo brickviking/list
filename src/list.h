@@ -22,6 +22,10 @@ void getmaxyx(WINDOW *, int, int);
 typedef unsigned long u_long;
 #endif
 
+#ifdef __DOS__
+typedef unsigned long u_long;
+#endif
+
 enum ByeReason {BR_NOERR, /* 0 */
                 BR_NOMEM, /* 1 */
                 BR_DEBUGEND, /* 2 */
