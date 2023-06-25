@@ -5072,36 +5072,15 @@ LDFLAGS =
 LIBS = pdcurses.lib
 OPTFLAGS = -od
 
-OBJECTS = l.obj d.obj b.obj f.obj i.obj sh.obj sc.obj
+OBJECTS = list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj
 
 all: list.exe
 
 .c.obj:
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
-l.obj: list.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
-
-d.obj: dequeue.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
-
-b.obj: bugwrite.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
-
-f.obj: file.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
-
-i.obj: input.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
-
-sh.obj: showhelp.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
-
-sc.obj: screen.c
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
-
 list.exe: $(OBJECTS)
-	$(CL) $(LDFLAGS) name list.exe file { $(OBJECTS) } libr { $(LIBS) }
+	$(CL) $(LDFLAGS) @list.lnk
 
 clean:
 	del *.obj list.exe
@@ -5109,7 +5088,19 @@ clean:
 #+END_SRC
 
 * DOS
-So far, this needs pdcurses. There's other work to do to get it to work under Watcom.
+   :PROPERTIES:
+   :header-args: :tangle src/list.lnk
+   :END:
+
+So far, this needs pdcurses. There's other work to do to get it to work under Watcom. I've found out that DOS has a 128-char limit, so watcom requires response files to pass more information than that around. Hence, here's a list.lnk file that watcom can use. I've restored the full filenames.
+
+#+BEGIN_SRC linker -i
+system dos4g
+name list.exe
+option map
+file { list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj }
+library { c:\pdcurses\dos\pdcurses.lib }
+#+END_SRC
 
 * Bugs
 (so far)

@@ -1,0 +1,5 @@
+system dos4g
+name list.exe
+option map
+file { list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj }
+library { c:\pdcurses\dos\pdcurses.lib }
