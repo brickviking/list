@@ -5121,6 +5121,7 @@ So far, this needs pdcurses. There's other work to do to get it to work under Wa
 + Plenty of compiling problems under FreeDOS, needs pdcurses. Missing lots of things.
 + I don't need menu.h under DOS, it's simply not in pdcurses and I don't technically
   need it under anything else yet.
++ After exiting the editor, list doesn't re-read the content.
 
 * Conclusions
 There. I think that's all.
