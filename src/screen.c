@@ -8,8 +8,8 @@
 #endif 
 #include <ctype.h>
 #include <curses.h>
-#include <menu.h>
 #ifndef __DOS__
+#include <menu.h>  /* not strictly necessary yet */
 #include <dirent.h>
 #else
 #include <direct.h>
