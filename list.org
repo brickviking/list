@@ -3671,7 +3671,37 @@ int MakeMenu(struct ListFile *fi) {
    :header-args: :tangle src/showhelp.c
    :END:
 
-This was split off into its own file because it seems to be causing some issues for the watcom compile that I can't track down.
+This was split off into its own file because it seems to be causing some issues for the watcom compile that I finally tracked down. I've also busted out the comments to its own separate section. It also cuts down the number of lines in screen.c, even though this would belong logically with screen.c due to it addressing the screen directly.
+
+The issue I had was that I had started working with the variables then created some more variables. It seems that the WatcomC prefers a more C++-like concept of declaring all your variables at the top of the function before you start using them.
+
+#+BEGIN_EXAMPLE c -i
+void ShowHelp(struct FileData *fi) {
+/* char tmpstr[COLS+1]; */
+  char *tempstring = (char *) malloc(sizeof(tempstring) * 1024);  /* To give us some room */
+  int c, middle, x, y, EightBitDisplay;
+  WINDOW *HelpWin;
+  if (tempstring == NULL)
+    /* We should be failing if we can't malloc here */
+    Bye(BR_NOMEM, __LINE__);
+
+#+END_EXAMPLE
+
+Here, I'd tried to assign to tempstring, and then tried to declare more variables (int c, middle, x, y and EightBitDisplay). Even in C, you're not meant to do this, certainly not in the later standards for C.
+
+What I should have done was this instead:
+#+BEGIN_EXAMPLE c -i
+void ShowHelp(struct FileData *fi) {
+/* char tmpstr[COLS+1]; */
+  int c, middle, x, y, EightBitDisplay;
+  WINDOW *HelpWin; /* Note the movement of a variable being set to below */
+  char *tempstring = (char *) malloc(sizeof(tempstring) * 1024);  /* To give us some room */
+  if (tempstring == NULL)
+    /* We should be failing if we can't malloc here */
+    Bye(BR_NOMEM, __LINE__);
+#+END_EXAMPLE
+
+Anyhow, here's the code for real. Note to self: check out the rest of the source code for similar egregious flagrant disregard for modern standards. I wonder if this had got to C90 as a "soft requirement". I've yet to fix the bugs in screen.c, which again only turn up for watcom.
 
 #+BEGIN_SRC c -i
 #include <stdio.h>
