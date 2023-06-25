@@ -5069,7 +5069,7 @@ DISTBINFILE = lstb$(VERSION).tgz
 SRCDIR = src
 INCDIR = -i=c:\pdcurses
 LDFLAGS = 
-LIBS = c:\pdcurses\dos\pdcurses.lib
+LIBS = pdcurses.lib
 OPTFLAGS = -od
 
 OBJECTS = l.obj d.obj b.obj f.obj i.obj sh.obj sc.obj
@@ -5079,29 +5079,29 @@ all: list.exe
 .c.obj:
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
-l.obj: list.c list.h
+l.obj: list.c
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
-d.obj: dequeue.c dequeue.h
+d.obj: dequeue.c
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
-b.obj: bugwrite.c list.h
+b.obj: bugwrite.c
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
-f.obj: file.c list.h
+f.obj: file.c
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
-i.obj: input.c list.h
+i.obj: input.c
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
-sh.obj: showhelp.c list.h
+sh.obj: showhelp.c
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
-sc.obj: screen.c list.h
+sc.obj: screen.c
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
 
 list.exe: $(OBJECTS)
-	$(CL) $(LDFLAGS) name list.exe file { $(OBJECTS) } libr $(LIBS) }
+	$(CL) $(LDFLAGS) name list.exe file { $(OBJECTS) } libr { $(LIBS) }
 
 clean:
 	del *.obj list.exe
