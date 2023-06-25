@@ -3722,40 +3722,6 @@ Anyhow, here's the code for real. Note to self: check out the rest of the source
 
 /* Split off from screen.c for the moment to see if it compiles separately */
 void ShowHelp(struct FileData *fi) {
-/* Notes: So far I have had to make sure that this screen is only 80 ch wide... *
- ,* and now I'm going to see if I can stick it in the middle of the screen vertically *
- ,* I also have to worry about ALT_CHARSET, because that doesn't display well in an   *
- ,* xterm for some unknown reason - possibly to do with font mapping               *
- ,* I have also had the idea of displaying a second help screen - seeing as the
- ,* first is keys, the second can be for search + description.
- ,*/
-        /* This help screen layout has been suggested by bronaugh
-         ,*
-                               +-----+------+------------------------+-----+------+------------------------+ 
-                               | Key | Mode |         Action         | Key | Mode |         Action         |
-                               +-----+------+------------------------+-----+------+------------------------+ 
-                               | Z/z | All  | Toggle debug flag      | H/h | All  | Show help screen       |
-                               | T/t | Hex  | Switches to text mode  | X/x | Text | Switch to hex mode     |
-                               | /   | All  | Search forward         | \   | All  | Search backwards       |
-                               | n   | All  | Repeats search         | e   | All  | Edit with ext. editor  |
-                               | S   | All  | Statistics on file     | w   | All  | Write out bug report   |
-                               | O/o | Hex  | Address in Hex or Dec. | Q/q | All  | Quit (Hasta La Vista!) |
-                               | 7   | Text | Toggle printable chars | 8   | Text | Toggle all chars       |
-                               | *   | Text | Show line ends         | l   | Text | Toggle line numbers    |
-                               +-----+------+------------------------+-----+------+------------------------+ 
-
-                               +-----+------+------------------------+-----+------+------------------------+ 
-                               | Key | Mode |         Action         | Key | Mode |         Action         |
-                               +-----+------+------------------------+-----+------+------------------------+ 
-                               | B   | Text | Move back one page     | B   | Hex  | Move back 2072 bytes   |
-                               | Up  | Text | Move back one line     | Up  | Hex  | Move back 37 bytes     |
-                               | Dn  | Text | Move forward one line  | Up  | Hex  | Move forward 37 bytes  |
-                               | Sp  | Text | Move forward one page  | Sp  | Hex  | Move forward 2072 bytes|
-                               | H   | All  | Move to start of file  | E   | Hex  | Move to end of file    |
-                               | G   | Text | Jump to line in file   | G   | Hex  | Jump to byte in file   |
-                               | %   | All  | Move to n% offset file |     |      |                        |
-                               +-----+------+------------------------+-----+------+------------------------+ 
-         ,* */
 /* char tmpstr[COLS+1]; */
   int c, middle, x, y, EightBitDisplay;
   WINDOW *HelpWin;
@@ -4037,6 +4003,47 @@ void ShowHelp(struct FileData *fi) {
 }
 
 #+END_SRC
+
+** showhelp comments
+This is the huge comment block that was possibly causing watcom's compiler to choke. I've popped it out of the file for the moment.
+
+#+BEGIN_SRC c -i
+/* Notes: So far I have had to make sure that this screen is only 80 ch wide... *
+ ,* and now I'm going to see if I can stick it in the middle of the screen vertically *
+ ,* I also have to worry about ALT_CHARSET, because that doesn't display well in an   *
+ ,* xterm for some unknown reason - possibly to do with font mapping               *
+ ,* I have also had the idea of displaying a second help screen - seeing as the
+ ,* first is keys, the second can be for search + description.
+ ,*/
+        /* This help screen layout has been suggested by bronaugh
+         ,*
+                               +-----+------+------------------------+-----+------+------------------------+ 
+                               | Key | Mode |         Action         | Key | Mode |         Action         |
+                               +-----+------+------------------------+-----+------+------------------------+ 
+                               | Z/z | All  | Toggle debug flag      | H/h | All  | Show help screen       |
+                               | T/t | Hex  | Switches to text mode  | X/x | Text | Switch to hex mode     |
+                               | /   | All  | Search forward         | \   | All  | Search backwards       |
+                               | n   | All  | Repeats search         | e   | All  | Edit with ext. editor  |
+                               | S   | All  | Statistics on file     | w   | All  | Write out bug report   |
+                               | O/o | Hex  | Address in Hex or Dec. | Q/q | All  | Quit (Hasta La Vista!) |
+                               | 7   | Text | Toggle printable chars | 8   | Text | Toggle all chars       |
+                               | *   | Text | Show line ends         | l   | Text | Toggle line numbers    |
+                               +-----+------+------------------------+-----+------+------------------------+ 
+
+                               +-----+------+------------------------+-----+------+------------------------+ 
+                               | Key | Mode |         Action         | Key | Mode |         Action         |
+                               +-----+------+------------------------+-----+------+------------------------+ 
+                               | B   | Text | Move back one page     | B   | Hex  | Move back 2072 bytes   |
+                               | Up  | Text | Move back one line     | Up  | Hex  | Move back 37 bytes     |
+                               | Dn  | Text | Move forward one line  | Up  | Hex  | Move forward 37 bytes  |
+                               | Sp  | Text | Move forward one page  | Sp  | Hex  | Move forward 2072 bytes|
+                               | H   | All  | Move to start of file  | E   | Hex  | Move to end of file    |
+                               | G   | Text | Jump to line in file   | G   | Hex  | Jump to byte in file   |
+                               | %   | All  | Move to n% offset file |     |      |                        |
+                               +-----+------+------------------------+-----+------+------------------------+ 
+         ,* */
+#+END_SRC
+
 * Main program
 ** DONE list.c
    :PROPERTIES:
