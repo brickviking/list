@@ -2713,7 +2713,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
 
 #+END_SRC
 
-** DONE screen.c
+** TODO screen.c
    :PROPERTIES:
    :header-args: :tangle src/screen.c
    :END:
@@ -3666,7 +3666,7 @@ int MakeMenu(struct ListFile *fi) {
 
 #+END_SRC
 
-** showhelp.c
+** DONE showhelp.c
    :PROPERTIES:
    :header-args: :tangle src/showhelp.c
    :END:
@@ -4004,7 +4004,7 @@ void ShowHelp(struct FileData *fi) {
 
 #+END_SRC
 
-** showhelp comments
+** DONE showhelp comments
 This is the huge comment block that was possibly causing watcom's compiler to choke. I've popped it out of the file for the moment.
 
 #+BEGIN_SRC c -i
