@@ -2730,8 +2730,8 @@ These are functions that deal with anything going to the screen through ncurses.
 #endif 
 #include <ctype.h>
 #include <curses.h>
-#include <menu.h>
 #ifndef __DOS__
+#include <menu.h>  /* not strictly necessary yet */
 #include <dirent.h>
 #else
 #include <direct.h>
@@ -5017,7 +5017,7 @@ clean:
 #+END_SRC
 
 * DOS
-So far, this needs pdcurses. There's other work to do.
+So far, this needs pdcurses. There's other work to do to get it to work under Watcom.
 
 * Bugs
 (so far)
