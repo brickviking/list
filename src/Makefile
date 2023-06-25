@@ -22,8 +22,8 @@ OPTFLAGS = -O3
 BIN = /usr/local/bin
 MAN = /usr/local/man
 
-OBJECTS = list.o dequeue.o bugwrite.o screen.o file.o input.o
-DOBJECTS = listd.o dequeued.o bugwrited.o screend.o filed.o inputd.o
+OBJECTS = list.o dequeue.o bugwrite.o file.o input.o showhelp.o screen.o
+DOBJECTS = listd.o dequeued.o bugwrited.o filed.o inputd.o showhelpd.o screend.o
 
 all: list
 

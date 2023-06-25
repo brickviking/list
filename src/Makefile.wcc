@@ -11,7 +11,7 @@ LDFLAGS =
 LIBS = pdcurses.lib
 OPTFLAGS = -od
 
-OBJECTS = list.obj dequeue.obj bugwrite.obj screen.obj file.obj input.obj
+OBJECTS = list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj
 
 all: list.exe
 

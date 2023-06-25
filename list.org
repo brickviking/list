@@ -4882,8 +4882,8 @@ LDFLAGS = -s
 LIBS = -lcurses
 OPTFLAGS = -O3 -fcommon
 
-OBJECTS = list.o dequeue.o bugwrite.o screen.o file.o input.o
-DOBJECTS = listd.o dequeued.o bugwrited.o screend.o filed.o inputd.o
+OBJECTS = list.o dequeue.o bugwrite.o file.o input.o showhelp.o screen.o
+DOBJECTS = listd.o dequeued.o bugwrited.o filed.o inputd.o showhelp_d.o screend.o
 
 all: list
 
@@ -4953,8 +4953,8 @@ OPTFLAGS = -O3
 BIN = /usr/local/bin
 MAN = /usr/local/man
 
-OBJECTS = list.o dequeue.o bugwrite.o screen.o file.o input.o
-DOBJECTS = listd.o dequeued.o bugwrited.o screend.o filed.o inputd.o
+OBJECTS = list.o dequeue.o bugwrite.o file.o input.o showhelp.o screen.o
+DOBJECTS = listd.o dequeued.o bugwrited.o filed.o inputd.o showhelpd.o screend.o
 
 all: list
 
@@ -5027,7 +5027,7 @@ LDFLAGS =
 LIBS = pdcurses.lib
 OPTFLAGS = -od
 
-OBJECTS = list.obj dequeue.obj bugwrite.obj screen.obj file.obj input.obj
+OBJECTS = list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj
 
 all: list.exe
 
