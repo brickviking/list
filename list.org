@@ -3598,10 +3598,14 @@ void PrintLine(struct FileData *fi) {
   attroff(A_REVERSE);
 } /* End of PrintLine */
 
-#ifndef _MINIX
-extern __inline__ void BackPage(struct FileData *fi, long int LinesToBackUp) { /* 1st in */
-#else
+#ifdef _MINIX
 void BackPage(struct FileData *fi, long int LinesToBackUp) { /* 1st in */
+#else
+#ifdef __DOS__
+void BackPage(struct FileData *fi, long int LinesToBackUp) { /* 1st in */
+#else /* Not DOS, not MINIX */
+extern __inline__ void BackPage(struct FileData *fi, long int LinesToBackUp) { /* 1st in */
+#endif
 #endif
   if(fi->DumpMode == 't') { /* 2nd in */
     fi->FLineCtr -= (ruler) ?
