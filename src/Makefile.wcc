@@ -1,5 +1,5 @@
 DEBUGFLAGS = -g -O2
-CC = wcc
+CC = wcc386
 CL = wlink
 CFLAGS = -bc -wx -d3
 VERSION = 0735
@@ -21,5 +21,5 @@ all: list.exe
 list.exe: $(OBJECTS)
 	$(CL) $(LDFLAGS) @list.lnk
 
-clean:
+clean: .symbolic
 	del *.obj list.exe
