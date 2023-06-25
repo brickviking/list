@@ -13,7 +13,7 @@ Naturally, things have evolved since then, but I've finally recovered a copy of 
 ## Bugs, ErROrS and Omisons
 list is most definitely still beta software. it is also only designed to reliably handle 7-bit printable ASCII characters, at least under UNIX (this includes Linux). 8-bit and non-printing ASCII characters in files may not be correctly handled. This will depend on the environment where you run the program, but I have tried to sort out the worst offenders (those that would change screen positions). For porting back to MS-DOS, I would suggest using pdcurses, and DJGPP. Some byte sequences in binary files can cause ncurses to go crazy, possibly because these sequences match up with ANSI console commands. As for FreeDOS, I can't say for certain.
 
-I haven't confirmed that this'll work under anything much aside from gcc, so for example I've never tried compiling this under WatcomC, or Open Watcom as it's now known. I might have to see (first) if I can source some libs to work with Open Watcom.
+I haven't confirmed that this'll work under anything much aside from gcc, clang or Watcom (on FreeDOS). I might have to see (first) if I can source some libs to work with Open Watcom.
 
 Also, when going to the End of a file with the End key, you need to go down an extra line to actually display the last line. I haven't tried getting Colour curses modes to work well. In particular, reverse video is not always rendered correctly on some terminal types, and xterms. I have also noticed that xterms do not handle the ALT_GR charset well, unless a suitable font is used in the .Xdefaults file for xterm fonts. But far be it for me to supply a suitable font - let it suffice to say that I developed this originally to display IBM-charset on the screen.
 

@@ -3,6 +3,7 @@
 #+SUBTITLE: a poorly-executed less
 #+AUTHOR: brickviking
 #+DATE: whenever
+#+VERSION: 0.7.35
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -71,7 +72,7 @@ generated source and making sure I don't blow away information I might need late
 .\" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 .\"
 .\"
-.TH LIST 1 "31st Jan 2022" "List" \" -*- nroff -*-
+.TH LIST 1 "26th June 2023" "List" \" -*- nroff -*-
 .SH NAME
 list \- Curses-based file lister
 .\"
@@ -322,6 +323,9 @@ It was first created to run under DJGPP, and then converted again into a UNIX
 C/curses program.  A number of bugs appeared to have been squashed in this
 move, but, needless to say, several still remain.
 .PP
+It has recently been compiled under the OpenWatcom C compiler on FreeDOS, so
+in a way this has returned almost to its roots, back onto a DOS environment.
+.PP
 .\"
 .\"
 .\"
@@ -335,7 +339,11 @@ handled, though this will depend on what or where you compile and I have tried
 to sort out the worst offenders (those that would change screen positions).
 For porting back to MS\-DOS, I would suggest using pdcurses, and DJGPP.  Some
 byte sequences in binary files can cause ncurses to go crazy, possibly because
-these sequences match up with ANSI console commands.
+these sequences match up with ANSI console commands. Watcom will work, though
+you will need to use
+.I
+wmake -f makefile.wcc
+to create the executable, and also have a compiled pdcurses.lib available.
 .PP
 I know for a fact that Tab characters will make the line display incorrectly.
 I haven't yet sorted this out, so bear with me while I learn how.  And yes, I
@@ -440,7 +448,7 @@ Naturally, things have evolved since then, but I've finally recovered a copy of 
 ## Bugs, ErROrS and Omisons
 list is most definitely still beta software. it is also only designed to reliably handle 7-bit printable ASCII characters, at least under UNIX (this includes Linux). 8-bit and non-printing ASCII characters in files may not be correctly handled. This will depend on the environment where you run the program, but I have tried to sort out the worst offenders (those that would change screen positions). For porting back to MS-DOS, I would suggest using pdcurses, and DJGPP. Some byte sequences in binary files can cause ncurses to go crazy, possibly because these sequences match up with ANSI console commands. As for FreeDOS, I can't say for certain.
 
-I haven't confirmed that this'll work under anything much aside from gcc, so for example I've never tried compiling this under WatcomC, or Open Watcom as it's now known. I might have to see (first) if I can source some libs to work with Open Watcom.
+I haven't confirmed that this'll work under anything much aside from gcc, clang or Watcom (on FreeDOS). I might have to see (first) if I can source some libs to work with Open Watcom.
 
 Also, when going to the End of a file with the End key, you need to go down an extra line to actually display the last line. I haven't tried getting Colour curses modes to work well. In particular, reverse video is not always rendered correctly on some terminal types, and xterms. I have also noticed that xterms do not handle the ALT_GR charset well, unless a suitable font is used in the .Xdefaults file for xterm fonts. But far be it for me to supply a suitable font - let it suffice to say that I developed this originally to display IBM-charset on the screen.
 
@@ -817,7 +825,10 @@ list.c file for over twenty years.
           Scrn_x being 0 initially.
   0.7.34  Many formatting changes, centred around spacing and consistency.
           Making more use of github and gitea issues from this release.
-
+  0.7.35  Finally knocked out quite a few other bugs, resulting in the ability
+          to compile cleanly under the Open Watcom C compiler, at least on
+          FreeDOS. Several additions made to make this work. ShowHelp now
+          in its own file to reduce the clutter in screen.c
 
 #+END_SRC
 
@@ -4761,7 +4772,7 @@ The obvious place to put declarations and defines. It's the header file for the 
 /* Now called list.h instead of hexdump.h */
 /* Global defines */
 #define LISTVERSION 0
-#define LISTMINOR 34
+#define LISTMINOR 35
 #define LISTMAJOR 7
 /* Had to include this one, since it's disappeared from 2.2 linux kernel or something... */
 #ifndef PATH_MAX
@@ -4918,7 +4929,7 @@ DEBUGFLAGS = -g -O2
 CC = clang
 # Should be clang if no cc in system
 CFLAGS = -Wall -W -pedantic -fcommon
-VERSION = 0.7.34
+VERSION = 0.7.35
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 #SRCDIR = list-$(VERSION)
@@ -4978,13 +4989,13 @@ DEBUGFLAGS = -g -O2
 ifeq ($(OS), minix)
 CC = clang
 CFLAGS = -Wall
-VERSION = 0734
+VERSION = 0735
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = listb$(VERSION).tgz
 else
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.34
+VERSION = 0.7.35
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 endif
@@ -5063,11 +5074,11 @@ DEBUGFLAGS = -g -O2
 CC = wcc
 CL = wlink
 CFLAGS = -bc -wx -d3
-VERSION = 0734
+VERSION = 0735
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = lstb$(VERSION).tgz
 SRCDIR = src
-INCDIR = -i=c:\pdcurses
+INCDIR = c:\pdcurses
 LDFLAGS = 
 LIBS = pdcurses.lib
 OPTFLAGS = -od
@@ -5077,7 +5088,7 @@ OBJECTS = list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj scre
 all: list.exe
 
 .c.obj:
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCDIR) -fo=$@ $<
+	$(CC) $(CFLAGS) $(OPTFLAGS) -i=$(INCDIR) -fo=$@ $<
 
 list.exe: $(OBJECTS)
 	$(CL) $(LDFLAGS) @list.lnk

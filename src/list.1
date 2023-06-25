@@ -17,7 +17,7 @@
 .\" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 .\"
 .\"
-.TH LIST 1 "31st Jan 2022" "List" \" -*- nroff -*-
+.TH LIST 1 "26th June 2023" "List" \" -*- nroff -*-
 .SH NAME
 list \- Curses-based file lister
 .\"
@@ -268,6 +268,9 @@ It was first created to run under DJGPP, and then converted again into a UNIX
 C/curses program.  A number of bugs appeared to have been squashed in this
 move, but, needless to say, several still remain.
 .PP
+It has recently been compiled under the OpenWatcom C compiler on FreeDOS, so
+in a way this has returned almost to its roots, back onto a DOS environment.
+.PP
 .\"
 .\"
 .\"
@@ -281,7 +284,11 @@ handled, though this will depend on what or where you compile and I have tried
 to sort out the worst offenders (those that would change screen positions).
 For porting back to MS\-DOS, I would suggest using pdcurses, and DJGPP.  Some
 byte sequences in binary files can cause ncurses to go crazy, possibly because
-these sequences match up with ANSI console commands.
+these sequences match up with ANSI console commands. Watcom will work, though
+you will need to use
+.I
+wmake -f makefile.wcc
+to create the executable, and also have a compiled pdcurses.lib available.
 .PP
 I know for a fact that Tab characters will make the line display incorrectly.
 I haven't yet sorted this out, so bear with me while I learn how.  And yes, I

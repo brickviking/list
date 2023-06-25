@@ -1,7 +1,7 @@
 /* Now called list.h instead of hexdump.h */
 /* Global defines */
 #define LISTVERSION 0
-#define LISTMINOR 34
+#define LISTMINOR 35
 #define LISTMAJOR 7
 /* Had to include this one, since it's disappeared from 2.2 linux kernel or something... */
 #ifndef PATH_MAX

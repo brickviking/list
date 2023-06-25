@@ -308,3 +308,7 @@ June 28th, 2021
         Scrn_x being 0 initially.
 0.7.34  Many formatting changes, centred around spacing and consistency.
         Making more use of github and gitea issues from this release.
+0.7.35  Finally knocked out quite a few other bugs, resulting in the ability
+        to compile cleanly under the Open Watcom C compiler, at least on
+        FreeDOS. Several additions made to make this work. ShowHelp now
+        in its own file to reduce the clutter in screen.c
