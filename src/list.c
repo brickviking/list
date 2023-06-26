@@ -81,38 +81,38 @@ int main(int argc, char **argv) {
   /*   struct stat *ListFileInfo; / * ... and create an associated pointer... */
 
   struct FileData ListFile = { /* Check header file for descriptions */
-    .FPosn = 0;
-    .FEnd = 0;
-    .FLines = 0;
-    .CrArray = 0; /* it's a pointer, should be 0 to start with */
-    .LnAtTopOfScrn = 0; /* Should be set the first time we display text */
-    .FLineCtr = 0;
-    .LineCount = 0;
-    .Start = 0;
-    .Count = 0;
-    .Scrn_y = 0; Scrn_x = 0; ScrnWide = 0; /* These should get set by first initscr() */
-    .FPtr = 0;
-    .FName = 0; /* Remember, it's a pointer, not a string */
+    .FPosn = 0,
+    .FEnd = 0,
+    .FLines = 0,
+    .CrArray = 0, /* it's a pointer, should be 0 to start with */
+    .LnAtTopOfScrn = 0, /* Should be set the first time we display text */
+    .FLineCtr = 0,
+    .LineCount = 0,
+    .Start = 0,
+    .Count = 0,
+    .Scrn_y = 0, .Scrn_x = 0, .ScrnWide = 0, /* These should get set by first initscr() */
+    .FPtr = 0,
+    .FName = 0, /* Remember, it's a pointer, not a string */
     .DumpMode = 't', /* DumpMode - set to text by default */
     .DumpFlag = '0', /* It's official - this wants to be a char */
-    .LineNumbers = 0;
-    .Monochrome = '0';
-    .TabSize = '8';
-    .addrflag = 0; /* why isn't this AddrFlag? */
-    .EofSet = 0;
-    .FgColour = 0; BgColour = 0; /* No snarky about British spelling */
+    .LineNumbers = 0,
+    .Monochrome = '0',
+    .TabSize = '8',
+    .addrflag = 0, /* why isn't this AddrFlag? */
+    .EofSet = 0,
+    .FgColour = 0, .BgColour = 0, /* No snarky about British spelling */
     /* Search stuff */
     .SearchDirection = '\0', /* SearchDirection */
-    .SearchString = 0; /* ptr, not string */
-    .SPosn = 0;
+    .SearchString = 0, /* ptr, not string */
+    .SPosn = 0,
     /* .FileInfo = ... we need to init a stat structure here */
-    .FileInfoPtr = 0;
-    .Quick = 0;
+    .FileInfoPtr = 0,
+    .Quick = 0,
     /* .DirQueuePtr = ... we need to init a queue struct here */
-    BugWriteFName = 0;  /* ptr, not string */
-    MyArgc = 0; /* copy of ArgC */
-    MyArgv = 0; /* ptr to ptr */
-    MyCurrentArgC = 0;
+    .BugWriteFName = 0,  /* ptr, not string */
+    .MyArgc = 0, /* copy of ArgC */
+    .MyArgv = 0, /* ptr to ptr */
+    .MyCurrentArgC = 0, /* hm, does this need a comma at the end? */
   };  /* ... the end of the struct init */
   /* Initialises struct to empty - yep, everything! - lclint complains, so does splint */
   struct FileData *fi; /* Define an associated pointer... doesn't this have to be alloc'ed? */
