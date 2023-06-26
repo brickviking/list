@@ -2,13 +2,13 @@ DEBUGFLAGS = -g -O2
 ifeq ($(OS), minix)
 CC = clang
 CFLAGS = -Wall
-VERSION = 0735
+VERSION = 0736
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = listb$(VERSION).tgz
 else
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.35
+VERSION = 0.7.36
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 endif
