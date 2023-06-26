@@ -4,7 +4,7 @@
 #+AUTHOR: brickviking
 #+DATE: whenever
 #+VERSION: 0.7.35
-#+REVISION: 3
+#+REVISION: 4
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -457,12 +457,12 @@ Every good project deserves a README, and these days, it's a README.md (i.e. mar
 will render perfectly well here in github, but might be a bit foreign to most text editors.
 I'm currently writing this up in Emacs, which includes a form of markdown in its org-mode.
 
-#+BEGIN_SRC markdown
+#+BEGIN_SRC markdown -i
 # List, a text and hexdump program
 
 ## Description
 
-list is a curses-based interactive file listing program that combines the functions of less and hexdump into one handy program. It displays text on the screen in one of two different formats, either in hexadecimal dump format (a la MS-DOS debug.com format or xxd), or in text format, similar to what the programs less and more do.
+list is a curses-based interactive file listing program that combines the functions of less and hexdump into one handy program. It displays text on the screen in one of two different formats, either in hexadecimal dump format (a la MS-DOS debug.com format or xxd), or in text format, similar to what the programs less and more do. More or less.
 
 The original list program that I saw started out as an excellent program under MS-DOS created by Vernon Buerg, to whom I acknowledge the initial idea. However, there was not an equivalent program under Linux, although people had tried. There are two hexdump programs which provide something like what I wanted, but I also wanted to have a text display at the press of one key (without macros, please...). I note that Midnight Commander also provides the same ability but wrapped up in a nice file manager too.
 
@@ -470,10 +470,37 @@ list is (pretty much) all my own code, but is based on routines slipped in from 
 
 Naturally, things have evolved since then, but I've finally recovered a copy of this program's source, and will continue to work on it, as and when I get better at coding.
 
-## Bugs, ErROrS and Omisons
-list is most definitely still beta software. it is also only designed to reliably handle 7-bit printable ASCII characters, at least under UNIX (this includes Linux). 8-bit and non-printing ASCII characters in files may not be correctly handled. This will depend on the environment where you run the program, but I have tried to sort out the worst offenders (those that would change screen positions). For porting back to MS-DOS, I would suggest using pdcurses, and DJGPP. Some byte sequences in binary files can cause ncurses to go crazy, possibly because these sequences match up with ANSI console commands. As for FreeDOS, I can't say for certain.
+## Common requirements for compiling
+To compile list properly, you will need a compiler and development files for the ncurses (or pdcurses)
+library. I don't expect too much fancy stuff, this is a console (terminal) program after all, not a fancy 
+GTK/GUI/Qt/X11/Wayland program. For a compiler you'll need either of the GCC suite of tools installed or
+the LLVM suite of tools with the clang compiler. You'll also need a make program of some sort.
 
-I haven't confirmed that this'll work under anything much aside from gcc, clang or Watcom (on FreeDOS). I might have to see (first) if I can source some libs to work with Open Watcom.
+### Compiling under Linux (most distributions)
+At least for the moment, the Makefile will expect to use the GCC suite of tools. If you have the clang
+LLVM compiler suite and don't also have the GCC suite of tools, you'll need to modify the Makefile to
+reflect this. This will use GNU's make program.
+
+### Compiling under FreeBSD, OpenBSD, NetBSD or Minix
+Most of the time, the compile will now use the clang LLVM compiler. If you still have GCC and haven't got
+clang installed, you'll need to edit the BSDMakefile to reflect this. This will use BSD's make program,
+although it is possible to use GNU's make program instead.
+
+### Compiling under MS-DOS or FreeDOS
+For the MS-DOS port, I would suggest using pdcurses, and DJGPP or Watcom. You will need to install or
+compile the pdcurses lib to compile this project with Open Watcom. The makefile.wcc file should describe
+where I normally expect things to be found, this can be freely changed as you see fit. For this, you'll
+need to use wmake.
+
+If you still have the DJGPP environment installed, or perhaps the cygwin environment, you may be able
+to utilise the curses available there, but the MS-DOS compile expects to use pdcurses when compiling
+with Watcom. I haven't entirely decided what to do about cygwin or DJGPP, which both use the GCC suite
+of tools and GNU's make program.
+
+## Bugs, ErROrS and Omisons
+list is most definitely still beta software. it is also only designed to reliably handle 7-bit printable ASCII characters, at least under UNIX (this includes Linux). 8-bit and non-printing ASCII characters in files may not be correctly handled. This will depend on the environment where you run the program, but I have tried to sort out the worst offenders (those that would change screen positions).  Some byte sequences in binary files can cause ncurses to go crazy, possibly because these sequences match up with ANSI console commands. As for FreeDOS, I can't say for certain.
+
+I haven't confirmed that this'll work under anything much aside from gcc, clang or Watcom (on FreeDOS).
 
 Also, when going to the End of a file with the End key, you need to go down an extra line to actually display the last line. I haven't tried getting Colour curses modes to work well. In particular, reverse video is not always rendered correctly on some terminal types, and xterms. I have also noticed that xterms do not handle the ALT_GR charset well, unless a suitable font is used in the .Xdefaults file for xterm fonts. But far be it for me to supply a suitable font - let it suffice to say that I developed this originally to display IBM-charset on the screen.
 
@@ -520,7 +547,8 @@ Thanks to the author of the original MS-DOS LIST program, Vernon Buerg, for prov
 
 ,* BIOS screen writes. Same reason as above.
 
-,* Windows support. No. Just…no. There are too many variants of the Windows API (Windows 3.1 - Windows 11), and four separate versions of the shells that ran under Windows (COMMAND.COM (MS-DOS 2.0 - 7.0), CMD.EXE, powershell.exe, pwsh.exe).
+,* Windows support. No. Just…no. There are too many variants of the Windows API (Windows 3.1 - Windows 11), and four separate versions of the shells that ran under Windows (COMMAND.COM (MS-DOS 2.0 - 7.0), CMD.EXE, powershell.exe, pwsh.exe). At best, this _may_ work under the terminal shells available for
+Windows.
 
 ,* Telephone, FAX, and BBS support. Do you really want to dial me up in New Zealand at 3:30 am to tell me you can't run this program? These days the support (what little there is) is severely hobbled by my lack of coding knowledge. Yes, I'll get better, but it'll take time. I don't even _have_ a FAX. Meanwhile, post an issue to the repository, I'll probably see it.
 
