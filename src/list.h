@@ -63,6 +63,7 @@ struct FileData {
         char LineNumbers; /* Set to on or off */
         char Monochrome;
         char TabSize; /* a number from 1 to _about_ 8 */
+        /* Why isn't this AddrFlag? Refactor? */
         int addrflag;  /* Either hex or decimal addresses (only in hex view) */
         int EofSet;    /* Has the End of the File been reached? */
         int FgColour, BgColour; /* Colours */
