@@ -57,7 +57,7 @@ copies of the same thing?
    :header-args: roff :tangle src/list.1
    :END:
 
-#+BEGIN_SRC nroff
+#+BEGIN_SRC nroff -i
 .\"
 .\" list - a file listing program
 .\" Copyright (C) 1999,2002,2021,2023 brickviking (brickviking@gmail.com)
