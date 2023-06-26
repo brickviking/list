@@ -14,7 +14,7 @@
 #include <sys/stat.h>
 #include "list.h"
 
-/* Split off from screen.c for the moment to see if it compiles separately */
+/* Split off from screen.c for the moment to reduce the number of lines in screen.c */
 void ShowHelp(struct FileData *fi) {
 /* char tmpstr[COLS+1]; */
   int c, middle, x, y, EightBitDisplay;

@@ -4,6 +4,7 @@
 #+AUTHOR: brickviking
 #+DATE: whenever
 #+VERSION: 0.7.35
+#+REVISION: 1
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -828,7 +829,8 @@ list.c file for over twenty years.
   0.7.35  Finally knocked out quite a few other bugs, resulting in the ability
           to compile cleanly under the Open Watcom C compiler, at least on
           FreeDOS. Several additions made to make this work. ShowHelp now
-          in its own file to reduce the clutter in screen.c
+          in its own file to reduce the clutter in screen.c and shorten that file some.
+          Also introduced a new tag to the org file - revision.
 
 #+END_SRC
 
@@ -2724,7 +2726,7 @@ char WhatNext(struct FileData *fi) { /* 1 */
 
 #+END_SRC
 
-** TODO screen.c
+** DONE screen.c
    :PROPERTIES:
    :header-args: :tangle src/screen.c
    :END:
@@ -3735,7 +3737,7 @@ Anyhow, here's the code for real. Note to self: check out the rest of the source
 #include <sys/stat.h>
 #include "list.h"
 
-/* Split off from screen.c for the moment to see if it compiles separately */
+/* Split off from screen.c for the moment to reduce the number of lines in screen.c */
 void ShowHelp(struct FileData *fi) {
 /* char tmpstr[COLS+1]; */
   int c, middle, x, y, EightBitDisplay;
