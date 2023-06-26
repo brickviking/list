@@ -4,7 +4,7 @@
 #+AUTHOR: brickviking
 #+DATE: whenever
 #+VERSION: 0.7.35
-#+REVISION: 2
+#+REVISION: 3
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -124,7 +124,7 @@ status information.
 .\"
 .B list
 understands the following command line options.  Only the short form
-options are available in this LINUX version. It remains for me to
+options are available in this version. It remains for me to
 write the code to understand the long format switches.
 .TP
 .I "\-f filename"
