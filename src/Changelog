@@ -314,3 +314,4 @@ June 28th, 2021
         in its own file to reduce the clutter in screen.c and shorten that file some.
         Also introduced a new tag to the org file - revision.
 0.7.36  Added content to the man page and README, no changes to the source code in this revision.
+0.7.36.3 Added a LISTREV(ision). Fixed incorrect struct fieldname in fi.
