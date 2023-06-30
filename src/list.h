@@ -79,7 +79,7 @@ struct FileData {
         char *BugWriteFName; /* Filename of bugwrite file */
         int MyArgc;
         char **MyArgv;
-        int MyCurrArgC;  /* This is added to utilise positioning within MyArgv[] */
+        int MyCurrentArgC;  /* This is added to utilise positioning within MyArgv[] */
 };
 
 int debug;

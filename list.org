@@ -4,7 +4,7 @@
 #+AUTHOR: brickviking
 #+DATE: whenever
 #+VERSION: 0.7.36
-#+REVISION: 1
+#+REVISION: 2
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -4934,7 +4934,7 @@ struct FileData {
         char *BugWriteFName; /* Filename of bugwrite file */
         int MyArgc;
         char **MyArgv;
-        int MyCurrArgC;  /* This is added to utilise positioning within MyArgv[] */
+        int MyCurrentArgC;  /* This is added to utilise positioning within MyArgv[] */
 };
 
 int debug;
