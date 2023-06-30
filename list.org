@@ -4,7 +4,7 @@
 #+AUTHOR: brickviking
 #+DATE: whenever
 #+VERSION: 0.7.36
-#+REVISION: 0
+#+REVISION: 1
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -4991,7 +4991,7 @@ int EmailUser(struct FileData *);
 int TakeNotes(FILE *, struct FileData *);
 
 #+END_SRC
-* Makefiles
+* Unix-like Makefiles
 There's two of these; one for BSD systems, and one for the rest of the UNIX-likes.  The reason for
 two is that BSD and AT&T UNIX have never bothered to use GNU's make syntax, having come up with
 their own and stuck with it. The one thing I'm missing seems to be a makefile that'll work happily
@@ -5002,8 +5002,6 @@ installed, as long as there is one. In some cases this won't have been installed
 as clang were installed and not done a symlink. This also seems to be relevant for Minix too, which
 has now switched (at least in part) to the NetBSD userland and now also uses clang as gcc no longer
 compiles well (gmp doesn't seem to want to compile).
-
-I'm having to stitch in a completely different makefile for Watcom to use. There are some similarities with UNIX make, but not very many.
 
 ** BSDMakefile
    :PROPERTIES:
@@ -5146,13 +5144,29 @@ uninstall:
 #+END_SRC
 
 
+* MS-DOS/FreeDOS Makefiles
+   :PROPERTIES:
+   :header-args: :tangle src/list.lnk
+   :END:
+I'm having to stitch in a completely different makefile for Watcom to use. There are some similarities with UNIX make, but not very many. One other thing to consider is that DOS doesn't always support long filenames, and some of the project filenames exceed the 8.3 filename format of the normal un-LFN'd environment. The filenames I specifically need for DOS are fine though, except Changelog. FreeDOS is better at this than straight MS-DOS, which has no native support for LFN whatsoever.
+
+There's two possibilities for compiling things under MS-DOS or FreeDOS - DJGPP's GCC compiler or Open Watcom's C compiler.
+So far, these both need pdcurses. There's other work to do to get it to work under Watcom. I've found out that DOS has a 128-char limit, so the Watcom tools use response files to pass more information than the paltry amount of 128 bytes around. Hence, here's a list.lnk file that Watcom's wmake program can use. 
+
+#+BEGIN_SRC linker -i
+system dos4g
+name list.exe
+option map
+file { list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj }
+library { c:\pdcurses\dos\pdcurses.lib }
+#+END_SRC
+
 ** Watcom Makefile
    :PROPERTIES:
    :header-args: :tangle src/Makefile.wcc
    :END:
 
-This maybe needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line. This also
-needs tabs where they need to be, I have modified them in previous makefiles too.
+This maybe needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line.
 
 #+BEGIN_SRC makefile -i
 DEBUGFLAGS = -g -O2
@@ -5183,20 +5197,9 @@ clean: .symbolic
 
 #+END_SRC
 
-* DOS
-   :PROPERTIES:
-   :header-args: :tangle src/list.lnk
-   :END:
-
-So far, this needs pdcurses. There's other work to do to get it to work under Watcom. I've found out that DOS has a 128-char limit, so watcom requires response files to pass more information than that around. Hence, here's a list.lnk file that watcom can use. I've restored the full filenames.
-
-#+BEGIN_SRC linker -i
-system dos4g
-name list.exe
-option map
-file { list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj }
-library { c:\pdcurses\dos\pdcurses.lib }
-#+END_SRC
+** TODO: check over Unix Makefile to see how well it'll work on DJGPP
+This should work well enough, as we're just feeding it to GNU Make. The only issue would be setting
+the paths correctly. 
 
 * Bugs
 (so far)
