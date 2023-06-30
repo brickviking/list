@@ -75,7 +75,7 @@ static size_t fsetup(FILE *, size_t);
 int main(int argc, char **argv) {
   char *bufp;
   char *tempstring;  /* Don't forget to malloc later on... */
-  int c, y = 0, x = 0;
+  int c, y = 0, x = 0; /* x and y are only used in D_ROWCOL version. */
   /* I have to fix this - I HAVE to initialise this struct before referencing it... */
   /*   struct stat FileInfo; / * stat from <sys/stat.h> - 2 lines - bits to delete... */
   /*   struct stat *ListFileInfo; / * ... and create an associated pointer... */

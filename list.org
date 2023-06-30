@@ -4200,7 +4200,7 @@ static size_t fsetup(FILE *, size_t);
 int main(int argc, char **argv) {
   char *bufp;
   char *tempstring;  /* Don't forget to malloc later on... */
-  int c, y = 0, x = 0;
+  int c, y = 0, x = 0; /* x and y are only used in D_ROWCOL version. */
   /* I have to fix this - I HAVE to initialise this struct before referencing it... */
   /*   struct stat FileInfo; / * stat from <sys/stat.h> - 2 lines - bits to delete... */
   /*   struct stat *ListFileInfo; / * ... and create an associated pointer... */
@@ -4267,6 +4267,7 @@ having to entirely tear down the source code to its bare functions to see what n
 window created at a certain size. I'll need to tweak this while loop and the case switch below.
 I'll use D_ROWCOL for the moment. I doubt I'll need too many of these switches, but anything that
 needs them needs to be watertight, i.e. the code can't fall over without the section behind defines.
+Leaving the switch undefined does cause a compile warning about unused variables x and y in main().
 
 This is the beginning of working out whether a fix is feasible for issue #14.
 
