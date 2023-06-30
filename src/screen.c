@@ -697,7 +697,7 @@ int Dump(struct FileData *fi) { /* 1 */
     if((fi->DumpMode = WhatNext(fi)) == 0) /* Goes and asks what to do next */
       break;
   } /* end of loop forever through file loop */
-  return(0);
+  return 0;
 } /* End of Dump() */
 
 void PrintLine(struct FileData *fi) {

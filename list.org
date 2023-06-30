@@ -2086,7 +2086,7 @@ int NewFile(struct FileData *fi, char *NewName) {
   /* Hey, what if it hasn't been allocated yet? Hmmm, 'nother bug fixed... */
   fi->FPosn = fi->Start; /* Do I want to start from the same point? If new file, then Start should change... */
   fi->FLineCtr = 0; /* Not sure about this... */
-  return(0);
+  return 0;
 } /* End of NewFile() */
 
 /***********************************************************************
@@ -2357,7 +2357,7 @@ int Bye(enum ByeReason WhyBye, int LineCalled) {
    break;
   case BR_NOCOLOR:
    sprintf(ErrMessage, "list: Ooops, no colour available here");
-   return (0);
+   return 0;
    /* This shouldn't stop the program from working...just do things in b&w */
    break;
   case BR_FILEPERM:
@@ -3486,7 +3486,7 @@ int Dump(struct FileData *fi) { /* 1 */
     if((fi->DumpMode = WhatNext(fi)) == 0) /* Goes and asks what to do next */
       break;
   } /* end of loop forever through file loop */
-  return(0);
+  return 0;
 } /* End of Dump() */
 
 void PrintLine(struct FileData *fi) {
