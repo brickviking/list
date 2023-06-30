@@ -164,7 +164,7 @@ int main(int argc, char **argv) {
   */
   switch(c) {
     case 'v':    /* Spits out version information */
-      printf("list: Version %1d.%1d.%1d, compiled on %s at %s, by %s\n", LISTVERSION, LISTMAJOR, LISTMINOR, __DATE__, __TIME__, "brickviking");  /* Why don't we run this through Bye()? Because there's no ERROR, that's why!!! */
+      printf("list: Version %1d.%1d.%1d.%1d, compiled on %s at %s, by %s\n", LISTVERSION, LISTMAJOR, LISTMINOR, LISTREV, __DATE__, __TIME__, "brickviking");  /* Why don't we run this through Bye()? Because there's no ERROR, that's why!!! */
       exit(0);
       break;  /* never gets to this line... 8-) this should be tidier */
     case 'f': /* Load following filename */
