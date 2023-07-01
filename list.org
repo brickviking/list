@@ -469,6 +469,14 @@ The original list program that I saw started out as an excellent program under M
 list is (pretty much) all my own code, but is based on routines slipped in from the dequeue, hexdump and srchfile packages from SNIPPETS, which was maintained by Bob Stout until his death. Mirrors of the SNIPPETS code still exist as of 2020 over on GitHub. List was first created to run under DJGPP, and then morphed into a UNIX C/curses program. A number of bugs appeared to have been squashed in this move, but, needless to say, several still remain.
 
 Naturally, things have evolved since then, but I've finally recovered a copy of this program's source, and will continue to work on it, as and when I get better at coding.
+## Build status
+https://img.shields.io/badge/FreeDOS_build-passing-green
+https://img.shields.io/badge/Minix_build-passing-green
+https://img.shields.io/badge/FreeBSD-13_build-passing-green
+https://img.shields.io/badge/Linux_build-passing-green
+https://img.shields.io/badge/OpenBSD_build-passing-green
+
+
 
 ## Common requirements for compiling
 To compile list properly, you will need a compiler and development files for the ncurses (or pdcurses)
