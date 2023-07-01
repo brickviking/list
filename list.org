@@ -52,6 +52,14 @@ as it stands, assuming that you grabbed this from the github repository. I proba
 this file itself in the tarballs, as that would be completely redundant. After all, who needs /two/
 copies of the same thing?
 
+The only thing you won't get from this single org file is the original SVG images for the badges,
+which were added to show compile status for the project on my own machine. I don't have NetBSD or
+Solaris installed at the moment, and I don't see me getting to them in the near future. However,
+I have compiled them on the rest of the operating systems I state. Your mileage might vary for
+cygwin or WSL, but it's worth a try.
+
+
+
 ** Man page
    :PROPERTIES:
    :header-args: roff :tangle src/list.1
