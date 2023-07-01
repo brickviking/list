@@ -52,7 +52,7 @@ as it stands, assuming that you grabbed this from the github repository. I proba
 this file itself in the tarballs, as that would be completely redundant. After all, who needs /two/
 copies of the same thing?
 
-The only thing you won't get from this single org file is the original SVG images for the badges,
+The only thing you won't get from this single org file are the original SVG images for the badges,
 which were added to show compile status for the project on my own machine, and were initially
 supplied by [Shields.io](https://shields.io). I don't have NetBSD or Solaris installed at the
 moment, and I don't see me getting to them in the near future. However, I have compiled them on the
