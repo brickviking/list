@@ -10,11 +10,11 @@ list is (pretty much) all my own code, but is based on routines slipped in from 
 
 Naturally, things have evolved since then, but I've finally recovered a copy of this program's source, and will continue to work on it, as and when I get better at coding.
 ## Build status
-<img url="https://img.shields.io/badge/FreeDOS_build-passing-green">
-<img url="https://img.shields.io/badge/Minix_build-passing-green">
-<img url="https://img.shields.io/badge/FreeBSD-13_build-passing-green">
-<img url="https://img.shields.io/badge/Linux_build-passing-green">
-<img url="https://img.shields.io/badge/OpenBSD_build-passing-green">
+<img url="https://img.shields.io/badge/FreeDOS_build-passing-green"></img>
+<img url="https://img.shields.io/badge/Minix_build-passing-green"></img>
+<img url="https://img.shields.io/badge/FreeBSD-13_build-passing-green"></img>
+<img url="https://img.shields.io/badge/Linux_build-passing-green"></img>
+<img url="https://img.shields.io/badge/OpenBSD_build-passing-green"></img>
 
 
 
