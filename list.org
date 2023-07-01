@@ -3,8 +3,8 @@
 #+SUBTITLE: a poorly-executed less
 #+AUTHOR: brickviking
 #+DATE: whenever
-#+VERSION: 0.7.36
-#+REVISION: 4
+#+VERSION: 0.7.37
+#+REVISION: 0
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -896,6 +896,7 @@ June 28th, 2021
         Also introduced a new tag to the org file - revision.
 0.7.36  Added content to the man page and README, no changes to the source code in this revision.
 0.7.36.3 Added a LISTREV(ision). Fixed incorrect struct fieldname in fi.
+0.7.37  Added badges to README for compile status, manually managed for the moment.
 
 #+END_SRC
 
@@ -4869,9 +4870,9 @@ The obvious place to put declarations and defines. It's the header file for the 
 /* Now called list.h instead of hexdump.h */
 /* Global defines */
 #define LISTVERSION 0
-#define LISTMINOR 35
+#define LISTMINOR 37
 #define LISTMAJOR 7
-#define LISTREV 3
+#define LISTREV 0
 /* Had to include this one, since it's disappeared from 2.2 linux kernel or something... */
 #ifndef PATH_MAX
 #define PATH_MAX  4095
@@ -5026,7 +5027,7 @@ DEBUGFLAGS = -g -O2
 CC = clang
 # Should be clang if no cc in system
 CFLAGS = -Wall -W -pedantic -fcommon
-VERSION = 0.7.36
+VERSION = 0.7.37
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 #SRCDIR = list-$(VERSION)
@@ -5086,13 +5087,13 @@ DEBUGFLAGS = -g -O2
 ifeq ($(OS), minix)
 CC = clang
 CFLAGS = -Wall
-VERSION = 0736
+VERSION = 0737
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = listb$(VERSION).tgz
 else
 CC = gcc
 CFLAGS = -Wall -W -pedantic
-VERSION = 0.7.36
+VERSION = 0.7.37
 DISTFILE = list-$(VERSION).tar.gz
 DISTBINFILE = list-bin-$(VERSION).tar.gz
 endif
@@ -5187,7 +5188,7 @@ DEBUGFLAGS = -g -O2
 CC = wcc386
 CL = wlink
 CFLAGS = -bc -wx -d3
-VERSION = 0736
+VERSION = 0737
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = lstb$(VERSION).tgz
 SRCDIR = src
