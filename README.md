@@ -10,12 +10,13 @@ list is (pretty much) all my own code, but is based on routines slipped in from 
 
 Naturally, things have evolved since then, but I've finally recovered a copy of this program's source, and will continue to work on it, as and when I get better at coding.
 ## Build status
-![Static Badge](badge-img/Linux-pass.svg) |
-![Static Badge](badge-img/FreeDOS-pass.svg) |
-![Static Badge](badge-img/Minix-pass.svg) |
-![Static Badge](badge-img/FreeBSD-pass.svg) |
-![Static Badge](badge-img/OpenBSD-pass.svg) |
-![Static Badge](badge-img/NetBSD-not_compiled.svg) |
+![Static Badge](badge-img/Linux-pass.svg)
+![Static Badge](badge-img/FreeDOS-pass.svg)
+![Static Badge](badge-img/Minix-pass.svg)
+![Static Badge](badge-img/FreeBSD-pass.svg)
+![Static Badge](badge-img/OpenBSD-pass.svg)
+
+![Static Badge](badge-img/NetBSD-not_compiled.svg)
 ![Static Badge](badge-img/Solaris-not_compiled.svg)
 
 
