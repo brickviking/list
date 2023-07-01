@@ -577,325 +577,325 @@ a source block. It was originally in C comment form but it really doesn't need t
 any longer, I can really just include it as straight text, as I hadn't included it inline in the
 list.c file for over twenty years.
 
-#+BEGIN_SRC text
+#+BEGIN_SRC text -i
 
-  HEXDUMP.C - Dump a file.
-  Changed to list.c - to emulate (hopefully) Vernon Buerg's famous program
-  of the same name
+HEXDUMP.C - Dump a file.
+Changed to list.c - to emulate (hopefully) Vernon Buerg's famous program
+of the same name
 
-  WARNING: program in semi-stable (read - BETA) state at the moment...it's usable, but a few bugs remain.
+WARNING: program in semi-stable (read - BETA) state at the moment...it's usable, but a few bugs remain.
 
-  Released under the GPL version 2, Copyright (c) 2002, 2023 by brickviking
+Released under the GPL version 2, Copyright (c) 2002, 2023 by brickviking
 
-  Initial copyright
-    This Program Written By Paul Edwards w/ modifications by Bob Stout
+Initial copyright
+  This Program Written By Paul Edwards w/ modifications by Bob Stout
 
-  Srchfile.c added (regards to Bob Stout - thanks...) with modifications
-  Contributors:
-     Myself of course (brickviking <brickviking@gmail.com>
-     Some debugging and other points pointed out by Dion Bonner <bonner@xtra.co.nz>
-  Version   - stored in hexdump.h (now list.h)
-  0.2 - 0.5 Further mods by Eric Gillespie 16 Jun 97 and Aug - Nov 1997
-  0.6 - 0.6.2 Working on realloc...working...working  - Jan 1998
-  0.6.3  Finally squashed the realloc bug!
-         Also removed CountCr as it was unnecessary, seeing as I had
-         ScanForCr() already
-  0.6.4  Have gone to a struct to pass between functions - major revamp
-         of everything to match up with struct pointer passing
-  Feb 1998
-  0.6.5  Tidied up the beginning and end of file processing and installed a
-         zero-length check.
-  0.6.6  Completely revamped the dump routines...
-  0.6.7  ... and slightly revamped the struct, adding an entry for
-         the current line being used.  Also changed the buf array
-         from char to unsigned char, and changed the format for sprintf
-  0.6.8  Dealt with the Ruler, and with the bottom status line
-         Also shifted globals into new hexdump include file
-         ,*Finally* sorted boundary problems
-         Adding switch to select new file - isn't working yet
-         File is selected, but memory gets written over every time
-         I fseek the file.  I will also need to add a Comp() - see
-         dequeue.c:Q_Sort() for more details
-  March 1998
-         If I don't specify -f on commandline, program gets rather lost and
-         doesn't display anything, and exits when I hit any key.
-  0.6.9  Making a maintenance release with updated feature of 7/8 bit
-         printing of characters.  Have fixed ruler problem on text mode.
-         Fixed stdin reading (sort of...)
-  0.6.10 Have fixed keyboard problem when piped from stdin...
-         I just don't ask for a getch()
-  0.6.11 Have added a line-end toggle, though it shows all chars as well...
-         Have noticed that program is slow at allocating line-ends on huge
-         files (larger than say, 300k) - would this be sped up by loading
-         file into huge buffer and counting CRs there?
-   ,********************************************************
-        Imported to Linux - gee, this will be an adventure
-  0.7.0  Will have to change all the screen-based routines
-         to use curses.  Have also had to undergo a name change
-         because hexdump already exists on this platform 8-)
-         hey, hexdump actually works here...!! Wonder if list will too...
-  Jan 1999
-  0.7.1  Have split off the debug switches into a separate function
-         have also (slightly) sped up the hex display of screen
-         by not updating each line, just doing a screen at a time.
-  June 1999
-  0.7.2  Have added the % command (jump to percentage of file)
-         and modified the help screen to reflect the correct number of
-         bytes and lines (but need to modify to remove dependency on LINES
-         and COLS (which don't change))
-  November 1999
-  0.7.3  Have (finally) got a scandir function working - shall attempt to
-         amalgamate it in to filebrowse.c
-         Am also integrating dequeue back into the source if it can be used
-         effectively (i.e. if I can figure out how to use it without SIGSEVs)
-         I have just been made aware of a weakness in the ncurses implementation:
-         the window doesn't automatically re-size (though I think there is a function
-         that does just this - I just have to find out what it is called.)
-         Also, I have a problem with the ALT_GR charset in an xterm - it can't
-         be seen!!  I will obviously have to work out how to "have my IBM charset"
-         and view it too.  Hmmm... that's a point - I could deliberately make
-         a program to repeatedly show LINES and COLS, and see whether it changes
-         when I resize the xterm window.  There is an environment function I can
-         use to test for DISPLAY - if that exists, I can switch over to using
-         just plain characters (char mapping is done by the font manager anyway).
+Srchfile.c added (regards to Bob Stout - thanks...) with modifications
+Contributors:
+   Myself of course (brickviking <brickviking@gmail.com>
+   Some debugging and other points pointed out by Dion Bonner <bonner@xtra.co.nz>
+Version   - stored in hexdump.h (now list.h)
+0.2 - 0.5 Further mods by Eric Gillespie 16 Jun 97 and Aug - Nov 1997
+0.6 - 0.6.2 Working on realloc...working...working  - Jan 1998
+0.6.3  Finally squashed the realloc bug!
+       Also removed CountCr as it was unnecessary, seeing as I had
+       ScanForCr() already
+0.6.4  Have gone to a struct to pass between functions - major revamp
+       of everything to match up with struct pointer passing
+Feb 1998
+0.6.5  Tidied up the beginning and end of file processing and installed a
+       zero-length check.
+0.6.6  Completely revamped the dump routines...
+0.6.7  ... and slightly revamped the struct, adding an entry for
+       the current line being used.  Also changed the buf array
+       from char to unsigned char, and changed the format for sprintf
+0.6.8  Dealt with the Ruler, and with the bottom status line
+       Also shifted globals into new hexdump include file
+       ,*Finally* sorted boundary problems
+       Adding switch to select new file - isn't working yet
+       File is selected, but memory gets written over every time
+       I fseek the file.  I will also need to add a Comp() - see
+       dequeue.c:Q_Sort() for more details
+March 1998
+       If I don't specify -f on commandline, program gets rather lost and
+       doesn't display anything, and exits when I hit any key.
+0.6.9  Making a maintenance release with updated feature of 7/8 bit
+       printing of characters.  Have fixed ruler problem on text mode.
+       Fixed stdin reading (sort of...)
+0.6.10 Have fixed keyboard problem when piped from stdin...
+       I just don't ask for a getch()
+0.6.11 Have added a line-end toggle, though it shows all chars as well...
+       Have noticed that program is slow at allocating line-ends on huge
+       files (larger than say, 300k) - would this be sped up by loading
+       file into huge buffer and counting CRs there?
+ ,********************************************************
+      Imported to Linux - gee, this will be an adventure
+0.7.0  Will have to change all the screen-based routines
+       to use curses.  Have also had to undergo a name change
+       because hexdump already exists on this platform 8-)
+       hey, hexdump actually works here...!! Wonder if list will too...
+Jan 1999
+0.7.1  Have split off the debug switches into a separate function
+       have also (slightly) sped up the hex display of screen
+       by not updating each line, just doing a screen at a time.
+June 1999
+0.7.2  Have added the % command (jump to percentage of file)
+       and modified the help screen to reflect the correct number of
+       bytes and lines (but need to modify to remove dependency on LINES
+       and COLS (which don't change))
+November 1999
+0.7.3  Have (finally) got a scandir function working - shall attempt to
+       amalgamate it in to filebrowse.c
+       Am also integrating dequeue back into the source if it can be used
+       effectively (i.e. if I can figure out how to use it without SIGSEVs)
+       I have just been made aware of a weakness in the ncurses implementation:
+       the window doesn't automatically re-size (though I think there is a function
+       that does just this - I just have to find out what it is called.)
+       Also, I have a problem with the ALT_GR charset in an xterm - it can't
+       be seen!!  I will obviously have to work out how to "have my IBM charset"
+       and view it too.  Hmmm... that's a point - I could deliberately make
+       a program to repeatedly show LINES and COLS, and see whether it changes
+       when I resize the xterm window.  There is an environment function I can
+       use to test for DISPLAY - if that exists, I can switch over to using
+       just plain characters (char mapping is done by the font manager anyway).
 
-  0.7.4  Worked out (sorta) the new filename prompting... except the strcpy routine is
-         puking at the copying of the string into the fi->FName var.  Haven't
-         worked out why yet...
+0.7.4  Worked out (sorta) the new filename prompting... except the strcpy routine is
+       puking at the copying of the string into the fi->FName var.  Haven't
+       worked out why yet...
 
-  0.7.5   Well, I sorted that out by malloc'ing PATH_MAX bytes to fi->FName each time
-          and now it doesn't fall over.  Also added a -v switch, and realised another
-          reason why I wanted this filebrowser - I didn't want to see any more
-          <FF><C0>-style things turning up.  Mind you, I haven't sorted out full
-          8-bit printing in text mode - that's my next project. Then I want to handle
-          input from stdin, like less does.
-          One fault I have just found is that the debug function doesn't
-          work as well as I'd like.  Am working on this one now.
+0.7.5   Well, I sorted that out by malloc'ing PATH_MAX bytes to fi->FName each time
+        and now it doesn't fall over.  Also added a -v switch, and realised another
+        reason why I wanted this filebrowser - I didn't want to see any more
+        <FF><C0>-style things turning up.  Mind you, I haven't sorted out full
+        8-bit printing in text mode - that's my next project. Then I want to handle
+        input from stdin, like less does.
+        One fault I have just found is that the debug function doesn't
+        work as well as I'd like.  Am working on this one now.
 
-  0.7.6   Decided to add a DisplayStats function, to show number of lines, bytes etc
-          Also added colour for the first time! Converted Help() and DisplayStats()
-          to open in a window rather than erase stdscr.
-  0.7.7   Have finally cracked the 8-bit display in text mode!  It was wrapped up
-          in the test of prtln[i] against valid values, so I changed it to a
-          large switch/case statement.  It seems that I still haven't
-          worked out the line length vs. COLS problem.
-  0.7.8   Well, it seems like I've cracked the COLS problem - the next implementation
-          will be bringing in some sort of search function...yeah, likely - not!
+0.7.6   Decided to add a DisplayStats function, to show number of lines, bytes etc
+        Also added colour for the first time! Converted Help() and DisplayStats()
+        to open in a window rather than erase stdscr.
+0.7.7   Have finally cracked the 8-bit display in text mode!  It was wrapped up
+        in the test of prtln[i] against valid values, so I changed it to a
+        large switch/case statement.  It seems that I still haven't
+        worked out the line length vs. COLS problem.
+0.7.8   Well, it seems like I've cracked the COLS problem - the next implementation
+        will be bringing in some sort of search function...yeah, likely - not!
 
-  March 2000
-  0.7.9   I've finally found a version of lclint that works!  It has picked up so many
-          nits and bits that I'm surprised about.  I went back to signed long ints, but
-          it looks like I might have to go back to unsigned for all the screen trouble
-          it's giving me.  I will also have to rewrite the print-to-string routine for
-          hex mode.
-          So far I've gone from signed char buf[17] to unsigned chars, which has cured
-          the screen droppings.  So I'll retain the signed longints to keep lint happy.
+March 2000
+0.7.9   I've finally found a version of lclint that works!  It has picked up so many
+        nits and bits that I'm surprised about.  I went back to signed long ints, but
+        it looks like I might have to go back to unsigned for all the screen trouble
+        it's giving me.  I will also have to rewrite the print-to-string routine for
+        hex mode.
+        So far I've gone from signed char buf[17] to unsigned chars, which has cured
+        the screen droppings.  So I'll retain the signed longints to keep lint happy.
 
-  0.7.10  I think I've come up with a simpler way of creating my output line in hex mode...
-          The concept is to build a line using 4-byte chunks to the width of the screen.
-          and then filling lines.  I found out what was causing the Help() fault in an xterm
-          - not enough lines in my xterm!  I needed the size of xterm to be 26 lines or
-          better, so I've reduced the help screen down to 24 lines, and changed the
-          midpoint.  I have also started changing the window references in DisplayStats()
-          Of course that still doesn't help the ALT_CHARSET problem under X - I don't
-          have an answer for this.  So far I get around it by checking whether DISPLAY exists
-          and if so, I use alternative chars to outline the windows with.
-  0.7.11  Worked out the width problem for window, and side effect is that screen resizing
-          seems to be handled fine - I thought I was going to have to handle that myself!
-      I still haven't separated output into 4-byte blocks yet, just a stream of hex
-          bytes followed by the chars. Now I just need to add code for the ruler.
-          Only thing is that text mode still works at the screen size the program started
-          with...guess I'll have to go add the code for that into dump(text) as well as
-          dump(hex)
-  July 2000 (approximately)
-  0.7.12  YES!!!!! The arrows problem is FINALLY SOLVED!!!!!!!!!!! I was using the wrong
-          function to read my keys in WhatNext() - I should have been using the ncurses
-          routine getch() _instead of_ the stdio routine getchar().
-          Next object is to go sort out the code that reads the keys.
-          Whoops - realised that keys behave differently for each termtype, i.e. for Linux,
-          console, the keys work properly, but for some other termtypes, (especially under X)
-          they don't work the same way.  Should I try to understand how ncurses picks up its
-          keystrokes to feed to the upperlevel process?  Is there some way of modifying low-level
-          keyparsing routines?
+0.7.10  I think I've come up with a simpler way of creating my output line in hex mode...
+        The concept is to build a line using 4-byte chunks to the width of the screen.
+        and then filling lines.  I found out what was causing the Help() fault in an xterm
+        - not enough lines in my xterm!  I needed the size of xterm to be 26 lines or
+        better, so I've reduced the help screen down to 24 lines, and changed the
+        midpoint.  I have also started changing the window references in DisplayStats()
+        Of course that still doesn't help the ALT_CHARSET problem under X - I don't
+        have an answer for this.  So far I get around it by checking whether DISPLAY exists
+        and if so, I use alternative chars to outline the windows with.
+0.7.11  Worked out the width problem for window, and side effect is that screen resizing
+        seems to be handled fine - I thought I was going to have to handle that myself!
+    I still haven't separated output into 4-byte blocks yet, just a stream of hex
+        bytes followed by the chars. Now I just need to add code for the ruler.
+        Only thing is that text mode still works at the screen size the program started
+        with...guess I'll have to go add the code for that into dump(text) as well as
+        dump(hex)
+July 2000 (approximately)
+0.7.12  YES!!!!! The arrows problem is FINALLY SOLVED!!!!!!!!!!! I was using the wrong
+        function to read my keys in WhatNext() - I should have been using the ncurses
+        routine getch() _instead of_ the stdio routine getchar().
+        Next object is to go sort out the code that reads the keys.
+        Whoops - realised that keys behave differently for each termtype, i.e. for Linux,
+        console, the keys work properly, but for some other termtypes, (especially under X)
+        they don't work the same way.  Should I try to understand how ncurses picks up its
+        keystrokes to feed to the upperlevel process?  Is there some way of modifying low-level
+        keyparsing routines?
 
-          I think I have just come up with a filename length problem (256 bytes...) when I feed
-          (G)et with a name longer than 254 chars...?  Also, how would I do the equivalent of
-          basename? This would help out with DisplayStats().
+        I think I have just come up with a filename length problem (256 bytes...) when I feed
+        (G)et with a name longer than 254 chars...?  Also, how would I do the equivalent of
+        basename? This would help out with DisplayStats().
 
-          Oooooo - what happens when list tries to open a Directory???????  Just saw this from
-          looking at code for less.  Am hoping to integrate some useful code from less to modularise
-          the functions somewhat.  Also want to set up a queue of files on the commandline to list.
-          Have also tidied up how the ruler looks in decimal or hex, in text and hexdump modes.
+        Oooooo - what happens when list tries to open a Directory???????  Just saw this from
+        looking at code for less.  Am hoping to integrate some useful code from less to modularise
+        the functions somewhat.  Also want to set up a queue of files on the commandline to list.
+        Have also tidied up how the ruler looks in decimal or hex, in text and hexdump modes.
 
-  0.7.13  Cleaned up some code, added extra cases to Bye(), added a search routine (both forwards
-          and backwards, however, the search-to-position isn't working well, and neither is the
-          display of the screen directly subsequent to a search hit.  Heh he - I just thought of
-          a way around the lookataDir() problem - give a listing of the directory on the screen!
-          Now isn't that smart?  Although seriously, this should come from filebrowse if object
-          turns out to be a dir.
+0.7.13  Cleaned up some code, added extra cases to Bye(), added a search routine (both forwards
+        and backwards, however, the search-to-position isn't working well, and neither is the
+        display of the screen directly subsequent to a search hit.  Heh he - I just thought of
+        a way around the lookataDir() problem - give a listing of the directory on the screen!
+        Now isn't that smart?  Although seriously, this should come from filebrowse if object
+        turns out to be a dir.
 
-          Have just figured out that the ffsearch/rfsearch are "best-fit" algorithms - though the
-          best-fit doesn't...for example if I search for ffsearch from beginning of list.c, I'll
-          get a hit on ffset instead...
-          20 minutes later...
-          Figured out what was wrong - I was setting size in ffsearch to sizeof(fi->SearchString)
-          which, of course, will give you the size of the pointer (which this is...) - what I
-          wanted was the length of the string SearchString pointed _to_, therefore, *(fi->SearchString)
-          Now what we need, is  to position (in text mode anyway) to the nearest line containing search
-          pattern.  And, it's an exact pattern match. Hex mode doesn't matter - it will handle exact
-          placement, however, it looks a little funny to see
-                  ffsearch(blah);
-          instead of seeing
-                  if((-1L) ==(fi->SPosn = ffsearch(blah);
-          I'm still seeing screen droppings...
+        Have just figured out that the ffsearch/rfsearch are "best-fit" algorithms - though the
+        best-fit doesn't...for example if I search for ffsearch from beginning of list.c, I'll
+        get a hit on ffset instead...
+        20 minutes later...
+        Figured out what was wrong - I was setting size in ffsearch to sizeof(fi->SearchString)
+        which, of course, will give you the size of the pointer (which this is...) - what I
+        wanted was the length of the string SearchString pointed _to_, therefore, *(fi->SearchString)
+        Now what we need, is  to position (in text mode anyway) to the nearest line containing search
+        pattern.  And, it's an exact pattern match. Hex mode doesn't matter - it will handle exact
+        placement, however, it looks a little funny to see
+                ffsearch(blah);
+        instead of seeing
+                if((-1L) ==(fi->SPosn = ffsearch(blah);
+        I'm still seeing screen droppings...
 
-          I've had an idea, but it would mean changing the key that 7/8 or * toggles were done on,
-          it would be to use a numerical prefix to do the following command n times...
-  August 2000
-  0.7.14  I'm sure this is worth another version update - I seem to have fully implemented the functions
-          Search forward, Search Backward, and Repeat Search.  I even think I have cleared off the screen
-          droppings.  The only thing is, I haven't fully bullet-proofed the StringPrompt routine yet
-          (for empty strings etc...)  Have also changed the key used for help from ? to h, and the key
-          for Repeat from ^L to N.  Have also changed what gets passed to Help from a File * to a struct pointer
-  0.7.15  Tidied some more code up, due to Dion's bugfinding, and finally got debug_function to display
-          yellow text on red background.  Also added a taBsize parameter, and sorted out most of the
-          screendroppings left behind as a result - meaning I get to change the version number yet again.
-      <B> The only thing left is that the rest of the line left behind (if wider than COLS) doesn't get
-          shifted down onto the next line of display.  Hmmm.... Have decided to take out tab-processing for now.
-          Have found another buglet I have seen for a while.  When starting in text mode, the hexmode vars
-          aren't initialised.  Will cure this forthwith.  I may also have to #include another file so I
-          don't get an implicit declaration of basename()
-          Ported (well, just copied, really...) this to BSD - compiled without a hitch except for having to use
-          a slightly different library name curses instead of ncurses.  It's all the same thing anyway in the
-          version of OpenBSD I have (2.7) - hope Dion has luck with copying.  I also had to put in a horrible
-          #ifdef LINUX because BSD console treats ALT_CHARSET wierd, so it's better if I leave it as white on
-          black for the moment.  I'm even surprised the Makefile works under BSD - they seem to use a different
-          but similar syntax, however BSD swallowed my Makefile without comment. Actually, I've found that the
-          variable LINUX isn't defined under Linux...? Huh?
-          Fixed that - found that __linux__ would probably be #defined somewhere in the Linux system...I really
-          need to remove the system dependency just for displaying 8-bit and DisplayStat() and Help()
-  0.7.16  Started work on a BugWrite function to take input from the user and either write to a specified file
-          or mail to a specified user.  Creates a file in the tmp dir to work with...
-          Also added stat data into the struct.  Will also need to remove all references to COLS and LINES, and
-          replace with the two vars I defined in the struct FileData.
-          I've also cleaned up screen updating in Help() and DisplayStats() by removing wclear() out of each.
-      <B> It seems the screen isn't updating properly any more...so have put a wclear back in for the moment
-          until I sort out how to clear off each line without too much penalty in speed
-  0.7.17  Added an edit function, calls system() to run external program, go see EditFunction()
-      <B> So far, bug is that LnAtTopOfScrn isn't being set properly at _all!_
-      <B> I've altered the debug_function code, but it is no longer printing the line it's supposed
-          to print. Tried doing a neat frame around the window, but it's not having any of it...
-          Also added a timestamp option to each entry I write to the debug file.
-          Am striking problems with the last line of file not getting written to screen in text mode.
-  0.7.18  Got fixed...  Also fixed offset problem when starting editor at specified line - luckily most
-          Linux editors support this.  Also put in a return to same line feature once returned from edit.
-          Only hassle is trying to edit a filename that begins with + - the editor thinks it's a command.
-          Now, if we coud only fix this LineCount problem...and it still won't compile under FreeBSD
-          The following vars aren't found: __errno_location, __xstat, __cbyte_h (??) and __strtol_internal
-          It's possible that these are compiler generated.
-          I also haven't sorted out what happens when no file is specified on the commandline.
-          (Later) Sorted that.  Now my only problem is working out how to simplify the colour stuff
-          so that list will compile under minix!  Yes!  If I can do this, it might give me ideas as
-          to how to strip/simplify mainstream code.  Minix has color, but I don't know how to access it yet.
-          <Later> Sorted out most of the minix problems, now I just have to strip start_color and init_pair
-          and have minix work without colours.
-      <B> Fixed a subtle fault I didn't find until now - if I start a search "/", and then hit enter, the
-          program bombed - am now checking the length of string returned by SearchPrompt() - also found
-          independently by Dion the BugHunter.
-  October 2000
-  0.7.19  (End of September)  Made a large number of changes to code to allow the use of list under
-      monochrome conditions such as minix offers.  Have altered HelpScreen to HelpWin to be consistent
-          with StatWin in ShowStat(), and changed the name of the Help() routine to ShowHelp() to be more
-          consistent.  There may be a bit more "tidying up" of namespace over the next few releases.
-  0.7.20  I have added line numbers to the text view - it was easier than I thought... but lines are not
-          being filled to the right hand side when line numbers aren't being shown - so really, the sooner
-          I get the lineparsing routine fixed from choosing fixed length (screenwide) long, the better.
-      <B> I've just found that the ruler line in text mode doesn't shift across when in line number mode.
-  0.7.21  So I fixed it!  Have also changed the name of DisplayStats() to ShowStats (consistency...) and
-          added a CmdMode blank function for vim-like functions, such as (N)ext/(P)rev file...and also
-          copied argc and argv to local copies inside the fi structure for use later by CmdMode.
-          Well, have finally found out that __OpenBSD__ _is_ #defined in said OS, and so would __FreeBSD__
-          be in that OS.  Dion mentioned that when he attempts to compile under FreeBSD, stdin is not #defined
-          at the link stage, so I have to work out why, though I suspect that now I've sorted out that.
-      <B> Found another bug relating to display in text mode - on an 80 char screen, 71 chars (not 70) get
-      <B> displayed. Also, colours aren't changing under OpenBSD - I can't figure out why...
-  December 7th, 2000
-          Not a lot has happened since last code addition - still considering code complexity; for example:
-          Screen lines vs. File lines - I guess I display all screenlines I can, then increment filelines with
-          as many as fitted on the screen?  Then how do I treat lines that are longer than one screen in length?
-      <N> Changed a XRunning variable into EightBitDisplay, and changed the sense of test.
-  February 12, 2001
-  0.7.22  Finally found one reason why things are taking so long to start up.  I was doing ScanForCR() and
-          AllocateLines() twice. Found it when I added a 'q'uick switch to get around it - hey, I'm supposed
-          to be rewriting that whole section anyway!  As a result, I have ended up with a MAJOR increase in
-          startup speed for hexmode when selecting quick mode.
-          Have also added code to handle displaying in a different screensize than is current - though I have
-          to watch what I get here...
-  March 2, 2001
-  0.7.23  Just added code in for choosing size of screen for dump...
-      <B> Found a buglet - on a huge file, display of offset in decimal gets overwritten by file data - corrected
-      <B>'nother buglet - go to the end of the file, it's not the end - short by Scrn_wide bytes.
-          Could put more info in the bug file...like dump stats once per session, and dump fileposn every time
-          I "w"rote to the bugfile.
-      <B> Displaying the last line of a file in hex that takes up less than a screen, loses it's last half a hex byte,
-          and doesn't display it's chars, except when I display the end of the file.  This could be the bit of the
-          file that's responsible for munging the last line.
-          We seem to have sorted that one out...
-          Went on a bit of a tikitour the past few days trying to clear off excess lines...back to original 0.7.23 status
-      <B> Another bug found by Dion - Searching backwards on empty string crashes the program.
+        I've had an idea, but it would mean changing the key that 7/8 or * toggles were done on,
+        it would be to use a numerical prefix to do the following command n times...
+August 2000
+0.7.14  I'm sure this is worth another version update - I seem to have fully implemented the functions
+        Search forward, Search Backward, and Repeat Search.  I even think I have cleared off the screen
+        droppings.  The only thing is, I haven't fully bullet-proofed the StringPrompt routine yet
+        (for empty strings etc...)  Have also changed the key used for help from ? to h, and the key
+        for Repeat from ^L to N.  Have also changed what gets passed to Help from a File * to a struct pointer
+0.7.15  Tidied some more code up, due to Dion's bugfinding, and finally got debug_function to display
+        yellow text on red background.  Also added a taBsize parameter, and sorted out most of the
+        screendroppings left behind as a result - meaning I get to change the version number yet again.
+    <B> The only thing left is that the rest of the line left behind (if wider than COLS) doesn't get
+        shifted down onto the next line of display.  Hmmm.... Have decided to take out tab-processing for now.
+        Have found another buglet I have seen for a while.  When starting in text mode, the hexmode vars
+        aren't initialised.  Will cure this forthwith.  I may also have to #include another file so I
+        don't get an implicit declaration of basename()
+        Ported (well, just copied, really...) this to BSD - compiled without a hitch except for having to use
+        a slightly different library name curses instead of ncurses.  It's all the same thing anyway in the
+        version of OpenBSD I have (2.7) - hope Dion has luck with copying.  I also had to put in a horrible
+        #ifdef LINUX because BSD console treats ALT_CHARSET wierd, so it's better if I leave it as white on
+        black for the moment.  I'm even surprised the Makefile works under BSD - they seem to use a different
+        but similar syntax, however BSD swallowed my Makefile without comment. Actually, I've found that the
+        variable LINUX isn't defined under Linux...? Huh?
+        Fixed that - found that __linux__ would probably be #defined somewhere in the Linux system...I really
+        need to remove the system dependency just for displaying 8-bit and DisplayStat() and Help()
+0.7.16  Started work on a BugWrite function to take input from the user and either write to a specified file
+        or mail to a specified user.  Creates a file in the tmp dir to work with...
+        Also added stat data into the struct.  Will also need to remove all references to COLS and LINES, and
+        replace with the two vars I defined in the struct FileData.
+        I've also cleaned up screen updating in Help() and DisplayStats() by removing wclear() out of each.
+    <B> It seems the screen isn't updating properly any more...so have put a wclear back in for the moment
+        until I sort out how to clear off each line without too much penalty in speed
+0.7.17  Added an edit function, calls system() to run external program, go see EditFunction()
+    <B> So far, bug is that LnAtTopOfScrn isn't being set properly at _all!_
+    <B> I've altered the debug_function code, but it is no longer printing the line it's supposed
+        to print. Tried doing a neat frame around the window, but it's not having any of it...
+        Also added a timestamp option to each entry I write to the debug file.
+        Am striking problems with the last line of file not getting written to screen in text mode.
+0.7.18  Got fixed...  Also fixed offset problem when starting editor at specified line - luckily most
+        Linux editors support this.  Also put in a return to same line feature once returned from edit.
+        Only hassle is trying to edit a filename that begins with + - the editor thinks it's a command.
+        Now, if we coud only fix this LineCount problem...and it still won't compile under FreeBSD
+        The following vars aren't found: __errno_location, __xstat, __cbyte_h (??) and __strtol_internal
+        It's possible that these are compiler generated.
+        I also haven't sorted out what happens when no file is specified on the commandline.
+        (Later) Sorted that.  Now my only problem is working out how to simplify the colour stuff
+        so that list will compile under minix!  Yes!  If I can do this, it might give me ideas as
+        to how to strip/simplify mainstream code.  Minix has color, but I don't know how to access it yet.
+        <Later> Sorted out most of the minix problems, now I just have to strip start_color and init_pair
+        and have minix work without colours.
+    <B> Fixed a subtle fault I didn't find until now - if I start a search "/", and then hit enter, the
+        program bombed - am now checking the length of string returned by SearchPrompt() - also found
+        independently by Dion the BugHunter.
+October 2000
+0.7.19  (End of September)  Made a large number of changes to code to allow the use of list under
+    monochrome conditions such as minix offers.  Have altered HelpScreen to HelpWin to be consistent
+        with StatWin in ShowStat(), and changed the name of the Help() routine to ShowHelp() to be more
+        consistent.  There may be a bit more "tidying up" of namespace over the next few releases.
+0.7.20  I have added line numbers to the text view - it was easier than I thought... but lines are not
+        being filled to the right hand side when line numbers aren't being shown - so really, the sooner
+        I get the lineparsing routine fixed from choosing fixed length (screenwide) long, the better.
+    <B> I've just found that the ruler line in text mode doesn't shift across when in line number mode.
+0.7.21  So I fixed it!  Have also changed the name of DisplayStats() to ShowStats (consistency...) and
+        added a CmdMode blank function for vim-like functions, such as (N)ext/(P)rev file...and also
+        copied argc and argv to local copies inside the fi structure for use later by CmdMode.
+        Well, have finally found out that __OpenBSD__ _is_ #defined in said OS, and so would __FreeBSD__
+        be in that OS.  Dion mentioned that when he attempts to compile under FreeBSD, stdin is not #defined
+        at the link stage, so I have to work out why, though I suspect that now I've sorted out that.
+    <B> Found another bug relating to display in text mode - on an 80 char screen, 71 chars (not 70) get
+    <B> displayed. Also, colours aren't changing under OpenBSD - I can't figure out why...
+December 7th, 2000
+        Not a lot has happened since last code addition - still considering code complexity; for example:
+        Screen lines vs. File lines - I guess I display all screenlines I can, then increment filelines with
+        as many as fitted on the screen?  Then how do I treat lines that are longer than one screen in length?
+    <N> Changed a XRunning variable into EightBitDisplay, and changed the sense of test.
+February 12, 2001
+0.7.22  Finally found one reason why things are taking so long to start up.  I was doing ScanForCR() and
+        AllocateLines() twice. Found it when I added a 'q'uick switch to get around it - hey, I'm supposed
+        to be rewriting that whole section anyway!  As a result, I have ended up with a MAJOR increase in
+        startup speed for hexmode when selecting quick mode.
+        Have also added code to handle displaying in a different screensize than is current - though I have
+        to watch what I get here...
+March 2, 2001
+0.7.23  Just added code in for choosing size of screen for dump...
+    <B> Found a buglet - on a huge file, display of offset in decimal gets overwritten by file data - corrected
+    <B>'nother buglet - go to the end of the file, it's not the end - short by Scrn_wide bytes.
+        Could put more info in the bug file...like dump stats once per session, and dump fileposn every time
+        I "w"rote to the bugfile.
+    <B> Displaying the last line of a file in hex that takes up less than a screen, loses it's last half a hex byte,
+        and doesn't display it's chars, except when I display the end of the file.  This could be the bit of the
+        file that's responsible for munging the last line.
+        We seem to have sorted that one out...
+        Went on a bit of a tikitour the past few days trying to clear off excess lines...back to original 0.7.23 status
+    <B> Another bug found by Dion - Searching backwards on empty string crashes the program.
 
-  0.7.24  Hmm, we seem to have missed a version here somewhere
-  0.7.25  Okay, some stuff suggested by bronaugh's comments of 8-Oct-2001
-          Okay, what happens when the user has a 128M file of \n?  How large does CrArray get then? (512M)
-      <B> WhatNext() is leaking memory
-  0.7.26  Almost fixed blank screen for Usage(), but haven't got "Wrong parameter - not known" done yet
-  0.7.27<B>I still have to fix the flick into curses and back out for Usage().
-          I have split off Usage() and Help() into a separate file, added BugWriteFName to fi,
-          and given the user the chance to select the filename he wishes to use.
-          I haven't YET set up a default of homedir/list.debug
-      <I> I could load the previous contents of the BugWrite file into the edit window.
-      <B> We STILL don't have the lines display correct in PrintLine if we have less lines in file than a screenfull.
-      <?> Could we utilise a unwrap-like function? This displays the leftmost hunk of line, and we scroll right or left
-          for any remainder.
-  0.7.28  Moved an awful lot of code out of list.c into other files - file.c, input.c and screen.c
-          Also added a ccmalloc target, to use with ccmalloc.  So far, all I can find is that
-          an awful lot of strcpy calls get made. Apart from that, nothing appears out of the ordinary,
-          but ncurses eats memory and doesn't appear to release it until programs end. Apparently, WhatNext()
-          also gobbles memory. Bronaugh sent me a file to utilise as a replacement to WhatNext, using an array
-          of function pointers. It also refuses to compile under DOS (not that I expected anything else).
-      <B> I don't need to switch to curses mode until my file can be loaded, however, the f param
-          calls NewFile(), which prompts user we're about to scan for lines, then calls ScanForCR()
-          So - now we need to find out how to tell the user without using NewFile(); i.e. separate the two
-          functions from each other.  Perhaps call it as initial start through Dump?  We ought to be in
-          curses by then, assuming file can be opened.
-  0.7.29  Hm!  Well, THAT worked well! Now I just work on shifting the rest of the ncurses code past init
-      <B> Uh oh - now Bye isn't ...quite... correct.  If ncurses isn't even started, then Bye barfs
-          because it closes down curses before printing anything - guess I'm going to have to stick THAT
-          in a separate function...sheesh!  - Okay, done.  Now how do I clean up when I call ecalloc?
+0.7.24  Hmm, we seem to have missed a version here somewhere
+0.7.25  Okay, some stuff suggested by bronaugh's comments of 8-Oct-2001
+        Okay, what happens when the user has a 128M file of \n?  How large does CrArray get then? (512M)
+    <B> WhatNext() is leaking memory
+0.7.26  Almost fixed blank screen for Usage(), but haven't got "Wrong parameter - not known" done yet
+0.7.27<B>I still have to fix the flick into curses and back out for Usage().
+        I have split off Usage() and Help() into a separate file, added BugWriteFName to fi,
+        and given the user the chance to select the filename he wishes to use.
+        I haven't YET set up a default of homedir/list.debug
+    <I> I could load the previous contents of the BugWrite file into the edit window.
+    <B> We STILL don't have the lines display correct in PrintLine if we have less lines in file than a screenfull.
+    <?> Could we utilise a unwrap-like function? This displays the leftmost hunk of line, and we scroll right or left
+        for any remainder.
+0.7.28  Moved an awful lot of code out of list.c into other files - file.c, input.c and screen.c
+        Also added a ccmalloc target, to use with ccmalloc.  So far, all I can find is that
+        an awful lot of strcpy calls get made. Apart from that, nothing appears out of the ordinary,
+        but ncurses eats memory and doesn't appear to release it until programs end. Apparently, WhatNext()
+        also gobbles memory. Bronaugh sent me a file to utilise as a replacement to WhatNext, using an array
+        of function pointers. It also refuses to compile under DOS (not that I expected anything else).
+    <B> I don't need to switch to curses mode until my file can be loaded, however, the f param
+        calls NewFile(), which prompts user we're about to scan for lines, then calls ScanForCR()
+        So - now we need to find out how to tell the user without using NewFile(); i.e. separate the two
+        functions from each other.  Perhaps call it as initial start through Dump?  We ought to be in
+        curses by then, assuming file can be opened.
+0.7.29  Hm!  Well, THAT worked well! Now I just work on shifting the rest of the ncurses code past init
+    <B> Uh oh - now Bye isn't ...quite... correct.  If ncurses isn't even started, then Bye barfs
+        because it closes down curses before printing anything - guess I'm going to have to stick THAT
+        in a separate function...sheesh!  - Okay, done.  Now how do I clean up when I call ecalloc?
 
-  September 7th, 2020
-  0.7.30  After what, 19 years, I'm back? Cool. Fixed up screen.c:BackPage() to be extern, otherwise
-          functions in input.c can't use it, even with the "list.h" header in place. Go figure.
-          Only found this out when Jason Nunn (of nighthawk and funktracker
-          fame) found this trying to compile again.
-  June 28th, 2021
-  0.7.31  Tweaked -h very slightly, explicitly calling out Monochrome instead
-          of Mono (which wasn't around in 1998)
-  0.7.32  Instead of using a series of arbitrary integers for Bye(), I changed them
-          into an enum, and played whack-a-mole - so far the only remaining
-          regression bug seems to be that I can now open .. (like, huh?)
-  0.7.33  Corrected malloc just to make sure the malloc succeeded. Also looking at
-          fi->Scrn_x assignment as -c from commandline doesn't work (list.c:138) due to
-          Scrn_x being 0 initially.
-  0.7.34  Many formatting changes, centred around spacing and consistency.
-          Making more use of github and gitea issues from this release.
-  0.7.35  Finally knocked out quite a few other bugs, resulting in the ability
-          to compile cleanly under the Open Watcom C compiler, at least on
-          FreeDOS. Several additions made to make this work. ShowHelp now
-          in its own file to reduce the clutter in screen.c and shorten that file some.
-          Also introduced a new tag to the org file - revision.
-  0.7.36  Added content to the man page and README, no changes to the source code in this revision.
-  0.7.36.3 Added a LISTREV(ision). Fixed incorrect struct fieldname in fi.
+September 7th, 2020
+0.7.30  After what, 19 years, I'm back? Cool. Fixed up screen.c:BackPage() to be extern, otherwise
+        functions in input.c can't use it, even with the "list.h" header in place. Go figure.
+        Only found this out when Jason Nunn (of nighthawk and funktracker
+        fame) found this trying to compile again.
+June 28th, 2021
+0.7.31  Tweaked -h very slightly, explicitly calling out Monochrome instead
+        of Mono (which wasn't around in 1998)
+0.7.32  Instead of using a series of arbitrary integers for Bye(), I changed them
+        into an enum, and played whack-a-mole - so far the only remaining
+        regression bug seems to be that I can now open .. (like, huh?)
+0.7.33  Corrected malloc just to make sure the malloc succeeded. Also looking at
+        fi->Scrn_x assignment as -c from commandline doesn't work (list.c:138) due to
+        Scrn_x being 0 initially.
+0.7.34  Many formatting changes, centred around spacing and consistency.
+        Making more use of github and gitea issues from this release.
+0.7.35  Finally knocked out quite a few other bugs, resulting in the ability
+        to compile cleanly under the Open Watcom C compiler, at least on
+        FreeDOS. Several additions made to make this work. ShowHelp now
+        in its own file to reduce the clutter in screen.c and shorten that file some.
+        Also introduced a new tag to the org file - revision.
+0.7.36  Added content to the man page and README, no changes to the source code in this revision.
+0.7.36.3 Added a LISTREV(ision). Fixed incorrect struct fieldname in fi.
 
 #+END_SRC
 
