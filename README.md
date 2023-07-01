@@ -13,10 +13,10 @@ Naturally, things have evolved since then, but I've finally recovered a copy of 
 ![Static Badge](badge-img/FreeBSD-pass.svg)
 ![Static Badge](badge-img/FreeDOS-pass.svg)
 ![Static Badge](badge-img/OpenBSD-pass.svg)
-![Static Badge](badge-img/NetBSD-not_compiling.svg)
+![Static Badge](badge-img/NetBSD-not_compiled.svg)
 ![Static Badge](badge-img/Minix-pass.svg)
 ![Static Badge](badge-img/Linux-pass.svg)
-![Static Badge](badge-img/Solaris-not_compiling.svg)
+![Static Badge](badge-img/Solaris-not_compiled.svg)
 
 
 
