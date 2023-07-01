@@ -22,7 +22,7 @@ int BugWrite(struct FileData *fi) {
  /* Of course I could always prompt user for a filename here... */
   if(NULL == fi->BugWriteFName) {
     if(!getenv("TEMP"))  /* Whoops, no TEMP variable defined */
-      strcpy(TempPath, "/tmp/list.debug"); /* This should be the last resort filename, not the default */
+      strcpy(TempPath, "/tmp/list.debug"); /* This should be the last resort filename, not the default - it won't work under DOS */
     else {
   /* Should this be a file in the users home dir instead? The only place where this
    * wouldn't work is where the home dir is not writeable. 
