@@ -65,7 +65,7 @@ int WriteToFile(void) {
 }
 
 int EmailToUser(struct FileData *fi) {
-#ifndef __linux__
+#ifndef __linux__  /* Could also use mail on BSD or even Minix, just not DOS */
   debug_function("Sorry, can't mail on this system", 0, fi->Scrn_y, __LINE__ );
 #else
   debug_function("Report mailed to user", 0, fi->Scrn_y, __LINE__ );
