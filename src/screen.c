@@ -49,7 +49,9 @@ void Usage(void) {
   printf("\t e: show line endings\n");
   printf("\t m: Monochrome version");
   printf("\t f: specify filename to open\n");
+#ifdef D_ROWCOL
   printf("\t r: rows to use, c: columns to use\n");
+#endif
   printf("\t (*) means I haven't finished coding this bit yet\n");
 /*  printf("Hit any key to exit\n"); / * Added by Dion's bugfinding, taken out
  *  in the change from curses to tty */
