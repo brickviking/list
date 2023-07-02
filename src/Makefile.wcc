@@ -1,10 +1,11 @@
-DEBUGFLAGS = -g -O2
 CC = wcc386
 CL = wlink
-CFLAGS = -bc -wx -d3
+CFLAGS = -bc -ox -wx
+DEBUGFLAGS = -g -bc -od -d3 -wx
 VERSION = 0737
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = lstb$(VERSION).tgz
+DBGBINFILE = lstd$(VERSION).tgz
 SRCDIR = src
 INCDIR = c:\pdcurses
 LDFLAGS = 
@@ -12,14 +13,39 @@ LIBS = pdcurses.lib
 OPTFLAGS = -od
 
 OBJECTS = list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj
+DBGOBJECTS = listd.obj dequeued.obj bugwrited.obj filed.obj inputd.obj showhelpd.obj screend.obj
 
 all: list.exe
 
 .c.obj:
 	$(CC) $(CFLAGS) $(OPTFLAGS) -i=$(INCDIR) -fo=$@ $<
 
+listd.obj:
+	$(CC) $(DEBUGFLAGS) list.c -i=$(INCDIR) -fo $@
+
+dequeued.obj:
+	$(CC) $(DEBUGFLAGS) dequeue.c -i=$(INCDIR) -fo $@
+
+bugwrited.obj:
+	$(CC) $(DEBUGFLAGS) bugwrite.c -i=$(INCDIR) -fo $@
+
+filed.obj:
+	$(CC) $(DEBUGFLAGS) file.c -i=$(INCDIR) -fo $@
+
+inputd.obj:
+	$(CC) $(DEBUGFLAGS) input.c -i=$(INCDIR) -fo $@
+
+screend.obj:
+	$(CC) $(DEBUGFLAGS) screen.c -i=$(INCDIR) -fo $@
+
+showhelpd.obj:
+	$(CC) $(DEBUGFLAGS) showhelp.c -i=$(INCDIR) -fo $@
+
 list.exe: $(OBJECTS)
 	$(CL) $(LDFLAGS) @list.lnk
+
+listd.exe: $(DBGOBJECTS)
+	$(CL) $(LDFLAGS) @listd.lnk
 
 clean: .symbolic
 	del *.obj list.exe

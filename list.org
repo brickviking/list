@@ -4,7 +4,7 @@
 #+AUTHOR: brickviking
 #+DATE: whenever
 #+VERSION: 0.7.37
-#+REVISION: 1
+#+REVISION: 2
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -5171,13 +5171,16 @@ uninstall:
 
 
 * MS-DOS/FreeDOS Makefiles
-   :PROPERTIES:
-   :header-args: :tangle src/list.lnk
-   :END:
 I'm having to stitch in a completely different makefile for Watcom to use. There are some similarities with UNIX make, but not very many. One other thing to consider is that DOS doesn't always support long filenames, and some of the project filenames exceed the 8.3 filename format of the normal un-LFN'd environment. The filenames I specifically need for DOS are fine though, except Changelog. FreeDOS is better at this than straight MS-DOS, which has no native support for LFN whatsoever.
 
 There's two possibilities for compiling things under MS-DOS or FreeDOS - DJGPP's GCC compiler or Open Watcom's C compiler.
-So far, these both need pdcurses. There's other work to do to get it to work under Watcom. I've found out that DOS has a 128-char limit, so the Watcom tools use response files to pass more information than the paltry amount of 128 bytes around. Hence, here's a list.lnk file that Watcom's wmake program can use. 
+So far, these both need pdcurses. There's other work to do to get it to work under Watcom.
+
+** Watcom response file
+   :PROPERTIES:
+   :header-args: :tangle src/list.lnk
+   :END:
+I've found out that DOS has a 128-char limit, so the Watcom tools use response files to pass more information than the paltry amount of 128 bytes around. Hence, here's a list.lnk file that Watcom's wmake program can use. 
 
 #+BEGIN_SRC linker -i
 system dos4g
@@ -5186,22 +5189,36 @@ option map
 file { list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj }
 library { c:\pdcurses\dos\pdcurses.lib }
 #+END_SRC
+** Watcom debug response file
+   :PROPERTIES:
+   :header-args: :tangle src/list_d.lnk
+   :END:
+
+Putting back the debug stuff into Watcom's response file requires a separate response file for the debug objects.
+#+BEGIN_SRC linker -i
+system dos4g
+name listd.exe
+option map
+file { listd.obj dequeued.obj bugwrited.obj filed.obj inputd.obj showhelpd.obj screend.obj }
+library { c:\pdcurses\dos\pdcurses.lib }
+#+END_SRC
 
 ** Watcom Makefile
    :PROPERTIES:
    :header-args: :tangle src/Makefile.wcc
    :END:
 
-This maybe needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line.
+This maybe needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line, although Watcom's wmake doesn't seem to complain about it.
 
 #+BEGIN_SRC makefile -i
-DEBUGFLAGS = -g -O2
 CC = wcc386
 CL = wlink
-CFLAGS = -bc -wx -d3
+CFLAGS = -bc -ox -wx
+DEBUGFLAGS = -g -bc -od -d3 -wx
 VERSION = 0737
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = lstb$(VERSION).tgz
+DBGBINFILE = lstd$(VERSION).tgz
 SRCDIR = src
 INCDIR = c:\pdcurses
 LDFLAGS = 
@@ -5209,14 +5226,39 @@ LIBS = pdcurses.lib
 OPTFLAGS = -od
 
 OBJECTS = list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj
+DBGOBJECTS = listd.obj dequeued.obj bugwrited.obj filed.obj inputd.obj showhelpd.obj screend.obj
 
 all: list.exe
 
 .c.obj:
 	$(CC) $(CFLAGS) $(OPTFLAGS) -i=$(INCDIR) -fo=$@ $<
 
+listd.obj:
+	$(CC) $(DEBUGFLAGS) list.c -i=$(INCDIR) -fo $@
+
+dequeued.obj:
+	$(CC) $(DEBUGFLAGS) dequeue.c -i=$(INCDIR) -fo $@
+
+bugwrited.obj:
+	$(CC) $(DEBUGFLAGS) bugwrite.c -i=$(INCDIR) -fo $@
+
+filed.obj:
+	$(CC) $(DEBUGFLAGS) file.c -i=$(INCDIR) -fo $@
+
+inputd.obj:
+	$(CC) $(DEBUGFLAGS) input.c -i=$(INCDIR) -fo $@
+
+screend.obj:
+	$(CC) $(DEBUGFLAGS) screen.c -i=$(INCDIR) -fo $@
+
+showhelpd.obj:
+	$(CC) $(DEBUGFLAGS) showhelp.c -i=$(INCDIR) -fo $@
+
 list.exe: $(OBJECTS)
 	$(CL) $(LDFLAGS) @list.lnk
+
+listd.exe: $(DBGOBJECTS)
+	$(CL) $(LDFLAGS) @listd.lnk
 
 clean: .symbolic
 	del *.obj list.exe
