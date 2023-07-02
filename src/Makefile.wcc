@@ -1,7 +1,7 @@
 CC = wcc386
 CL = wlink
 CFLAGS = -bc -ox -wx
-DEBUGFLAGS = -g -bc -od -d3 -wx
+DEBUGFLAGS = -bc -od -d3 -wx
 VERSION = 0737
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = lstb$(VERSION).tgz
@@ -21,25 +21,25 @@ all: list.exe
 	$(CC) $(CFLAGS) $(OPTFLAGS) -i=$(INCDIR) -fo=$@ $<
 
 listd.obj:
-	$(CC) $(DEBUGFLAGS) list.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) list.c -i=$(INCDIR) -fo=$@
 
 dequeued.obj:
-	$(CC) $(DEBUGFLAGS) dequeue.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) dequeue.c -i=$(INCDIR) -fo=$@
 
 bugwrited.obj:
-	$(CC) $(DEBUGFLAGS) bugwrite.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) bugwrite.c -i=$(INCDIR) -fo=$@
 
 filed.obj:
-	$(CC) $(DEBUGFLAGS) file.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) file.c -i=$(INCDIR) -fo=$@
 
 inputd.obj:
-	$(CC) $(DEBUGFLAGS) input.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) input.c -i=$(INCDIR) -fo=$@
 
 screend.obj:
-	$(CC) $(DEBUGFLAGS) screen.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) screen.c -i=$(INCDIR) -fo=$@
 
 showhelpd.obj:
-	$(CC) $(DEBUGFLAGS) showhelp.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) showhelp.c -i=$(INCDIR) -fo=$@
 
 list.exe: $(OBJECTS)
 	$(CL) $(LDFLAGS) @list.lnk

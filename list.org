@@ -4,7 +4,7 @@
 #+AUTHOR: brickviking
 #+DATE: whenever
 #+VERSION: 0.7.37
-#+REVISION: 2
+#+REVISION: 3
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -4883,7 +4883,7 @@ The obvious place to put declarations and defines. It's the header file for the 
 #define LISTVERSION 0
 #define LISTMINOR 37
 #define LISTMAJOR 7
-#define LISTREV 1
+#define LISTREV 3
 /* Had to include this one, since it's disappeared from 2.2 linux kernel or something... */
 #ifndef PATH_MAX
 #define PATH_MAX  4095
@@ -5214,7 +5214,7 @@ This maybe needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of 
 CC = wcc386
 CL = wlink
 CFLAGS = -bc -ox -wx
-DEBUGFLAGS = -g -bc -od -d3 -wx
+DEBUGFLAGS = -bc -od -d3 -wx
 VERSION = 0737
 DISTFILE = list$(VERSION).tgz
 DISTBINFILE = lstb$(VERSION).tgz
@@ -5234,25 +5234,25 @@ all: list.exe
 	$(CC) $(CFLAGS) $(OPTFLAGS) -i=$(INCDIR) -fo=$@ $<
 
 listd.obj:
-	$(CC) $(DEBUGFLAGS) list.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) list.c -i=$(INCDIR) -fo=$@
 
 dequeued.obj:
-	$(CC) $(DEBUGFLAGS) dequeue.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) dequeue.c -i=$(INCDIR) -fo=$@
 
 bugwrited.obj:
-	$(CC) $(DEBUGFLAGS) bugwrite.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) bugwrite.c -i=$(INCDIR) -fo=$@
 
 filed.obj:
-	$(CC) $(DEBUGFLAGS) file.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) file.c -i=$(INCDIR) -fo=$@
 
 inputd.obj:
-	$(CC) $(DEBUGFLAGS) input.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) input.c -i=$(INCDIR) -fo=$@
 
 screend.obj:
-	$(CC) $(DEBUGFLAGS) screen.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) screen.c -i=$(INCDIR) -fo=$@
 
 showhelpd.obj:
-	$(CC) $(DEBUGFLAGS) showhelp.c -i=$(INCDIR) -fo $@
+	$(CC) $(DEBUGFLAGS) showhelp.c -i=$(INCDIR) -fo=$@
 
 list.exe: $(OBJECTS)
 	$(CL) $(LDFLAGS) @list.lnk
