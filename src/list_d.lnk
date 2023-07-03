@@ -1,5 +1,6 @@
 system dos4g
 name listd.exe
 option map
+debug Watcom All
 file { listd.obj dequeued.obj bgwrited.obj filed.obj inputd.obj shwhelpd.obj screend.obj }
 library { c:\pdcurses\dos\pdcurses.lib }

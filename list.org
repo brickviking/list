@@ -5181,7 +5181,7 @@ So far, these both need pdcurses. There's other work to do to get it to work und
    :PROPERTIES:
    :header-args: :tangle src/list.lnk
    :END:
-I've found out that DOS has a 128-char limit, so the Watcom tools use response files to pass more information than the paltry amount of 128 bytes around. Hence, here's a list.lnk file that Watcom's wmake program can use. 
+I've found out that DOS has a 128-char limit, so the Watcom tools use response files to pass more information than the paltry amount of 128 bytes around. Hence, here's a list.lnk file that Watcom's wmake program can use. There's no debugging symbols included, that's left to the listd.exe object.
 
 #+BEGIN_SRC linker -i
 system dos4g
@@ -5195,12 +5195,17 @@ library { c:\pdcurses\dos\pdcurses.lib }
    :header-args: :tangle src/list_d.lnk
    :END:
 
-Putting back the debug stuff into Watcom's response file requires a separate response file for the debug objects. Additionally, the filenames all need to fit within 8.3, or Watcom's tools simply can't find them, at least under FreeDOS even with long filename support turned on—which it is by default anyhow. They can't even output anything that's not 8.3, which somewhat surprises me.
+Putting back the debug stuff into Watcom's response file requires a separate response file for the
+debug objects. Additionally, the filenames all need to fit within 8.3, or Watcom's tools simply
+can't find them, at least under FreeDOS even with long filename support turned on—which it is by
+default anyhow. They can't even output anything that's not 8.3, which somewhat surprises me. This
+time I've turned on debug symbols.
 
 #+BEGIN_SRC linker -i
 system dos4g
 name listd.exe
 option map
+debug Watcom All
 file { listd.obj dequeued.obj bgwrited.obj filed.obj inputd.obj shwhelpd.obj screend.obj }
 library { c:\pdcurses\dos\pdcurses.lib }
 #+END_SRC
@@ -5210,7 +5215,8 @@ library { c:\pdcurses\dos\pdcurses.lib }
    :header-args: :tangle src/Makefile.wcc
    :END:
 
-This maybe needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line, although Watcom's wmake doesn't seem to complain about it.
+This maybe needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line, although
+Watcom's wmake doesn't seem to complain about it.
 
 #+BEGIN_SRC makefile -i
 CC = wcc386
