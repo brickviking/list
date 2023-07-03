@@ -13,7 +13,7 @@ LIBS = pdcurses.lib
 OPTFLAGS = -od
 
 OBJECTS = list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj
-DBGOBJECTS = listd.obj dequeued.obj bugwrited.obj filed.obj inputd.obj showhelpd.obj screend.obj
+DBGOBJECTS = listd.obj dequeued.obj bgwrited.obj filed.obj inputd.obj shwhelpd.obj screend.obj
 
 all: list.exe
 
@@ -26,7 +26,7 @@ listd.obj:
 dequeued.obj:
 	$(CC) $(DEBUGFLAGS) dequeue.c -i=$(INCDIR) -fo=$@
 
-bugwrited.obj:
+bgwrited.obj:
 	$(CC) $(DEBUGFLAGS) bugwrite.c -i=$(INCDIR) -fo=$@
 
 filed.obj:
@@ -38,14 +38,14 @@ inputd.obj:
 screend.obj:
 	$(CC) $(DEBUGFLAGS) screen.c -i=$(INCDIR) -fo=$@
 
-showhelpd.obj:
+shwhelpd.obj:
 	$(CC) $(DEBUGFLAGS) showhelp.c -i=$(INCDIR) -fo=$@
 
 list.exe: $(OBJECTS)
 	$(CL) $(LDFLAGS) @list.lnk
 
 listd.exe: $(DBGOBJECTS)
-	$(CL) $(LDFLAGS) @listd.lnk
+	$(CL) $(LDFLAGS) @list_d.lnk
 
 clean: .symbolic
 	del *.obj list.exe

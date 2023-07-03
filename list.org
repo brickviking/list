@@ -906,6 +906,7 @@ June 28th, 2021
 0.7.36  Added content to the man page and README, no changes to the source code in this revision.
 0.7.36.3 Added a LISTREV(ision). Fixed incorrect struct fieldname in fi.
 0.7.37  Added badges to README for compile status, manually managed for the moment.
+0.7.37.3 Attempting to add DEBUG build to Watcom
 
 #+END_SRC
 
@@ -5194,12 +5195,13 @@ library { c:\pdcurses\dos\pdcurses.lib }
    :header-args: :tangle src/list_d.lnk
    :END:
 
-Putting back the debug stuff into Watcom's response file requires a separate response file for the debug objects.
+Putting back the debug stuff into Watcom's response file requires a separate response file for the debug objects. Additionally, the filenames all need to fit within 8.3, or Watcom's tools simply can't find them, at least under FreeDOS even with long filename support turned on—which it is by default anyhow. They can't even output anything that's not 8.3, which somewhat surprises me.
+
 #+BEGIN_SRC linker -i
 system dos4g
 name listd.exe
 option map
-file { listd.obj dequeued.obj bugwrited.obj filed.obj inputd.obj showhelpd.obj screend.obj }
+file { listd.obj dequeued.obj bgwrited.obj filed.obj inputd.obj shwhelpd.obj screend.obj }
 library { c:\pdcurses\dos\pdcurses.lib }
 #+END_SRC
 
@@ -5226,7 +5228,7 @@ LIBS = pdcurses.lib
 OPTFLAGS = -od
 
 OBJECTS = list.obj dequeue.obj bugwrite.obj file.obj input.obj showhelp.obj screen.obj
-DBGOBJECTS = listd.obj dequeued.obj bugwrited.obj filed.obj inputd.obj showhelpd.obj screend.obj
+DBGOBJECTS = listd.obj dequeued.obj bgwrited.obj filed.obj inputd.obj shwhelpd.obj screend.obj
 
 all: list.exe
 
@@ -5239,7 +5241,7 @@ listd.obj:
 dequeued.obj:
 	$(CC) $(DEBUGFLAGS) dequeue.c -i=$(INCDIR) -fo=$@
 
-bugwrited.obj:
+bgwrited.obj:
 	$(CC) $(DEBUGFLAGS) bugwrite.c -i=$(INCDIR) -fo=$@
 
 filed.obj:
@@ -5251,14 +5253,14 @@ inputd.obj:
 screend.obj:
 	$(CC) $(DEBUGFLAGS) screen.c -i=$(INCDIR) -fo=$@
 
-showhelpd.obj:
+shwhelpd.obj:
 	$(CC) $(DEBUGFLAGS) showhelp.c -i=$(INCDIR) -fo=$@
 
 list.exe: $(OBJECTS)
 	$(CL) $(LDFLAGS) @list.lnk
 
 listd.exe: $(DBGOBJECTS)
-	$(CL) $(LDFLAGS) @listd.lnk
+	$(CL) $(LDFLAGS) @list_d.lnk
 
 clean: .symbolic
 	del *.obj list.exe

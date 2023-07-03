@@ -1,5 +1,5 @@
 system dos4g
 name listd.exe
 option map
-file { listd.obj dequeued.obj bugwrited.obj filed.obj inputd.obj showhelpd.obj screend.obj }
+file { listd.obj dequeued.obj bgwrited.obj filed.obj inputd.obj shwhelpd.obj screend.obj }
 library { c:\pdcurses\dos\pdcurses.lib }

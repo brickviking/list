@@ -316,3 +316,4 @@ June 28th, 2021
 0.7.36  Added content to the man page and README, no changes to the source code in this revision.
 0.7.36.3 Added a LISTREV(ision). Fixed incorrect struct fieldname in fi.
 0.7.37  Added badges to README for compile status, manually managed for the moment.
+0.7.37.3 Attempting to add DEBUG build to Watcom
