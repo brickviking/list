@@ -5269,7 +5269,7 @@ listd.exe: $(DBGOBJECTS)
 	$(CL) $(LDFLAGS) @list_d.lnk
 
 clean: .symbolic
-	del *.obj list.exe
+	del *.obj list.exe listd.exe
 
 #+END_SRC
 
