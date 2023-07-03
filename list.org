@@ -4,7 +4,7 @@
 #+AUTHOR: brickviking
 #+DATE: whenever
 #+VERSION: 0.7.37
-#+REVISION: 3
+#+REVISION: 4
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -907,6 +907,7 @@ June 28th, 2021
 0.7.36.3 Added a LISTREV(ision). Fixed incorrect struct fieldname in fi.
 0.7.37  Added badges to README for compile status, manually managed for the moment.
 0.7.37.3 Attempting to add DEBUG build to Watcom
+0.7.37.4 
 
 #+END_SRC
 
@@ -5216,7 +5217,7 @@ library { c:\pdcurses\dos\pdcurses.lib }
    :END:
 
 This maybe needs to be turned into MSDOS-guacamole, i.e. with ^M at the ends of every line, although
-Watcom's wmake doesn't seem to complain about it.
+Watcom's wmake doesn't seem to complain about it. We don't want the debug executable made by default, the user should know to create this, and if they don't deliberately create it, it shouldn't be made.
 
 #+BEGIN_SRC makefile -i
 CC = wcc386
