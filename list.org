@@ -4245,7 +4245,7 @@ int main(int argc, char **argv) {
     .DumpMode = 't', /* DumpMode - set to text by default */
     .DumpFlag = '0', /* It's official - this wants to be a char */
     .LineNumbers = 0,
-    .Monochrome = '0',
+    .Monochrome = 0,
     .TabSize = '8',
     .addrflag = 0, /* why isn't this AddrFlag? */
     .EofSet = 0,
