@@ -907,6 +907,7 @@ June 28th, 2021
 0.7.36.3 Added a LISTREV(ision). Fixed incorrect struct fieldname in fi.
 0.7.37  Added badges to README for compile status, manually managed for the moment.
 0.7.37.3 Attempting to add DEBUG build to Watcom
+0.7.37.4 Fixed a bug with Monochrome
 
 #+END_SRC
 
@@ -4884,7 +4885,7 @@ The obvious place to put declarations and defines. It's the header file for the 
 #define LISTVERSION 0
 #define LISTMINOR 37
 #define LISTMAJOR 7
-#define LISTREV 3
+#define LISTREV 4
 /* Had to include this one, since it's disappeared from 2.2 linux kernel or something... */
 #ifndef PATH_MAX
 #define PATH_MAX  4095
