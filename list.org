@@ -5023,7 +5023,8 @@ int TakeNotes(FILE *, struct FileData *);
 There's two of these; one for BSD systems, and one for the rest of the UNIX-likes.  The reason for
 two is that BSD and AT&T UNIX have never bothered to use GNU's make syntax, having come up with
 their own and stuck with it. The one thing I'm missing seems to be a makefile that'll work happily
-under Minix. How does that differ from BSDMake or GNU Make?
+under Minix. How does that differ from BSDMake or GNU Make? Not much, apparently. I can now feed
+the BSDMakefile into what passes for make on Minix now, and it all just works.
 
 I stitched in a very small change for BSD, if gcc isn't installed, it'll use the cc that IS
 installed, as long as there is one. In some cases this won't have been installed if compilers such
