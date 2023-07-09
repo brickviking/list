@@ -37,20 +37,13 @@ project—eventually.
 
 Currently, I provide a man page here written in nroff and perhaps a .tex file later. I made the docs
 originally before I was well aware of LaTeX, and I think I snagged the output format from other
-manpages. I'm also including the README.md file whole.
+manpages. I'm also including the README.md file whole, as well as the Changelog in the src/
+directory.
 
-I wasn't originally going to include the Changelog in here, but have decided to in the end. As it
-stands, it's also currently in the src directory and will be kept up to date. Sort of.
-
-Future plans for this org document are to include all the source files so that you can take this
-single document and extract everything else that you need to get the source files as I wrote
-them. Current issues with that approach mean correlating what I already have in src/* with the
-generated source and making sure I don't blow away information I might need later.
-
-I think I've got 100% of the files in this org document that you will need to re-create the project
-as it stands, assuming that you grabbed this from the github repository. I probably won't include
-this file itself in the tarballs, as that would be completely redundant. After all, who needs /two/
-copies of the same thing?
+I think I've got 100% of the source files in this org document that you will need to re-create the
+project as it stands, assuming that you grabbed this from the github repository. I probably won't
+include this file itself in the tarballs, as that would be completely redundant. After all, who
+needs /two/ copies of the same thing?
 
 The only thing you won't get from this single org file are the original SVG images for the badges,
 which were added to show compile status for the project on my own machine, and were initially
@@ -58,8 +51,6 @@ supplied by [Shields.io](https://shields.io). I don't have NetBSD or Solaris ins
 moment, and I don't see me getting to them in the near future. However, I have compiled them on the
 rest of the operating systems I state. Your mileage might vary for cygwin or WSL, but it's worth a
 try.
-
-
 
 ** Man page
    :PROPERTIES:
