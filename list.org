@@ -4,7 +4,7 @@
 #+AUTHOR: brickviking
 #+DATE: whenever
 #+VERSION: 0.7.37
-#+REVISION: 4
+#+REVISION: 5
 
 * Introduction
 This program dates from the days before I knew about good programming. It is one of my earliest
@@ -12,8 +12,9 @@ large-scale(1) projects and was an attempt to understand how to write to the scr
 I was also programming this under DJGPP for DOS at the time, which was the first time I had
 gained any extensive experience of the GNU toolchain and compiler.
 
-Later, I gained some experience with programming for cross-platform programs. This program could run
-under most modern BSDs, Solaris (probably), Minix, and Linux from 2.0.x onwards, as well as DJGPP.
+Later, I gained some experience with programming for cross-platform programs. I learned how to make
+list work under most modern BSDs, Solaris (probably), Minix, and Linux from 2.0.x onwards, as well
+as DJGPP. All you'll need will be some version of curses or ncurses, and the standard libraries.
 
 The project languished on my disk for quite some time, to the extent that I lost the original
 source code, or I thought I had, anyhow.
@@ -26,14 +27,15 @@ a git repository. I was contacted about it as a courtesy, and while browsing the
 very nice surprise. There was my last tarball of list source, pretty as you please! It only took
 me 19 years to find it again!
 
-(1) Well, large-scale for me, anyhow. I tend to like single-file projects. This was deliberately
-split across multiple files as a bit of an exercise.
+(1) Well, large-scale for me, anyhow. I tend to like single-file projects. This started off as a
+single-file project, but then it was deliberately split across multiple files as a bit of an
+exercise.
 
 * Documentation
 Yup, docs are pretty much required, so as to understand not only the program itself and its
 functions, but also the mindset that I had while I was writing the program. I've used Org-mode from
-emacs to write this up, and you can use org-mode to extract all the files for the
-project—eventually.
+emacs to write this up, and you can extract all the source files for the project from just this one
+file.
 
 Currently, I provide a man page here written in nroff and perhaps a .tex file later. I made the docs
 originally before I was well aware of LaTeX, and I think I snagged the output format from other
@@ -77,7 +79,7 @@ try.
 .\" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 .\"
 .\"
-.TH LIST 1 "26th June 2023" "List" \" -*- nroff -*-
+.TH LIST 1 "14th July 2023" "List" \" -*- nroff -*-
 .SH NAME
 list \- Curses-based file lister
 .\"
@@ -4876,7 +4878,7 @@ The obvious place to put declarations and defines. It's the header file for the 
 #define LISTVERSION 0
 #define LISTMINOR 37
 #define LISTMAJOR 7
-#define LISTREV 4
+#define LISTREV 5
 /* Had to include this one, since it's disappeared from 2.2 linux kernel or something... */
 #ifndef PATH_MAX
 #define PATH_MAX  4095
