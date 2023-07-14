@@ -60,6 +60,10 @@ try.
    :END:
 
 #+BEGIN_SRC nroff -i
+.
+.de LS
+.B list
+..
 .\"
 .\" list - a file listing program
 .\" Copyright (C) 1999,2002,2021,2023 brickviking (brickviking@gmail.com)
@@ -87,7 +91,7 @@ list \- Curses-based file lister
 .\"
 .SH SYNOPSIS
 .\" Guess I'd better list these in the same order as in list.c
-.B list
+\*(LS
 [\-f ] list_file
 [\-s start_byte]
 .\" [\-r] rows [\-c] columns  *** comment these out, they don't seem to work
@@ -96,7 +100,7 @@ list \- Curses-based file lister
 [\-x|\-t|\-q]  [\-7|\-8|\-e] [\-l]
 [\-d] [\-m]
 .PP
-.B list
+\*(LS
 also accepts the \-h, \-?, and \-v options.
 .PP
 .\"
@@ -105,7 +109,7 @@ also accepts the \-h, \-?, and \-v options.
 .SH DESCRIPTION
 .\"
 .PP
-.B list
+\*(LS
 is a curses\-based interactive file listing program, which displays
 text on the screen in one of two different formats, either in
 hexadecimal dump format (a la MS\-DOS debug.com format), or in text
@@ -124,7 +128,7 @@ status information.
 .\"
 .SH COMMAND LINE OPTIONS
 .\"
-.B list
+\*(LS
 understands the following command line options.  Only the short form
 options are available in this version. It remains for me to write the
 code to understand the long format switches.
@@ -134,7 +138,7 @@ specifies what file to display.  The "\-f" switch is not necessary,
 however, the filename
 .B is
 mandatory, else
-.B list
+\*(LS
 will just quit back to an empty screen, and complain that it can't
 open an empty file.  I have not (yet) sorted out input from a pipe, so
 input from
@@ -289,7 +293,7 @@ the place for this file will change later.
 .\"
 .SH ENVIRONMENT VARIABLES
 .\"
-.B list
+\*(LS
 may or may not use the following environment variables, but it is
 probably best to have them defined anyway.
 .TP
@@ -349,7 +353,7 @@ a DOS environment.
 .\"
 .SH BUGS, ERRORS AND OMISSIONS
 .\"
-.B list
+\*(LS
 is most definitely still beta software. it is also only designed to
 reliably handle 7\-bit printable ASCII characters, at least under UNIX
 (this includes Linux).  8\-bit and non\-printing ASCII characters in
