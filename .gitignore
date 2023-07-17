@@ -1,1 +1,8 @@
 .fslckout
+*.o
+vernon-buerg/*
+gh-repo-issues/*
+src/TAGS
+src/tags
+src/cscope.out
+list.fossil
