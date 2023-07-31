@@ -5289,7 +5289,7 @@ the paths correctly.
 + After exiting the editor, list doesn't re-read the content.
 + Running splint across just list.c gives me a horrifyingly large number of issues.
 + Bye returns? It's supposed to be void, as we never return from Bye, due to exit inside.
-+ What happened to the colours?
++ What happened to the colours? That seems to have been fixed now, I think.
 
 * Conclusions
 There. I think that's all.
